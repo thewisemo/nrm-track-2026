@@ -5,39 +5,69 @@
 <title>نورماندي شوز — متابعة المحتوى</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+  :root{--gold:#c9a227;--dark:#1a1a1a;--cream:#fff8ec;--line:#e8e0cc;--bg:#faf7f0}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Tajawal',Tahoma,sans-serif;background:#faf7f0;color:#1a1a1a;padding:20px}
-  .wrap{max-width:1150px;margin:0 auto}
-  header{background:#1a1a1a;color:#fff;border-radius:14px;padding:26px 30px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-  header h1{font-size:24px;font-weight:900} header h1 span{color:#c9a227}
-  header .sub{color:#cfc6ae;font-size:14px;margin-top:6px}
-  .badge{background:#c9a227;color:#1a1a1a;font-weight:700;border-radius:8px;padding:8px 14px;font-size:13px}
-  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
-  .kpi{background:#fff;border:1px solid #e8e0cc;border-radius:12px;padding:16px 18px}
-  .kpi .v{font-size:24px;font-weight:900} .kpi .l{font-size:13px;color:#777;margin-top:2px}
-  .bar{height:10px;background:#eee;border-radius:6px;overflow:hidden;margin-top:8px}
-  .bar i{display:block;height:100%;background:#c9a227;width:0.0%}
-  h2{font-size:18px;font-weight:900;margin:26px 0 10px} h2 span{color:#c9a227}
-  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-size:13px}
-  th{background:#1a1a1a;color:#fff;padding:9px 8px;font-weight:700;white-space:nowrap}
-  td{padding:8px;border-bottom:1px solid #f0ead8;text-align:center;vertical-align:middle}
-  td.ttl{text-align:right;font-weight:500;min-width:220px} td.nt{text-align:right;color:#666;font-size:12px}
-  td.plt{font-size:11px;color:#555}
-  tr.hero td{background:#fff8ec;font-weight:700} tr.livrow td{background:#f0f7f0}
-  .chip{border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;white-space:nowrap}
-  .note{background:#fff8ec;border-right:4px solid #c9a227;border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px;color:#555}
-  .reports{display:grid;gap:10px}
-  .rep{background:#fff;border:1px solid #e8e0cc;border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  body{font-family:'Tajawal',Tahoma,sans-serif;background:var(--bg);color:#1a1a1a;padding:14px}
+  .wrap{max-width:1100px;margin:0 auto}
+  header{background:var(--dark);color:#fff;border-radius:14px;padding:20px 22px}
+  header h1{font-size:clamp(19px,4.5vw,26px);font-weight:900} header h1 span{color:var(--gold)}
+  header .sub{color:#cfc6ae;font-size:13px;margin-top:6px;line-height:1.7}
+  .badge{display:inline-block;background:var(--gold);color:var(--dark);font-weight:700;border-radius:8px;padding:6px 12px;font-size:13px;margin-top:12px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .kpi .v{font-size:clamp(18px,4vw,24px);font-weight:900} .kpi .l{font-size:12px;color:#777;margin-top:2px}
+  .bar{height:9px;background:#eee;border-radius:6px;overflow:hidden;margin-top:8px}
+  .bar i{display:block;height:100%;background:var(--gold);width:0.0%}
+  h2{font-size:clamp(16px,4vw,19px);font-weight:900;margin:24px 0 10px} h2 span{color:var(--gold);font-size:13px;font-weight:500}
+  .note{background:var(--cream);border-right:4px solid var(--gold);border-radius:8px;padding:11px 14px;margin:8px 0;font-size:13.5px;color:#555;line-height:1.8}
+  .chip{border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:700;white-space:nowrap;display:inline-block}
+  /* changelog */
+  .upd{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+  .utime{color:#999;font-size:11.5px;margin-bottom:5px;font-weight:700}
+  .utxt{font-size:13.5px;line-height:1.8}
+  /* reports */
+  .rep{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
   .rep .rd{color:#888;font-size:12px;margin-top:3px}
-  .dl{background:#1a1a1a;color:#c9a227;text-decoration:none;font-weight:700;border-radius:8px;padding:9px 16px;font-size:14px;white-space:nowrap}
-  .dl:hover{background:#333}
-  footer{margin:26px 0 8px;color:#999;font-size:12px;text-align:center}
+  .dl{background:var(--dark);color:var(--gold);text-decoration:none;font-weight:700;border-radius:8px;padding:9px 16px;font-size:13.5px}
+  /* accordion */
+  details.week{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+  details.week>summary{cursor:pointer;list-style:none;padding:14px 16px;background:var(--cream);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;font-size:15px}
+  details.week>summary::-webkit-details-marker{display:none}
+  details.week>summary::before{content:"▾";color:var(--gold);font-weight:900;margin-left:6px}
+  details.week:not([open])>summary::before{content:"◂"}
+  .wsub{color:#8a7a4d;font-size:12px}
+  details.week.future>summary{background:#f3f0e7}
+  details.item{border-top:1px solid #f0ead8}
+  details.item>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;flex-wrap:wrap}
+  details.item>summary::-webkit-details-marker{display:none}
+  details.item[open]>summary{background:#fffdf6}
+  .daynum{background:var(--dark);color:var(--gold);font-weight:900;border-radius:8px;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  summary .ttl{font-weight:700;font-size:13.5px;flex:1 1 200px;line-height:1.6}
+  summary .meta{color:#999;font-size:12px;white-space:nowrap}
+  .body{padding:4px 16px 16px;background:#fffdf6}
+  .facts{display:flex;flex-wrap:wrap;gap:6px 16px;color:#666;font-size:12.5px;margin-bottom:8px}
+  .idea{font-size:13.5px;line-height:1.9;color:#333}
+  .inote{background:#fdf3d1;border-radius:8px;padding:8px 12px;font-size:12.5px;color:#7a6215;margin-top:8px}
+  /* comments */
+  .cform{margin-top:12px;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:12px}
+  .cttl{font-size:12.5px;font-weight:700;color:#7a6215;margin-bottom:8px}
+  .cname,.ctext{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-family:inherit;font-size:13.5px;margin-bottom:7px;background:#fffdf6}
+  .cname:focus,.ctext:focus{outline:2px solid var(--gold)}
+  .cerr{color:#a11111;font-size:12px;margin-bottom:6px;min-height:15px}
+  .cbtns{display:flex;gap:8px;flex-wrap:wrap}
+  .send{border:0;border-radius:8px;padding:10px 18px;font-family:inherit;font-weight:700;font-size:13.5px;cursor:pointer}
+  .send.wa{background:#1c6b2f;color:#fff;}
+  .send.em{background:var(--dark);color:var(--gold)}
+  footer{margin:26px 0 8px;color:#999;font-size:11.5px;text-align:center;line-height:1.8}
+  @media (max-width:480px){ body{padding:8px} summary .meta{width:100%;margin-right:44px} }
 </style></head><body><div class="wrap">
 <header>
-  <div><h1>نورماندي <span>شوز</span> — متابعة محتوى شهر التوعية</h1>
-  <div class="sub">«من أول خطوة» • الدورة: 20 يوليو → 19 أغسطس 2026 • المواعيد بتوقيت القاهرة</div></div>
-  <div class="badge">آخر تحديث: 21 يوليو 2026 — 12:15 ص بتوقيت القاهرة</div>
+  <h1>نورماندي <span>شوز</span> — متابعة محتوى شهر التوعية</h1>
+  <div class="sub">«من أول خطوة» • الدورة الحالية: من 20 يوليو حتى 19 أغسطس 2026 • كل المواعيد بتوقيت القاهرة<br>
+  اضغط على أي أسبوع أو أي محتوى تشوف تفاصيله — وتقدر تسيب ملاحظتك عليه وهتوصل فورًا.</div>
+  <div class="badge">🕐 آخر تحديث: 21 يوليو 2026 • 2:55 ص بتوقيت القاهرة</div>
 </header>
+
 <div class="kpis">
   <div class="kpi"><div class="v">0%</div><div class="l">إنجاز محتوى الشهر — مرجح بالأوزان</div><div class="bar"><i></i></div></div>
   <div class="kpi"><div class="v" id="daysLeft">—</div><div class="l">يوم متبقي في الدورة</div></div>
@@ -47,111 +77,847 @@
 
 <div class="note">⏳ <b>نقطة مفتوحة:</b> بدء توليد الحلقة الأولى بانتظار تفعيل اشتراك أداة إنتاج الفيديو — التجهيز الكامل جاهز والتنفيذ يبدأ فور التفعيل.</div>
 
+<h2>🕐 سجل التحديثات <span>أحدث حاجة حصلت — بالتاريخ والوقت</span></h2>
+<div class="upd"><div class="utime">21 يوليو 2026 • 2:55 ص</div><div><span class="chip" style="color:#1c6b2f;background:#def0e0">حالة</span> <span class="utxt">تفعيل إرسال الملاحظات على واتساب مباشرة — بجانب الإيميل</span></div></div><div class="upd"><div class="utime">21 يوليو 2026 • 2:45 ص</div><div><span class="chip" style="color:#7a6215;background:#fdf3d1">إطلاق</span> <span class="utxt">إطلاق صفحة المتابعة بنسختها التفاعلية: خطة الشهر كاملة + التعليقات + سجل التحديثات</span></div></div><div class="upd"><div class="utime">21 يوليو 2026 • 12:30 ص</div><div><span class="chip" style="color:#8a4b00;background:#fbe8d3">تجهيز</span> <span class="utxt">اكتمال مخرجات يوم التجهيز: التقويم الفعلي، منظومة المتابعة، باك الأسبوع الأول، كيت الحلقة الأولى</span></div></div><div class="upd"><div class="utime">20 يوليو 2026 • 9:00 م</div><div><span class="chip" style="color:#555555;background:#eeeeee">جدولة</span> <span class="utxt">اعتماد الجدولة الفعلية للدورة: من 20 يوليو حتى 19 أغسطس — الحلقات أيام السبت والثلاثاء والخميس</span></div></div>
+
 <h2>📄 التقارير المعتمدة</h2>
-<div class="note">أول تقرير أسبوعي هيظهر هنا بعد اجتماع الاثنين 27 يوليو — كل تقرير بينشر بعد اعتماده.</div>
+<div class="note">أول تقرير أسبوعي هيظهر هنا بعد اجتماع الاثنين 27 يوليو — كل تقرير بينشر بعد اعتماده، وبيوصلكم تنبيه بيه في سجل التحديثات.</div>
 
-<h2>🛠️ مخرجات يوم التجهيز <span>— الاثنين 20 يوليو</span></h2>
-<table><tr><th>المخرج</th><th>الحالة</th></tr><tr><td class="ttl">تقويم الشهر كامل على التواريخ الفعلية + الأوزان النسبية للمخرجات</td><td><span class="chip" style="color:#1c6b2f;background:#def0e0">جاهز ✓</span></td></tr><tr><td class="ttl">منظومة المتابعة الحية — الصفحة دي</td><td><span class="chip" style="color:#1c6b2f;background:#def0e0">جاهز ✓</span></td></tr><tr><td class="ttl">باك الأسبوع الأول: كابشنات نهائية لكل منصة + بريفات تصميم + نصوص ستوريز</td><td><span class="chip" style="color:#1c6b2f;background:#def0e0">جاهز ✓</span></td></tr><tr><td class="ttl">كيت إنتاج الحلقة الأولى — جاهز للتنفيذ فور تفعيل الأداة</td><td><span class="chip" style="color:#1c6b2f;background:#def0e0">جاهز ✓</span></td></tr></table>
+<h2>📅 خطة المحتوى <span>اضغط على أي يوم تشوف الفكرة وتسيب ملاحظتك</span></h2>
+<div class="note">الستوريز اليومية — الساعة 11 صباحًا والساعة 8 مساءً — شغالة طول الشهر فوق الجدول ده.</div>
 
-<h2>📅 خطة المحتوى — 30 مخرج</h2>
-<div class="note">الستوريز اليومية — 11 صباحًا و8 مساءً — شغالة طول الشهر فوق الجدول ده • الحلقات الرئيسية بخلفية ذهبية • اللايفات بخلفية خضراء</div>
-<table><tr><th>يوم</th><th>التاريخ</th><th>الوقت</th><th>النوع</th><th>المحتوى</th><th>المنصات</th><th>الوزن</th><th>الحالة</th><th>ملاحظات</th></tr>
-<tr class="hero"><td>1</td><td>الثلاثاء 21/07</td><td>20:00</td>
-    <td>حلقة رئيسية</td><td class="ttl">فيديو الحلقة 1 — التيزر «كل خطوة كبيرة... بدأت بخطوة»</td><td class="plt">Reels + TikTok + Shorts + Facebook</td>
-    <td>9.0%</td><td><span class="chip" style="color:#8a6d00;background:#fdf3d1">قيد التنفيذ</span></td><td class="nt">التجهيز مكتمل — بانتظار تفعيل اشتراك أداة توليد الفيديو لبدء الإنتاج</td></tr>
-<tr><td>2</td><td>الأربعاء 22/07</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل 5 شرائح — لقطات الأقدام في مواقف الحياة</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>3</td><td>الخميس 23/07</td><td>11:00 + 20:00</td>
-    <td>ستوري تفاعلي</td><td class="ttl">Story Poll — «إيه أهم خطوة في حياتك؟»</td><td class="plt">IG + FB Stories</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>4</td><td>الجمعة 24/07</td><td>18:30</td>
-    <td>بوست ثابت</td><td class="ttl">بوست ثابت — Macro جلد فاخر بدون نص</td><td class="plt">Facebook + Instagram</td>
-    <td>1.5%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>5</td><td>السبت 25/07</td><td>20:00</td>
-    <td>فيديو فرع</td><td class="ttl">فيديو 15 ثانية — جولة داخل الفرع</td><td class="plt">Reels + TikTok + Shorts</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>6</td><td>الأحد 26/07</td><td>12:00</td>
-    <td>Highlight</td><td class="ttl">Highlight «حكايتنا» — تأسيس</td><td class="plt">Instagram</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>7</td><td>الاثنين 27/07</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل 4 شرائح — «من أول خطوة في الشغل/الفرح/البيت/الحياة»</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr class="hero"><td>8</td><td>الثلاثاء 28/07</td><td>20:00</td>
-    <td>حلقة رئيسية</td><td class="ttl">فيديو الحلقة 2 — الكشف «من أول خطوة» + Boost</td><td class="plt">Reels + TikTok + Shorts + Facebook</td>
-    <td>9.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>9</td><td>الأربعاء 29/07</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل 6 شرائح — «وراء التاج لاين» (الـ Proof Lines)</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>10</td><td>الخميس 30/07</td><td>11:00</td>
-    <td>ستوري تفاعلي</td><td class="ttl">Story Q&A — «اسألونا عن أي حاجة»</td><td class="plt">IG Stories</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>11</td><td>الجمعة 31/07</td><td>18:30</td>
-    <td>بوست ثابت</td><td class="ttl">بوست ثابت — صورة 1998 «من 1998... وإحنا معاك»</td><td class="plt">Facebook + Instagram</td>
-    <td>1.5%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr class="livrow"><td>12</td><td>السبت 01/08</td><td>21:30</td>
-    <td>Live</td><td class="ttl">Live الأول (30 دقيقة) — «ليه نورماندي بدأت تحكي؟»</td><td class="plt">IG + FB Live</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>13</td><td>الأحد 02/08</td><td>12:00</td>
-    <td>Highlight</td><td class="ttl">Highlight «فروعنا» — يبدأ بمدينة نصر</td><td class="plt">Instagram</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>14</td><td>الاثنين 03/08</td><td>20:00</td>
-    <td>فيديو فرع</td><td class="ttl">فيديو فرع 1 — مدينة نصر «جنبك»</td><td class="plt">Reels + TikTok + Shorts + Facebook</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr class="hero"><td>15</td><td>الثلاثاء 04/08</td><td>20:00</td>
-    <td>حلقة رئيسية</td><td class="ttl">فيديو الحلقة 3 — الترسيخ «خطوتك. مشوارك. اختيارك.» + Boost</td><td class="plt">Reels + TikTok + Shorts + Facebook</td>
-    <td>9.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>16</td><td>الأربعاء 05/08</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل UGC — إجابات استفتاء يوم 3 + رد البراند</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>17</td><td>الخميس 06/08</td><td>20:00</td>
-    <td>فيديو فرع</td><td class="ttl">فيديو فرع 2 — سموحة بلهجة سكندرية</td><td class="plt">Reels + TikTok + Shorts</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>18</td><td>الجمعة 07/08</td><td>18:30</td>
-    <td>بوست ثابت</td><td class="ttl">بوست ثابت — Macro «جودة من أول خطوة»</td><td class="plt">Facebook + Instagram</td>
-    <td>1.5%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>19</td><td>السبت 08/08</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل «رحلة الاختيار» — 7 شرائح</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>20</td><td>الأحد 09/08</td><td>11:00 + 20:00</td>
-    <td>ستوري تفاعلي</td><td class="ttl">Story استفتاء — «Loafer ولا Lace-up؟»</td><td class="plt">IG + FB Stories</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>21</td><td>الاثنين 10/08</td><td>20:00</td>
-    <td>فيديو فرع</td><td class="ttl">فيديو فرع 3 — طنطا «من قلب الدلتا»</td><td class="plt">Reels + TikTok + Shorts</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>22</td><td>الثلاثاء 11/08</td><td>20:00</td>
-    <td>فيديو/Reel</td><td class="ttl">Reel كواليس — فريق نورماندي (وجوه حقيقية)</td><td class="plt">Reels + TikTok + Shorts</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>23</td><td>الأربعاء 12/08</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل «رحلتنا 1998-2026» — 8 شرائح</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>24</td><td>الخميس 13/08</td><td>18:30</td>
-    <td>بوست ثابت</td><td class="ttl">بوست Quote — فلسفة المؤسس</td><td class="plt">Facebook + Instagram</td>
-    <td>1.5%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>25</td><td>الجمعة 14/08</td><td>20:00</td>
-    <td>فيديو فرع</td><td class="ttl">فيديو فرع 4 — الدقي «معاك في كل خطوة شغل»</td><td class="plt">Reels + TikTok + Shorts</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr class="livrow"><td>26</td><td>السبت 15/08</td><td>21:30</td>
-    <td>Live</td><td class="ttl">Live الثاني (30 دقيقة) — مع مدير فرع</td><td class="plt">IG + FB Live</td>
-    <td>3.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>27</td><td>الأحد 16/08</td><td>12:00</td>
-    <td>Highlight</td><td class="ttl">تنظيم كل الـ Highlights بأيقونات ذهبية</td><td class="plt">Instagram</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>28</td><td>الاثنين 17/08</td><td>13:00</td>
-    <td>كاروسيل</td><td class="ttl">كاروسيل ختام — «لو فاتك أي حلقة» 6 شرائح</td><td class="plt">Instagram + Facebook</td>
-    <td>2.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr class="hero"><td>29</td><td>الثلاثاء 18/08</td><td>20:00</td>
-    <td>حلقة رئيسية</td><td class="ttl">فيديو ختام السلسلة — مونتاج «30 يوم... وكلها بدأت بخطوة»</td><td class="plt">Reels + TikTok + Shorts + Facebook</td>
-    <td>5.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-<tr><td>30</td><td>الأربعاء 19/08</td><td>11:00 + 20:00</td>
-    <td>ستوري تفاعلي</td><td class="ttl">Story تشويق + Q&A — «الشهر الجاي فيه جديد»</td><td class="plt">IG + FB Stories</td>
-    <td>1.0%</td><td><span class="chip" style="color:#8a8a8a;background:#f1f1f1">قادم</span></td><td class="nt"></td></tr>
-</table>
+<details class="week" open>
+  <summary><b>الأسبوع الأول — تثبيت الفضول</b><span class="wsub">من الثلاثاء 21 يوليو حتى الاثنين 27 يوليو</span></summary>
+  <div class="witems">
+<details class="item" id="day1">
+  <summary>
+    <span class="daynum">1</span>
+    <span class="ttl">فيديو الحلقة 1 — التيزر «كل خطوة كبيرة... بدأت بخطوة»</span>
+    <span class="meta">الثلاثاء 21/07</span>
+    <span class="chip" style="color:#8a6d00;background:#fdf3d1">قيد التنفيذ</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 حلقة رئيسية</span><span>📱 Reels + TikTok + Shorts + Facebook</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 9.0%</span>
+    </div>
+    <p class="idea">تيزر تشويقي 30 ثانية بدون كشف الهوية — نهايته «قريبًا» — هدفه إشعال الفضول وفتح حديث الجمهور.</p>
+    <div class="inote">📌 التجهيز مكتمل — الإنتاج يبدأ فور تفعيل اشتراك أداة الفيديو</div>
+    <div class="cform" data-item="يوم 1 — فيديو الحلقة 1 — التيزر «كل خطوة كبيرة... بدأت بخطوة» — الحالة: قيد التنفيذ">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day2">
+  <summary>
+    <span class="daynum">2</span>
+    <span class="ttl">كاروسيل 5 شرائح — لقطات الأقدام في مواقف الحياة</span>
+    <span class="meta">الأربعاء 22/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل 5 شرائح: لقطات أقدام في مواقف الحياة — شغل، فرح، تخرج، أبوة — ربط عاطفي بفكرة الخطوة.</p>
+    
+    <div class="cform" data-item="يوم 2 — كاروسيل 5 شرائح — لقطات الأقدام في مواقف الحياة — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day3">
+  <summary>
+    <span class="daynum">3</span>
+    <span class="ttl">Story Poll — «إيه أهم خطوة في حياتك؟»</span>
+    <span class="meta">الخميس 23/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 ستوري تفاعلي</span><span>📱 IG + FB Stories</span>
+      <span>🕗 النشر: 11:00 + 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">استفتاء ستوري «إيه أهم خطوة في حياتك؟» — تفاعل حي + تجميع إجابات حقيقية نبني عليها محتوى قادم.</p>
+    
+    <div class="cform" data-item="يوم 3 — Story Poll — «إيه أهم خطوة في حياتك؟» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day4">
+  <summary>
+    <span class="daynum">4</span>
+    <span class="ttl">بوست ثابت — Macro جلد فاخر بدون نص</span>
+    <span class="meta">الجمعة 24/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 بوست ثابت</span><span>📱 Facebook + Instagram</span>
+      <span>🕗 النشر: 18:30 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.5%</span>
+    </div>
+    <p class="idea">صورة ماكرو لتفاصيل جلد فاخر — تأسيس الجودة بصريًا من غير أي نص بيعي.</p>
+    
+    <div class="cform" data-item="يوم 4 — بوست ثابت — Macro جلد فاخر بدون نص — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day5">
+  <summary>
+    <span class="daynum">5</span>
+    <span class="ttl">فيديو 15 ثانية — جولة داخل الفرع</span>
+    <span class="meta">السبت 25/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 فيديو فرع</span><span>📱 Reels + TikTok + Shorts</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">جولة 15 ثانية داخل الفرع — عرض راقٍ يبرز معايير الاختيار والخدمة.</p>
+    
+    <div class="cform" data-item="يوم 5 — فيديو 15 ثانية — جولة داخل الفرع — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day6">
+  <summary>
+    <span class="daynum">6</span>
+    <span class="ttl">Highlight «حكايتنا» — تأسيس</span>
+    <span class="meta">الأحد 26/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 Highlight</span><span>📱 Instagram</span>
+      <span>🕗 النشر: 12:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">تأسيس Highlight «حكايتنا»: البداية 1998، معنى التاج لاين، الفروع، الضمانات.</p>
+    
+    <div class="cform" data-item="يوم 6 — Highlight «حكايتنا» — تأسيس — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day7">
+  <summary>
+    <span class="daynum">7</span>
+    <span class="ttl">كاروسيل 4 شرائح — «من أول خطوة في الشغل/الفرح/البيت/الحياة»</span>
+    <span class="meta">الاثنين 27/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل «من أول خطوة في الشغل والفرح والبيت والحياة» — أول ظهور صريح للتاج لاين.</p>
+    
+    <div class="cform" data-item="يوم 7 — كاروسيل 4 شرائح — «من أول خطوة في الشغل/الفرح/البيت/الحياة» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details></div>
+</details>
+<details class="week" open>
+  <summary><b>الأسبوع الثاني — الكشف</b><span class="wsub">من الثلاثاء 28 يوليو حتى الاثنين 3 أغسطس</span></summary>
+  <div class="witems">
+<details class="item" id="day8">
+  <summary>
+    <span class="daynum">8</span>
+    <span class="ttl">فيديو الحلقة 2 — الكشف «من أول خطوة» + Boost</span>
+    <span class="meta">الثلاثاء 28/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 حلقة رئيسية</span><span>📱 Reels + TikTok + Shorts + Facebook</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 9.0%</span>
+    </div>
+    <p class="idea">حلقة الكشف 45 ثانية: قصة عميلين — واحد في الفرع وواحد أونلاين — بنفس الاهتمام. مع تعزيز إعلاني.</p>
+    
+    <div class="cform" data-item="يوم 8 — فيديو الحلقة 2 — الكشف «من أول خطوة» + Boost — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day9">
+  <summary>
+    <span class="daynum">9</span>
+    <span class="ttl">كاروسيل 6 شرائح — «وراء التاج لاين» (الـ Proof Lines)</span>
+    <span class="meta">الأربعاء 29/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل «وراء التاج لاين»: ست معاني — راحة، ثقة، أناقة، ضمان، خدمة، أصالة.</p>
+    
+    <div class="cform" data-item="يوم 9 — كاروسيل 6 شرائح — «وراء التاج لاين» (الـ Proof Lines) — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day10">
+  <summary>
+    <span class="daynum">10</span>
+    <span class="ttl">Story Q&A — «اسألونا عن أي حاجة»</span>
+    <span class="meta">الخميس 30/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 ستوري تفاعلي</span><span>📱 IG Stories</span>
+      <span>🕗 النشر: 11:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">ستوري أسئلة مفتوحة «اسألونا عن أي حاجة» — شفافية وقرب من الجمهور.</p>
+    
+    <div class="cform" data-item="يوم 10 — Story Q&A — «اسألونا عن أي حاجة» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day11">
+  <summary>
+    <span class="daynum">11</span>
+    <span class="ttl">بوست ثابت — صورة 1998 «من 1998... وإحنا معاك»</span>
+    <span class="meta">الجمعة 31/07</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 بوست ثابت</span><span>📱 Facebook + Instagram</span>
+      <span>🕗 النشر: 18:30 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.5%</span>
+    </div>
+    <p class="idea">بوست الإرث: «من 1998... وإحنا معاك» — ربط التاريخ بالهوية الجديدة.</p>
+    
+    <div class="cform" data-item="يوم 11 — بوست ثابت — صورة 1998 «من 1998... وإحنا معاك» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day12">
+  <summary>
+    <span class="daynum">12</span>
+    <span class="ttl">Live الأول (30 دقيقة) — «ليه نورماندي بدأت تحكي؟»</span>
+    <span class="meta">السبت 01/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 Live</span><span>📱 IG + FB Live</span>
+      <span>🕗 النشر: 21:30 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">أول لقاء مباشر مع الجمهور — حوار مفتوح عن الهوية الجديدة. عنصر مرن: له بديل معتمد جاهز بنفس الهدف لو اللايف مش مناسب.</p>
+    
+    <div class="cform" data-item="يوم 12 — Live الأول (30 دقيقة) — «ليه نورماندي بدأت تحكي؟» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day13">
+  <summary>
+    <span class="daynum">13</span>
+    <span class="ttl">Highlight «فروعنا» — يبدأ بمدينة نصر</span>
+    <span class="meta">الأحد 02/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 Highlight</span><span>📱 Instagram</span>
+      <span>🕗 النشر: 12:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">Highlight «فروعنا» — يبدأ بمدينة نصر ويضاف فرع جديد كل كام يوم.</p>
+    
+    <div class="cform" data-item="يوم 13 — Highlight «فروعنا» — يبدأ بمدينة نصر — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day14">
+  <summary>
+    <span class="daynum">14</span>
+    <span class="ttl">فيديو فرع 1 — مدينة نصر «جنبك»</span>
+    <span class="meta">الاثنين 03/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 فيديو فرع</span><span>📱 Reels + TikTok + Shorts + Facebook</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">فيديو تعريف فرع مدينة نصر: العنوان، الجو، أحدث الموديلات.</p>
+    
+    <div class="cform" data-item="يوم 14 — فيديو فرع 1 — مدينة نصر «جنبك» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details></div>
+</details>
+<details class="week" open>
+  <summary><b>الأسبوع الثالث — ترسيخ المعنى</b><span class="wsub">من الثلاثاء 4 أغسطس حتى الاثنين 10 أغسطس</span></summary>
+  <div class="witems">
+<details class="item" id="day15">
+  <summary>
+    <span class="daynum">15</span>
+    <span class="ttl">فيديو الحلقة 3 — الترسيخ «خطوتك. مشوارك. اختيارك.» + Boost</span>
+    <span class="meta">الثلاثاء 04/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 حلقة رئيسية</span><span>📱 Reels + TikTok + Shorts + Facebook</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 9.0%</span>
+    </div>
+    <p class="idea">حلقة الترسيخ 45 ثانية: ثلاث شخصيات في لحظاتهم المفصلية — مقابلة، فرح، أبوة. مع تعزيز إعلاني.</p>
+    
+    <div class="cform" data-item="يوم 15 — فيديو الحلقة 3 — الترسيخ «خطوتك. مشوارك. اختيارك.» + Boost — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day16">
+  <summary>
+    <span class="daynum">16</span>
+    <span class="ttl">كاروسيل UGC — إجابات استفتاء يوم 3 + رد البراند</span>
+    <span class="meta">الأربعاء 05/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل من الجمهور: إجاباتهم الحقيقية على استفتاء الأسبوع الأول مع رد البراند الدافئ.</p>
+    
+    <div class="cform" data-item="يوم 16 — كاروسيل UGC — إجابات استفتاء يوم 3 + رد البراند — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day17">
+  <summary>
+    <span class="daynum">17</span>
+    <span class="ttl">فيديو فرع 2 — سموحة بلهجة سكندرية</span>
+    <span class="meta">الخميس 06/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 فيديو فرع</span><span>📱 Reels + TikTok + Shorts</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">فيديو فرع سموحة بلمسة سكندرية.</p>
+    
+    <div class="cform" data-item="يوم 17 — فيديو فرع 2 — سموحة بلهجة سكندرية — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day18">
+  <summary>
+    <span class="daynum">18</span>
+    <span class="ttl">بوست ثابت — Macro «جودة من أول خطوة»</span>
+    <span class="meta">الجمعة 07/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 بوست ثابت</span><span>📱 Facebook + Instagram</span>
+      <span>🕗 النشر: 18:30 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.5%</span>
+    </div>
+    <p class="idea">صورة ماكرو «جودة من أول خطوة».</p>
+    
+    <div class="cform" data-item="يوم 18 — بوست ثابت — Macro «جودة من أول خطوة» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day19">
+  <summary>
+    <span class="daynum">19</span>
+    <span class="ttl">كاروسيل «رحلة الاختيار» — 7 شرائح</span>
+    <span class="meta">السبت 08/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل «رحلة الاختيار» — من انتقاء الموديل لحد وصوله للعميل.</p>
+    
+    <div class="cform" data-item="يوم 19 — كاروسيل «رحلة الاختيار» — 7 شرائح — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day20">
+  <summary>
+    <span class="daynum">20</span>
+    <span class="ttl">Story استفتاء — «Loafer ولا Lace-up؟»</span>
+    <span class="meta">الأحد 09/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 ستوري تفاعلي</span><span>📱 IG + FB Stories</span>
+      <span>🕗 النشر: 11:00 + 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">استفتاء ستايل: Loafer ولا Lace-up — بيانات تفضيلات لمحتوى الشهر الجاي.</p>
+    
+    <div class="cform" data-item="يوم 20 — Story استفتاء — «Loafer ولا Lace-up؟» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day21">
+  <summary>
+    <span class="daynum">21</span>
+    <span class="ttl">فيديو فرع 3 — طنطا «من قلب الدلتا»</span>
+    <span class="meta">الاثنين 10/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 فيديو فرع</span><span>📱 Reels + TikTok + Shorts</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">فيديو فرع طنطا — من قلب الدلتا.</p>
+    
+    <div class="cform" data-item="يوم 21 — فيديو فرع 3 — طنطا «من قلب الدلتا» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details></div>
+</details>
+<details class="week" open>
+  <summary><b>الأسبوع الرابع — بناء المجتمع والختام</b><span class="wsub">من الثلاثاء 11 أغسطس حتى الأربعاء 19 أغسطس</span></summary>
+  <div class="witems">
+<details class="item" id="day22">
+  <summary>
+    <span class="daynum">22</span>
+    <span class="ttl">Reel كواليس — فريق نورماندي (وجوه حقيقية)</span>
+    <span class="meta">الثلاثاء 11/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 فيديو/Reel</span><span>📱 Reels + TikTok + Shorts</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">ريل كواليس الفريق — وجوه حقيقية من المبيعات وخدمة العملاء.</p>
+    
+    <div class="cform" data-item="يوم 22 — Reel كواليس — فريق نورماندي (وجوه حقيقية) — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day23">
+  <summary>
+    <span class="daynum">23</span>
+    <span class="ttl">كاروسيل «رحلتنا 1998-2026» — 8 شرائح</span>
+    <span class="meta">الأربعاء 12/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل «رحلتنا من 1998 حتى 2026» — ثماني محطات فارقة.</p>
+    
+    <div class="cform" data-item="يوم 23 — كاروسيل «رحلتنا 1998-2026» — 8 شرائح — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day24">
+  <summary>
+    <span class="daynum">24</span>
+    <span class="ttl">بوست Quote — فلسفة المؤسس</span>
+    <span class="meta">الخميس 13/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 بوست ثابت</span><span>📱 Facebook + Instagram</span>
+      <span>🕗 النشر: 18:30 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.5%</span>
+    </div>
+    <p class="idea">بوست اقتباس عن فلسفة البراند في خدمة العميل.</p>
+    
+    <div class="cform" data-item="يوم 24 — بوست Quote — فلسفة المؤسس — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day25">
+  <summary>
+    <span class="daynum">25</span>
+    <span class="ttl">فيديو فرع 4 — الدقي «معاك في كل خطوة شغل»</span>
+    <span class="meta">الجمعة 14/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 فيديو فرع</span><span>📱 Reels + TikTok + Shorts</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">فيديو فرع الدقي — موجه لشريحة الموظفين والبزنس.</p>
+    
+    <div class="cform" data-item="يوم 25 — فيديو فرع 4 — الدقي «معاك في كل خطوة شغل» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day26">
+  <summary>
+    <span class="daynum">26</span>
+    <span class="ttl">Live الثاني (30 دقيقة) — مع مدير فرع</span>
+    <span class="meta">السبت 15/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 Live</span><span>📱 IG + FB Live</span>
+      <span>🕗 النشر: 21:30 بتوقيت القاهرة</span><span>⚖️ الوزن: 3.0%</span>
+    </div>
+    <p class="idea">لقاء مباشر حوالين تجربة العميل ونصايح المقاس والستايل. عنصر مرن: له بديل معتمد جاهز بنفس الهدف.</p>
+    
+    <div class="cform" data-item="يوم 26 — Live الثاني (30 دقيقة) — مع مدير فرع — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day27">
+  <summary>
+    <span class="daynum">27</span>
+    <span class="ttl">تنظيم كل الـ Highlights بأيقونات ذهبية</span>
+    <span class="meta">الأحد 16/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 Highlight</span><span>📱 Instagram</span>
+      <span>🕗 النشر: 12:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">تنظيم كل الـ Highlights بأيقونات ذهبية موحدة — بروفايل مرجعي متكامل.</p>
+    
+    <div class="cform" data-item="يوم 27 — تنظيم كل الـ Highlights بأيقونات ذهبية — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day28">
+  <summary>
+    <span class="daynum">28</span>
+    <span class="ttl">كاروسيل ختام — «لو فاتك أي حلقة» 6 شرائح</span>
+    <span class="meta">الاثنين 17/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 كاروسيل</span><span>📱 Instagram + Facebook</span>
+      <span>🕗 النشر: 13:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 2.0%</span>
+    </div>
+    <p class="idea">كاروسيل ختام: خلاصة شهر التوعية في ست شرائح.</p>
+    
+    <div class="cform" data-item="يوم 28 — كاروسيل ختام — «لو فاتك أي حلقة» 6 شرائح — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day29">
+  <summary>
+    <span class="daynum">29</span>
+    <span class="ttl">فيديو ختام السلسلة — مونتاج «30 يوم... وكلها بدأت بخطوة»</span>
+    <span class="meta">الثلاثاء 18/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 حلقة رئيسية</span><span>📱 Reels + TikTok + Shorts + Facebook</span>
+      <span>🕗 النشر: 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 5.0%</span>
+    </div>
+    <p class="idea">فيديو ختام السلسلة: مونتاج أفضل اللحظات + التاج لاين الكامل.</p>
+    
+    <div class="cform" data-item="يوم 29 — فيديو ختام السلسلة — مونتاج «30 يوم... وكلها بدأت بخطوة» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="item" id="day30">
+  <summary>
+    <span class="daynum">30</span>
+    <span class="ttl">Story تشويق + Q&A — «الشهر الجاي فيه جديد»</span>
+    <span class="meta">الأربعاء 19/08</span>
+    <span class="chip" style="color:#6b7280;background:#eef0f3">قادم</span>
+  </summary>
+  <div class="body">
+    <div class="facts">
+      <span>🗂 ستوري تفاعلي</span><span>📱 IG + FB Stories</span>
+      <span>🕗 النشر: 11:00 + 20:00 بتوقيت القاهرة</span><span>⚖️ الوزن: 1.0%</span>
+    </div>
+    <p class="idea">ستوري تشويق للشهر الجاي + بداية استقبال أسئلة المنتجات — جسر لمرحلة التحويل.</p>
+    
+    <div class="cform" data-item="يوم 30 — Story تشويق + Q&A — «الشهر الجاي فيه جديد» — الحالة: قادم">
+      <div class="cttl">✍️ اكتب ملاحظتك على المحتوى ده — هتوصل لمؤمن مباشرة</div>
+      <input type="text" class="cname" placeholder="اسمك — مطلوب" maxlength="40">
+      <textarea class="ctext" placeholder="ملاحظتك أو تعليقك..." rows="2" maxlength="500"></textarea>
+      <div class="cerr"></div>
+      <div class="cbtns">
+        <button class="send wa" type="button">إرسال واتساب</button>
+        <button class="send em" type="button">إرسال إيميل</button>
+      </div>
+    </div>
+  </div>
+</details></div>
+</details>
 
-<footer>نورماندي شوز • من أول خطوة — صفحة متابعة داخلية لمجلس الإدارة • إعداد وتشغيل: مؤمن الرفاعي</footer>
+<details class="week future">
+  <summary><b>الشهر الثاني — توعية + دعوات تفاعل ناعمة</b><span class="wsub">من 20 أغسطس حتى 19 سبتمبر — التفاصيل بتتبني على نتايج شهر التوعية</span></summary>
+  <div class="witems"><p class="idea" style="padding:14px 18px">استكمال بناء الوعي مع أول دعوات تفاعل ناعمة: «شوف بنفسك»، «تعالى جربها»، «اعرف الفروع» — مع تعميق محتوى الفروع والموديلات حسب تفضيلات الجمهور اللي اتجمعت في الشهر الأول.</p></div>
+</details>
+<details class="week future">
+  <summary><b>الشهر الثالث — التحويل وبداية حملات الأداء</b><span class="wsub">من 20 سبتمبر حتى 19 أكتوبر — يُعرض تفصيليًا للاعتماد قبل بدايته</span></summary>
+  <div class="witems"><p class="idea" style="padding:14px 18px">دعوات مباشرة + حملات Performance موجهة + عروض مدروسة — البناء على الجمهور والثقة اللي اتبنوا في أول شهرين لتحريك المبيعات فعليًا.</p></div>
+</details>
+
+<footer>نورماندي شوز • من أول خطوة — صفحة متابعة داخلية لمجلس الإدارة • إعداد وتشغيل: مؤمن الرفاعي<br>أي ملاحظة بتتبعت من هنا بتوصل مؤمن مباشرة وبيتم الرد عليها في سجل التحديثات.</footer>
 </div>
 <script>
-  const end = new Date('2026-08-19T23:59:59+03:00');
+  var end = new Date('2026-08-19T23:59:59+03:00');
   document.getElementById('daysLeft').textContent = Math.max(0, Math.ceil((end - new Date())/86400000));
+  var WA = "966563353079", EM = "imwisemo@gmail.com";
+  document.querySelectorAll('.cform').forEach(function(f) {
+    var item = f.getAttribute('data-item');
+    function build() {
+      var n = f.querySelector('.cname').value.trim();
+      var t = f.querySelector('.ctext').value.trim();
+      var err = f.querySelector('.cerr');
+      if (!n) { err.textContent = 'من فضلك اكتب اسمك الأول'; return null; }
+      if (!t) { err.textContent = 'اكتب ملاحظتك قبل الإرسال'; return null; }
+      err.textContent = '';
+      return 'تعليق من: ' + n + '\nعلى: ' + item + '\n\n' + t;
+    }
+    var wa = f.querySelector('.send.wa');
+    if (wa) wa.addEventListener('click', function() {
+      var m = build(); if (!m) return;
+      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(m), '_blank');
+    });
+    f.querySelector('.send.em').addEventListener('click', function() {
+      var m = build(); if (!m) return;
+      location.href = 'mailto:' + EM + '?subject=' + encodeURIComponent('ملاحظة على ' + item) + '&body=' + encodeURIComponent(m);
+    });
+  });
 </script>
 </body></html>
