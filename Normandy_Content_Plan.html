@@ -78,7 +78,7 @@ a{color:#c9761a}
  <p class="sub">الشعار اللفظي: من أول خطوة • الأسبوع الأول جاهز • خطة ستة شهور</p><div class="rule"></div></div></div>
 
 <nav><a href="index.html">← صفحة المتابعة</a><a href="#cal">كاليندر الأسبوع</a><a href="#idea">الفكرة</a><a href="#rules">الكلام</a><a href="#war">الضمان</a>
-<a href="#br">الفروع</a><a href="#per">البيرسونا</a><a href="#six">الستة شهور</a><a href="#mech">تغيير الموديل</a><a href="#alt">لقطات إضافية</a><a href="#month">الشهر كامل</a><a href="#teaser">التيزر</a></nav>
+<a href="#br">الفروع</a><a href="#per">البيرسونا</a><a href="#six">الستة شهور</a><a href="#mech">تغيير الموديل</a><a href="#ads">بإعلانات وبدون</a><a href="#alt">لقطات إضافية</a><a href="#month">الشهر كامل</a><a href="#teaser">التيزر</a></nav>
 
 <h2 id="cal">كاليندر الأسبوع الأول — <span>اضغط على أي يوم</span></h2>
 <section class="blk" style="padding:16px 20px">
@@ -172,6 +172,25 @@ a{color:#c9761a}
 <p style="margin-top:12px"><b>شروط الصورة:</b> خلفية بيضا أو كريم • إضاءة نضيفة من غير فلاش • ٢٠٠٠ بكسل على الأقل • الجزمة جديدة ونضيفة • زاوية ٤٥° وزاوية جانبية.</p>
 </section>
 
+<h2 id="ads">الخطة بإعلانات وبدون إعلانات</h2>
+<section class="blk">
+<p class="big">المحتوى واحد في الحالتين. اللي بيتغيّر هو التوزيع مش الكلام.</p>
+<div class="grid">
+ <div class="tile"><b>بدون إعلانات — أورجانيك بالكامل</b>
+ بنعتمد على تلات حاجات: الحفظ والمشاركة (كلام الناس بتحس إنه بيتكلم عنها)، والستوري اليومي اللي بيسأل ويجمع ردود، والفروع — كل بوست فرع بيوصل لناس الحي بالاسم والعنوان. الإيقاع تبات ٧ أيام في الأسبوع عشان الصفحة تفضل حيّة.</div>
+ <div class="tile"><b>بإعلانات — نفس البوستات، توزيع أذكى</b>
+ مبنزلش إعلان جديد. بنختار من نفس أيام الأسبوع تلات بوستات وندفع وراهم بس. مفيش كلام بيع في الإعلان برضه — إحنا في شهر تعريف.</div>
+</div>
+<h3 style="margin-top:20px">لو فيه ميزانية — بندفع على إيه بالظبط</h3>
+<table><thead><tr><th>البوست</th><th>الهدف</th><th>الجمهور</th><th>نصيبه من الميزانية</th></tr></thead><tbody>
+<tr><td class=t>السبت — التيزر</td><td>مشاهدات فيديو</td><td>رجالة ٢٥–٤٥، القاهرة والجيزة والإسكندرية</td><td class="p">٥٠٪</td></tr>
+<tr><td class=t>الجمعة — الفرع</td><td>وصول موضعي</td><td>دايرة ١٠ كم حوالين كل فرع بالاسم</td><td class="p">٣٠٪</td></tr>
+<tr><td class=t>الأحد — اللحظة</td><td>تفاعل</td><td>آباء ٣٠–٤٥ + اهتمامات الأبوة والملابس الرجالي</td><td class="p">٢٠٪</td></tr>
+</tbody></table>
+<div class="note">قواعد ثابتة: نفس الكابشن بالظبط زي الأورجانيك • الفيديو يرفع 9x16 أصلي • مفيش «اشتري» ولا «خصم» في شهر التوعية • مفيش بوست ضمان مدفوع (الضمان بيتقري مش بيتفرض) • الريمار كيتنج يبتدي من الشهر التالت مش دلوقتي.</div>
+<p style="margin-top:12px;color:var(--grey);font-size:14px">التوزيع ده نسبة مئوية مش رقم — بيشتغل مع أي ميزانية صغيرة أو كبيرة. قولوا لنا الرقم وإحنا نظبّطه.</p>
+</section>
+
 <h2 id="alt">لقطات إضافية عندنا</h2>
 <section class="blk">
 <p>دي لقطات عملناها مع عيّنة الأسبوع الأول ومش مستخدمة في أي يوم. سايبينها قدامكم عشان لو مش مرتاحين لصورة يوم معيّن، نبدّلها من دي في نفس اليوم <b>من غير ما نغيّر الكلام ولا الترتيب</b>.</p>
@@ -242,5 +261,7 @@ function openDay(i){
 function closeDay(){document.getElementById('ov').classList.remove('on');document.body.style.overflow=''}
 function cp(){navigator.clipboard.writeText(document.getElementById('cp').innerText);}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDay()});
+function fromHash(){var m=(location.hash||'').match(/^#d(\d+)$/);if(m){var i=+m[1];if(D[i])openDay(i);}}
+window.addEventListener('hashchange',fromHash);fromHash();
 </script>
 </html>
