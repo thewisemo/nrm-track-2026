@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>نورماندي شوز</title>
+<link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EDE6;--ink:#2D2A28;--or:#EE9637}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--cream);color:var(--ink);
+  background-image:url(pattern.png);background-size:620px;
+  min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+.box img{width:200px;max-width:60vw}
+.box p{margin-top:18px;font-size:15px;font-weight:600;color:#6f6a64}
+.bar{width:170px;height:4px;border-radius:4px;background:#ddd8cf;margin:18px auto 0;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--or);border-radius:4px;animation:go .9s ease forwards}
+@keyframes go{to{width:100%}}
+a.fb{display:inline-block;margin-top:20px;font-size:14px;font-weight:800;color:var(--or);text-decoration:none}
+</style></head>
+<body>
+<div class="box">
+  <img src="logo.png" alt="نورماندي شوز">
+  <p id="msg">لحظة واحدة…</p>
+  <div class="bar"><i></i></div>
+  <a class="fb" id="fb" href="#" style="display:none">اضغط هنا لو مافتحش</a>
+</div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search);
+  var to=q.get('to')||'';
+  // security: only allow known-safe schemes / hosts
+  var OKH=['wa.me','api.whatsapp.com','m.me','ig.me','instagram.com','www.instagram.com',
+           'facebook.com','www.facebook.com','messenger.com','maps.google.com','www.google.com',
+           'goo.gl','maps.app.goo.gl','tiktok.com','www.tiktok.com'];
+  var safe='';
+  if(/^tel:\+?[0-9\-\s]{5,20}$/.test(to)) safe=to;
+  else{ try{ var u=new URL(to); if(u.protocol==='https:'&&OKH.indexOf(u.hostname)>-1) safe=u.href; }catch(e){} }
+  if(!safe && to && to.charAt(0)==='/' ) safe=to;
+
+  var payload={ev:'click'};
+  ['k','id','from','m','b','s','src','post','utm_source','utm_medium','utm_campaign','utm_content']
+    .forEach(function(k){ if(q.get(k)) payload[k]=q.get(k); });
+  payload.dest=safe?(safe.slice(0,120)):'blocked';
+  payload.ref=document.referrer||'';
+  payload.ts=new Date().toISOString();
+
+  var EP='';
+  function fire(cb){
+    if(!EP){cb();return;}
+    var url=EP+(EP.indexOf('?')>-1?'&':'?')+new URLSearchParams(payload).toString();
+    var done=false, end=function(){if(!done){done=true;cb();}};
+    if(navigator.sendBeacon){ try{navigator.sendBeacon(url); setTimeout(end,180); return;}catch(e){} }
+    var img=new Image(); img.onload=img.onerror=end; img.src=url; setTimeout(end,700);
+  }
+  function jump(){
+    if(!safe){ document.getElementById('msg').textContent='الرابط مش صحيح'; return; }
+    document.getElementById('fb').href=safe;
+    document.getElementById('fb').style.display='inline-block';
+    location.replace(safe);
+  }
+  function localSave(){ try{
+    var L=JSON.parse(localStorage.getItem('nrm_events')||'[]');
+    L.push(payload); if(L.length>500)L=L.slice(-500);
+    localStorage.setItem('nrm_events',JSON.stringify(L));
+  }catch(e){} }
+
+  var started=false;
+  function start(){ if(started)return; started=true;
+    if(!EP) localSave();
+    fire(jump);
+  }
+  // grab the endpoint from config, but never block the redirect for long
+  try{
+    var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},600);
+    fetch('config.json',{signal:ctl.signal,cache:'force-cache'})
+      .then(function(r){return r.json()})
+      .then(function(C){ EP=(C&&C.log_endpoint)||''; start(); })
+      .catch(start);
+  }catch(e){ start(); }
+  setTimeout(start,650);
+  setTimeout(jump,1600);
+})();
+</script>
+</body></html>
