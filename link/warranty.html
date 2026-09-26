@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نورماندي شوز — فعّل ضمانك</title>
+<meta name="description" content="فعّل ضمان نورماندي شوز أونلاين في دقيقة، واطمن على المدة المتبقية في أي وقت.">
+<meta property="og:title" content="نورماندي شوز — فعّل ضمانك">
+<meta property="og:description" content="التفعيل بياخد دقيقة. ضمان حقيقي على النعل والغرزة.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EDE6;--ink:#2D2A28;--or:#EE9637;--mut:#8a8580;--line:#e4e0d7;--ok:#2e8b5a;--bad:#c1492f}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--cream);color:var(--ink);
+  background-image:url(pattern.png);background-size:620px;min-height:100vh}
+.wrap{max-width:540px;margin:0 auto;padding:22px 18px 60px}
+header{text-align:center;padding:8px 0 2px}
+header img{width:190px;max-width:58%}
+.hero{background:var(--ink);color:var(--cream);border-radius:26px;padding:26px 22px;margin-top:18px;
+  text-align:center;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(45,42,40,.18)}
+.hero::before{content:'';position:absolute;inset:-40% -30% auto auto;width:280px;height:280px;
+  background:radial-gradient(circle,rgba(238,150,55,.32),transparent 62%)}
+.hero .big{font-size:56px;font-weight:900;color:var(--or);line-height:1;position:relative}
+.hero .big small{font-size:18px;font-weight:800;color:var(--cream);opacity:.8;display:block;margin-top:6px}
+.hero h1{font-size:23px;font-weight:900;margin:14px 0 8px;position:relative}
+.hero p{font-size:14px;color:#c0bab2;font-weight:600;line-height:1.75;position:relative}
+.tabs{display:flex;gap:8px;margin:20px 0 14px}
+.tabs button{flex:1;border:1.5px solid var(--line);background:#fff;color:#6f6a64;border-radius:100px;
+  padding:12px 6px;font-family:inherit;font-size:14.5px;font-weight:800;cursor:pointer}
+.tabs button.on{border-color:var(--or);background:#fff7ec;color:var(--ink);box-shadow:0 6px 16px rgba(238,150,55,.16)}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px 18px;
+  box-shadow:0 3px 14px rgba(45,42,40,.05)}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:13.5px;font-weight:800;margin-bottom:7px}
+.fld label i{font-style:normal;color:var(--or)}
+.fld input,.fld select{width:100%;border:1.5px solid var(--line);border-radius:15px;padding:13px 14px;
+  font-family:inherit;font-size:15.5px;font-weight:700;color:var(--ink);background:#fbfaf7;outline:none}
+.fld input:focus,.fld select:focus{border-color:var(--or);background:#fff}
+.fld .hint{font-size:12px;color:var(--mut);font-weight:600;margin-top:6px}
+.fld.bad input,.fld.bad select{border-color:var(--bad);background:#fdf3f1}
+.fld .err{display:none;font-size:12.5px;color:var(--bad);font-weight:700;margin-top:6px}
+.fld.bad .err{display:block}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#6f6a64;
+  font-weight:600;line-height:1.7;margin:4px 0 16px}
+.agree input{width:19px;height:19px;flex:0 0 19px;margin-top:2px;accent-color:var(--or)}
+.btn{width:100%;border:0;border-radius:100px;background:var(--or);color:#fff;font-family:inherit;
+  font-size:17px;font-weight:900;padding:16px;cursor:pointer;box-shadow:0 12px 26px rgba(238,150,55,.32)}
+.btn[disabled]{opacity:.55;box-shadow:none;cursor:not-allowed}
+.btn.g{background:var(--ink);box-shadow:0 12px 26px rgba(45,42,40,.22)}
+.res{border-radius:22px;padding:22px 18px;margin-top:14px;display:none}
+.res.on{display:block;animation:up .45s cubic-bezier(.2,.7,.3,1)}
+.res.good{background:#eef6f0;border:1.5px solid #cfe6d8}
+.res.warn{background:#fdf1e3;border:1.5px solid #f0dcc1}
+.res.err{background:#fdf3f1;border:1.5px solid #f0cfc8}
+.res h3{font-size:18px;font-weight:900;margin-bottom:8px}
+.res p{font-size:13.5px;font-weight:600;color:#5d574f;line-height:1.8}
+.res .code{display:inline-block;background:#fff;border:1px dashed var(--or);border-radius:12px;
+  padding:7px 14px;font-weight:900;font-size:16px;margin-top:10px;letter-spacing:1px;direction:ltr}
+.meter{height:9px;border-radius:9px;background:#e6e2da;overflow:hidden;margin:12px 0 6px}
+.meter i{display:block;height:100%;background:var(--or);border-radius:9px}
+h2{font-size:20px;font-weight:900;margin:30px 0 12px;display:flex;align-items:center;gap:9px}
+h2::after{content:'';flex:1;height:1px;background:var(--line)}
+.steps{counter-reset:s}
+.step{display:flex;gap:13px;background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:14px 16px;margin-bottom:9px}
+.step::before{counter-increment:s;content:counter(s);flex:0 0 32px;height:32px;border-radius:11px;
+  background:var(--cream);color:var(--or);font-weight:900;display:flex;align-items:center;justify-content:center}
+.step b{display:block;font-size:15px;font-weight:800}
+.step small{display:block;font-size:12.5px;color:var(--mut);font-weight:600;margin-top:2px;line-height:1.7}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px 16px}
+.box b{display:block;font-size:14.5px;font-weight:900;margin-bottom:6px}
+.box.y b{color:var(--ok)} .box.n b{color:var(--bad)}
+.box p{font-size:12.5px;color:#6f6a64;font-weight:600;line-height:1.75}
+.bk{display:block;text-align:center;background:#fff;border:1px solid var(--line);border-radius:100px;
+  padding:14px;margin-top:22px;text-decoration:none;color:var(--ink);font-weight:800;font-size:15px}
+footer{text-align:center;margin-top:26px;font-size:12px;color:var(--mut);font-weight:700}
+@keyframes up{from{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion:no-preference){.card,.step,.hero{animation:up .5s cubic-bezier(.2,.7,.3,1) backwards}}
+@media (max-width:360px){.two{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="wrap">
+  <header><img src="logo.png" alt="نورماندي شوز"></header>
+
+  <div class="hero">
+    <div class="big" id="hbig">—<small id="hsmall">ضمان</small></div>
+    <h1>فعّل ضمانك في دقيقة</h1>
+    <p id="hsub">اكتب بيانات فاتورتك، وإحنا نراجعها مع الفرع ونأكدلك التفعيل.</p>
+  </div>
+
+  <div class="tabs">
+    <button id="tA" class="on" onclick="tab('A')">فعّل ضمانك</button>
+    <button id="tB" onclick="tab('B')">اطمن على ضمانك</button>
+  </div>
+
+  <!-- ============ تفعيل ============ -->
+  <div class="card" id="paneA">
+    <div class="fld" id="f_inv">
+      <label>رقم الفاتورة <i>*</i></label>
+      <input id="inv" inputmode="numeric" autocomplete="off" placeholder="زي ما هو مكتوب على الفاتورة">
+      <div class="hint">هتلاقيه في أعلى الفاتورة.</div>
+      <div class="err">اكتب رقم الفاتورة.</div>
+    </div>
+    <div class="fld" id="f_br">
+      <label>الفرع اللي اشتريت منه <i>*</i></label>
+      <select id="br"><option value="">اختار الفرع</option></select>
+      <div class="err">اختار الفرع.</div>
+    </div>
+    <div class="fld" id="f_sel">
+      <label>اسم البائع <i>*</i></label>
+      <input id="sel" autocomplete="off" placeholder="اسم اللي خدمك في الفرع">
+      <div class="hint">مكتوب على الفاتورة، أو اسأل الفرع.</div>
+      <div class="err">اكتب اسم البائع.</div>
+    </div>
+    <div class="fld" id="f_dt">
+      <label>تاريخ الفاتورة <i>*</i></label>
+      <input id="dt" type="date">
+      <div class="hint" id="dthint">الضمان بيبدأ من التاريخ ده.</div>
+      <div class="err" id="dterr">اختار تاريخ صحيح.</div>
+    </div>
+    <div class="fld" id="f_ph">
+      <label>رقم الموبايل <i>*</i></label>
+      <input id="ph" inputmode="numeric" autocomplete="tel" placeholder="01XXXXXXXXX">
+      <div class="hint">عليه هيوصلك تأكيد التفعيل.</div>
+      <div class="err">اكتب رقم موبايل مصري صحيح.</div>
+    </div>
+    <label class="agree"><input type="checkbox" id="ok">
+      <span>موافق إن نورماندي تحتفظ بالبيانات دي لتفعيل الضمان والتواصل معايا بخصوصه.</span></label>
+    <button class="btn" id="send" onclick="submitAct()">فعّل الضمان</button>
+    <div class="res" id="resA"></div>
+  </div>
+
+  <!-- ============ استعلام ============ -->
+  <div class="card" id="paneB" style="display:none">
+    <div class="fld" id="g_inv">
+      <label>رقم الفاتورة <i>*</i></label>
+      <input id="qinv" inputmode="numeric" placeholder="رقم الفاتورة">
+      <div class="err">اكتب رقم الفاتورة.</div>
+    </div>
+    <div class="fld" id="g_ph">
+      <label>رقم الموبايل <i>*</i></label>
+      <input id="qph" inputmode="numeric" placeholder="01XXXXXXXXX">
+      <div class="err">اكتب رقم موبايل مصري صحيح.</div>
+    </div>
+    <button class="btn g" id="qsend" onclick="submitChk()">اطمن على ضمانك</button>
+    <div class="res" id="resB"></div>
+  </div>
+
+  <h2>إزاي بيشتغل</h2>
+  <div class="steps">
+    <div class="step"><div><b>تكتب بيانات فاتورتك</b><small>رقم الفاتورة، الفرع، اسم البائع، تاريخ الفاتورة، ورقم موبايلك.</small></div></div>
+    <div class="step"><div><b>إحنا نطابقها مع الفرع</b><small>فريق نورماندي بيراجع الطلبات يومياً مع كشوف الفروع.</small></div></div>
+    <div class="step"><div><b>يوصلك التأكيد</b><small id="s3">وفيه تاريخ بداية الضمان وتاريخ نهايته.</small></div></div>
+  </div>
+
+  <h2>الضمان بيغطي إيه</h2>
+  <div class="two">
+    <div class="box y"><b>بيغطي</b><p id="cov">—</p></div>
+    <div class="box n"><b>مبيغطيش</b><p id="ncov">—</p></div>
+  </div>
+
+  <a class="bk" href="index.html">الفروع والمواعيد والتواصل ←</a>
+  <footer>نورماندي شوز · من أول خطوة</footer>
+</div>
+
+<script>
+var C={}, W={days:90,grace_days:14,from:'invoice',on:true,label:''}, EP='', LOG='';
+var q=new URLSearchParams(location.search);
+var KEEP=['utm_source','utm_medium','utm_campaign','utm_content','src','post','m'];
+function passthru(){var o={};KEEP.forEach(function(k){if(q.get(k))o[k]=q.get(k)});return o}
+function arn(n){return String(n).replace(/[0-9]/g,function(c){return '٠١٢٣٤٥٦٧٨٩'[+c]})}
+function beacon(p){ if(!LOG)return; try{
+  var u=LOG+(LOG.indexOf('?')>-1?'&':'?')+new URLSearchParams(Object.assign(p,passthru())).toString();
+  if(navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src=u;
+}catch(e){} }
+function tab(t){
+  document.getElementById('tA').className = t==='A'?'on':'';
+  document.getElementById('tB').className = t==='B'?'on':'';
+  document.getElementById('paneA').style.display = t==='A'?'':'none';
+  document.getElementById('paneB').style.display = t==='B'?'':'none';
+  beacon({ev:'tab',page:'warranty',id:t});
+}
+function bad(id,on){document.getElementById(id).className='fld'+(on?' bad':'')}
+function okPhone(v){return /^01[0125][0-9]{8}$/.test(v.replace(/\D/g,''))}
+
+function applyCfg(){
+  var d=W.days|0, g=W.grace_days|0;
+  var lbl = W.label || (d%30===0 ? arn(d/30)+' شهور' : arn(d)+' يوم');
+  document.getElementById('hbig').firstChild.nodeValue = lbl;
+  document.getElementById('hsmall').textContent = 'ضمان على النعل والغرزة';
+  document.getElementById('hsub').textContent =
+    'الضمان '+arn(d)+' يوم من تاريخ الفاتورة. اكتب بياناتك وإحنا نراجعها مع الفرع ونأكدلك التفعيل.';
+  document.getElementById('dthint').textContent =
+    'الضمان بيبدأ من التاريخ ده، والتفعيل لازم يتم خلال '+arn(g)+' يوم من الشراء.';
+  document.getElementById('s3').textContent =
+    'وفيه تاريخ بداية الضمان وتاريخ نهايته — '+arn(d)+' يوم من تاريخ الفاتورة.';
+  document.getElementById('cov').textContent  = W.covers||'النعل والغرزة وعيوب الصناعة';
+  document.getElementById('ncov').textContent = W.not_covers||'سوء الاستخدام';
+  var dt=document.getElementById('dt');
+  var today=new Date(), min=new Date(today.getTime()-g*864e5);
+  dt.max=today.toISOString().slice(0,10);
+  dt.min=min.toISOString().slice(0,10);
+  if(W.on===false){
+    document.getElementById('send').disabled=true;
+    document.getElementById('send').textContent='التفعيل موقوف مؤقتاً';
+  }
+}
+
+function collect(){
+  var v={inv:document.getElementById('inv').value.trim(),
+         br:document.getElementById('br').value,
+         sel:document.getElementById('sel').value.trim(),
+         dt:document.getElementById('dt').value,
+         ph:document.getElementById('ph').value.replace(/\D/g,'')};
+  var bad1=!v.inv, bad2=!v.br, bad3=!v.sel, bad5=!okPhone(v.ph);
+  var g=W.grace_days|0, bad4=false;
+  if(!v.dt) bad4=true; else {
+    var days=Math.floor((Date.now()-new Date(v.dt+'T00:00:00').getTime())/864e5);
+    if(days<0){bad4=true;document.getElementById('dterr').textContent='التاريخ ده في المستقبل.';}
+    else if(days>g){bad4=true;document.getElementById('dterr').textContent=
+      'عدّى أكتر من '+arn(g)+' يوم على الشراء — التفعيل أونلاين مش متاح. تعالى لأقرب فرع بالفاتورة.';}
+  }
+  bad('f_inv',bad1);bad('f_br',bad2);bad('f_sel',bad3);bad('f_dt',bad4);bad('f_ph',bad5);
+  if(bad1||bad2||bad3||bad4||bad5) return null;
+  if(!document.getElementById('ok').checked){
+    show('resA','warn','لسه خطوة','لازم توافق على الاحتفاظ ببياناتك عشان نقدر نفعّل الضمان.');
+    return null;
+  }
+  return v;
+}
+function show(id,kind,h,p,extra){
+  var e=document.getElementById(id);
+  e.className='res on '+kind;
+  e.innerHTML='<h3>'+h+'</h3><p>'+p+'</p>'+(extra||'');
+  e.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function endDate(d0,days){var t=new Date(d0+'T00:00:00');t.setDate(t.getDate()+days);
+  return arn(t.toISOString().slice(0,10).split('-').reverse().join('/'));}
+
+function submitAct(){
+  var v=collect(); if(!v) return;
+  var btn=document.getElementById('send'); btn.disabled=true; btn.textContent='بنسجّل…';
+  var ref='NRM-'+String(v.inv).replace(/\D/g,'').slice(-6).padStart(6,'0');
+  var payload=Object.assign({ev:'warranty_activate',page:'warranty',invoice:v.inv,branch:v.br,
+    seller:v.sel,invoice_date:v.dt,phone:v.ph,days:W.days,ref:ref},passthru());
+  var done=function(okSrv){
+    btn.disabled=false; btn.textContent='فعّل الضمان';
+    if(okSrv){
+      show('resA','good','تمام — طلبك اتسجّل',
+        'ضمانك هيبدأ من تاريخ الفاتورة وينتهي في <b>'+endDate(v.dt,W.days)+'</b>.<br>'+
+        'فريقنا هيطابق الفاتورة مع الفرع ويأكدلك على رقم موبايلك. احتفظ بالرقم ده:',
+        '<span class="code">'+ref+'</span>');
+      document.getElementById('inv').value='';document.getElementById('sel').value='';
+      document.getElementById('ph').value='';document.getElementById('ok').checked=false;
+    } else {
+      show('resA','warn','بياناتك اتسجّلت على الجهاز',
+        'خدمة التفعيل الأونلاين لسه بتتظبط. سجّلنا بياناتك هنا، وتقدر كمان تروح لأقرب فرع بالفاتورة ويتم التفعيل في ثانية.',
+        '<span class="code">'+ref+'</span>');
+      try{var L=JSON.parse(localStorage.getItem('nrm_war')||'[]');L.push(payload);
+        localStorage.setItem('nrm_war',JSON.stringify(L.slice(-100)));}catch(e){}
+    }
+  };
+  if(!EP){ done(false); return; }
+  var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},8000);
+  fetch(EP+(EP.indexOf('?')>-1?'&':'?')+new URLSearchParams(payload).toString(),
+        {signal:ctl.signal,method:'GET',mode:'cors'})
+    .then(function(r){return r.json()}).then(function(j){done(!!(j&&j.ok))})
+    .catch(function(){done(false)});
+}
+
+function submitChk(){
+  var inv=document.getElementById('qinv').value.trim(),
+      ph=document.getElementById('qph').value.replace(/\D/g,'');
+  bad('g_inv',!inv); bad('g_ph',!okPhone(ph));
+  if(!inv||!okPhone(ph)) return;
+  var btn=document.getElementById('qsend'); btn.disabled=true; btn.textContent='بندوّر…';
+  beacon({ev:'warranty_check',page:'warranty'});
+  var fin=function(){btn.disabled=false;btn.textContent='اطمن على ضمانك';};
+  if(!EP){ fin(); show('resB','warn','الاستعلام لسه مش شغال',
+    'خدمة الاستعلام الأونلاين بتتظبط دلوقتي. لحد ما تشتغل، أي فرع يقدر يقوللك حالة ضمانك بالفاتورة في ثانية.'); return; }
+  var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},8000);
+  fetch(EP+(EP.indexOf('?')>-1?'&':'?')+new URLSearchParams({mode:'status',invoice:inv,phone:ph}).toString(),
+        {signal:ctl.signal})
+   .then(function(r){return r.json()}).then(function(j){
+      fin();
+      if(!j||!j.ok||!j.found){ show('resB','warn','ملقيناش الفاتورة دي',
+        'راجع رقم الفاتورة ورقم الموبايل، أو كلّم الفرع اللي اشتريت منه.'); return; }
+      if(j.status==='pending'){ show('resB','warn','طلبك تحت المراجعة',
+        'سجّلنا طلبك وبنطابقه مع الفرع. أول ما يتأكد هيوصلك تأكيد على موبايلك.'); return; }
+      if(j.status!=='active'){ show('resB','err','الضمان مش مفعّل',
+        j.reason||'الطلب اترفض. كلّم الفرع اللي اشتريت منه للتفاصيل.'); return; }
+      var left=j.days_left|0, total=W.days|0, pct=Math.max(0,Math.min(100,Math.round(left*100/total)));
+      show('resB','good','ضمانك شغال',
+        'فاضل <b>'+arn(left)+' يوم</b> من أصل '+arn(total)+'.<br>ينتهي في <b>'+arn(j.end||'')+'</b>.',
+        '<div class="meter"><i style="width:'+pct+'%"></i></div>');
+   }).catch(function(){ fin(); show('resB','err','مشكلة في الاتصال','حاول تاني بعد شوية.'); });
+}
+
+fetch('config.json?v='+Date.now()).then(function(r){return r.json()}).then(function(cfg){
+  C=cfg; LOG=C.log_endpoint||'';
+  W=Object.assign(W,C.warranty||{});
+  EP=(C.warranty&&C.warranty.endpoint)||LOG||'';
+  var sel=document.getElementById('br');
+  (C.branches||[]).forEach(function(b){
+    var o=document.createElement('option'); o.value=b.key; o.textContent='فرع '+b.name; sel.appendChild(o);
+  });
+  applyCfg();
+  beacon({ev:'view',page:'warranty',ref:document.referrer||''});
+  // القيم الحيّة من لوحة التحكم (لو الشيت متوصّل) بتكسب اللي في الإعدادات
+  if(EP){
+    var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},2500);
+    fetch(EP+(EP.indexOf('?')>-1?'&':'?')+'mode=settings',{signal:ctl.signal})
+      .then(function(r){return r.json()})
+      .then(function(j){ if(j&&j.ok&&j.warranty){ W=Object.assign(W,j.warranty); applyCfg(); } })
+      .catch(function(){});
+  }
+}).catch(function(){ applyCfg(); });
+</script>
+</body></html>
