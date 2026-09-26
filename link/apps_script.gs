@@ -1,16 +1,39 @@
 /**
- * نورماندي شوز — سجل الأحداث ولوحة التحكم
- * الاستخدام: افتح الشيت > Extensions > Apps Script > الصق الكود ده كله
- * بعدين Deploy > New deployment > Web app
- *   Execute as: Me
- *   Who has access: Anyone
- * انسخ الرابط اللي هيطلع وحطه في config.json في خانة log_endpoint
+ * نورماندي شوز — سجل الأحداث + تفعيل الضمان + لوحة التحكم
+ *
+ * التركيب مرة واحدة:
+ *  افتح الشيت > Extensions > Apps Script > الصق الكود ده كله > احفظ
+ *  شغّل setup() مرة واحدة بإيدك (بيجهّز التبويبات)
+ *  Deploy > New deployment > Web app
+ *     Execute as: Me
+ *     Who has access: Anyone
+ *  انسخ الرابط وحطه في config.json في خانتين:
+ *     log_endpoint         (تسجيل الزيارات والضغطات)
+ *     warranty.endpoint    (تفعيل الضمان والاستعلام) — نفس الرابط
+ *
+ * لوحة التحكم = تبويب «الإعدادات». غيّر مدة الضمان أو مهلة التفعيل من هناك،
+ * والصفحة بتقراها أول ما تتفتح. مفيش تعديل كود ومفيش رفع ملفات.
  */
 
-var EVENTS_SHEET = 'الأحداث';
+var EVENTS = 'الأحداث';
+var WAR    = 'الضمان';
+var SETT   = 'الإعدادات';
+
 var HEADERS = ['التاريخ والوقت','اليوم','الساعة','نوع الحدث','القناة','الكود','الفرع','المقاس',
                'المصدر','البوست','utm_source','utm_medium','utm_campaign','utm_content',
                'الوجهة','الصفحة السابقة','الجهاز'];
+
+var WHEAD = ['وقت الطلب','الرقم المرجعي','رقم الفاتورة','تاريخ الفاتورة','الفرع','اسم البائع',
+             'رقم الموبايل','مدة الضمان (يوم)','تاريخ بداية الضمان','تاريخ نهاية الضمان',
+             'الحالة','مين راجع','وقت المراجعة','سبب الرفض'];
+
+var DEFAULTS = [
+  ['warranty_days','90','مدة الضمان باليوم — بتعد من تاريخ الفاتورة'],
+  ['grace_days','14','مهلة التفعيل: أقصى عدد أيام بعد الشراء يسمح فيها بالتفعيل أونلاين'],
+  ['warranty_on','نعم','اكتب «لأ» عشان توقف التفعيل الأونلاين مؤقتاً'],
+  ['warranty_covers','النعل والغرزة وعيوب الصناعة','بيظهر في صفحة الضمان'],
+  ['warranty_not_covers','سوء الاستخدام، القطع أو الحرق أو البلل الشديد، والتصليح بره الفروع','بيظهر في صفحة الضمان']
+];
 
 function doGet(e)  { return handle(e); }
 function doPost(e) { return handle(e); }
@@ -18,76 +41,160 @@ function doPost(e) { return handle(e); }
 function handle(e) {
   try {
     var p = (e && e.parameter) ? e.parameter : {};
-    if (p.ping) return out({ ok: true, msg: 'نورماندي — السجل شغال' });
-
-    var sh = getSheet();
-    var now = new Date();
-    var tz  = Session.getScriptTimeZone() || 'Africa/Cairo';
-
-    sh.appendRow([
-      Utilities.formatDate(now, tz, 'yyyy-MM-dd HH:mm:ss'),
-      Utilities.formatDate(now, tz, 'EEEE'),
-      Number(Utilities.formatDate(now, tz, 'H')),
-      p.ev   || 'click',
-      p.k === 'channel' ? (p.id || '') : (p.k || ''),
-      p.m    || '',
-      p.b    || (p.k === 'map' || p.k === 'call' ? (p.id || '') : ''),
-      p.s    || '',
-      p.src  || '',
-      p.post || '',
-      p.utm_source   || '',
-      p.utm_medium   || '',
-      p.utm_campaign || '',
-      p.utm_content  || '',
-      p.dest || '',
-      p.ref  || '',
-      ((e && e.parameter && e.parameter.ua) ? e.parameter.ua : '')
-    ]);
-
-    // صورة شفافة 1×1 عشان الاستدعاء بالـ Image يشتغل برضه
-    if (p.img) {
-      return ContentService.createTextOutput('').setMimeType(ContentService.MimeType.TEXT);
-    }
-    return out({ ok: true });
+    if (p.ping)  return out({ ok: true, msg: 'نورماندي — الخدمة شغالة' });
+    if (p.mode === 'settings') return out({ ok: true, warranty: readSettings() });
+    if (p.mode === 'status')   return out(statusOf(p.invoice, p.phone));
+    if (p.ev   === 'warranty_activate') return out(activate(p));
+    return out(logEvent(p));
   } catch (err) {
     return out({ ok: false, err: String(err) });
   }
 }
 
-function getSheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sh = ss.getSheetByName(EVENTS_SHEET);
+/* ---------------- الإعدادات (لوحة التحكم) ---------------- */
+function readSettings() {
+  var sh = tab(SETT, ['المفتاح','القيمة','ملاحظة'], DEFAULTS);
+  var v  = sh.getDataRange().getValues(), m = {};
+  for (var i = 1; i < v.length; i++) if (v[i][0]) m[String(v[i][0]).trim()] = String(v[i][1]).trim();
+  return {
+    days:        Number(m.warranty_days || 90),
+    grace_days:  Number(m.grace_days || 14),
+    on:          (m.warranty_on || 'نعم') !== 'لأ',
+    covers:      m.warranty_covers || '',
+    not_covers:  m.warranty_not_covers || ''
+  };
+}
+
+/* ---------------- تفعيل الضمان ---------------- */
+function activate(p) {
+  var S = readSettings();
+  if (!S.on) return { ok: false, reason: 'التفعيل الأونلاين موقوف مؤقتاً' };
+
+  var inv = String(p.invoice || '').trim();
+  if (!inv) return { ok: false, reason: 'رقم الفاتورة ناقص' };
+  var ph = String(p.phone || '').replace(/\D/g, '');
+  if (!/^01[0125]\d{8}$/.test(ph)) return { ok: false, reason: 'رقم الموبايل مش صحيح' };
+
+  var d0 = new Date(String(p.invoice_date || '') + 'T00:00:00');
+  if (isNaN(d0.getTime())) return { ok: false, reason: 'تاريخ الفاتورة مش صحيح' };
+  var age = Math.floor((new Date() - d0) / 864e5);
+  if (age < 0)            return { ok: false, reason: 'تاريخ الفاتورة في المستقبل' };
+  if (age > S.grace_days) return { ok: false, reason: 'عدّى أكتر من ' + S.grace_days + ' يوم على الشراء' };
+
+  var sh = tab(WAR, WHEAD);
+  // فاتورة واحدة = تفعيل واحد
+  var v = sh.getDataRange().getValues();
+  for (var i = 1; i < v.length; i++) {
+    if (String(v[i][2]).trim() === inv) return { ok: false, duplicate: true, reason: 'الفاتورة دي متفعّلة قبل كده' };
+  }
+
+  var tz  = Session.getScriptTimeZone() || 'Africa/Cairo';
+  var end = new Date(d0.getTime()); end.setDate(end.getDate() + S.days);
+  var ref = String(p.ref || ('NRM-' + inv.replace(/\D/g, '').slice(-6)));
+
+  sh.appendRow([
+    Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd HH:mm:ss'),
+    ref, inv,
+    Utilities.formatDate(d0,  tz, 'yyyy-MM-dd'),
+    p.branch || '', p.seller || '', ph, S.days,
+    Utilities.formatDate(d0,  tz, 'yyyy-MM-dd'),
+    Utilities.formatDate(end, tz, 'yyyy-MM-dd'),
+    'تحت المراجعة', '', '', ''
+  ]);
+  logEvent({ ev: 'warranty_activate', k: 'warranty', id: ref, b: p.branch || '' });
+  return { ok: true, ref: ref, days: S.days, end: Utilities.formatDate(end, tz, 'yyyy-MM-dd') };
+}
+
+/* ---------------- الاستعلام ---------------- */
+function statusOf(inv, phone) {
+  inv = String(inv || '').trim();
+  var ph = String(phone || '').replace(/\D/g, '');
+  var sh = tab(WAR, WHEAD), v = sh.getDataRange().getValues();
+  for (var i = 1; i < v.length; i++) {
+    if (String(v[i][2]).trim() === inv && String(v[i][6]).replace(/\D/g, '') === ph) {
+      var st  = String(v[i][10]).trim();
+      var end = new Date(v[i][9]);
+      var left = Math.max(0, Math.ceil((end - new Date()) / 864e5));
+      var map = { 'مفعّل': 'active', 'تحت المراجعة': 'pending', 'مرفوض': 'rejected' };
+      return { ok: true, found: true, status: map[st] || 'pending', days_left: left,
+               end: Utilities.formatDate(end, Session.getScriptTimeZone() || 'Africa/Cairo', 'yyyy-MM-dd'),
+               reason: String(v[i][13] || '') };
+    }
+  }
+  return { ok: true, found: false };
+}
+
+/* ---------------- سجل الأحداث ---------------- */
+function logEvent(p) {
+  var sh = tab(EVENTS, HEADERS);
+  var now = new Date(), tz = Session.getScriptTimeZone() || 'Africa/Cairo';
+  sh.appendRow([
+    Utilities.formatDate(now, tz, 'yyyy-MM-dd HH:mm:ss'),
+    Utilities.formatDate(now, tz, 'EEEE'),
+    Number(Utilities.formatDate(now, tz, 'H')),
+    p.ev || 'click',
+    p.k === 'channel' ? (p.id || '') : (p.k || ''),
+    p.m || '',
+    p.b || (p.k === 'map' || p.k === 'call' ? (p.id || '') : ''),
+    p.s || '', p.src || '', p.post || '',
+    p.utm_source || '', p.utm_medium || '', p.utm_campaign || '', p.utm_content || '',
+    p.dest || '', p.ref2 || p.page || '', p.ua || ''
+  ]);
+  return { ok: true };
+}
+
+/* ---------------- أدوات ---------------- */
+function tab(name, head, rows) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(), sh = ss.getSheetByName(name);
   if (!sh) {
-    sh = ss.insertSheet(EVENTS_SHEET);
-    sh.appendRow(HEADERS);
-    sh.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold').setBackground('#2D2A28').setFontColor('#F0EDE6');
+    sh = ss.insertSheet(name);
+    sh.appendRow(head);
+    sh.getRange(1, 1, 1, head.length).setFontWeight('bold')
+      .setBackground('#2D2A28').setFontColor('#F0EDE6');
     sh.setFrozenRows(1);
+    if (rows && rows.length) sh.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
   }
   return sh;
 }
-
 function out(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-/** شغّل ده مرة واحدة بإيدك عشان يجهّز التبويبات */
+/** شغّله مرة واحدة بإيدك */
 function setup() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  getSheet();
-  var tabs = {
-    'الفروع'   : ['كود الفرع','اسم الفرع','المواعيد','التليفون','لينك الخريطة'],
-    'الأسئلة'  : ['السؤال','الإجابة','ظاهر'],
-    'الإعدادات': ['المفتاح','القيمة','ملاحظة'],
-    'الروابط'  : ['اسم الرابط','المنصة','الحملة','المحتوى','الرابط الجاهز']
-  };
-  Object.keys(tabs).forEach(function (name) {
-    if (!ss.getSheetByName(name)) {
-      var s = ss.insertSheet(name);
-      s.appendRow(tabs[name]);
-      s.getRange(1, 1, 1, tabs[name].length).setFontWeight('bold')
-        .setBackground('#2D2A28').setFontColor('#F0EDE6');
-      s.setFrozenRows(1);
-    }
-  });
+  tab(EVENTS, HEADERS);
+  tab(WAR, WHEAD);
+  tab(SETT, ['المفتاح','القيمة','ملاحظة'], DEFAULTS);
+  tab('الفروع', ['كود الفرع','اسم الفرع','العنوان','المواعيد','التليفون','لينك الخريطة']);
+  tab('الأسئلة', ['السؤال','الإجابة','ظاهر']);
+  tab('الروابط', ['اسم الرابط','المنصة','الحملة','المحتوى','الرابط الجاهز']);
+}
+
+/* ---------------- شاشة مراجعة الموظفين ---------------- */
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('نورماندي')
+    .addItem('تأكيد تفعيل الصفوف المختارة', 'confirmRows')
+    .addItem('رفض الصفوف المختارة', 'rejectRows')
+    .addToUi();
+}
+function markRows(status, reason) {
+  var sh = SpreadsheetApp.getActiveSheet();
+  if (sh.getName() !== WAR) { SpreadsheetApp.getUi().alert('افتح تبويب «الضمان» الأول.'); return; }
+  var r = sh.getActiveRange(), tz = Session.getScriptTimeZone() || 'Africa/Cairo';
+  var who = Session.getActiveUser().getEmail() || '';
+  var now = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd HH:mm:ss');
+  for (var i = 0; i < r.getNumRows(); i++) {
+    var row = r.getRow() + i;
+    if (row === 1) continue;
+    sh.getRange(row, 11).setValue(status);
+    sh.getRange(row, 12).setValue(who);
+    sh.getRange(row, 13).setValue(now);
+    if (reason) sh.getRange(row, 14).setValue(reason);
+  }
+}
+function confirmRows() { markRows('مفعّل', ''); }
+function rejectRows() {
+  var res = SpreadsheetApp.getUi().prompt('سبب الرفض؟');
+  if (res.getSelectedButton() === SpreadsheetApp.getUi().Button.OK) markRows('مرفوض', res.getResponseText());
 }
