@@ -54,6 +54,7 @@ details p{font-size:13.5px;color:#6f6a64;font-weight:600;line-height:1.75;paddin
 .war{background:var(--ink);color:var(--cream);border-radius:22px;padding:22px;text-align:center;margin-top:8px}
 .war b{display:block;font-size:34px;font-weight:900;color:var(--or);line-height:1}
 .war h3{font-size:19px;font-weight:900;margin:6px 0 6px}
+.war .wbtn{display:block;margin-top:16px;background:var(--or);color:#fff;text-decoration:none;border-radius:100px;padding:13px;font-size:15.5px;font-weight:900;box-shadow:0 10px 22px rgba(238,150,55,.3)}
 .war p{font-size:13.5px;color:#b6b0a8;font-weight:600;line-height:1.7}
 footer{text-align:center;margin-top:34px;font-size:12px;color:var(--mut);font-weight:700}
 .offers{display:block;background:var(--ink);color:var(--cream);border-radius:20px;padding:17px;
@@ -81,9 +82,10 @@ footer{text-align:center;margin-top:34px;font-size:12px;color:var(--mut);font-we
 
   <h2>الضمان</h2>
   <div class="war">
-    <b>٣ شهور</b>
+    <b id="wbig">٣ شهور</b>
     <h3>ضمان حقيقي</h3>
-    <p>على النعل والغرزة. تيجي بالفاتورة لأي فرع<br>ويتم الاستبدال أو الإصلاح من غير أي تكلفة.</p>
+    <p id="wsub">على النعل والغرزة. تيجي بالفاتورة لأي فرع<br>ويتم الاستبدال أو الإصلاح من غير أي تكلفة.</p>
+    <a class="wbtn" id="wbtn" href="warranty.html">فعّل ضمانك أونلاين ←</a>
   </div>
 
   <h2>أسئلة بتتكرر</h2>
@@ -132,7 +134,7 @@ fetch('config.json?v='+Date.now()).then(r=>r.json()).then(C=>{
     if(b.phone) acts.push(`<a href="${go('call',b.key,'tel:'+b.phone)}">اتصال</a>`);
     const d=document.createElement('div');
     d.className='br';
-    d.innerHTML=`<div class="top"><div class="pin">📍</div><div><h3>فرع ${b.name}</h3><small>${b.hours||''}</small></div></div>`
+    d.innerHTML=`<div class="top"><div class="pin">📍</div><div><h3>فرع ${b.name}</h3><small>${b.addr||b.hours||''}</small></div></div>`
       +(acts.length?`<div class="acts">${acts.join('')}</div>`:'');
     d.style.animationDelay=(i*50)+'ms';
     bs.appendChild(d);
@@ -145,6 +147,17 @@ fetch('config.json?v='+Date.now()).then(r=>r.json()).then(C=>{
     d.style.animationDelay=(i*40)+'ms';
     fq.appendChild(d);
   });
+  const W=C.warranty||{};
+  if(W.days){
+    const arn=n=>String(n).replace(/[0-9]/g,c=>'٠١٢٣٤٥٦٧٨٩'[+c]);
+    document.getElementById('wbig').textContent = W.label || (W.days%30===0? arn(W.days/30)+' شهور' : arn(W.days)+' يوم');
+    document.getElementById('wsub').innerHTML = 'على '+(W.covers||'النعل والغرزة')+'.<br>'+arn(W.days)+' يوم من تاريخ الفاتورة، والتفعيل بياخد دقيقة.';
+  }
+  if(W.on===false){ document.getElementById('wbtn').style.display='none'; }
+  else { const wb=document.getElementById('wbtn');
+    wb.href='warranty.html'+(location.search||'');
+    wb.addEventListener('click',()=>{ if(window.__LOG){ const p=Object.assign({ev:'click',k:'warranty',id:'warranty',from:'hub'},passthru());
+      try{navigator.sendBeacon(window.__LOG+'?'+new URLSearchParams(p))}catch(e){} } }); }
   window.__LOG=C.log_endpoint||'';
   try{sessionStorage.setItem('nrm_log',window.__LOG)}catch(e){}
   // page view
