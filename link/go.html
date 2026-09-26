@@ -33,7 +33,7 @@ a.fb{display:inline-block;margin-top:20px;font-size:14px;font-weight:800;color:v
   // security: only allow known-safe schemes / hosts
   var OKH=['wa.me','api.whatsapp.com','m.me','ig.me','instagram.com','www.instagram.com',
            'facebook.com','www.facebook.com','messenger.com','maps.google.com','www.google.com',
-           'goo.gl','maps.app.goo.gl','tiktok.com','www.tiktok.com'];
+           'goo.gl','maps.app.goo.gl','g.page','tiktok.com','www.tiktok.com'];
   var safe='';
   if(/^tel:\+?[0-9\-\s]{5,20}$/.test(to)) safe=to;
   else{ try{ var u=new URL(to); if(u.protocol==='https:'&&OKH.indexOf(u.hostname)>-1) safe=u.href; }catch(e){} }
