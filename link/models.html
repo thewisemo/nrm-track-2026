@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نورماندي شوز — التشكيلة</title>
+<meta name="description" content="تشكيلة نورماندي شوز — اختار فرعك ومقاسك وشوف الموديلات قبل ما تنزل.">
+<meta property="og:title" content="نورماندي شوز — التشكيلة">
+<meta property="og:description" content="اختار فرعك ومقاسك وشوف الموديلات">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EDE6;--ink:#2D2A28;--or:#EE9637;--mut:#8a8580;--line:#e4e0d7;--ok:#2e8b5a}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--cream);color:var(--ink);
+  background-image:url(pattern.png);background-size:620px;min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 70px}
+header{text-align:center;padding:6px 0 2px}
+header img{width:170px;max-width:52%}
+h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
+.lead{text-align:center;font-size:14px;color:#6f6a64;font-weight:600;line-height:1.7}
+.bar{position:sticky;top:0;z-index:20;background:rgba(240,237,230,.93);backdrop-filter:blur(10px);
+  margin:16px -16px 0;padding:12px 16px 10px;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.row::-webkit-scrollbar{display:none}
+.row+.row{margin-top:8px}
+.lbl{font-size:12px;font-weight:800;color:var(--mut);margin:0 2px 5px}
+.chip{flex:0 0 auto;border:1.5px solid var(--line);background:#fff;color:#57524c;border-radius:100px;
+  padding:8px 15px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap}
+.chip.on{border-color:var(--or);background:var(--or);color:#fff;box-shadow:0 6px 16px rgba(238,150,55,.28)}
+.count{margin:14px 0 10px;font-size:13.5px;font-weight:700;color:#6f6a64}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;
+  box-shadow:0 2px 10px rgba(45,42,40,.04);transition:transform .15s ease,box-shadow .15s ease}
+.card:active{transform:scale(.985)}
+.card .ph{width:100%;aspect-ratio:900/702;background:#fff;display:block;object-fit:contain}
+.card .in{padding:10px 13px 14px}
+.card b{display:block;font-size:15px;font-weight:800;line-height:1.35}
+.card .cd{font-size:12.5px;font-weight:800;color:var(--or);direction:ltr;text-align:right;margin-top:2px}
+.card small{display:block;font-size:12px;color:var(--mut);font-weight:600;margin-top:5px;line-height:1.6}
+.tag{display:inline-block;margin-top:9px;border-radius:100px;padding:3px 10px;font-size:11.5px;font-weight:800}
+.tag.ask{background:#f2efe9;color:#6b655d}.tag.yes{background:#e8f3ec;color:var(--ok)}
+.tag.no{background:#f7ecea;color:#b2503a}
+.empty{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 20px;text-align:center}
+.empty b{display:block;font-size:17px;font-weight:900;margin-bottom:6px}
+.empty p{font-size:13.5px;color:#6f6a64;font-weight:600;line-height:1.75}
+.sheet{position:fixed;inset:0;background:rgba(30,28,26,.55);display:none;align-items:flex-end;
+  justify-content:center;z-index:60;padding:0}
+.sheet.on{display:flex}
+.sheet .in{background:var(--cream);width:100%;max-width:560px;border-radius:26px 26px 0 0;
+  padding:16px 18px 30px;max-height:92vh;overflow:auto;animation:up .3s cubic-bezier(.2,.7,.3,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.6}}
+.sheet .hd{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.sheet h3{font-size:21px;font-weight:900;flex:1}
+.sheet .x{border:0;background:var(--ink);color:#fff;border-radius:100px;padding:7px 14px;
+  font-family:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.sheet img{width:100%;border-radius:18px;background:#fff;display:block;margin-bottom:12px}
+.kv{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.kv span{background:#fff;border:1px solid var(--line);border-radius:100px;padding:6px 13px;
+  font-size:12.5px;font-weight:800}
+.sheet p.d{font-size:14.5px;font-weight:600;color:#5d574f;line-height:1.85;margin-bottom:14px}
+.av{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:14px}
+.av b{display:block;font-size:13px;color:var(--mut);font-weight:800;margin-bottom:9px}
+.av .sz{display:flex;gap:7px;flex-wrap:wrap}
+.av .sz i{font-style:normal;border-radius:12px;padding:7px 12px;font-size:13.5px;font-weight:800;
+  background:#f2efe9;color:#6b655d}
+.av .sz i.yes{background:#e8f3ec;color:var(--ok)}.av .sz i.no{background:#f7ecea;color:#b2503a;opacity:.7}
+.btn{display:block;text-align:center;background:var(--or);color:#fff;border-radius:100px;padding:15px;
+  font-size:16px;font-weight:900;text-decoration:none;box-shadow:0 10px 24px rgba(238,150,55,.3)}
+.btn.g{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;margin-top:9px}
+footer{text-align:center;margin-top:30px;font-size:12px;color:var(--mut);font-weight:700}
+footer a{color:var(--mut)}
+.note{background:#fff;border:1px dashed var(--line);border-radius:16px;padding:12px 15px;
+  font-size:12.5px;color:#6f6a64;font-weight:600;line-height:1.7;margin-top:14px}
+</style></head>
+<body>
+<div class="wrap">
+  <header><img src="logo.png" alt="نورماندي شوز"></header>
+  <h1>التشكيلة</h1>
+  <p class="lead">اختار فرعك ومقاسك .. وشوف اللي يناسبك قبل ما تنزل.</p>
+
+  <div class="bar">
+    <div class="lbl">الفرع</div>
+    <div class="row" id="brs"></div>
+    <div class="lbl" style="margin-top:9px">المقاس</div>
+    <div class="row" id="szs"></div>
+    <div class="lbl" style="margin-top:9px">الاستخدام</div>
+    <div class="row" id="uss"></div>
+  </div>
+
+  <div class="count" id="cnt"></div>
+  <div class="grid" id="grid"></div>
+  <div id="none"></div>
+  <div class="note" id="note"></div>
+
+  <footer>
+    <a href="index.html">الفروع والتواصل</a> · <a href="warranty.html">تفعيل الضمان</a><br><br>
+    نورماندي شوز · من أول خطوة
+  </footer>
+</div>
+
+<div class="sheet" id="sheet" onclick="if(event.target===this)closeSheet()"><div class="in" id="sheetin"></div></div>
+
+<script>
+var C={}, M=[], BR=[], SZ=[], US=[], LOG='', CH=[];
+var st={br:'',sz:0,us:'الكل'};
+var q=new URLSearchParams(location.search);
+var KEEP=['utm_source','utm_medium','utm_campaign','utm_content','src','post','m'];
+function passthru(){var o={};KEEP.forEach(function(k){if(q.get(k))o[k]=q.get(k)});return o}
+function arn(n){return String(n).replace(/[0-9]/g,function(c){return '٠١٢٣٤٥٦٧٨٩'[+c]})}
+function beacon(p){ if(!LOG)return; try{
+  var u=LOG+(LOG.indexOf('?')>-1?'&':'?')+new URLSearchParams(Object.assign(p,passthru())).toString();
+  if(navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src=u;
+}catch(e){} }
+function go(kind,key,url,extra){
+  var p=new URLSearchParams(Object.assign({to:url,k:kind,id:key,from:'models'},passthru(),extra||{}));
+  return 'go.html?'+p.toString();
+}
+/* حالة التوفر: متاح / مش متاح / مش معروف */
+function stockOf(code,br,size){
+  var s=(C.stock||{})[code];
+  if(!s||!br) return null;
+  var r=s[br]; if(!r) return null;
+  if(Array.isArray(r)) return r.indexOf(size)>-1;
+  if(typeof r==='object'){ var v=r[String(size)]; if(v===undefined) return null; return !!v && v!=='0'; }
+  return null;
+}
+function fits(m){
+  if(st.us!=='الكل' && m.use!==st.us) return false;
+  if(st.sz){
+    if((m.sizes||[]).indexOf(st.sz)<0) return false;
+    var s=stockOf(m.code,st.br,st.sz);
+    if(s===false) return false;
+  }
+  return true;
+}
+function chip(txt,on,fn){
+  var b=document.createElement('button'); b.className='chip'+(on?' on':'');
+  b.textContent=txt; b.onclick=fn; return b;
+}
+function build(){
+  var e=document.getElementById('brs'); e.innerHTML='';
+  e.appendChild(chip('كل الفروع',!st.br,function(){st.br='';render()}));
+  BR.forEach(function(b){ e.appendChild(chip(b.name,st.br===b.key,function(){st.br=b.key;beacon({ev:'filter',k:'branch',id:b.key,page:'models'});render()})); });
+  e=document.getElementById('szs'); e.innerHTML='';
+  e.appendChild(chip('كل المقاسات',!st.sz,function(){st.sz=0;render()}));
+  SZ.forEach(function(s){ e.appendChild(chip(arn(s),st.sz===s,function(){st.sz=s;beacon({ev:'filter',k:'size',id:s,page:'models'});render()})); });
+  e=document.getElementById('uss'); e.innerHTML='';
+  US.forEach(function(u){ e.appendChild(chip(u,st.us===u,function(){st.us=u;render()})); });
+}
+function render(){
+  build();
+  var list=M.filter(fits);
+  var g=document.getElementById('grid'); g.innerHTML='';
+  list.forEach(function(m){
+    var s=st.sz?stockOf(m.code,st.br,st.sz):null;
+    var tag = s===true?'<span class="tag yes">متوفر</span>'
+            : s===false?'<span class="tag no">خلص</span>'
+            : '<span class="tag ask">اسأل الفرع</span>';
+    var d=document.createElement('div'); d.className='card';
+    d.onclick=function(){openModel(m)};
+    d.innerHTML='<img class="ph" loading="lazy" src="'+m.img+'" alt="'+m.name+'">'
+      +'<div class="in"><b>'+m.name+'</b><div class="cd">'+m.code+'</div>'
+      +'<small>'+(m.color||'')+'</small>'+tag+'</div>';
+    g.appendChild(d);
+  });
+  document.getElementById('cnt').textContent =
+    list.length? arn(list.length)+' موديل'+(st.br?' — فرع '+(BR.filter(function(b){return b.key===st.br})[0]||{}).name:'') : '';
+  document.getElementById('none').innerHTML = list.length? '' :
+    '<div class="empty"><b>مفيش موديل بالمواصفات دي</b><p>جرّب تغيّر المقاس أو الاستخدام، أو كلّم الفرع وإحنا نشوفلك حل.</p></div>';
+}
+function openModel(m){
+  beacon({ev:'model',k:'model',id:m.code,page:'models',s:st.sz||'',b:st.br||''});
+  var sizes=(m.sizes||[]).map(function(s){
+    var v=stockOf(m.code,st.br,s);
+    return '<i class="'+(v===true?'yes':v===false?'no':'')+'">'+arn(s)+'</i>';
+  }).join('');
+  var ch=CH.filter(function(c){return c.on&&c.url&&!/XXXX/.test(c.url)})[0];
+  var msg='مهتم بموديل '+m.code+(st.sz?' مقاس '+st.sz:'');
+  var link=ch? go('channel',ch.key, ch.url+(ch.url.indexOf('?')>-1?'&':'?')+'text='+encodeURIComponent(msg),{m:m.code,s:st.sz||''}) : 'index.html';
+  document.getElementById('sheetin').innerHTML=
+    '<div class="hd"><h3>'+m.name+'</h3><button class="x" onclick="closeSheet()">إغلاق ✕</button></div>'
+    +'<img src="'+m.img+'" alt="'+m.name+'">'
+    +'<div class="kv"><span style="color:var(--or);direction:ltr">'+m.code+'</span>'
+      +'<span>'+m.use+'</span>'+(m.color?'<span>'+m.color+'</span>':'')+'</div>'
+    +'<p class="d">'+m.desc+'</p>'
+    +'<div class="av"><b>المقاسات'+(st.br?' — فرع '+(BR.filter(function(b){return b.key===st.br})[0]||{}).name:'')+'</b><div class="sz">'+sizes+'</div>'
+      +(Object.keys(C.stock||{}).length?'':'<p style="font-size:12px;color:var(--mut);font-weight:600;margin-top:10px;line-height:1.7">المخزون لسه مش متوصّل — كلّم الفرع يأكدلك المقاس.</p>')
+    +'</div>'
+    +'<a class="btn" href="'+link+'">اسأل عن الموديل ده</a>'
+    +'<a class="btn g" href="index.html">الفروع والمواعيد</a>';
+  document.getElementById('sheet').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(){document.getElementById('sheet').classList.remove('on');document.body.style.overflow=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
+
+Promise.all([
+  fetch('models.json?v='+Date.now()).then(function(r){return r.json()}),
+  fetch('config.json?v='+Date.now()).then(function(r){return r.json()}).catch(function(){return {}})
+]).then(function(a){
+  C=a[0]; var cfg=a[1]||{};
+  LOG=cfg.log_endpoint||''; CH=cfg.channels||[];
+  M=C.models||[]; BR=C.branches||[]; SZ=C.sizes||[]; US=C.uses||['الكل'];
+  st.br=q.get('b')||''; st.sz=+(q.get('s')||0); st.us=q.get('u')||'الكل';
+  document.getElementById('note').textContent=C.note||'';
+  render();
+  beacon({ev:'view',page:'models',ref:document.referrer||''});
+  // المخزون الحيّ من الشيت لو متوصّل
+  var EP=(cfg.warranty&&cfg.warranty.endpoint)||LOG||'';
+  if(EP){
+    var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},3000);
+    fetch(EP+(EP.indexOf('?')>-1?'&':'?')+'mode=stock',{signal:ctl.signal})
+      .then(function(r){return r.json()})
+      .then(function(j){ if(j&&j.ok&&j.stock){ C.stock=j.stock; C.updated=j.updated||''; render(); } })
+      .catch(function(){});
+  }
+}).catch(function(){
+  document.getElementById('none').innerHTML='<div class="empty"><b>مش قادرين نحمّل التشكيلة</b><p>حاول تاني بعد شوية.</p></div>';
+});
+</script>
+</body></html>
