@@ -72,6 +72,8 @@ footer{text-align:center;margin-top:34px;font-size:12px;color:var(--mut);font-we
     <p id="tag"></p>
   </header>
 
+  <a class="offers" id="modelsBtn" href="models.html">التشكيلة<span>اختار فرعك ومقاسك وشوف الموديلات</span></a>
+
   <a id="offersBtn" class="offers" style="display:none" href="#"></a>
 
   <h2>تواصل معانا</h2>
@@ -147,6 +149,7 @@ fetch('config.json?v='+Date.now()).then(r=>r.json()).then(C=>{
     d.style.animationDelay=(i*40)+'ms';
     fq.appendChild(d);
   });
+  document.getElementById('modelsBtn').href='models.html'+(location.search||'');
   const W=C.warranty||{};
   if(W.days){
     const arn=n=>String(n).replace(/[0-9]/g,c=>'٠١٢٣٤٥٦٧٨٩'[+c]);
