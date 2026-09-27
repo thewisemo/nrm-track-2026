@@ -18,6 +18,7 @@
 var EVENTS = 'الأحداث';
 var WAR    = 'الضمان';
 var SETT   = 'الإعدادات';
+var STOCK  = 'المخزون';
 
 var HEADERS = ['التاريخ والوقت','اليوم','الساعة','نوع الحدث','القناة','الكود','الفرع','المقاس',
                'المصدر','البوست','utm_source','utm_medium','utm_campaign','utm_content',
@@ -43,6 +44,7 @@ function handle(e) {
     var p = (e && e.parameter) ? e.parameter : {};
     if (p.ping)  return out({ ok: true, msg: 'نورماندي — الخدمة شغالة' });
     if (p.mode === 'settings') return out({ ok: true, warranty: readSettings() });
+    if (p.mode === 'stock')    return out(readStock());
     if (p.mode === 'status')   return out(statusOf(p.invoice, p.phone));
     if (p.ev   === 'warranty_activate') return out(activate(p));
     return out(logEvent(p));
@@ -63,6 +65,26 @@ function readSettings() {
     covers:      m.warranty_covers || '',
     not_covers:  m.warranty_not_covers || ''
   };
+}
+
+/* ---------------- المخزون ----------------
+ * تبويب «المخزون»: صف لكل موديل في كل فرع
+ *   كود الموديل | كود الفرع | المقاسات المتاحة (٤٠,٤١,٤٢) | آخر تحديث
+ * سيبه فاضي والصفحة هتقول «اسأل الفرع» — متقولش متوفر من غير بيانات.
+ */
+function readStock() {
+  var sh = tab(STOCK, ['كود الموديل','كود الفرع','المقاسات المتاحة','آخر تحديث']);
+  var v = sh.getDataRange().getValues(), st = {}, last = '';
+  for (var i = 1; i < v.length; i++) {
+    var code = String(v[i][0]).trim(), br = String(v[i][1]).trim();
+    if (!code || !br) continue;
+    var sizes = String(v[i][2]).split(/[,،\s]+/).map(function (x) { return parseInt(x, 10); })
+                  .filter(function (x) { return !isNaN(x); });
+    if (!st[code]) st[code] = {};
+    st[code][br] = sizes;
+    if (v[i][3]) last = v[i][3];
+  }
+  return { ok: true, stock: st, updated: String(last) };
 }
 
 /* ---------------- تفعيل الضمان ---------------- */
@@ -166,6 +188,7 @@ function setup() {
   tab(EVENTS, HEADERS);
   tab(WAR, WHEAD);
   tab(SETT, ['المفتاح','القيمة','ملاحظة'], DEFAULTS);
+  tab(STOCK, ['كود الموديل','كود الفرع','المقاسات المتاحة','آخر تحديث']);
   tab('الفروع', ['كود الفرع','اسم الفرع','العنوان','المواعيد','التليفون','لينك الخريطة']);
   tab('الأسئلة', ['السؤال','الإجابة','ظاهر']);
   tab('الروابط', ['اسم الرابط','المنصة','الحملة','المحتوى','الرابط الجاهز']);
