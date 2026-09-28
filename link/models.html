@@ -38,6 +38,12 @@ h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
   font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(45,42,40,.32);
   transition:transform .28s cubic-bezier(.2,.7,.3,1);opacity:.97}
 .fab.on{transform:translate(50%,0)}
+.done{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px 16px}
+.done b{display:block;font-size:15.5px;font-weight:900;color:var(--ok);margin-bottom:9px}
+.done .msg{background:#f7f4ee;border:1px dashed #d8d2c7;border-radius:12px;padding:11px 13px;
+  font-size:14px;font-weight:700;line-height:1.7;transition:background .3s}
+.done p{font-size:13px;color:#6f6a64;font-weight:600;line-height:1.7;margin:10px 0 12px}
+.done .btn.g{margin-top:9px}
 .clr{flex:0 0 auto;border:1.5px dashed #cfc8bd;background:transparent;color:#8a8580;border-radius:100px;
   padding:8px 14px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
 .row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;
@@ -86,8 +92,9 @@ h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
 .av .sz i{font-style:normal;border-radius:12px;padding:7px 12px;font-size:13.5px;font-weight:800;
   background:#f2efe9;color:#6b655d}
 .av .sz i.yes{background:#e8f3ec;color:var(--ok)}.av .sz i.no{background:#f7ecea;color:#b2503a;opacity:.7}
-.btn{display:block;text-align:center;background:var(--or);color:#fff;border-radius:100px;padding:15px;
-  font-size:16px;font-weight:900;text-decoration:none;box-shadow:0 10px 24px rgba(238,150,55,.3)}
+.btn{display:block;width:100%;text-align:center;background:var(--or);color:#fff;border:0;border-radius:100px;
+  padding:15px;font-family:inherit;font-size:16px;font-weight:900;text-decoration:none;cursor:pointer;
+  box-shadow:0 10px 24px rgba(238,150,55,.3)}
 .btn.g{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;margin-top:9px}
 footer{text-align:center;margin-top:30px;font-size:12px;color:var(--mut);font-weight:700}
 footer a{color:var(--mut)}
@@ -245,9 +252,12 @@ function openModel(m){
     var v=stockOf(m.code,st.br,s);
     return '<i class="'+(v===true?'yes':v===false?'no':'')+'">'+arn(s)+'</i>';
   }).join('');
-  var ch=CH.filter(function(c){return c.on&&c.url&&!/XXXX/.test(c.url)})[0];
-  var msg='مهتم بموديل '+m.code+(st.sz?' مقاس '+st.sz:'');
-  var link=ch? go('channel',ch.key, ch.url+(ch.url.indexOf('?')>-1?'&':'?')+'text='+encodeURIComponent(msg),{m:m.code,s:st.sz||''}) : 'index.html';
+  var ch=CH.filter(function(c){return c.key==='msg'&&c.on&&c.url})[0]
+        || CH.filter(function(c){return c.on&&c.url&&!/XXXX/.test(c.url)})[0];
+  var brn=st.br?((BR.filter(function(b){return b.key===st.br})[0]||{}).name||''):'';
+  var msg='مهتم بموديل '+m.code+(st.sz?' مقاس '+st.sz:'')+(brn?' .. فرع '+brn:'');
+  ASK={msg:msg, code:m.code, size:st.sz||'', br:st.br||'',
+       url: ch? go('channel',ch.key, ch.url, {m:m.code,s:st.sz||''}) : 'index.html'};
   document.getElementById('sheetin').innerHTML=
     '<div class="hd"><h3>'+m.name+'</h3><button class="x" onclick="closeSheet()">إغلاق ✕</button></div>'
     +'<img src="'+m.img+'" alt="'+m.name+'">'
@@ -257,12 +267,35 @@ function openModel(m){
     +'<div class="av"><b>المقاسات'+(st.br?' — فرع '+(BR.filter(function(b){return b.key===st.br})[0]||{}).name:'')+'</b><div class="sz">'+sizes+'</div>'
       +(Object.keys(C.stock||{}).length?'':'<p style="font-size:12px;color:var(--mut);font-weight:600;margin-top:10px;line-height:1.7">المخزون لسه مش متوصّل — كلّم الفرع يأكدلك المقاس.</p>')
     +'</div>'
-    +'<a class="btn" href="'+link+'">اسأل عن الموديل ده</a>'
+    +'<div id="askbox"><button class="btn" onclick="askNow()">اسأل عن الموديل ده على ماسنجر</button></div>'
     +'<a class="btn g" href="index.html">الفروع والمواعيد</a>';
   document.getElementById('sheet').classList.add('on');
   document.body.style.overflow='hidden';
 }
-function closeSheet(){document.getElementById('sheet').classList.remove('on');document.body.style.overflow=''}
+/* الماسنجر مبيقبلش رسالة جاهزة — فبننسخها للعميل ونفتحله المحادثة */
+var ASK=null;
+function askNow(){
+  if(!ASK) return;
+  try{ navigator.clipboard.writeText(ASK.msg); }catch(e){}
+  try{
+    var ta=document.createElement('textarea'); ta.value=ASK.msg; ta.style.position='fixed'; ta.style.opacity=0;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  }catch(e){}
+  beacon({ev:'model_ask',k:'model',id:ASK.code,s:ASK.size,b:ASK.br,page:'models'});
+  document.getElementById('askbox').innerHTML=
+    '<div class="done"><b>نسخنا رسالتك ✓</b>'
+   +'<div class="msg" id="askmsg">'+ASK.msg+'</div>'
+   +'<p>افتح ماسنجر والصقها وابعتها — وهنرد عليك بالتوفر في أقرب فرع.</p>'
+   +'<a class="btn" href="'+ASK.url+'">افتح ماسنجر ←</a>'
+   +'<button class="btn g" onclick="copyAsk()">انسخ الرسالة تاني</button></div>';
+}
+function copyAsk(){
+  var t=document.getElementById('askmsg');
+  try{ navigator.clipboard.writeText(t.textContent); }catch(e){}
+  t.style.background='#e8f3ec';
+  setTimeout(function(){t.style.background=''},700);
+}
+function closeSheet(){document.getElementById('sheet').classList.remove('on');document.body.style.overflow='';ASK=null}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
 stickEl=document.getElementById('stick'); fabEl=document.getElementById('fab');
 window.addEventListener('scroll',onScroll,{passive:true});
