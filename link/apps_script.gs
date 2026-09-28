@@ -34,6 +34,7 @@ var WHEAD = ['وقت الطلب','الرقم المرجعي','رقم الفات�
 var AHEAD = ['وقت الطلب','رقم الطلب','الموديل','المقاس','الفرع','وقت الرد','الرد','دقايق الانتظار'];
 
 var SHEAD = ['كود الموديل','كود الفرع','المقاسات المتاحة','آخر تحديث','المصدر'];
+var MHEAD = ['كود الموديل','الاسم','اللون','الاستخدام','الوصف','السعر','سعر العرض','المقاسات','عدد الصور المرفوعة'];
 var OWHEAD = ['ID المخزن في أودو','اسم المخزن في أودو','كود الفرع عندنا'];
 var OLHEAD = ['وقت المزامنة','النتيجة','عدد الصفوف','تفاصيل'];
 
@@ -60,7 +61,8 @@ function handle(e) {
     var p = (e && e.parameter) ? e.parameter : {};
     if (p.ping)  return out({ ok: true, msg: 'نورماندي — الخدمة شغالة' });
     if (p.mode === 'settings') return out({ ok: true, warranty: readSettings() });
-    if (p.mode === 'stock')    return out(readStock());
+    if (p.mode === 'stock')    { var st = readStock(); st.prices = readPrices(); return out(st); }
+    if (p.mode === 'prices')   return out({ ok: true, prices: readPrices() });
     if (p.mode === 'status')   return out(statusOf(p.invoice, p.phone));
     if (p.ev   === 'warranty_activate') return out(activate(p));
     if (p.ev   === 'model_ask' && p.k === 'staff')   return out(askOpen(p));
@@ -135,6 +137,23 @@ function askClose(p) {
     }
   }
   return { ok: false, reason: 'الطلب مش موجود' };
+}
+
+/* ---------------- الأسعار ----------------
+ * تبويب «الموديلات»: عمود «السعر» وعمود «سعر العرض».
+ * السعر فاضي = الصفحة بتكتب «السعر في الفرع» — مبتخترعش رقم.
+ */
+function readPrices() {
+  var sh = tab('الموديلات', MHEAD);
+  var v = sh.getDataRange().getValues(), out = {};
+  for (var i = 1; i < v.length; i++) {
+    var code = String(v[i][0] || '').trim();
+    if (!code) continue;
+    var p = Number(String(v[i][5] || '').replace(/[^\d.]/g, '')) || 0;
+    var s = Number(String(v[i][6] || '').replace(/[^\d.]/g, '')) || 0;
+    if (p || s) out[code] = { p: p, s: s };
+  }
+  return out;
 }
 
 /* ---------------- تفعيل الضمان ---------------- */
@@ -239,6 +258,7 @@ function setup() {
   tab(WAR, WHEAD);
   tab(SETT, ['المفتاح','القيمة','ملاحظة'], DEFAULTS);
   tab(STOCK, SHEAD);
+  tab('الموديلات', MHEAD);
   tab(ASKS, AHEAD);
   tab(OWH, OWHEAD);
   tab(OLOG, OLHEAD);
@@ -289,13 +309,18 @@ function setupFull() {
   var sizes = M.sizes || [39,40,41,42,43,44,45];
 
   /* الموديلات */
-  var ms = tab('الموديلات', ['كود الموديل','الاسم','اللون','الاستخدام','الوصف','المقاسات','عدد الصور المرفوعة']);
-  if (ms.getLastRow() > 1) ms.getRange(2, 1, ms.getLastRow() - 1, 7).clearContent();
+  var ms = tab('الموديلات', MHEAD);
+  /* الأسعار المكتوبة بإيد مبتتمسحش */
+  var old = {}, ov = ms.getDataRange().getValues();
+  for (var i = 1; i < ov.length; i++) if (ov[i][0]) old[String(ov[i][0]).trim()] = [ov[i][5], ov[i][6]];
+  if (ms.getLastRow() > 1) ms.getRange(2, 1, ms.getLastRow() - 1, MHEAD.length).clearContent();
   var mrows = (M.models || []).map(function (m) {
+    var o = old[m.code] || ['', ''];
     return [m.code, m.name, m.color || '', m.use || '', m.desc || '',
+            o[0] !== '' ? o[0] : (m.price || ''), o[1] !== '' ? o[1] : (m.sale || ''),
             (m.sizes || []).join(','), (m.imgs || []).length];
   });
-  if (mrows.length) ms.getRange(2, 1, mrows.length, 7).setValues(mrows);
+  if (mrows.length) ms.getRange(2, 1, mrows.length, MHEAD.length).setValues(mrows);
 
   /* الفروع */
   var bs = tab('الفروع', ['كود الفرع','اسم الفرع','العنوان','المواعيد','التليفون','لينك الخريطة','ورقة المخزون']);
