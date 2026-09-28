@@ -19,6 +19,7 @@ var EVENTS = 'الأحداث';
 var WAR    = 'الضمان';
 var SETT   = 'الإعدادات';
 var STOCK  = 'المخزون';
+var ASKS   = 'طلبات الموديلات';
 
 var HEADERS = ['التاريخ والوقت','اليوم','الساعة','نوع الحدث','القناة','الكود','الفرع','المقاس',
                'المصدر','البوست','utm_source','utm_medium','utm_campaign','utm_content',
@@ -27,6 +28,8 @@ var HEADERS = ['التاريخ والوقت','اليوم','الساعة','نوع
 var WHEAD = ['وقت الطلب','الرقم المرجعي','رقم الفاتورة','تاريخ الفاتورة','الفرع','اسم البائع',
              'رقم الموبايل','مدة الضمان (يوم)','تاريخ بداية الضمان','تاريخ نهاية الضمان',
              'الحالة','مين راجع','وقت المراجعة','سبب الرفض'];
+
+var AHEAD = ['وقت الطلب','رقم الطلب','الموديل','المقاس','الفرع','وقت الرد','الرد','دقايق الانتظار'];
 
 var DEFAULTS = [
   ['warranty_days','90','مدة الضمان باليوم — بتعد من تاريخ الفاتورة'],
@@ -47,6 +50,8 @@ function handle(e) {
     if (p.mode === 'stock')    return out(readStock());
     if (p.mode === 'status')   return out(statusOf(p.invoice, p.phone));
     if (p.ev   === 'warranty_activate') return out(activate(p));
+    if (p.ev   === 'model_ask' && p.k === 'staff')   return out(askOpen(p));
+    if (p.ev   === 'model_reply' && p.k === 'staff') return out(askClose(p));
     return out(logEvent(p));
   } catch (err) {
     return out({ ok: false, err: String(err) });
@@ -85,6 +90,36 @@ function readStock() {
     if (v[i][3]) last = v[i][3];
   }
   return { ok: true, stock: st, updated: String(last) };
+}
+
+/* ---------------- طلبات الموديلات ----------------
+ * تبويب «طلبات الموديلات»: صف لكل طلب بيتسأل عليه من ماسنجر
+ * وقت الطلب | رقم الطلب | الموديل | المقاس | الفرع | وقت الرد | الرد | دقايق الانتظار
+ * الرد بيتكتب أوتوماتيك أول ما الموظف يقفل الطلب من صفحة الموظف.
+ */
+function askOpen(p) {
+  var sh = tab(ASKS, AHEAD);
+  var tz = Session.getScriptTimeZone() || 'Africa/Cairo';
+  sh.appendRow([Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd HH:mm:ss'),
+                String(p.id || ''), String(p.m || ''), String(p.s || ''), String(p.b || ''),
+                '', 'مفتوح', '']);
+  return { ok: true };
+}
+function askClose(p) {
+  var sh = tab(ASKS, AHEAD), v = sh.getDataRange().getValues();
+  var tz = Session.getScriptTimeZone() || 'Africa/Cairo', now = new Date();
+  var map = { yes: 'متوفر', alt: 'فيه بديل', no: 'مش متوفر' };
+  for (var i = v.length - 1; i > 0; i--) {
+    if (String(v[i][1]).trim() === String(p.id || '').trim()) {
+      var t0 = new Date(v[i][0]);
+      sh.getRange(i + 1, 5).setValue(String(p.b || v[i][4]));
+      sh.getRange(i + 1, 6).setValue(Utilities.formatDate(now, tz, 'yyyy-MM-dd HH:mm:ss'));
+      sh.getRange(i + 1, 7).setValue(map[p.dest] || String(p.dest || ''));
+      sh.getRange(i + 1, 8).setValue(Math.max(0, Math.round((now - t0) / 60000)));
+      return { ok: true };
+    }
+  }
+  return { ok: false, reason: 'الطلب مش موجود' };
 }
 
 /* ---------------- تفعيل الضمان ---------------- */
@@ -189,6 +224,7 @@ function setup() {
   tab(WAR, WHEAD);
   tab(SETT, ['المفتاح','القيمة','ملاحظة'], DEFAULTS);
   tab(STOCK, ['كود الموديل','كود الفرع','المقاسات المتاحة','آخر تحديث']);
+  tab(ASKS, AHEAD);
   tab('الفروع', ['كود الفرع','اسم الفرع','العنوان','المواعيد','التليفون','لينك الخريطة']);
   tab('الأسئلة', ['السؤال','الإجابة','ظاهر']);
   tab('الروابط', ['اسم الرابط','المنصة','الحملة','المحتوى','الرابط الجاهز']);
