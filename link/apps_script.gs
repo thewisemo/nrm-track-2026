@@ -248,6 +248,144 @@ function setup() {
 }
 
 
+
+/* ================= أوراق الفروع =================
+ * ورقة مخزون لكل فرع، مدير الفروع بيكتب فيها كمية كل مقاس من واقع الفواتير.
+ * «المخزون» بتتولّد منهم — الصفحة بتقرا من «المخزون» بس.
+ * الفروع نفسها مبتشوفش الشيت أصلاً، فمفيش فرع بيشوف فرع تاني.
+ */
+var SITE = 'https://thewisemo.github.io/nrm-track-2026/link/';
+
+function fetchJson(name) {
+  try {
+    var r = UrlFetchApp.fetch(SITE + name + '?v=' + Date.now(), { muteHttpExceptions: true });
+    if (r.getResponseCode() !== 200) return null;
+    return JSON.parse(r.getContentText());
+  } catch (e) { return null; }
+}
+
+function branchSheetName(name) { return 'مخزون ' + name; }
+
+/* بيقرا الفروع من تبويب «الفروع» */
+function branchList() {
+  var sh = tab('الفروع', ['كود الفرع','اسم الفرع','العنوان','المواعيد','التليفون','لينك الخريطة','ورقة المخزون']);
+  var v = sh.getDataRange().getValues(), out = [];
+  for (var i = 1; i < v.length; i++) {
+    var key = String(v[i][0] || '').trim();
+    if (!key) continue;
+    out.push({ key: key, name: String(v[i][1] || ''), sheet: String(v[i][6] || branchSheetName(v[i][1])) });
+  }
+  return out;
+}
+
+/* بيجهّز الشيت كله: التبويبات + الموديلات + ورقة لكل فرع */
+function setupFull() {
+  setup();
+  var M = fetchJson('models.json'), C = fetchJson('config.json');
+  if (!M || !C) {
+    SpreadsheetApp.getUi().alert('التبويبات اتعملت، بس مش قادر أجيب بيانات الموديلات والفروع من الموقع.\nاتأكد من النت وجرّب تاني.');
+    return;
+  }
+  var sizes = M.sizes || [39,40,41,42,43,44,45];
+
+  /* الموديلات */
+  var ms = tab('الموديلات', ['كود الموديل','الاسم','اللون','الاستخدام','الوصف','المقاسات','عدد الصور المرفوعة']);
+  if (ms.getLastRow() > 1) ms.getRange(2, 1, ms.getLastRow() - 1, 7).clearContent();
+  var mrows = (M.models || []).map(function (m) {
+    return [m.code, m.name, m.color || '', m.use || '', m.desc || '',
+            (m.sizes || []).join(','), (m.imgs || []).length];
+  });
+  if (mrows.length) ms.getRange(2, 1, mrows.length, 7).setValues(mrows);
+
+  /* الفروع */
+  var bs = tab('الفروع', ['كود الفرع','اسم الفرع','العنوان','المواعيد','التليفون','لينك الخريطة','ورقة المخزون']);
+  if (bs.getLastRow() > 1) bs.getRange(2, 1, bs.getLastRow() - 1, 7).clearContent();
+  var brows = (C.branches || []).map(function (b) {
+    return [b.key, b.name, b.addr || '', b.hours || '', b.phone || '', b.map || '', branchSheetName(b.name)];
+  });
+  if (brows.length) bs.getRange(2, 1, brows.length, 7).setValues(brows);
+
+  /* ورقة مخزون لكل فرع */
+  var head = ['كود الموديل','الاسم'];
+  for (var i = 0; i < sizes.length; i++) head.push('مقاس ' + sizes[i]);
+  head.push('آخر تحديث');
+  (C.branches || []).forEach(function (b) {
+    var sh = tab(branchSheetName(b.name), head);
+    var have = {}, v = sh.getDataRange().getValues();
+    for (var i = 1; i < v.length; i++) if (v[i][0]) have[String(v[i][0]).trim()] = i + 1;
+    (M.models || []).forEach(function (m) {
+      if (have[m.code]) return;
+      var row = [m.code, m.name];
+      for (var k = 0; k < sizes.length; k++) row.push('');
+      row.push('');
+      sh.appendRow(row);
+    });
+  });
+
+  SpreadsheetApp.getUi().alert('الشيت اتجهّز ✓\n\n' + mrows.length + ' موديل · ' + brows.length + ' فرع.\n' +
+    'كل فرع له ورقة اسمها «مخزون + اسم الفرع» — اكتب فيها كمية كل مقاس.\n' +
+    'وبعدين اضغط «حدّث المخزون من أوراق الفروع».');
+}
+
+/* بيجمّع أوراق الفروع في تبويب «المخزون» */
+function rollupBranches() {
+  var tz = Session.getScriptTimeZone() || 'Africa/Cairo';
+  var stamp = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd HH:mm');
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var rows = [], seen = 0;
+
+  branchList().forEach(function (b) {
+    var sh = ss.getSheetByName(b.sheet);
+    if (!sh) return;
+    var v = sh.getDataRange().getValues();
+    if (v.length < 2) return;
+    /* أعمدة المقاسات: اللي هيدرها «مقاس NN» */
+    var cols = [];
+    for (var c = 0; c < v[0].length; c++) {
+      var m = String(v[0][c]).match(/(\d{2})/);
+      if (m && String(v[0][c]).indexOf('مقاس') === 0) cols.push({ c: c, size: +m[1] });
+    }
+    for (var i = 1; i < v.length; i++) {
+      var code = String(v[i][0] || '').trim();
+      if (!code) continue;
+      var got = [];
+      for (var k = 0; k < cols.length; k++) {
+        var q = v[i][cols[k].c];
+        if (q === '' || q === null) continue;
+        if (Number(q) > 0) got.push(cols[k].size);
+      }
+      if (!got.length) continue;
+      rows.push([code, b.key, got.join(','), stamp, 'يدوي']);
+      seen++;
+    }
+  });
+
+  var sh = tab(STOCK, SHEAD);
+  var v = sh.getDataRange().getValues();
+  /* بنسيب صفوف أودو زي ما هي ونستبدل اليدوي بس */
+  var keep = [];
+  for (var i = 1; i < v.length; i++)
+    if (String(v[i][4] || '').trim() === 'أودو') keep.push(v[i].slice(0, SHEAD.length));
+  var all = keep.concat(rows);
+  if (sh.getLastRow() > 1) sh.getRange(2, 1, sh.getLastRow() - 1, SHEAD.length).clearContent();
+  if (all.length) sh.getRange(2, 1, all.length, SHEAD.length).setValues(all);
+  return { ok: true, rows: rows.length, kept: keep.length, stamp: stamp };
+}
+
+function menuRollup() {
+  var r = rollupBranches();
+  SpreadsheetApp.getUi().alert('المخزون اتحدّث ✓\n\n' + r.rows + ' صف من أوراق الفروع' +
+    (r.kept ? ('\nو' + r.kept + ' صف من أودو اتسابوا زي ما هم.') : '') +
+    '\n\nالتوفر بقى ظاهر للعملاء في صفحة التشكيلة.');
+}
+function installRollup() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'rollupBranches') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('rollupBranches').timeBased().everyHours(1).create();
+  SpreadsheetApp.getUi().alert('المخزون هيتحدّث من أوراق الفروع كل ساعة أوتوماتيك.');
+}
+
 /* ================= الربط بأودو (JSON-RPC) =================
  * الفكرة: الصفحة بتقرا من تبويب «المخزون» دايماً — مش بتكلّم أودو مباشرة.
  * لو الربط شغال: مزامنة كل ساعة بتكتب المخزون في نفس التبويب وتحطّ «أودو» في عمود المصدر.
@@ -468,7 +606,12 @@ function onOpen() {
     .addItem('تأكيد تفعيل الصفوف المختارة', 'confirmRows')
     .addItem('رفض الصفوف المختارة', 'rejectRows')
     .addSeparator()
+    .addItem('جهّز الشيت من أول وجديد', 'setupFull')
+    .addSeparator()
     .addSubMenu(SpreadsheetApp.getUi().createMenu('المخزون وأودو')
+      .addItem('حدّث المخزون من أوراق الفروع', 'menuRollup')
+      .addItem('حدّثه كل ساعة أوتوماتيك', 'installRollup')
+      .addSeparator()
       .addItem('اختبار الربط بأودو', 'testOdoo')
       .addItem('اسحب مخازن أودو', 'menuPullWarehouses')
       .addItem('زامن المخزون دلوقتي', 'menuSyncNow')
