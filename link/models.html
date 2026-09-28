@@ -317,7 +317,11 @@ Promise.all([
     var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},3000);
     fetch(EP+(EP.indexOf('?')>-1?'&':'?')+'mode=stock',{signal:ctl.signal})
       .then(function(r){return r.json()})
-      .then(function(j){ if(j&&j.ok&&j.stock){ C.stock=j.stock; C.updated=j.updated||''; render(); } })
+      .then(function(j){ if(j&&j.ok&&j.stock){
+          C.stock=j.stock; C.updated=j.updated||'';
+          if(C.updated){ document.getElementById('note').textContent=
+            'التوفر محدّث: '+C.updated+' — ولو المقاس اللي عايزه مش ظاهر، اسأل عنه وإحنا نتأكد لك من الفرع.'; }
+          render(); } })
       .catch(function(){});
   }
 }).catch(function(){
