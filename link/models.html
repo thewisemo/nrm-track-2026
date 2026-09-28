@@ -21,9 +21,28 @@ header{text-align:center;padding:6px 0 2px}
 header img{width:170px;max-width:52%}
 h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
 .lead{text-align:center;font-size:14px;color:#6f6a64;font-weight:600;line-height:1.7}
-.bar{position:sticky;top:0;z-index:20;background:rgba(240,237,230,.93);backdrop-filter:blur(10px);
-  margin:16px -16px 0;padding:12px 16px 10px;border-bottom:1px solid var(--line)}
-.row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.stick{position:sticky;top:0;z-index:20;margin:16px -16px 0;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.stick.up{transform:translateY(-102%)}
+.topnav{display:flex;align-items:center;gap:10px;background:rgba(240,237,230,.95);backdrop-filter:blur(10px);
+  padding:8px 16px;border-bottom:1px solid var(--line)}
+.topnav img{width:104px;display:block}
+.topnav .nv{margin-inline-start:auto;display:flex;gap:6px}
+.topnav .nv a{text-decoration:none;color:#5d574f;font-size:13px;font-weight:800;
+  border:1.5px solid var(--line);background:#fff;border-radius:100px;padding:6px 12px}
+.topnav .nv a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bar{background:rgba(240,237,230,.93);backdrop-filter:blur(10px);
+  padding:12px 16px 10px;border-bottom:1px solid var(--line);box-shadow:0 10px 24px -22px rgba(45,42,40,.9)}
+.fab{position:fixed;inset-inline-start:50%;transform:translate(50%,90px);bottom:18px;z-index:40;
+  border:0;background:var(--ink);color:#fff;border-radius:100px;padding:11px 20px;font-family:inherit;
+  font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(45,42,40,.32);
+  transition:transform .28s cubic-bezier(.2,.7,.3,1);opacity:.97}
+.fab.on{transform:translate(50%,0)}
+.clr{flex:0 0 auto;border:1.5px dashed #cfc8bd;background:transparent;color:#8a8580;border-radius:100px;
+  padding:8px 14px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
+.row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(to left,#000 88%,transparent 100%);
+  mask-image:linear-gradient(to left,#000 88%,transparent 100%)}
 .row::-webkit-scrollbar{display:none}
 .row+.row{margin-top:8px}
 .lbl{font-size:12px;font-weight:800;color:var(--mut);margin:0 2px 5px}
@@ -81,13 +100,23 @@ footer a{color:var(--mut)}
   <h1>التشكيلة</h1>
   <p class="lead">اختار فرعك ومقاسك .. وشوف اللي يناسبك قبل ما تنزل.</p>
 
-  <div class="bar">
+  <div class="stick" id="stick">
+   <nav class="topnav">
+     <a href="index.html"><img src="logo.png" alt="نورماندي شوز"></a>
+     <div class="nv">
+       <a href="models.html" class="on">التشكيلة</a>
+       <a href="index.html">الفروع</a>
+       <a href="warranty.html">الضمان</a>
+     </div>
+   </nav>
+   <div class="bar">
     <div class="lbl">الفرع</div>
     <div class="row" id="brs"></div>
     <div class="lbl" style="margin-top:9px">المقاس</div>
     <div class="row" id="szs"></div>
     <div class="lbl" style="margin-top:9px">الاستخدام</div>
     <div class="row" id="uss"></div>
+   </div>
   </div>
 
   <div class="count" id="cnt"></div>
@@ -101,6 +130,7 @@ footer a{color:var(--mut)}
   </footer>
 </div>
 
+<button class="fab" id="fab" onclick="showBar(1)">الفلاتر ↑</button>
 <div class="sheet" id="sheet" onclick="if(event.target===this)closeSheet()"><div class="in" id="sheetin"></div></div>
 
 <script>
@@ -148,7 +178,21 @@ function build(){
   e.appendChild(chip('كل المقاسات',!st.sz,function(){st.sz=0;render()}));
   SZ.forEach(function(s){ e.appendChild(chip(arn(s),st.sz===s,function(){st.sz=s;beacon({ev:'filter',k:'size',id:s,page:'models'});render()})); });
   e=document.getElementById('uss'); e.innerHTML='';
-  US.forEach(function(u){ e.appendChild(chip(u,st.us===u,function(){st.us=u;render()})); });
+  US.forEach(function(u){ e.appendChild(chip(u,st.us===u,function(){st.us=u;beacon({ev:'filter',k:'use',id:u,page:'models'});render()})); });
+  if(st.br||st.sz||st.us!=='الكل'){
+    var c=document.createElement('button'); c.className='clr'; c.textContent='مسح الفلاتر ✕';
+    c.onclick=function(){st.br='';st.sz=0;st.us='الكل';render()};
+    e.appendChild(c);
+  }
+}
+/* الفلتر بيتحفظ في اللينك — يعني اللينك اللي تبعته بيفتح على نفس الاختيار */
+function syncURL(){
+  var p=new URLSearchParams(location.search);
+  st.br?p.set('b',st.br):p.delete('b');
+  st.sz?p.set('s',st.sz):p.delete('s');
+  st.us!=='الكل'?p.set('u',st.us):p.delete('u');
+  var s=p.toString();
+  history.replaceState(null,'',location.pathname+(s?'?'+s:''));
 }
 function render(){
   build();
@@ -166,10 +210,34 @@ function render(){
       +'<small>'+(m.color||'')+'</small>'+tag+'</div>';
     g.appendChild(d);
   });
+  var bits=[];
+  if(st.br) bits.push('فرع '+((BR.filter(function(b){return b.key===st.br})[0]||{}).name||''));
+  if(st.sz) bits.push('مقاس '+arn(st.sz));
+  if(st.us!=='الكل') bits.push(st.us);
   document.getElementById('cnt').textContent =
-    list.length? arn(list.length)+' موديل'+(st.br?' — فرع '+(BR.filter(function(b){return b.key===st.br})[0]||{}).name:'') : '';
+    list.length? arn(list.length)+' موديل'+(bits.length?' — '+bits.join(' · '):'') : '';
   document.getElementById('none').innerHTML = list.length? '' :
     '<div class="empty"><b>مفيش موديل بالمواصفات دي</b><p>جرّب تغيّر المقاس أو الاستخدام، أو كلّم الفرع وإحنا نشوفلك حل.</p></div>';
+  syncURL();
+}
+/* الفلاتر بتختفي مع النزول وبترجع مع أول سكرول لفوق */
+var lastY=0, ticking=false, stickEl, fabEl;
+function showBar(scroll){
+  stickEl.classList.remove('up'); fabEl.classList.remove('on');
+  if(scroll) window.scrollTo({top:0,behavior:'smooth'});
+}
+function hideBar(){ stickEl.classList.add('up'); fabEl.classList.add('on'); }
+function onScroll(){
+  if(ticking) return; ticking=true;
+  requestAnimationFrame(function(){
+    ticking=false;
+    if(document.getElementById('sheet').classList.contains('on')){lastY=window.scrollY;return}
+    var y=Math.max(0,window.scrollY), d=y-lastY;
+    if(y<90) showBar(0);
+    else if(d>8) hideBar();
+    else if(d<-8) showBar(0);
+    lastY=y;
+  });
 }
 function openModel(m){
   beacon({ev:'model',k:'model',id:m.code,page:'models',s:st.sz||'',b:st.br||''});
@@ -196,6 +264,8 @@ function openModel(m){
 }
 function closeSheet(){document.getElementById('sheet').classList.remove('on');document.body.style.overflow=''}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
+stickEl=document.getElementById('stick'); fabEl=document.getElementById('fab');
+window.addEventListener('scroll',onScroll,{passive:true});
 
 Promise.all([
   fetch('models.json?v='+Date.now()).then(function(r){return r.json()}),
