@@ -66,6 +66,19 @@ h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
 .card b{display:block;font-size:15px;font-weight:800;line-height:1.35}
 .card .cd{font-size:12.5px;font-weight:800;color:var(--or);direction:ltr;text-align:right;margin-top:2px}
 .card small{display:block;font-size:12px;color:var(--mut);font-weight:600;margin-top:5px;line-height:1.6}
+.price{margin-top:7px;font-size:16px;font-weight:900;color:var(--ink);direction:rtl}
+.price small{font-size:12px;font-weight:700;color:var(--mut);margin-inline-start:3px}
+.price .old{font-size:13px;font-weight:700;color:var(--mut);text-decoration:line-through;
+  margin-inline-start:7px}
+.price .now{color:#b2503a}
+.price.ask{font-size:13px;font-weight:800;color:var(--mut)}
+.pbig{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px 16px;margin-bottom:12px;
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pbig b{font-size:26px;font-weight:900}
+.pbig small{font-size:13px;font-weight:700;color:var(--mut)}
+.pbig .old{font-size:15px;font-weight:700;color:var(--mut);text-decoration:line-through}
+.pbig .sv{margin-inline-start:auto;background:#f7ecea;color:#b2503a;border-radius:100px;
+  padding:4px 11px;font-size:12px;font-weight:800}
 .tag{display:inline-block;margin-top:9px;border-radius:100px;padding:3px 10px;font-size:11.5px;font-weight:800}
 .tag.ask{background:#f2efe9;color:#6b655d}.tag.yes{background:#e8f3ec;color:var(--ok)}
 .tag.no{background:#f7ecea;color:#b2503a}
@@ -163,7 +176,7 @@ footer a{color:var(--mut)}
 <div class="sheet" id="sheet" onclick="if(event.target===this)closeSheet()"><div class="in" id="sheetin"></div></div>
 
 <script>
-var C={}, M=[], BR=[], SZ=[], US=[], LOG='', CH=[];
+var C={}, M=[], BR=[], SZ=[], US=[], LOG='', CH=[], PR={}, CUR='جنيه';
 var st={br:'',sz:0,us:'الكل'};
 var q=new URLSearchParams(location.search);
 var KEEP=['utm_source','utm_medium','utm_campaign','utm_content','src','post','m'];
@@ -236,7 +249,7 @@ function render(){
     d.onclick=function(){openModel(m)};
     d.innerHTML='<img class="ph" loading="lazy" src="'+m.img+'" alt="'+m.name+'">'
       +'<div class="in"><b>'+m.name+'</b><div class="cd">'+m.code+'</div>'
-      +'<small>'+(m.color||'')+'</small>'+tag+'</div>';
+      +'<small>'+(m.color||'')+'</small>'+priceSmall(m)+tag+'</div>';
     g.appendChild(d);
   });
   var bits=[];
@@ -267,6 +280,28 @@ function onScroll(){
     else if(d<-8) showBar(0);
     lastY=y;
   });
+}
+function money(n){ return arn(Number(n).toLocaleString('en-US')); }
+function priceOf(m){
+  var p=Number((PR[m.code]&&PR[m.code].p)||m.price||0);
+  var s=Number((PR[m.code]&&PR[m.code].s)||m.sale||0);
+  return {p:p, s:(s>0&&s<p)?s:0};
+}
+function priceSmall(m){
+  var x=priceOf(m);
+  if(!x.p) return '<div class="price ask">السعر في الفرع</div>';
+  if(x.s) return '<div class="price"><span class="now">'+money(x.s)+'</span><small>'+CUR+'</small>'
+                +'<span class="old">'+money(x.p)+'</span></div>';
+  return '<div class="price">'+money(x.p)+'<small>'+CUR+'</small></div>';
+}
+function priceBig(m){
+  var x=priceOf(m);
+  if(!x.p) return '<div class="pbig"><b style="font-size:17px;color:var(--mut)">السعر في الفرع</b></div>';
+  if(x.s) return '<div class="pbig"><b style="color:#b2503a">'+money(x.s)+'</b><small>'+CUR+'</small>'
+    +'<span class="old">'+money(x.p)+'</span>'
+    +'<span class="sv">وفّر '+money(x.p-x.s)+' '+CUR+'</span></div>';
+  return '<div class="pbig"><b>'+money(x.p)+'</b><small>'+CUR+'</small>'
+    +'<span class="sv" style="background:#f2efe9;color:#6b655d">السعر واحد في كل الفروع</span></div>';
 }
 var ANG={side:'الجنب',side2:'الجنب التاني',front:'من قدام',back:'من ورا',top:'من فوق',sole:'النعل'};
 function angles(m){
@@ -329,6 +364,7 @@ function openModel(m){
     +gallery(m)
     +'<div class="kv"><span style="color:var(--or);direction:ltr">'+m.code+'</span>'
       +'<span>'+m.use+'</span>'+(m.color?'<span>'+m.color+'</span>':'')+'</div>'
+    +priceBig(m)
     +'<p class="d">'+m.desc+'</p>'
     +'<div class="av"><b>المقاسات'+(st.br?' — فرع '+(BR.filter(function(b){return b.key===st.br})[0]||{}).name:'')+'</b><div class="sz">'+sizes+'</div>'
       +(Object.keys(C.stock||{}).length?'':'<p style="font-size:12px;color:var(--mut);font-weight:600;margin-top:10px;line-height:1.7">المخزون لسه مش متوصّل — كلّم الفرع يأكدلك المقاس.</p>')
@@ -374,7 +410,7 @@ Promise.all([
 ]).then(function(a){
   C=a[0]; var cfg=a[1]||{};
   LOG=cfg.log_endpoint||''; CH=cfg.channels||[];
-  M=C.models||[]; BR=C.branches||[]; SZ=C.sizes||[]; US=C.uses||['الكل'];
+  M=C.models||[]; BR=C.branches||[]; SZ=C.sizes||[]; US=C.uses||['الكل']; CUR=C.currency||'جنيه';
   st.br=q.get('b')||''; st.sz=+(q.get('s')||0); st.us=q.get('u')||'الكل';
   document.getElementById('note').textContent=C.note||'';
   render();
@@ -385,7 +421,9 @@ Promise.all([
     var ctl=new AbortController(); setTimeout(function(){try{ctl.abort()}catch(e){}},3000);
     fetch(EP+(EP.indexOf('?')>-1?'&':'?')+'mode=stock',{signal:ctl.signal})
       .then(function(r){return r.json()})
-      .then(function(j){ if(j&&j.ok&&j.stock){
+      .then(function(j){
+        if(j&&j.ok&&j.prices){ PR=j.prices; render(); }
+        if(j&&j.ok&&j.stock){
           C.stock=j.stock; C.updated=j.updated||'';
           if(C.updated){ document.getElementById('note').textContent=
             'التوفر محدّث: '+C.updated+' — ولو المقاس اللي عايزه مش ظاهر، اسأل عنه وإحنا نتأكد لك من الفرع.'; }
