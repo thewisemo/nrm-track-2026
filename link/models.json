@@ -85,7 +85,9 @@
      "u": "models/143.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "281",
@@ -108,7 +110,9 @@
      "u": "models/281.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "275",
@@ -131,7 +135,9 @@
      "u": "models/275.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "278",
@@ -154,7 +160,9 @@
      "u": "models/278.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "63-14",
@@ -177,7 +185,9 @@
      "u": "models/63-14.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "280",
@@ -200,7 +210,9 @@
      "u": "models/280.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "400",
@@ -223,7 +235,9 @@
      "u": "models/400.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "144",
@@ -246,7 +260,9 @@
      "u": "models/144.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "15",
@@ -269,7 +285,9 @@
      "u": "models/15.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "16",
@@ -292,7 +310,9 @@
      "u": "models/16.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "165",
@@ -315,7 +335,9 @@
      "u": "models/165.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "bk89",
@@ -338,7 +360,9 @@
      "u": "models/bk89.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "181",
@@ -361,7 +385,9 @@
      "u": "models/181.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "d561",
@@ -384,7 +410,9 @@
      "u": "models/d561.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "d583",
@@ -407,7 +435,9 @@
      "u": "models/d583.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "426005",
@@ -430,7 +460,9 @@
      "u": "models/426005.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "1166",
@@ -453,7 +485,9 @@
      "u": "models/1166.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   },
   {
    "code": "180-6",
@@ -476,7 +510,9 @@
      "u": "models/180-6.jpg",
      "t": "side"
     }
-   ]
+   ],
+   "price": 0,
+   "sale": 0
   }
  ],
  "stock": {},
@@ -506,5 +542,7 @@
    "t": "النعل"
   }
  ],
- "img_size": "2000×2000 على أبيض"
+ "img_size": "2000×2000 على أبيض",
+ "currency": "جنيه",
+ "price_note": "الأسعار بتتحط من تبويب «الموديلات» في لوحة التحكم — والسعر واحد في كل الفروع."
 }
