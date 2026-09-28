@@ -64,9 +64,20 @@ footer{text-align:center;margin-top:34px;font-size:12px;color:var(--mut);font-we
   .ch,.br,details{animation:up .5s cubic-bezier(.2,.7,.3,1) backwards}
   @keyframes up{from{opacity:0;transform:translateY(12px)}}
 }
+
+.stick{position:sticky;top:0;z-index:30;margin:0 -18px 6px;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.stick.up{transform:translateY(-104%)}
+.topnav{display:flex;align-items:center;gap:10px;background:rgba(240,237,230,.95);backdrop-filter:blur(10px);
+  padding:8px 18px;border-bottom:1px solid var(--line);box-shadow:0 10px 24px -22px rgba(45,42,40,.9)}
+.topnav img{width:104px;display:block}
+.topnav .nv{margin:0 auto;display:flex;gap:6px}
+.topnav .nv a{text-decoration:none;color:#5d574f;font-size:13px;font-weight:800;
+  border:1.5px solid var(--line);background:#fff;border-radius:100px;padding:6px 12px}
+.topnav .nv a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 </style></head>
 <body>
 <div class="wrap">
+  <div class="stick" id="stick"><nav class="topnav"><div class="nv"><a href="models.html">التشكيلة</a><a href="index.html" class="on">الفروع</a><a href="warranty.html">الضمان</a></div></nav></div>
   <header>
     <img src="logo.png" alt="نورماندي شوز">
     <p id="tag"></p>
@@ -169,5 +180,23 @@ fetch('config.json?v='+Date.now()).then(r=>r.json()).then(C=>{
     navigator.sendBeacon?navigator.sendBeacon(window.__LOG+'?'+new URLSearchParams(p)):0;
   }
 }).catch(()=>{});
+</script>
+
+<script>
+(function(){
+  var s=document.getElementById('stick'); if(!s) return;
+  var last=0,tick=false;
+  addEventListener('scroll',function(){
+    if(tick)return; tick=true;
+    requestAnimationFrame(function(){
+      tick=false;
+      var y=Math.max(0,scrollY), d=y-last;
+      if(y<90) s.classList.remove('up');
+      else if(d>8) s.classList.add('up');
+      else if(d<-8) s.classList.remove('up');
+      last=y;
+    });
+  },{passive:true});
+})();
 </script>
 </body></html>
