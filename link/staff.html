@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>نورماندي — طلبات الموديلات (داخلي)</title>
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F0EDE6;--ink:#2D2A28;--or:#EE9637;--mut:#8a8580;--line:#e4e0d7;--ok:#2e8b5a;--red:#b2503a}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+.wrap{max-width:620px;margin:0 auto;padding:16px 16px 60px}
+.hd{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hd img{width:110px}
+.hd .tag{margin-inline-start:auto;background:var(--ink);color:#fff;border-radius:100px;
+  padding:5px 12px;font-size:11.5px;font-weight:800}
+h1{font-size:21px;font-weight:900;margin:10px 0 2px}
+.lead{font-size:13.5px;color:#6f6a64;font-weight:600;line-height:1.7;margin-bottom:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:15px 16px;margin-bottom:12px}
+.card h2{font-size:15.5px;font-weight:900;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.card h2 i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--or);color:#fff;
+  font-size:13px;display:grid;place-items:center}
+label{display:block;font-size:12.5px;font-weight:800;color:var(--mut);margin:11px 0 5px}
+select,input,textarea{width:100%;font-family:inherit;font-size:15px;font-weight:700;color:var(--ink);
+  background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 13px}
+select:focus,input:focus,textarea:focus{outline:0;border-color:var(--or)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pre{background:#f7f4ee;border:1px dashed #d8d2c7;border-radius:14px;padding:12px 14px;margin-top:13px;
+  font-size:13.5px;font-weight:700;line-height:1.85;white-space:pre-wrap;transition:background .3s}
+.pre.flash{background:#e8f3ec}
+.btn{display:block;width:100%;text-align:center;background:var(--or);color:#fff;border:0;border-radius:100px;
+  padding:14px;font-family:inherit;font-size:15.5px;font-weight:900;cursor:pointer;text-decoration:none;
+  margin-top:10px;box-shadow:0 8px 20px rgba(238,150,55,.28)}
+.btn.g{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+.btn.k{background:var(--ink);box-shadow:none}
+.btn:disabled{opacity:.45;cursor:default;box-shadow:none}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.row3 button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:11px 4px;
+  font-family:inherit;font-size:13.5px;font-weight:800;cursor:pointer}
+.row3 button.y{border-color:#bfe2cd;color:var(--ok)}
+.row3 button.a{border-color:#f0d7b4;color:#a3620c}
+.row3 button.n{border-color:#e8c8bf;color:var(--red)}
+.req{border:1px solid var(--line);border-radius:16px;padding:12px 13px;margin-bottom:9px;background:#fff}
+.req .t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.req .rf{font-size:12px;font-weight:800;color:var(--or);direction:ltr}
+.req b{font-size:15px;font-weight:900}
+.req .ago{margin-inline-start:auto;font-size:12px;font-weight:800;color:var(--mut)}
+.req .ago.late{color:var(--red)}
+.req .sm{font-size:12.5px;color:#6f6a64;font-weight:600;margin-top:3px}
+.empty{font-size:13.5px;color:var(--mut);font-weight:600;text-align:center;padding:14px 0}
+.done{background:#eef7f1;border:1px solid #cfe7da;border-radius:14px;padding:11px 13px;margin-top:10px;
+  font-size:13px;font-weight:700;color:#2b6b49;line-height:1.7}
+.warn{background:#fdf6ea;border:1px solid #f0dfc2;border-radius:14px;padding:11px 13px;
+  font-size:12.5px;font-weight:700;color:#8a6224;line-height:1.75;margin-top:10px}
+footer{text-align:center;margin-top:22px;font-size:12px;color:var(--mut);font-weight:700;line-height:2}
+footer a{color:var(--mut)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="hd"><img src="logo.png" alt="نورماندي"><span class="tag">صفحة داخلية</span></div>
+  <h1>طلبات الموديلات</h1>
+  <p class="lead">العميل بيسأل على ماسنجر .. تسجّل طلبه هنا، تبعته للفروع بضغطة، وأول ما الفرع يرد تاخد الرد الجاهز وتبعته للعميل بنفس الكلام كل مرة.</p>
+
+  <div class="card">
+    <h2><i>١</i> طلب جديد</h2>
+    <label>الموديل</label>
+    <select id="mdl"></select>
+    <div class="two">
+      <div><label>المقاس</label><select id="sz"></select></div>
+      <div><label>الفرع اللي العميل قريب منه</label><select id="br"></select></div>
+    </div>
+    <label>اسم العميل أو حسابه على ماسنجر — اختياري</label>
+    <input id="cust" placeholder="زي ما هو ظاهر على ماسنجر">
+    <div class="pre" id="pre"></div>
+    <button class="btn" onclick="copyAsk()">انسخ رسالة الفروع</button>
+    <a class="btn k" id="wa" href="#" target="_blank" rel="noopener">افتح جروب الفروع ←</a>
+    <button class="btn g" onclick="saveReq()">سجّل الطلب في المتابعة</button>
+    <div class="warn" id="waw" style="display:none">لينك جروب الفروع لسه ماتحطش في الإعدادات — انسخ الرسالة والصقها في الجروب عادي.</div>
+  </div>
+
+  <div class="card">
+    <h2><i>٢</i> الطلبات المفتوحة</h2>
+    <div id="open"></div>
+  </div>
+
+  <div class="card">
+    <h2><i>٣</i> رد فوري للعميل</h2>
+    <p class="lead" style="margin:0 0 4px">ابعته للعميل وانت بتسأل الفرع عشان ميستناش من غير كلام.</p>
+    <div class="pre" id="hold"></div>
+    <button class="btn g" onclick="copyEl('hold')">انسخ الرد</button>
+  </div>
+
+  <footer>
+    <a href="models.html">التشكيلة</a> · <a href="index.html">الفروع</a> · <a href="warranty.html">الضمان</a><br>
+    الصفحة دي للموظفين — متتبعتش لعميل.
+  </footer>
+</div>
+
+<script>
+var C={},CFG={},M=[],BR=[],SZ=[],S={},EP='',LOG='';
+var KEY='nrm_asks';
+function arn(n){return String(n).replace(/[0-9]/g,function(c){return '٠١٢٣٤٥٦٧٨٩'[+c]})}
+function now(){return new Date()}
+function hhmm(d){return d.toLocaleTimeString('ar-EG',{hour:'numeric',minute:'2-digit'})}
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function save(a){try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}
+function post(p){
+  if(!EP) return;
+  try{
+    var u=EP+(EP.indexOf('?')>-1?'&':'?')+new URLSearchParams(p).toString();
+    if(navigator.sendBeacon) navigator.sendBeacon(u); else (new Image()).src=u;
+  }catch(e){}
+}
+function mdl(){ return M.filter(function(x){return x.code===document.getElementById('mdl').value})[0]||{} }
+function brOf(k){ return BR.filter(function(b){return b.key===k})[0]||{} }
+function fill(t,o){
+  var x=String(t||'').replace(/\{(\w+)\}/g,function(_,k){return o[k]!==undefined?o[k]:''});
+  /* أي سطر عنوانه فاضي (زي «المواعيد:» من غير قيمة) بيتشال */
+  return x.split('\n').filter(function(l){ return !/^[^:\n]{1,24}:\s*$/.test(l.trim()) }).join('\n');
+}
+
+function refNo(){
+  var d=now(), p='M'+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);
+  var n=load().filter(function(r){return r.ref.indexOf(p)===0}).length+1;
+  return p+'-'+('0'+n).slice(-2);
+}
+function askText(ref){
+  var m=mdl(), b=brOf(document.getElementById('br').value), c=document.getElementById('cust').value.trim();
+  return fill(S.ask_tpl,{ref:ref, code:m.code||'', name:m.name||'',
+    size:arn(document.getElementById('sz').value||''),
+    cust:c?(' .. '+c):'', time:hhmm(now())}) + (b.name?('\nالعميل قريب من فرع '+b.name):'');
+}
+function draw(){ document.getElementById('pre').textContent=askText(refNo()); }
+function copyEl(id){
+  var e=document.getElementById(id);
+  try{ navigator.clipboard.writeText(e.textContent) }catch(x){}
+  try{ var ta=document.createElement('textarea'); ta.value=e.textContent; ta.style.position='fixed';
+       ta.style.opacity=0; document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+       document.body.removeChild(ta); }catch(x){}
+  e.classList.add('flash'); setTimeout(function(){e.classList.remove('flash')},600);
+}
+function copyAsk(){ copyEl('pre'); }
+function saveReq(){
+  var m=mdl(), r={ref:refNo(), code:m.code||'', name:m.name||'',
+    size:document.getElementById('sz').value||'', br:document.getElementById('br').value||'',
+    cust:document.getElementById('cust').value.trim(), t:Date.now(), st:'open'};
+  var a=load(); a.unshift(r); save(a);
+  post({ev:'model_ask',id:r.ref,m:r.code,s:r.size,b:r.br,k:'staff'});
+  document.getElementById('cust').value='';
+  draw(); renderOpen();
+}
+function ago(ms){
+  var m=Math.floor((Date.now()-ms)/60000);
+  if(m<1) return 'دلوقتي';
+  if(m<60) return 'من '+arn(m)+' دقيقة';
+  var h=Math.floor(m/60); return 'من '+arn(h)+' ساعة';
+}
+function renderOpen(){
+  var a=load().filter(function(r){return r.st==='open'}), e=document.getElementById('open');
+  if(!a.length){ e.innerHTML='<div class="empty">مفيش طلبات مفتوحة دلوقتي.</div>'; return }
+  e.innerHTML='';
+  a.forEach(function(r,i){
+    var late=(Date.now()-r.t)>15*60000;
+    var d=document.createElement('div'); d.className='req';
+    d.innerHTML='<div class="t"><b>'+(r.name||r.code)+'</b><span class="rf">'+r.ref+'</span>'
+      +'<span class="ago'+(late?' late':'')+'">'+ago(r.t)+'</span></div>'
+      +'<div class="sm">مقاس '+arn(r.size)+(r.cust?' · '+r.cust:'')+(r.br?' · فرع '+brOf(r.br).name:'')+'</div>'
+      +'<div class="row3">'
+      +'<button class="y" data-k="yes">متوفر</button>'
+      +'<button class="a" data-k="alt">فيه بديل</button>'
+      +'<button class="n" data-k="no">مش متوفر</button></div>'
+      +'<div class="ans" id="ans_'+i+'"></div>';
+    d.querySelectorAll('button').forEach(function(b){
+      b.onclick=function(){ answer(r,b.dataset.k,'ans_'+i) };
+    });
+    e.appendChild(d);
+  });
+}
+function answer(r,kind,box){
+  var host=document.getElementById(box);
+  var bsel='';
+  if(kind==='yes'){
+    bsel='<label>الفرع اللي عنده المقاس</label><select class="pick">'
+      +BR.map(function(b){return '<option value="'+b.key+'"'+(b.key===r.br?' selected':'')+'>'+b.name+'</option>'}).join('')
+      +'</select>';
+  }
+  if(kind==='alt'){
+    bsel='<label>البديل اللي هنرشّحه</label><input class="pick" placeholder="زي: ١٨١ بني مقاس ٤٢">';
+  }
+  host.innerHTML=bsel+'<div class="pre rep"></div>'
+    +'<button class="btn g cpy">انسخ الرد وابعته للعميل</button>'
+    +'<button class="btn k fin">قفل الطلب</button>';
+  var pick=host.querySelector('.pick'), rep=host.querySelector('.pre');
+  function upd(){
+    var b=brOf(pick&&pick.tagName==='SELECT'?pick.value:r.br);
+    rep.textContent=fill(S.replies[kind],{code:r.code,name:r.name,size:arn(r.size),
+      branch:b.name||'', addr:b.addr||'', hours:b.hours||'',
+      alt:(pick&&pick.tagName==='INPUT')?pick.value:''});
+  }
+  if(pick){ pick.oninput=upd; pick.onchange=upd }
+  upd();
+  host.querySelector('.cpy').onclick=function(){
+    try{ navigator.clipboard.writeText(rep.textContent) }catch(e){}
+    rep.classList.add('flash'); setTimeout(function(){rep.classList.remove('flash')},600);
+  };
+  host.querySelector('.fin').onclick=function(){
+    var a=load(); var x=a.filter(function(z){return z.ref===r.ref})[0];
+    if(x){ x.st=kind; x.done=Date.now() }
+    save(a);
+    post({ev:'model_reply',id:r.ref,m:r.code,s:r.size,
+      b:(pick&&pick.tagName==='SELECT')?pick.value:(r.br||''),
+      dest:kind, k:'staff'});
+    renderOpen();
+  };
+}
+
+Promise.all([
+  fetch('models.json?v='+Date.now()).then(function(r){return r.json()}),
+  fetch('config.json?v='+Date.now()).then(function(r){return r.json()}).catch(function(){return {}})
+]).then(function(a){
+  C=a[0]; CFG=a[1]||{}; S=CFG.staff||{}; M=C.models||[]; BR=(CFG.branches&&CFG.branches.length?CFG.branches:(C.branches||[])); SZ=C.sizes||[];
+  LOG=CFG.log_endpoint||''; EP=(CFG.warranty&&CFG.warranty.endpoint)||LOG||'';
+  var e=document.getElementById('mdl');
+  e.innerHTML=M.map(function(m){return '<option value="'+m.code+'">'+m.code+' .. '+m.name+'</option>'}).join('');
+  document.getElementById('sz').innerHTML=SZ.map(function(s){return '<option value="'+s+'">'+arn(s)+'</option>'}).join('');
+  document.getElementById('br').innerHTML='<option value="">مش محدد</option>'
+    +BR.map(function(b){return '<option value="'+b.key+'">'+b.name+'</option>'}).join('');
+  ['mdl','sz','br','cust'].forEach(function(id){
+    var el=document.getElementById(id); el.oninput=draw; el.onchange=draw;
+  });
+  document.getElementById('hold').textContent=(S.replies&&S.replies.hold)||'';
+  if(S.group_url){ document.getElementById('wa').href=S.group_url }
+  else { document.getElementById('wa').style.display='none'; document.getElementById('waw').style.display='block' }
+  draw(); renderOpen();
+  setInterval(renderOpen,60000);
+});
+</script>
+</body></html>
