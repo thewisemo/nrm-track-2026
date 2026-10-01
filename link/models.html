@@ -213,6 +213,7 @@ footer a{color:var(--mut)}
 <script>
 var C={}, M=[], BR=[], SZ=[], US=[], LOG='', CH=[], PR={}, CUR='جنيه';
 var st={br:'',sz:0,us:'الكل',q:''};
+var HASH0=(location.hash||'').replace('#','').trim();
 var q=new URLSearchParams(location.search);
 var KEEP=['utm_source','utm_medium','utm_campaign','utm_content','src','post','m'];
 function passthru(){var o={};KEEP.forEach(function(k){if(q.get(k))o[k]=q.get(k)});return o}
@@ -274,7 +275,7 @@ function syncURL(){
   st.sz?p.set('s',st.sz):p.delete('s');
   st.us!=='الكل'?p.set('u',st.us):p.delete('u');
   var s=p.toString();
-  history.replaceState(null,'',location.pathname+(s?'?'+s:''));
+  history.replaceState(null,'',location.pathname+(s?'?'+s:'')+(location.hash||''));
 }
 function render(){
   build();
@@ -425,11 +426,30 @@ function openModel(m){
       +(Object.keys(C.stock||{}).length?'':'<p style="font-size:12px;color:var(--mut);font-weight:600;margin-top:10px;line-height:1.7">المخزون لسه مش متوصّل — كلّم الفرع يأكدلك المقاس.</p>')
     +'</div>'
     +'<div id="askbox"><button class="btn" onclick="askNow()">اسأل عن الموديل ده على ماسنجر</button></div>'
+    +'<button class="btn g" id="shbtn" onclick="shareModel(\''+m.code+'\')">انسخ لينك الموديل ده</button>'
     +'<a class="btn g" href="index.html">الفروع والمواعيد</a>';
+  try{ history.replaceState(null,'','#'+m.code); }catch(e){}
   document.getElementById('sheet').classList.add('on');
   document.body.style.overflow='hidden';
   document.getElementById('sheetin').scrollTop=0;
   var g=document.getElementById('gmain'); if(g) g.addEventListener('scroll',angSync,{passive:true});
+}
+/* لينك مباشر للموديل — بيتحط في أي منشور على أي منصة */
+function modelURL(code){
+  var b=location.origin+location.pathname.replace(/[^\/]*$/,'');
+  return b+'m/'+code+'.html';
+}
+function shareModel(code){
+  var u=modelURL(code), btn=document.getElementById('shbtn');
+  function done(){ if(btn){btn.textContent='اتنسخ ✓ '+u; setTimeout(function(){btn.textContent='انسخ لينك الموديل ده'},2600);} }
+  beacon({ev:'model_share',k:'model',id:code,page:'models'});
+  if(navigator.share){ navigator.share({title:'نورماندي شوز — موديل '+code,url:u}).then(done).catch(function(){copyTxt(u);done()}); return; }
+  copyTxt(u); done();
+}
+function copyTxt(t){
+  try{ navigator.clipboard.writeText(t); }catch(e){}
+  try{ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity=0;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }catch(e){}
 }
 /* الماسنجر مبيقبلش رسالة جاهزة — فبننسخها للعميل ونفتحله المحادثة */
 var ASK=null;
@@ -454,7 +474,8 @@ function copyAsk(){
   t.style.background='#e8f3ec';
   setTimeout(function(){t.style.background=''},700);
 }
-function closeSheet(){document.getElementById('sheet').classList.remove('on');document.body.style.overflow='';ASK=null}
+function closeSheet(){
+  try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}document.getElementById('sheet').classList.remove('on');document.body.style.overflow='';ASK=null}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
 stickEl=document.getElementById('stick'); fabEl=document.getElementById('fab');
 window.addEventListener('scroll',onScroll,{passive:true});
@@ -470,7 +491,8 @@ window.addEventListener('scroll',onScroll,{passive:true});
 })();
 
 function openFromHash(){
-  var h=(location.hash||'').replace('#','').trim();
+  var h=(location.hash||'').replace('#','').trim() || HASH0;
+  HASH0='';
   if(!h||!M.length) return;
   var m=M.filter(function(x){return String(x.code)===h})[0];
   if(m) openModel(m);
