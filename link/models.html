@@ -57,6 +57,15 @@ h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
   padding:8px 15px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap}
 .chip.on{border-color:var(--or);background:var(--or);color:#fff;box-shadow:0 6px 16px rgba(238,150,55,.28)}
 .count{margin:14px 0 10px;font-size:13.5px;font-weight:700;color:#6f6a64}
+.hfl{position:absolute;inset-inline-start:9px;top:9px;z-index:2;background:#b2503a;color:#fff;
+  border-radius:100px;padding:4px 10px;font-size:11.5px;font-weight:900}
+.card{position:relative}
+.hbanner{display:flex;align-items:center;gap:10px;margin:14px 0 2px;text-decoration:none;color:#fff;
+  background:var(--ink);border-radius:18px;padding:14px 16px}
+.hbanner b{font-size:16px;font-weight:900}
+.hbanner span{font-size:12.5px;font-weight:600;color:#b6b0a8}
+.hbanner i{margin-inline-start:auto;font-style:normal;font-size:18px;color:var(--or)}
+.btn.hb{background:#b2503a;color:#fff;border:0}
 .sumrow{display:flex;gap:8px;align-items:center}
 .srch{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);
   border-radius:100px;padding:0 14px;height:42px}
@@ -168,11 +177,7 @@ footer a{color:var(--mut)}
   <div class="stick" id="stick">
    <nav class="topnav">
      <a class="lg" href="index.html"><img src="logo.png" alt="نورماندي شوز"></a>
-     <div class="nv">
-       <a href="models.html" class="on">التشكيلة</a>
-       <a href="index.html">الفروع</a>
-       <a href="warranty.html">الضمان</a>
-     </div>
+     <div class="nv"><a href="models.html" class="on">التشكيلة</a><a href="index.html">الفروع</a><a href="sale.html">الحفلة</a><a href="warranty.html">الضمان</a></div>
    </nav>
    <div class="bar">
     <div class="sumrow">
@@ -196,6 +201,7 @@ footer a{color:var(--mut)}
   <p class="lead">اختار فرعك ومقاسك .. وشوف اللي يناسبك قبل ما تنزل.</p>
 
 
+  <div id="hbanner"></div>
   <div class="count" id="cnt"></div>
   <div class="grid" id="grid"></div>
   <div id="none"></div>
@@ -212,6 +218,7 @@ footer a{color:var(--mut)}
 
 <script>
 var C={}, M=[], BR=[], SZ=[], US=[], LOG='', CH=[], PR={}, CUR='جنيه';
+var SALE={}, SALEMAP={};
 var st={br:'',sz:0,us:'الكل',q:''};
 var HASH0=(location.hash||'').replace('#','').trim();
 var q=new URLSearchParams(location.search);
@@ -288,11 +295,15 @@ function render(){
             : '<span class="tag ask">اسأل الفرع</span>';
     var d=document.createElement('div'); d.className='card';
     d.onclick=function(){openModel(m)};
-    d.innerHTML='<img class="ph" loading="lazy" src="'+m.img+'" alt="'+m.name+'">'
+    d.innerHTML=(inSale(m.code)?'<span class="hfl">'+((SALE.name||'الحفلة'))+'</span>':'')
+      +'<img class="ph" loading="lazy" src="'+m.img+'" alt="'+m.name+'">'
       +'<div class="in"><b>'+m.name+'</b><div class="cd">'+m.code+'</div>'
       +'<small>'+(m.color||'')+'</small>'+priceSmall(m)+tag+'</div>';
     g.appendChild(d);
   });
+  var hb=document.getElementById('hbanner');
+  if(hb){ hb.innerHTML = SALE.on
+    ? '<a class="hbanner" href="sale.html"><b>'+(SALE.name||'الحفلة')+' شغالة دلوقتي</b><span>'+(SALE.sub||'شوف موديلات الموسم وأسعارها')+'</span><i>←</i></a>' : ''; }
   var bits=[];
   if(st.br) bits.push('فرع '+((BR.filter(function(b){return b.key===st.br})[0]||{}).name||''));
   if(st.sz) bits.push('مقاس '+arn(st.sz));
@@ -338,9 +349,12 @@ function onScroll(){
   });
 }
 function money(n){ return arn(Number(n).toLocaleString('en-US')); }
+function inSale(code){ return !!SALEMAP[String(code)]; }
 function priceOf(m){
+  var h=SALEMAP[String(m.code)];
   var p=Number((PR[m.code]&&PR[m.code].p)||m.price||0);
   var s=Number((PR[m.code]&&PR[m.code].s)||m.sale||0);
+  if(h){ p=h.was||p; s=h.now||s; }
   return {p:p, s:(s>0&&s<p)?s:0};
 }
 function priceSmall(m){
@@ -426,6 +440,7 @@ function openModel(m){
       +(Object.keys(C.stock||{}).length?'':'<p style="font-size:12px;color:var(--mut);font-weight:600;margin-top:10px;line-height:1.7">المخزون لسه مش متوصّل — كلّم الفرع يأكدلك المقاس.</p>')
     +'</div>'
     +'<div id="askbox"><button class="btn" onclick="askNow()">اسأل عن الموديل ده على ماسنجر</button></div>'
+    +(inSale(m.code)?'<a class="btn hb" href="sale.html">الموديل ده في '+(SALE.name||'الحفلة')+' ←</a>':'')
     +'<button class="btn g" id="shbtn" onclick="shareModel(\''+m.code+'\')">انسخ لينك الموديل ده</button>'
     +'<a class="btn g" href="index.html">الفروع والمواعيد</a>';
   try{ history.replaceState(null,'','#'+m.code); }catch(e){}
@@ -505,6 +520,8 @@ Promise.all([
 ]).then(function(a){
   C=a[0]; var cfg=a[1]||{};
   LOG=cfg.log_endpoint||''; CH=cfg.channels||[];
+  SALE=cfg.sale||{}; SALEMAP={};
+  if(SALE.on){ (SALE.models||[]).forEach(function(x){ SALEMAP[String(x.code)]={was:Number(x.was||0),now:Number(x.now||0)}; }); }
   M=C.models||[]; BR=C.branches||[]; SZ=C.sizes||[]; US=C.uses||['الكل']; CUR=C.currency||'جنيه';
   st.br=q.get('b')||''; st.sz=+(q.get('s')||0); st.us=q.get('u')||'الكل';
   document.getElementById('note').textContent=C.note||'';
