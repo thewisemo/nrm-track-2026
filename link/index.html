@@ -142,7 +142,7 @@ footer a{color:var(--mut)}
 <div class="stick" id="stick">
   <nav class="topnav">
     <a class="lg" href="index.html"><img src="logo.png" alt="نورماندي شوز"></a>
-    <div class="nv"><a href="models.html">التشكيلة</a><a href="index.html" class="on">الفروع</a><a href="warranty.html">الضمان</a></div>
+    <div class="nv"><a href="models.html">التشكيلة</a><a href="index.html" class="on">الفروع</a><a href="sale.html" id="navSale" style="display:none">الحفلة</a><a href="warranty.html">الضمان</a></div>
   </nav>
 </div>
 
@@ -226,7 +226,14 @@ fetch('config.json?v='+Date.now()).then(r=>r.json()).then(C=>{
   window.__LOG=C.log_endpoint||'';
   try{sessionStorage.setItem('nrm_log',window.__LOG)}catch(e){}
 
-  if(C.offers && C.offers.on && C.offers.url){
+  const SA=C.sale||{};
+  if(SA.on){
+    const o=document.getElementById('offersBtn');
+    o.style.display='block';
+    o.innerHTML=(SA.name||'الحفلة')+'<span>'+(SA.sub||'موديلات الموسم وأسعارها')+'</span>';
+    o.href='sale.html'+(location.search||'');
+    const ns=document.getElementById('navSale'); if(ns) ns.style.display='';
+  } else if(C.offers && C.offers.on && C.offers.url){
     const o=document.getElementById('offersBtn');
     o.style.display='block';
     o.innerHTML=(C.offers.label||'العروض')+'<span>اضغط تشوف الموديلات والأسعار</span>';
