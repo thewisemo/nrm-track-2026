@@ -57,11 +57,33 @@ h1{font-size:23px;font-weight:900;margin:16px 0 4px;text-align:center}
   padding:8px 15px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap}
 .chip.on{border-color:var(--or);background:var(--or);color:#fff;box-shadow:0 6px 16px rgba(238,150,55,.28)}
 .count{margin:14px 0 10px;font-size:13.5px;font-weight:700;color:#6f6a64}
+.sumrow{display:flex;gap:8px;align-items:center}
+.srch{flex:1;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);
+  border-radius:100px;padding:0 14px;height:42px}
+.srch svg{width:17px;height:17px;fill:#a9a299;flex:0 0 17px}
+.srch input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:14px;font-weight:700;color:var(--ink);min-width:0}
+.srch input::placeholder{color:#a9a299;font-weight:600}
+.tgl{flex:0 0 auto;display:flex;align-items:center;gap:6px;height:42px;padding:0 15px;cursor:pointer;
+  border:1.5px solid var(--line);background:#fff;border-radius:100px;font:inherit;font-size:13.5px;font-weight:800;color:#57524c}
+.tgl i{font-style:normal;font-size:13px;transition:transform .25s ease;display:inline-block}
+.tgl[aria-expanded="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tgl[aria-expanded="true"] i{transform:rotate(180deg)}
+.tgl b{background:var(--or);color:#fff;border-radius:100px;min-width:19px;height:19px;font-size:11.5px;
+  display:none;align-items:center;justify-content:center;padding:0 5px}
+.tgl b.on{display:inline-flex}
+.fwrap{max-height:0;overflow:hidden;transition:max-height .3s cubic-bezier(.2,.7,.3,1)}
+.fwrap.open{max-height:260px;overflow:visible;margin-top:10px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.pills:empty{margin-top:0}
+.pills span{display:inline-flex;align-items:center;gap:6px;background:var(--or);color:#fff;
+  border-radius:100px;padding:5px 10px;font-size:12px;font-weight:800}
+.pills span u{text-decoration:none;cursor:pointer;opacity:.85;font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
 .card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;cursor:pointer;
   box-shadow:0 2px 10px rgba(45,42,40,.04);transition:transform .15s ease,box-shadow .15s ease}
 .card:active{transform:scale(.985)}
-.card .ph{width:100%;aspect-ratio:900/702;background:#fff;display:block;object-fit:contain}
+@media(hover:hover){.card:hover{transform:translateY(-3px);box-shadow:0 14px 28px -14px rgba(45,42,40,.35);border-color:#d9d3c8}}
+.card .ph{width:100%;aspect-ratio:900/702;background:linear-gradient(180deg,#fff 55%,#faf7f2);display:block;object-fit:contain;padding:4px}
 .card .in{padding:10px 13px 14px}
 .card b{display:block;font-size:15px;font-weight:800;line-height:1.35}
 .card .cd{font-size:12.5px;font-weight:800;color:var(--or);direction:ltr;text-align:right;margin-top:2px}
@@ -153,12 +175,21 @@ footer a{color:var(--mut)}
      </div>
    </nav>
    <div class="bar">
-    <div class="lbl">الفرع</div>
-    <div class="row" id="brs"></div>
-    <div class="lbl" style="margin-top:9px">المقاس</div>
-    <div class="row" id="szs"></div>
-    <div class="lbl" style="margin-top:9px">الاستخدام</div>
-    <div class="row" id="uss"></div>
+    <div class="sumrow">
+      <div class="srch"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
+        <input id="srch" type="search" inputmode="search" placeholder="دوّر بالاسم أو الكود" autocomplete="off"></div>
+      <button class="tgl" id="tgl" type="button" aria-expanded="false">
+        <span id="tglTxt">الفلاتر</span><b id="tglN"></b><i>⌄</i></button>
+    </div>
+    <div class="pills" id="pills"></div>
+    <div class="fwrap" id="fwrap">
+      <div class="lbl">الفرع</div>
+      <div class="row" id="brs"></div>
+      <div class="lbl" style="margin-top:9px">المقاس</div>
+      <div class="row" id="szs"></div>
+      <div class="lbl" style="margin-top:9px">الاستخدام</div>
+      <div class="row" id="uss"></div>
+    </div>
    </div>
   </div>
   <h1 style="margin-top:4px">التشكيلة</h1>
@@ -181,7 +212,7 @@ footer a{color:var(--mut)}
 
 <script>
 var C={}, M=[], BR=[], SZ=[], US=[], LOG='', CH=[], PR={}, CUR='جنيه';
-var st={br:'',sz:0,us:'الكل'};
+var st={br:'',sz:0,us:'الكل',q:''};
 var q=new URLSearchParams(location.search);
 var KEEP=['utm_source','utm_medium','utm_campaign','utm_content','src','post','m'];
 function passthru(){var o={};KEEP.forEach(function(k){if(q.get(k))o[k]=q.get(k)});return o}
@@ -203,7 +234,12 @@ function stockOf(code,br,size){
   if(typeof r==='object'){ var v=r[String(size)]; if(v===undefined) return null; return !!v && v!=='0'; }
   return null;
 }
+function norm(t){return String(t||'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase()}
 function fits(m){
+  if(st.q){
+    var hay=norm([m.name,m.code,m.color,m.use,m.desc].join(' '));
+    if(hay.indexOf(norm(st.q))<0) return false;
+  }
   if(st.us!=='الكل' && m.use!==st.us) return false;
   if(st.sz){
     if((m.sizes||[]).indexOf(st.sz)<0) return false;
@@ -262,9 +298,24 @@ function render(){
   if(st.us!=='الكل') bits.push(st.us);
   document.getElementById('cnt').textContent =
     list.length? arn(list.length)+' موديل'+(bits.length?' — '+bits.join(' · '):'') : '';
+  drawPills();
   document.getElementById('none').innerHTML = list.length? '' :
     '<div class="empty"><b>مفيش موديل بالمواصفات دي</b><p>جرّب تغيّر المقاس أو الاستخدام، أو كلّم الفرع وإحنا نشوفلك حل.</p></div>';
   syncURL();
+}
+function activeCount(){ return (st.br?1:0)+(st.sz?1:0)+(st.us!=='الكل'?1:0)+(st.q?1:0); }
+function drawPills(){
+  var p=document.getElementById('pills'); if(!p) return;
+  p.innerHTML='';
+  function add(txt,clr){ var e=document.createElement('span');
+    e.innerHTML=txt+' <u>✕</u>'; e.querySelector('u').onclick=function(ev){ev.stopPropagation();clr();render()};
+    p.appendChild(e); }
+  if(st.q)  add('بحث: '+st.q, function(){st.q='';var i=document.getElementById('srch');if(i)i.value=''});
+  if(st.br) add('فرع '+((BR.filter(function(b){return b.key===st.br})[0]||{}).name||''), function(){st.br=''});
+  if(st.sz) add('مقاس '+arn(st.sz), function(){st.sz=0});
+  if(st.us!=='الكل') add(st.us, function(){st.us='الكل'});
+  var n=activeCount(), b=document.getElementById('tglN');
+  if(b){ b.textContent=arn(n); b.className=n?'on':''; }
 }
 /* الفلاتر بتختفي مع النزول وبترجع مع أول سكرول لفوق */
 var lastY=0, ticking=false, stickEl, fabEl;
@@ -408,6 +459,24 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()
 stickEl=document.getElementById('stick'); fabEl=document.getElementById('fab');
 window.addEventListener('scroll',onScroll,{passive:true});
 
+(function(){
+  var t=document.getElementById('tgl'), w=document.getElementById('fwrap');
+  t.onclick=function(){ var open=w.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    document.getElementById('tglTxt').textContent=open?'إخفاء':'الفلاتر'; };
+  var i=document.getElementById('srch'), tm=null;
+  i.addEventListener('input',function(){ clearTimeout(tm); tm=setTimeout(function(){
+    st.q=i.value.trim(); render(); },180); });
+})();
+
+function openFromHash(){
+  var h=(location.hash||'').replace('#','').trim();
+  if(!h||!M.length) return;
+  var m=M.filter(function(x){return String(x.code)===h})[0];
+  if(m) openModel(m);
+}
+window.addEventListener('hashchange',openFromHash);
+
 Promise.all([
   fetch('models.json?v='+Date.now()).then(function(r){return r.json()}),
   fetch('config.json?v='+Date.now()).then(function(r){return r.json()}).catch(function(){return {}})
@@ -418,6 +487,7 @@ Promise.all([
   st.br=q.get('b')||''; st.sz=+(q.get('s')||0); st.us=q.get('u')||'الكل';
   document.getElementById('note').textContent=C.note||'';
   render();
+  openFromHash();
   beacon({ev:'view',page:'models',ref:document.referrer||''});
   // المخزون الحيّ من الشيت لو متوصّل
   var EP=(cfg.warranty&&cfg.warranty.endpoint)||LOG||'';
