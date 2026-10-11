@@ -96,7 +96,7 @@ td.t{font-weight:700;white-space:nowrap}td.p{color:var(--o);font-weight:700;whit
 .mbox{background:#fff;border-radius:14px;padding:14px 16px}
 .mbox b{display:block;font-size:13px;color:var(--grey);font-weight:800;margin-bottom:6px}
 .mbox p{margin:0;font-size:14.5px;line-height:1.8}
-@media(max-width:640px){.mgrid{grid-template-columns:1fr}}
+html,body{max-width:100%;overflow-x:clip}@media(max-width:640px){.calx{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin-inline:-4px;padding-inline:4px}.calx .grid7{grid-template-columns:repeat(7,96px)}.mgrid{grid-template-columns:1fr}}
 
 .slide{position:relative}
 .slide i.ord{position:absolute;top:6px;inset-inline-start:6px;z-index:2;width:26px;height:26px;
@@ -569,4 +569,5 @@ function fromHash34(){var m=(location.hash||'').match(/^#m([34])d(\d+)$/);if(!m)
 window.addEventListener('hashchange',fromHash34); fromHash34();
 
 </script>
+<script>(function(){var g=[].slice.call(document.querySelectorAll(".grid7"));for(var i=0;i<g.length;i++){var a=g[i],b=a.nextElementSibling;if(a.parentElement.classList.contains("calx"))continue;var w=document.createElement("div");w.className="calx";a.parentNode.insertBefore(w,a);w.appendChild(a);if(b&&b.classList.contains("grid7")){w.appendChild(b);i++;}}})();</script>
 </html>
