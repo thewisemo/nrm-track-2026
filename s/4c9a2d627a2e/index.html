@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- الصفحة على رابط مش متوقّع، وبنمنع محركات البحث من فهرستها. ده
+     بيمنع إنها تتلاقى بالصدفة، مش بيمنع اللي معاه الرابط. -->
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>مراجعة مخزون نورماندي</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* تخطيط: اختيار الأسبوع فوق، الأرقام وفرقها تحته، وكل مجموعة في كارت */
+:root{
+  --bg:#F3F0E9; --surface:#FBFAF7; --sunk:#EDE9E0;
+  --fg:#211F1D; --muted:#6E675E; --line:#DED7CA;
+  --accent:#D97E18; --crit:#B3341F; --crit-soft:#F7DED8;
+  --warn:#9A6B10; --warn-soft:#FAEBD0; --ok:#3F6B3A; --ok-soft:#E0EBDC;
+  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic","Readex Pro",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17150F; --surface:#201D16; --sunk:#2A261D;
+  --fg:#F0EBE0; --muted:#A49A89; --line:#37322A;
+  --accent:#E8A251; --crit:#E8816C; --crit-soft:#3B211C;
+  --warn:#D9A94E; --warn-soft:#352A14; --ok:#8FBE86; --ok-soft:#1F2C1C;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17150F; --surface:#201D16; --sunk:#2A261D;
+  --fg:#F0EBE0; --muted:#A49A89; --line:#37322A;
+  --accent:#E8A251; --crit:#E8816C; --crit-soft:#3B211C;
+  --warn:#D9A94E; --warn-soft:#352A14; --ok:#8FBE86; --ok-soft:#1F2C1C;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);
+  font-size:16px;line-height:1.7;margin:0}
+.wrap{max-width:1040px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:36px 72px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:clamp(26px,4.8vw,40px);font-weight:700;line-height:1.2}
+h2{font-size:clamp(19px,3vw,25px);font-weight:600}
+h3{font-size:16.5px;font-weight:600}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--display);font-size:12.5px;font-weight:600;
+  letter-spacing:.09em;color:var(--accent)}
+header{display:flex;flex-direction:column;gap:14px;padding-bottom:24px;
+  border-bottom:3px solid var(--fg)}
+.pickers{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+label.pk{display:flex;align-items:center;gap:7px;font-size:14px;
+  color:var(--muted)}
+select{font-family:var(--body);font-size:14.5px;padding:7px 10px;
+  border:1px solid var(--line);border-radius:4px;background:var(--surface);
+  color:var(--fg);font-variant-numeric:tabular-nums}
+section{margin-top:40px;display:flex;flex-direction:column;gap:16px}
+.sub{color:var(--muted);font-size:14.5px;max-width:70ch}
+.tiles{display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:15px 17px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.tile .v{font-family:var(--display);font-size:27px;font-weight:700;
+  line-height:1.15;font-variant-numeric:tabular-nums}
+.tile .k{font-size:13px;color:var(--muted);line-height:1.5}
+.d{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.d.up{color:var(--ok)} .d.dn{color:var(--crit)} .d.flat{color:var(--muted)}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.bk{background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:16px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.bk.crit{border-color:var(--crit)}
+.bk .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.bk .big{font-family:var(--display);font-size:25px;font-weight:700;
+  font-variant-numeric:tabular-nums}
+.bk .why{font-size:13.5px;color:var(--muted)}
+.bk table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
+.bk td{padding:5px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+.bk td:first-child{text-align:right;white-space:normal;word-break:break-word}
+.bk td.n{text-align:left;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bk tr:last-child td{border-bottom:none}
+details summary{cursor:pointer;font-size:13.5px;color:var(--accent);
+  font-family:var(--display);font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;
+  background:var(--surface)}
+table.big{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+table.big th,table.big td{padding:9px 13px;text-align:right;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+table.big thead th{background:var(--fg);color:var(--bg);
+  font-family:var(--display);font-weight:600;font-size:13px}
+table.big tbody tr:last-child td{border-bottom:none}
+table.big td.n{font-variant-numeric:tabular-nums}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:13.5px;display:flex;flex-direction:column;gap:6px}
+</style>
+
+</head><body>
+<div class="wrap">
+<header>
+  <span class="eyebrow">مخزون نورماندي · تقرير أسبوعي</span>
+  <h1>مراجعة مخزون نورماندي</h1>
+  <p class="sub">بيتقرا من أودو كل أسبوع. كل رقم جنبه الفرق عن الأسبوع اللي بتقارن بيه — ودي أهم حاجة في الصفحة.</p>
+  <div class="pickers">
+    <label class="pk">الأسبوع <select id="wk"></select></label>
+    <label class="pk">مقارنة بـ <select id="cmp"></select></label>
+    <span class="sub" id="when"></span>
+  </div>
+</header>
+
+<section>
+  <h2>الإجمالي</h2>
+  <div class="tiles" id="tiles"></div>
+</section>
+
+<section>
+  <h2>اللي محتاج تصرّف</h2>
+  <p class="sub">كل مجموعة فيها عدد المنتجات والقطع والقيمة بسعر البيع، وجواها أعلى اتناشر بالقيمة.</p>
+  <div class="cards" id="bks"></div>
+</section>
+
+<section>
+  <h2>الفروع والمخازن</h2>
+  <div class="scroll"><table class="big" id="pl"></table></div>
+</section>
+
+<footer>
+  <p>المصدر: أودو — الكميات والتكلفة والسعر وحركات البيع. و«ظاهر ولا مخفي» من واجهة الموقع، لأن دي حاجة الهب بيقررها مش أودو.</p>
+  <p id="foot2"></p>
+</footer>
+</div>
+
+<script>
+const W = [{"totals": {"products": 2023, "pieces": 34599, "retail": 45181456, "cost": 19535570, "shop_pieces": 23904, "shop_retail": 35691546.0, "s30": 3714, "s90": 9940}, "places": [{"name": "المخزن/الرئيسي", "kind": "مخزن", "pieces": 4906, "retail": -1216342, "products": 225}, {"name": "اكتوبر", "kind": "فرع", "pieces": 3791, "retail": 5267189, "products": 905}, {"name": "النحاس", "kind": "فرع", "pieces": 2874, "retail": 4858514, "products": 785}, {"name": "المنصورة", "kind": "فرع", "pieces": 2830, "retail": 4344475, "products": 752}, {"name": "ON/Stock", "kind": "مخزن", "pieces": 2811, "retail": 3816809, "products": 239}, {"name": "العاشر من رمضان", "kind": "فرع", "pieces": 2689, "retail": 3883452, "products": 641}, {"name": "المحلة", "kind": "فرع", "pieces": 2356, "retail": 4068196, "products": 657}, {"name": "مدينة نصر", "kind": "فرع", "pieces": 2322, "retail": 3355292, "products": 633}, {"name": "سموحة", "kind": "فرع", "pieces": 2307, "retail": 3609830, "products": 584}, {"name": "الدقي", "kind": "فرع", "pieces": 2147, "retail": 2918519, "products": 499}, {"name": "الزقازيق", "kind": "فرع", "pieces": 2051, "retail": 3201810, "products": 575}, {"name": "DM-WH/دمنهور", "kind": "مخزن", "pieces": 1753, "retail": 2582348, "products": 403}, {"name": "ONST/Stock", "kind": "مخزن", "pieces": 1152, "retail": 3188980, "products": 205}, {"name": "العروبة مول", "kind": "فرع", "pieces": 536, "retail": 240759, "products": 15}, {"name": "مخزن/الاونلاين", "kind": "مخزن", "pieces": 35, "retail": -71970, "products": 116}, {"name": "فيصل", "kind": "فرع", "pieces": 1, "retail": 1750, "products": 1}, {"name": "Stox/مخزن", "kind": "مخزن", "pieces": -1130, "retail": -660765, "products": 142}], "buckets": {"hidden": {"n": 1711, "pieces": 27934, "retail": 34350251, "neg": -695, "s90": 6972, "top": [{"code": "306-Black-جلد", "q": 78, "retail": 284700, "s90": 27, "cover": 260}, {"code": "63-14-Black-جلد لميع", "q": 67, "retail": 251250, "s90": 54, "cover": 112}, {"code": "4014-Black-جلد", "q": 72, "retail": 248400, "s90": 38, "cover": 171}, {"code": "151-4-Black-جلد", "q": 54, "retail": 213300, "s90": 6, "cover": 810}, {"code": "011-نبيتي-جلد", "q": 50, "retail": 212500, "s90": 1, "cover": 4500}, {"code": "151-2-Black-جلد", "q": 53, "retail": 209350, "s90": 10, "cover": 477}, {"code": "S105-بني مكسر-جلد", "q": 43, "retail": 182750, "s90": 2, "cover": 1935}, {"code": "011-Havan-جلد", "q": 42, "retail": 178500, "s90": 0, "cover": null}, {"code": "26088-6-كاكي-رابر مطاط", "q": 60, "retail": 171000, "s90": 9, "cover": 600}, {"code": "26088-6-اسود*ابيض-رابر مطاط", "q": 59, "retail": 168150, "s90": 10, "cover": 531}, {"code": "OFFER SHOES 500", "q": 309, "retail": 154500, "s90": 0, "cover": null}, {"code": "089-1-Black", "q": 73, "retail": 153300, "s90": 4, "cover": 1642}]}, "dead": {"n": 1114, "pieces": 5267, "retail": 7736468, "neg": -31, "s90": 0, "top": [{"code": "011-Havan-جلد", "q": 42, "retail": 178500, "s90": 0, "cover": null}, {"code": "3187-جراي-جلد", "q": 43, "retail": 156950, "s90": 0, "cover": null}, {"code": "OFFER SHOES 500", "q": 309, "retail": 154500, "s90": 0, "cover": null}, {"code": "426006-رمادي-رابر مطاط", "q": 56, "retail": 131600, "s90": 0, "cover": null}, {"code": "S104-Havan-جلد", "q": 33, "retail": 125400, "s90": 0, "cover": null}, {"code": "200-Havan-جلد", "q": 42, "retail": 88200, "s90": 0, "cover": null}, {"code": "92-Black-جلد فرنيه", "q": 25, "retail": 86250, "s90": 0, "cover": null}, {"code": "F16$8-جلد", "q": 164, "retail": 82000, "s90": 0, "cover": null}, {"code": "632-Havan-جلد", "q": 20, "retail": 70000, "s90": 0, "cover": null}, {"code": "3167-Havan-جلد", "q": 19, "retail": 69350, "s90": 0, "cover": null}, {"code": "JD12-بيج-جلد قماش", "q": 19, "retail": 69350, "s90": 0, "cover": null}, {"code": "S66-اسودلميع", "q": 20, "retail": 67500, "s90": 0, "cover": null}]}, "over": {"n": 101, "pieces": 4178, "retail": 5248797, "neg": -7, "s90": 92, "top": [{"code": "011-نبيتي-جلد", "q": 50, "retail": 212500, "s90": 1, "cover": 4500}, {"code": "S105-بني مكسر-جلد", "q": 43, "retail": 182750, "s90": 2, "cover": 1935}, {"code": "011-Havan-جلد", "q": 42, "retail": 178500, "s90": 0, "cover": null}, {"code": "3187-جراي-جلد", "q": 43, "retail": 156950, "s90": 0, "cover": null}, {"code": "OFFER SHOES 500", "q": 309, "retail": 154500, "s90": 0, "cover": null}, {"code": "S79-Brown-جلد", "q": 31, "retail": 131750, "s90": 2, "cover": 1395}, {"code": "426006-رمادي-رابر مطاط", "q": 56, "retail": 131600, "s90": 0, "cover": null}, {"code": "2025-Havan-جلد نوبك", "q": 34, "retail": 130900, "s90": 1, "cover": 3060}, {"code": "1709-ابيض اسود-رابر مطاط", "q": 37, "retail": 127650, "s90": 2, "cover": 1665}, {"code": "S104-Havan-جلد", "q": 33, "retail": 125400, "s90": 0, "cover": null}, {"code": "425103-رمادي-رابر مطاط", "q": 52, "retail": 122200, "s90": 2, "cover": 2340}, {"code": "S80-1-Havan", "q": 29, "retail": 110200, "s90": 2, "cover": 1305}]}, "zero": {"n": 123, "pieces": 0, "retail": 0, "neg": -2105, "s90": 1076, "top": [{"code": "برايت شوز كبير MA T-عديم", "q": -12, "retail": -1500, "s90": 143, "cover": null}, {"code": "كريم شفاف-شفاف", "q": -102, "retail": -9690, "s90": 108, "cover": null}, {"code": "اسفنجه-شفاف", "q": -102, "retail": -9690, "s90": 105, "cover": null}, {"code": "كريم شفاف-Black", "q": -102, "retail": -9690, "s90": 104, "cover": null}, {"code": "برايت شوز كبير MA T-Black", "q": -14, "retail": -1750, "s90": 67, "cover": null}, {"code": "فوم 200م EG-فوم", "q": -21, "retail": -4200, "s90": 67, "cover": null}, {"code": "برايت شوز خزان BTC-MA-Black", "q": -5, "retail": -700, "s90": 41, "cover": null}, {"code": "144-Black-جلد", "q": -1, "retail": -2400, "s90": 32, "cover": null}, {"code": "S65-Brown", "q": -9, "retail": -18900, "s90": 29, "cover": null}, {"code": "E15-1-كموني", "q": -9, "retail": -17955, "s90": 26, "cover": null}, {"code": "2072HB-Black", "q": -5, "retail": -8750, "s90": 22, "cover": null}, {"code": "125-كحلي*ابيض-جلد", "q": -7, "retail": -14700, "s90": 17, "cover": null}]}, "soldout": {"n": 83, "pieces": 0, "retail": 0, "neg": -1377, "s90": 1076, "top": [{"code": "برايت شوز كبير MA T-عديم", "q": -12, "retail": -1500, "s90": 143, "cover": null}, {"code": "كريم شفاف-شفاف", "q": -102, "retail": -9690, "s90": 108, "cover": null}, {"code": "اسفنجه-شفاف", "q": -102, "retail": -9690, "s90": 105, "cover": null}, {"code": "كريم شفاف-Black", "q": -102, "retail": -9690, "s90": 104, "cover": null}, {"code": "برايت شوز كبير MA T-Black", "q": -14, "retail": -1750, "s90": 67, "cover": null}, {"code": "فوم 200م EG-فوم", "q": -21, "retail": -4200, "s90": 67, "cover": null}, {"code": "برايت شوز خزان BTC-MA-Black", "q": -5, "retail": -700, "s90": 41, "cover": null}, {"code": "144-Black-جلد", "q": -1, "retail": -2400, "s90": 32, "cover": null}, {"code": "S65-Brown", "q": -9, "retail": -18900, "s90": 29, "cover": null}, {"code": "E15-1-كموني", "q": -9, "retail": -17955, "s90": 26, "cover": null}, {"code": "2072HB-Black", "q": -5, "retail": -8750, "s90": 22, "cover": null}, {"code": "125-كحلي*ابيض-جلد", "q": -7, "retail": -14700, "s90": 17, "cover": null}]}, "risk": {"n": 15, "pieces": 108, "retail": 130130, "neg": -270, "s90": 1010, "top": [{"code": "كريم 3*1 نورماندي-عديم-كريم", "q": 14, "retail": 1820, "s90": 310, "cover": 4}, {"code": "فوم 160م EG-فوم", "q": 8, "retail": 1600, "s90": 87, "cover": 8}, {"code": "1010HB-Black-جلد", "q": 1, "retail": 1950, "s90": 12, "cover": 8}, {"code": "1602-Black-جلد", "q": 3, "retail": 7200, "s90": 36, "cover": 8}, {"code": "كريم 3*1 نورماندي-Black-كريم", "q": 22, "retail": 2860, "s90": 208, "cover": 10}, {"code": "271-Black-جلد", "q": 9, "retail": 20250, "s90": 80, "cover": 10}, {"code": "286-Black-جلد", "q": 1, "retail": 2250, "s90": 9, "cover": 10}, {"code": "125-زيتي-جلد", "q": 2, "retail": 4200, "s90": 13, "cover": 14}, {"code": "CAS-1985-جلد", "q": 3, "retail": 10200, "s90": 20, "cover": 14}, {"code": "631-Brown-جلد", "q": 4, "retail": 14000, "s90": 22, "cover": 16}, {"code": "LV271-اسود لميع-جلد لميع", "q": 8, "retail": 19200, "s90": 46, "cover": 16}, {"code": "فرش حذاء EG-MA-رابر مطاط", "q": 16, "retail": 2400, "s90": 87, "cover": 17}]}, "negative": {"n": 214, "pieces": 1254, "retail": 2864456, "neg": -2927, "s90": 2558, "top": [{"code": "كريم شفاف-Black", "q": -102, "retail": -9690, "s90": 104, "cover": null}, {"code": "كريم شفاف-شفاف", "q": -102, "retail": -9690, "s90": 108, "cover": null}, {"code": "اسفنجه-شفاف", "q": -102, "retail": -9690, "s90": 105, "cover": null}, {"code": "sock-900-اسود*رمادي", "q": -48, "retail": -2640, "s90": 0, "cover": null}, {"code": "كريم 3*1 نورماندي-Black-كريم", "q": 22, "retail": 2860, "s90": 208, "cover": 10}, {"code": "كريم 3*1 نورماندي-عديم-كريم", "q": 14, "retail": 1820, "s90": 310, "cover": 4}, {"code": "1602-Black-جلد", "q": 3, "retail": 7200, "s90": 36, "cover": 8}, {"code": "125-Black-جلد", "q": -11, "retail": -23100, "s90": 14, "cover": null}, {"code": "فوم 200م EG-فوم", "q": -21, "retail": -4200, "s90": 67, "cover": null}, {"code": "26013-بيج-رابر مطاط", "q": -38, "retail": -133000, "s90": 0, "cover": null}, {"code": "3970-نافي-رابر مطاط", "q": -38, "retail": -123500, "s90": 0, "cover": null}, {"code": "1602-Havan-جلد", "q": 31, "retail": 74400, "s90": 12, "cover": 232}]}}, "week": "2026-W45", "date": "2026-11-04", "generated": "2026-11-04T09:04", "site_known": true}];
+const BK = [["hidden", "مخفي عن الموقع وليه رصيد", "بضاعة في الفرع والعميل مش شايفها على الموقع خالص.", "value"], ["dead", "راكد — صفر بيع في ٩٠ يوم", "فلوس واقفة من غير حركة من تلات شهور.", "value"], ["over", "تكدّس — ٢٠ قطعة فأكتر وبيع ٩٠ يوم ≤٢", "الكمية أكبر من الطلب بكتير.", "value"], ["soldout", "اتباع في ٩٠ يوم ورصيده خلص", "طلب مثبت بالرقم ومفيش منه حاجة — ده طلب ضايع.", "sold"], ["risk", "تغطيته أقل من ٢١ يوم", "هينفد خلال تلات أسابيع بمعدل بيعه الحالي.", "value"], ["negative", "رصيد سالب", "بيع اتسجّل من غير مخزون — الرقم مش موثوق لحد ما يتسوّى.", "neg"]];
+const ar = n => (n==null?'—':Number(n).toLocaleString('en-US'));
+const money = n => ar(Math.round(n||0));
+const el = id => document.getElementById(id);
+
+function delta(now, was, goodDown){
+  if(was==null || was===undefined) return '';
+  const d = (now||0)-(was||0);
+  if(!d) return '<span class="d flat">= زي الأسبوع اللي فات</span>';
+  const good = goodDown ? d<0 : d>0;
+  const sign = d>0?'▲ +':'▼ ';
+  return '<span class="d '+(good?'up':'dn')+'">'+sign+ar(Math.abs(d))+'</span>';
+}
+
+function line(kind,n){
+  if(kind==='sold') return ar(n.s90)+' قطعة اتباعت وهي خلصت';
+  if(kind==='neg')  return ar(Math.abs(n.neg))+' قطعة بالسالب';
+  return ar(n.pieces)+' قطعة · '+money(n.retail)+' ج';
+}
+
+function fill(){
+  const w = W.find(x=>x.week===el('wk').value) || W[W.length-1];
+  const c = W.find(x=>x.week===el('cmp').value) || null;
+  const t = w.totals, p = c? c.totals : {};
+  el('when').textContent = 'اتسحب ' + (w.generated||w.date).replace('T',' — ');
+  el('foot2').textContent = 'الصفحة فيها ' + W.length + ' أسبوع محفوظ. اختار أي أسبوعين من فوق للمقارنة.';
+
+  const tiles = [
+    ['القطع في المخزون', ar(t.pieces), delta(t.pieces,p.pieces,false)],
+    ['القيمة بسعر البيع', money(t.retail)+' ج', delta(t.retail,p.retail,false)],
+    ['التكلفة', money(t.cost)+' ج', delta(t.cost,p.cost,false)],
+    ['اتباع في ٣٠ يوم', ar(t.s30)+' قطعة', delta(t.s30,p.s30,false)],
+    ['اتباع في ٩٠ يوم', ar(t.s90)+' قطعة', delta(t.s90,p.s90,false)],
+    ['منتجات ليها رصيد', ar(t.products), delta(t.products,p.products,false)],
+  ];
+  el('tiles').innerHTML = tiles.map(x=>
+    '<div class="tile"><span class="v">'+x[1]+'</span><span class="k">'+x[0]+'</span>'+x[2]+'</div>').join('');
+
+  el('bks').innerHTML = BK.map(b=>{
+    const n = w.buckets[b[0]]; if(!n) return '';
+    const o = c && c.buckets ? c.buckets[b[0]] : null;
+    const rows = (n.top||[]).map(r=>'<tr><td>'+r.code+'</td><td class="n">'+ar(r.q)+' قطعة</td><td class="n">'+money(r.retail)+'</td></tr>').join('');
+    return '<div class="bk'+(b[0]==='hidden'||b[0]==='soldout'||b[0]==='negative'?' crit':'')+'">'
+      +'<div class="hd"><span class="big">'+ar(n.n)+'</span><h3>'+b[1]+'</h3></div>'
+      +'<div class="why">'+b[2]+'</div>'
+      +'<div class="d flat">'+line(b[3],n)+' '+delta(n.n,o?o.n:null,true)+'</div>'
+      +(rows?'<details><summary>أعلاهم بالقيمة</summary><table>'+rows+'</table></details>':'')
+      +'</div>';
+  }).join('');
+
+  const prev = {}; if(c) (c.places||[]).forEach(x=>prev[x.name]=x);
+  el('pl').innerHTML = '<thead><tr><th>المكان</th><th>النوع</th><th>القطع</th><th>منتجات</th><th>القيمة بسعر البيع</th><th>الفرق عن المقارنة</th></tr></thead><tbody>'
+   + (w.places||[]).map(x=>'<tr><td>'+x.name+'</td><td>'+x.kind+'</td><td class="n">'+ar(x.pieces)+'</td><td class="n">'+ar(x.products)+'</td><td class="n">'+money(x.retail)+'</td><td class="n">'+delta(x.pieces, prev[x.name]?prev[x.name].pieces:null,false)+'</td></tr>').join('')
+   + '</tbody>';
+}
+
+(function(){
+  const opts = W.map(x=>'<option value="'+x.week+'">'+x.week+' — '+x.date+'</option>').join('');
+  el('wk').innerHTML = opts;
+  el('cmp').innerHTML = '<option value="">(من غير مقارنة)</option>'+opts;
+  el('wk').value = W[W.length-1].week;
+  if(W.length>1) el('cmp').value = W[W.length-2].week;
+  el('wk').onchange = fill; el('cmp').onchange = fill;
+  fill();
+})();
+</script>
+</body></html>
