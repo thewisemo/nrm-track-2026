@@ -67,6 +67,23 @@ h2 span{font-weight:400;font-size:14px;color:var(--grey)}
 .hv.h-yes b{color:#2f6b4f}
 .hv.h-no b{color:#a8431d}
 .hv p{margin:5px 0 0;font-size:14.3px;color:#4e4840}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+  margin-top:4px}
+.sh{margin:0;background:#fff;border:1px solid #e2ddd4;border-radius:14px;
+  overflow:hidden}
+.sh img{display:block;width:100%;height:auto;border-bottom:1px solid #eee9e1}
+.sh figcaption{padding:11px 14px;font-size:13.6px;color:#4e4840;line-height:1.7}
+.sh figcaption b{display:block;color:var(--ink);font-size:14.5px;
+  margin-bottom:3px}
+pre.code{background:var(--dark);color:#e8e2d6;border-radius:14px;
+  padding:15px 18px;overflow-x:auto;direction:ltr;text-align:left;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;
+  line-height:1.65;margin:10px 0 0}
+.gl{display:block;background:#fff;border:1px solid #e2ddd4;
+  border-right:4px solid var(--o);border-radius:14px;padding:12px 16px;
+  margin-bottom:9px;text-decoration:none;color:inherit}
+.gl b{display:block;font-size:15px;color:#9a5b12}
+.gl span{display:block;font-size:13.5px;color:#4e4840;margin-top:3px}
 ul.gap{background:#fff;border:1px solid #e2ddd4;border-radius:16px;
   padding:15px 36px 15px 18px;margin:10px 0 0;font-size:14.6px}
 ul.gap li{margin-bottom:7px;color:#3d3830}
@@ -86,6 +103,7 @@ footer{margin-top:34px;color:var(--grey);font-size:13px;text-align:center}
     padding:20px 18px}
   .hero h1{font-size:21px}
   .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .shots{grid-template-columns:1fr}
   .wrap{padding:16px 13px 70px}
   h2{font-size:18.5px}
   ol.steps{padding:15px 32px 15px 14px}
@@ -229,6 +247,29 @@ footer{margin-top:34px;color:var(--grey);font-size:13px;text-align:center}
 <div class="mv"><b>بي تك — المنتج المتاح</b><p>سامسونج جالكسي S25 FE: السكيما بتقول <code>InStock</code> والسعر <b>٤٣٬٩٩٩ جنيه</b> بعملة <code>EGP</code>، ومعاه كود المنتج والبراند. شاومي ريدمي نوت ١٥ برو بلس: <code>InStock</code> و<b>٢٨٬٩٩٩ جنيه</b>.</p></div>
 <div class="mv"><b>بي تك — المنتج اللي خلص</b><p>«ميني BM-10 أسود» بـ<b>٦٤٩ جنيه</b>: السكيما بتقول <code>OutOfStock</code> صراحةً. <b>الصفحة ما اتشالتش ولا اترمت على ٤٠٤</b> — اتقال لجوجل الحقيقة، فجوجل بطّل يعرضه كمنتج تقدر تشتريه، والصفحة فضلت بتاريخها وترتيبها.</p></div>
 <div class="mv"><b>إحنا دلوقتي</b><p>٢١ منتج خلصانين تماماً و٤٣ فاضل فيهم مقاس أو اتنين — <b>وكلهم لسه معروضين، وبعضهم في قسم التخفيضات</b>. يعني العميل الجاي من جوجل ممكن يقع على صفحة مايقدرش يشتري منها، من غير ما حد يقوله «هيرجع إمتى» ولا «جرّب ده بدله».</p></div>
+
+<h2>شوفها بعينك <span>— نفس الموقع، منتج متاح ومنتج خلص</span></h2>
+<div class="shots"><figure class="sh"><img src="bt_in.jpg" alt="بي تك — منتج متاح"><figcaption><b>بي تك — منتج متاح</b> السعر <b>٤٣٬٩٩٩ ج.م</b> وزرار الشراء شغّال. وفي السكيما: <code>"availability": "InStock"</code></figcaption></figure>
+<figure class="sh"><img src="bt_out.jpg" alt="بي تك — نفس الموقع، منتج خلص"><figcaption><b>بي تك — نفس الموقع، منتج خلص</b> مكان الزرار مكتوب <b>«غير متوفر»</b>، والصفحة لسه شغالة بكل مواصفاتها. وفي السكيما: <code>"availability": "OutOfStock"</code></figcaption></figure></div>
+<p class="lead" style="margin-top:12px">ودي السطور اللي جوه صفحة
+المنتج المتاح بالحرف — هي دي اللي جوجل بيقراها:</p>
+<pre class="code">"@type": "Product",
+"offers": {
+  "@type": "Offer",
+  "price": "43999",
+  "priceCurrency": "EGP",
+  "availability": "https://schema.org/InStock"
+}</pre>
+<div class="note">لاحظ <code>EGP</code> و<code>InStock</code>. والمنتج
+اللي خلص نفس البناء بالظبط بس <code>OutOfStock</code>. <b>ولا صفحة
+فيهم اتمسحت.</b></div>
+
+<h2>جرّب بنفسك <span>— بحث جوجل مصر، دوس واتفرّج</span></h2>
+<p class="lead">ما تصدّقنيش. دوس على أي واحد من دول من موبايلك:</p>
+<a class="gl" href="https://www.google.com/search?q=%D9%86%D9%88%D8%B1%D9%85%D8%A7%D9%86%D8%AF%D9%8A%20%D8%B4%D9%88%D8%B2%20%D8%A7%D9%84%D8%AF%D9%82%D9%8A&gl=eg&hl=ar" target="_blank" rel="noopener"><b>نورماندي شوز الدقي</b><span>هيطلعلك كارت الخريطة بالمواعيد والتقييم — ده اللي في لقطة الشاشة.</span></a>
+<a class="gl" href="https://www.google.com/search?q=%D9%85%D8%AD%D9%84%20%D8%AC%D8%B2%D9%85%20%D8%B1%D8%AC%D8%A7%D9%84%D9%8A%20%D9%81%D9%8A%20%D8%B7%D9%86%D8%B7%D8%A7&gl=eg&hl=ar" target="_blank" rel="noopener"><b>محل جزم رجالي في طنطا</b><span>تلات محلات وخريطة فوق كل النتايج العادية.</span></a>
+<a class="gl" href="https://www.google.com/search?q=%D8%AD%D8%B0%D8%A7%D8%A1%20%D8%B1%D8%AC%D8%A7%D9%84%D9%8A%20%D8%AC%D9%84%D8%AF%20%D9%85%D8%AF%D9%8A%D9%86%D8%A9%20%D9%86%D8%B5%D8%B1&gl=eg&hl=ar" target="_blank" rel="noopener"><b>حذاء رجالي جلد مدينة نصر</b><span>بحث بنيّة شراء ومعاه مكان — ده شكل البحث في مصر.</span></a>
+<a class="gl" href="https://www.google.com/search?q=%D8%B3%D8%B9%D8%B1%20%D8%B3%D8%A7%D9%85%D8%B3%D9%88%D9%86%D8%AC%20S25%20FE%20%D9%85%D8%B5%D8%B1&gl=eg&hl=ar" target="_blank" rel="noopener"><b>سعر سامسونج S25 FE في مصر</b><span>شوف السعر بالجنيه جنب النتيجة — ده اللي السكيما بتعمله.</span></a>
 
 <h2>المنتج اللي خلص <span>— مش بيتمسح، بيتقال عنه الحقيقة</span></h2>
 <p class="lead">دي أكتر حتة بتتعمل غلط، والصح فيها خمس خطوات:</p>
