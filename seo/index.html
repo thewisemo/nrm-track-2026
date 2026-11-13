@@ -71,6 +71,7 @@ h2 span{font-weight:400;font-size:14px;color:var(--grey)}
   margin-top:4px}
 .sh{margin:0;background:#fff;border:1px solid #e2ddd4;border-radius:14px;
   overflow:hidden}
+.shots .sh:first-child{grid-column:1/-1}
 .sh img{display:block;width:100%;height:auto;border-bottom:1px solid #eee9e1}
 .sh figcaption{padding:11px 14px;font-size:13.6px;color:#4e4840;line-height:1.7}
 .sh figcaption b{display:block;color:var(--ink);font-size:14.5px;
@@ -249,8 +250,9 @@ footer{margin-top:34px;color:var(--grey);font-size:13px;text-align:center}
 <div class="mv"><b>إحنا دلوقتي</b><p>٢١ منتج خلصانين تماماً و٤٣ فاضل فيهم مقاس أو اتنين — <b>وكلهم لسه معروضين، وبعضهم في قسم التخفيضات</b>. يعني العميل الجاي من جوجل ممكن يقع على صفحة مايقدرش يشتري منها، من غير ما حد يقوله «هيرجع إمتى» ولا «جرّب ده بدله».</p></div>
 
 <h2>شوفها بعينك <span>— نفس الموقع، منتج متاح ومنتج خلص</span></h2>
-<div class="shots"><figure class="sh"><img src="bt_in.jpg" alt="بي تك — منتج متاح"><figcaption><b>بي تك — منتج متاح</b> السعر <b>٤٣٬٩٩٩ ج.م</b> وزرار الشراء شغّال. وفي السكيما: <code>"availability": "InStock"</code></figcaption></figure>
-<figure class="sh"><img src="bt_out.jpg" alt="بي تك — نفس الموقع، منتج خلص"><figcaption><b>بي تك — نفس الموقع، منتج خلص</b> مكان الزرار مكتوب <b>«غير متوفر»</b>، والصفحة لسه شغالة بكل مواصفاتها. وفي السكيما: <code>"availability": "OutOfStock"</code></figcaption></figure></div>
+<div class="shots"><figure class="sh"><img src="serp_demo.jpg" alt="نفس الصفحة — بالسكيما ومن غيرها"><figcaption><b>نفس الصفحة — بالسكيما ومن غيرها</b> الفرق الوحيد إن البيانات مكتوبة في المكان اللي جوجل بيقرا منه. (ده <b>توضيح لشكل النتيجة</b>، مش لقطة شاشة.)</figcaption></figure>
+<figure class="sh"><img src="bt_in.jpg" alt="بي تك — منتج متاح (لقطة حقيقية)"><figcaption><b>بي تك — منتج متاح (لقطة حقيقية)</b> السعر <b>٤٣٬٩٩٩ ج.م</b> وزرار الشراء شغّال. وفي السكيما: <code>"availability": "InStock"</code></figcaption></figure>
+<figure class="sh"><img src="bt_out.jpg" alt="بي تك — نفس الموقع، منتج خلص (لقطة حقيقية)"><figcaption><b>بي تك — نفس الموقع، منتج خلص (لقطة حقيقية)</b> مكان الزرار مكتوب <b>«غير متوفر»</b>، والصفحة لسه شغالة بكل مواصفاتها. وفي السكيما: <code>"availability": "OutOfStock"</code></figcaption></figure></div>
 <p class="lead" style="margin-top:12px">ودي السطور اللي جوه صفحة
 المنتج المتاح بالحرف — هي دي اللي جوجل بيقراها:</p>
 <pre class="code">"@type": "Product",
