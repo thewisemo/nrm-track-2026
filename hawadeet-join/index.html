@@ -70,7 +70,7 @@ input[name=link]{direction:ltr;text-align:left}button{font-family:var(--disp);fo
 <h3>ابعتلنا اللينك</h3>
 <form id="f" novalidate>
 <div><label>اسمك *</label><input name="name" autocomplete="name"></div>
-<div><label>الفرع *</label><input name="branch" placeholder="مثلًا: المحلة الكبرى"></div>
+<div><label>الفرع *</label><select name="branch"><option value="">اختار فرعك</option><option>مدينة نصر</option><option>الدقي</option><option>أكتوبر</option><option>العاشر من رمضان</option><option>سموحة</option><option>طنطا</option><option>المنصورة</option><option>الزقازيق</option><option>المحلة الكبرى</option><option>دمنهور</option><option>الإدارة</option></select></div>
 <div><label>رقم موبايلك *</label><input name="phone" inputmode="tel" style="direction:ltr;text-align:left"></div>
 <div><label>صوّرت أنهي حلقة؟</label><select name="ep"><option>اسمها ليه؟ — الدِّيزِرْت بُوت: أصله من القاهرة 🇪🇬</option><option>حكاية خطوة — الكعب العالي اتعمل للرجالة</option><option>رجلك بتتكلم — اختبار الصباع</option><option>عمّر جزمتك — غلطة الدفاية</option><option>إنتوا سألتوا — «الجزمة الجديدة بتعوّرني أعمل إيه؟»</option><option>قبل ما تشتري — جزمة الشغل</option><option>اسمها ليه؟ (للزميلات) — السْتِيلِيتُو: اسمه على اسم سلاح</option><option>أكتر من حلقة</option></select></div>
 <div><label>لينك الفيديو على درايف *</label><input name="link" placeholder="https://drive.google.com/..."></div>
@@ -85,8 +85,8 @@ input[name=link]{direction:ltr;text-align:left}button{font-family:var(--disp);fo
 document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
 var f=this,v=function(n){return (f[n].value||'').trim()},err=document.getElementById('err');
 if(!v('name')||!v('branch')||!v('phone')||!v('link')){err.textContent='كمّل الخانات اللي عليها *';return}
-if(!/^https?:\/\/(drive|docs)\.google\.com\//.test(v('link'))){err.textContent='اللينك لازم يكون من جوجل درايف';return}
+var m=v('link').match(/https?:\/\/(drive|docs)\.google\.com\/[^\s]+/);if(!m){err.textContent='اللينك لازم يكون من جوجل درايف';return}var link=m[0];
 err.textContent='';
-var msg='حواديت نورماندي — فيديو تجربة\nالاسم: '+v('name')+'\nالفرع: '+v('branch')+'\nالموبايل: '+v('phone')+'\nالحلقة: '+v('ep')+'\nاللينك: '+v('link');
+var msg='حواديت نورماندي — فيديو تجربة\nالاسم: '+v('name')+'\nالفرع: '+v('branch')+'\nالموبايل: '+v('phone')+'\nالحلقة: '+v('ep')+'\nاللينك: '+link;
 window.location.href='https://wa.me/201008887112?text='+encodeURIComponent(msg);document.getElementById('done').hidden=false;});
 </script></body></html>
