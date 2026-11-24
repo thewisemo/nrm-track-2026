@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نورماندي شوز</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="ديمو تفاعلي لصفحة نورماندي شوز — موبايل">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f6f3ec;--ink:#2d2a28;--or:#ee9637;--bd:#e3ddd2;--mut:#6b645d;
+ --panel:#ebe6dc;--rust:#a85a12;--chip:#fbeedd;--chipink:#8a4a0e;--shell:#15130f}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--shell);font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none} button{font:inherit;color:inherit}
+.alx{font-family:Alexandria,sans-serif}
+#stage{min-height:100dvh;display:flex;align-items:center;justify-content:center;gap:28px}
+#phone{width:100%;max-width:100%;background:var(--cream);position:relative;overflow:hidden}
+#scroll{height:100dvh;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.note{display:none}
+@media (min-width:860px){
+ #stage{padding:26px}
+ #phone{width:390px;height:844px;border-radius:44px;border:11px solid #000;
+  box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px #3a352e;flex:none}
+ #scroll{height:822px;border-radius:33px}
+ .note{display:block;max-width:300px;color:#b8b0a4;font-size:14px;line-height:1.85}
+ .note h3{font-family:Alexandria,sans-serif;color:#f1ece2;font-size:19px;margin:0 0 12px}
+ .note b{color:var(--or)} .note ul{margin:14px 0 0;padding:0 18px 0 0} .note li{margin-bottom:9px}
+}
+header.bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:12px 16px;
+ background:rgba(246,243,236,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+header.bar img.logo{height:26px;width:auto;display:block}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:22px;border:1px solid var(--bd);background:#fff;
+ display:flex;align-items:center;justify-content:center;cursor:pointer}
+.spacer{flex:1}
+section{padding:0 16px}
+h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
+.kick{display:inline-block;font-size:12px;font-weight:700;color:var(--rust);background:var(--chip);padding:5px 12px;border-radius:99px}
+.lead{font-size:16px;color:#4a4541;margin:10px 0 0}
+.muted{color:var(--mut)} .hint{font-size:13px;color:var(--mut);margin:10px 0 0}
+.ph{background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+ color:#8d8578;text-align:center;padding:20px;border-radius:18px;font-family:Alexandria,sans-serif;font-size:14px;border:1px dashed #cfc7b8}
+.photo{width:100%;display:block;border-radius:18px;background:var(--panel)}
+.hero{padding-top:26px} .hero h1{font-weight:800;font-size:31px;line-height:1.34;margin-top:14px}
+.vpswitch{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap}
+.vpswitch button{border:1px solid var(--bd);background:#fff;border-radius:99px;height:34px;padding:0 13px;
+ font-size:12.5px;font-weight:700;cursor:pointer;color:var(--mut)}
+.vpswitch button[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.cta{display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 22px;border-radius:26px;
+ background:var(--or);color:var(--ink);font-weight:700;font-size:15px;margin-top:18px;border:0;cursor:pointer}
+.nums{list-style:none;margin:26px 0 0;padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nums li{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:16px}
+.nums .n{font-family:Alexandria,sans-serif;font-weight:800;font-size:28px;line-height:1}
+.nums .t{font-size:13px;color:var(--mut);margin-top:5px}
+.stations{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.stations li{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px}
+.stations .yr{font-family:Alexandria,sans-serif;font-weight:700;font-size:13px;color:var(--rust)}
+.stations h3{font-size:18px;font-weight:700;margin:6px 0} .stations p{margin:0;font-size:14.5px;color:#4a4541}
+.founders{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.founders li{background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden}
+.founders .fph{aspect-ratio:1/1;background:var(--panel);display:flex;align-items:center;justify-content:center;color:#8d8578;font-size:12px}
+.founders .fn{padding:12px;font-weight:700;font-size:15px}
+.founders .fr{font-size:12.5px;color:var(--mut);margin-top:2px;font-weight:400}
+.memo{margin-top:12px;background:var(--ink);color:var(--cream);border-radius:20px;padding:22px}
+.memo p:first-child{font-family:Alexandria,sans-serif;font-weight:700;font-size:18px;margin:0}
+.memo p:last-child{margin:10px 0 0;font-size:14.5px;color:#c9c1b6}
+.brlist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.brlist li{background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden;cursor:pointer}
+.brlist .im{aspect-ratio:16/10;width:100%;object-fit:cover;display:block;background:var(--panel)}
+.brlist .bd{padding:14px 16px;display:flex;align-items:center;gap:12px}
+.brlist .nm{font-family:Alexandria,sans-serif;font-weight:700;font-size:18px}
+.brlist .ad{font-size:13px;color:var(--mut);margin-top:2px;display:block}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;background:var(--ink);
+ color:var(--or);font-size:11px;font-weight:700;margin-right:8px;vertical-align:middle}
+.chev{flex:none;width:40px;height:40px;border-radius:20px;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center}
+.newbox{margin-top:26px;background:linear-gradient(180deg,#fff,#f3efe6);border:1px solid var(--bd);border-radius:22px;padding:24px 20px}
+.newbox h2{font-size:21px;font-weight:800;line-height:1.4;margin-top:12px}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.pill{padding:5px 12px;border-radius:99px;background:var(--chip);color:var(--chipink);font-size:12.5px;font-weight:700}
+.pill.off{background:var(--panel);color:var(--mut)}
+.mems{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mems li{aspect-ratio:1/1}
+.view{display:none} .view.on{display:block}
+.rate{margin-top:16px;display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid var(--bd);border-radius:16px}
+.rate .v{font-family:Alexandria,sans-serif;font-weight:800;font-size:26px;line-height:1}
+.stars{display:flex;gap:2px;color:var(--or)}
+dl.info{margin:12px 0 0;display:grid;gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:16px;overflow:hidden;font-size:15px}
+dl.info>div{display:grid;grid-template-columns:86px minmax(0,1fr);background:#fff;padding:13px 16px;gap:10px}
+dl.info dt{color:var(--mut)} dl.info dd{margin:0}
+.tel{font-weight:700;font-family:Alexandria,sans-serif;direction:ltr;text-align:right;unicode-bidi:isolate}
+.btns{display:flex;gap:10px;margin-top:12px}
+.btns a{flex:1;height:52px;border-radius:26px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700}
+.btns .p{background:var(--or);color:var(--ink)} .btns .s{background:#fff;border:1px solid #d6cfc2}
+.finder{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px;margin-top:14px}
+.finder label{display:block;font-size:14px;font-weight:700;margin-bottom:10px}
+.frow{display:flex;gap:10px}
+.frow input{width:100px;height:52px;border:1px solid var(--bd);border-radius:14px;padding:0 14px;font:inherit;font-size:17px;background:var(--cream);color:var(--ink)}
+.frow button{flex:1;height:52px;border:0;border-radius:26px;background:var(--ink);color:var(--cream);font-weight:700;font-size:15px;cursor:pointer}
+.grid2{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid2 li{background:#fff;border:1px solid var(--bd);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.grid2 .pim{aspect-ratio:1/1;width:100%;object-fit:cover;display:block;background:var(--panel)}
+.grid2 .pb{padding:11px 12px;flex:1;display:flex;flex-direction:column}
+.grid2 .pn{font-weight:700;font-size:14.5px}
+.grid2 .pc{font-size:12.5px;color:var(--mut);margin-top:2px}
+.add{margin-top:10px;height:38px;border:1px solid var(--bd);border-radius:19px;background:var(--cream);
+ font-size:12.5px;font-weight:700;cursor:pointer}
+.add[data-in="1"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.elsewhere{margin-top:12px;background:var(--chip);border-radius:16px;padding:14px 16px;font-size:14px;color:var(--chipink)}
+.snap{margin-top:10px;font-size:12px;color:var(--mut);text-align:center}
+.darkbox{margin-top:26px;background:var(--ink);color:var(--cream);border-radius:20px;padding:24px 20px}
+.darkbox h2{font-size:20px;font-weight:700;color:var(--cream)}
+.darkbox p{margin:12px 0 0;font-size:14.5px;color:#c9c1b6}
+.darkbox button{display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:48px;padding:0 20px;border-radius:24px;
+ border:1px solid #5a534d;background:transparent;color:var(--cream);font-weight:700;font-size:15px;cursor:pointer}
+.near{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.near li{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:15px 17px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
+.secttl{margin-top:30px} .secttl h2{font-size:23px;font-weight:800}
+.rule{height:6px;width:70px;background:var(--or);border-radius:3px;margin-top:10px}
+/* فوتر */
+footer{margin-top:34px;background:var(--ink);color:#d9d2c8;padding:28px 16px calc(120px + env(safe-area-inset-bottom))}
+footer img.logo{height:26px;display:block}
+footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0 10px;font-weight:700}
+.fcols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.fcols a,.fcols span{display:block;font-size:14px;padding:5px 0;color:#c9c1b6;cursor:pointer}
+.fcols a:hover{color:#fff}
+.fbranches{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.fbranches button{background:#3a352e;border:0;color:#e6ded2;border-radius:99px;height:32px;padding:0 12px;font-size:12.5px;cursor:pointer}
+.fbot{margin-top:24px;border-top:1px solid #3a352e;padding-top:16px;font-size:12.5px;color:#9b9388}
+
+/* ===== تجربة التسوق ===== */
+#nav{position:absolute;left:0;right:0;bottom:0;z-index:45;height:calc(78px + env(safe-area-inset-bottom));
+ background:#fff;border-top:1px solid var(--bd);display:none;grid-template-columns:repeat(5,1fr);
+ align-items:start;padding-top:8px}
+#nav.on{display:grid}
+#nav a{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mut);cursor:pointer}
+#nav a.sel{font-weight:700;color:var(--ink)}
+#nav a.mid{margin-top:-30px;font-weight:700;color:var(--ink)}
+#nav .fab{position:relative;width:60px;height:60px;border-radius:20px;background:var(--ink);color:var(--or);
+ display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(45,42,40,.28);border:3px solid var(--cream)}
+#nav .fab b{position:absolute;top:-6px;left:-6px;min-width:22px;height:22px;border-radius:11px;background:var(--or);
+ color:var(--ink);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.padnav{padding-bottom:110px}
+.search{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:#fff;border:1px solid var(--bd);border-radius:14px}
+.search input{flex:1;border:0;outline:0;font:inherit;font-size:16px;background:transparent;color:var(--ink)}
+.sizebar{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:12px 14px;
+ background:var(--ink);color:var(--cream);border-radius:14px}
+.sizebar .sv{font-family:Alexandria,sans-serif;font-weight:800;font-size:26px;color:var(--or);line-height:1}
+.sizebar button{height:44px;padding:0 14px;border-radius:22px;border:1px solid #5a534d;background:transparent;color:var(--cream);font-size:14px;cursor:pointer}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:18px;padding:5px;background:var(--panel);border-radius:14px}
+.tabs button{height:44px;border:0;border-radius:10px;background:transparent;font-size:15px;color:#4a4541;cursor:pointer}
+.tabs button[aria-selected="true"]{background:#fff;font-weight:700;color:var(--ink);box-shadow:0 1px 2px rgba(45,42,40,.12)}
+.occ{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.occ a{display:block;background:#fff;border:1px solid var(--bd);border-radius:16px;overflow:hidden;cursor:pointer}
+.occ img{width:100%;height:118px;object-fit:cover;display:block;background:var(--panel)}
+.occ .t{padding:10px 12px 12px;font-weight:700;font-size:15px}
+.occ .d{font-size:12px;color:var(--mut);margin-top:2px;font-weight:400}
+.giftban{display:flex;align-items:center;gap:14px;margin-top:18px;padding:16px;border-radius:16px;background:var(--or);color:var(--ink);cursor:pointer}
+.giftban .ic{width:52px;height:52px;flex:none;border-radius:14px;background:var(--ink);color:var(--or);display:flex;align-items:center;justify-content:center}
+.trust{list-style:none;margin:22px 0 0;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--panel);border-radius:16px;font-size:13px;font-weight:600}
+.trust li{display:flex;align-items:center;gap:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chips button{height:38px;padding:0 13px;border-radius:19px;border:1px solid #d8d0c3;background:#fff;font-size:13.5px;cursor:pointer;color:var(--ink)}
+.chips button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}
+.pgrid{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pgrid li{background:#fff;border:1px solid var(--bd);border-radius:16px;overflow:hidden;cursor:pointer}
+.pgrid img{width:100%;height:150px;object-fit:cover;display:block;background:var(--panel)}
+.pgrid .b{padding:10px 12px 12px}
+.pgrid .nm{font-size:13px;font-weight:600;line-height:1.45}
+.pgrid .pr{font-family:Alexandria,sans-serif;font-weight:700;font-size:16px;margin-top:6px}
+.pgrid .av{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:600}
+.dot{width:8px;height:8px;border-radius:4px;display:inline-block}
+.hero-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#fff}
+.szgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
+.szgrid button{height:48px;border-radius:12px;border:1px solid #d8d0c3;background:#fff;font-size:16px;cursor:pointer}
+.szgrid button[aria-pressed="true"]{border:2px solid var(--ink);background:var(--ink);color:#fff;font-weight:700}
+.szgrid button:disabled{border:1px dashed #d8d0c3;background:transparent;color:#8f877e;text-decoration:line-through;cursor:default}
+.avlist{margin-top:18px;background:#fff;border:1px solid var(--bd);border-radius:16px;overflow:hidden}
+.avlist .hd{padding:12px 14px;font-weight:700;font-size:15px;border-bottom:1px solid #efe9df}
+.avlist .rw{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #efe9df}
+.avlist .rw:last-child{border-bottom:0}
+.sticky2{position:sticky;bottom:0;z-index:20;padding:12px 16px calc(14px + env(safe-area-inset-bottom));
+ background:#fff;border-top:1px solid var(--bd);display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.sticky2 button{height:62px;border-radius:16px;border:0;font-weight:700;font-size:15px;cursor:pointer;line-height:1.3}
+.sticky2 .d{background:var(--ink);color:#fff} .sticky2 .o{background:var(--or);color:var(--ink)}
+.sticky2 small{display:block;font-weight:400;font-size:11.5px;opacity:.8;margin-top:2px}
+.qa{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.qa button{height:42px;padding:0 16px;border-radius:21px;border:1px solid #d8d0c3;background:#fff;font-size:14px;cursor:pointer}
+.qa button[aria-pressed="true"]{border:2px solid var(--ink);background:var(--ink);color:#fff;font-weight:700}
+.entry{margin-top:26px;border-radius:22px;overflow:hidden;background:var(--ink);color:var(--cream);cursor:pointer}
+.entry .im{width:100%;height:170px;object-fit:cover;display:block;opacity:.85}
+.entry .bd{padding:22px 20px}
+.entry h2{font-size:22px;font-weight:800;color:var(--cream);line-height:1.35}
+.entry p{margin:10px 0 0;font-size:14.5px;color:#c9c1b6}
+.entry .go{display:inline-flex;align-items:center;gap:8px;margin-top:16px;height:50px;padding:0 20px;border-radius:25px;background:var(--or);color:var(--ink);font-weight:700;font-size:15px}
+
+/* كارت الزيارة */
+#vcbar{position:absolute;left:0;right:0;bottom:0;z-index:40;display:none;align-items:center;gap:12px;
+ padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--ink);color:var(--cream);cursor:pointer}
+#vcbar.on{display:flex}
+#vcbar .cnt{width:34px;height:34px;border-radius:17px;background:var(--or);color:var(--ink);
+ display:flex;align-items:center;justify-content:center;font-weight:800;font-family:Alexandria,sans-serif}
+.vcitem{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--bd);border-radius:16px;padding:12px;margin-top:10px}
+.vcitem img{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--panel);flex:none}
+.vcitem .rm{flex:none;width:36px;height:36px;border-radius:18px;border:1px solid var(--bd);background:#fff;cursor:pointer}
+.code{font-family:Alexandria,sans-serif;font-weight:800;font-size:30px;letter-spacing:.06em;direction:ltr}
+.policy h2{font-size:24px;font-weight:800;margin-top:6px}
+.policy h3{font-size:17px;font-weight:700;margin:22px 0 8px}
+.policy p{font-size:15px;color:#4a4541;margin:0 0 10px}
+.policy li{font-size:15px;color:#4a4541;margin-bottom:7px}
+.policy .box{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px;margin-top:14px}
+.policy table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+.policy th,.policy td{border:1px solid var(--bd);padding:8px 10px;text-align:right;background:#fff}
+.policy th{background:var(--panel);font-weight:700}
+.warn{background:var(--chip);border-radius:14px;padding:14px 16px;font-size:14px;color:var(--chipink);margin-top:12px}
+</style></head>
+<body>
+<div id="stage">
+ <div id="phone">
+  <div id="scroll">
+
+  <!-- ===== الحكاية ===== -->
+  <div class="view on" id="v-story">
+   <header class="bar">
+    <img class="logo" src="logo.svg" alt="نورماندي"><span class="spacer"></span>
+    <button class="iconbtn" data-go="branches" aria-label="الفروع">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+    </button>
+   </header>
+   <section class="hero">
+    <span class="kick">من ١٩٩٩</span>
+    <h1 id="vp">السعر واحد، والضمان واحد، في العشر فروع.</h1>
+    <p class="lead" id="vpsub">من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.</p>
+    <div class="vpswitch" id="vpsw" role="group" aria-label="جرّب سطور افتتاحية">
+     <button data-i="0" aria-pressed="true">السعر والضمان</button>
+     <button data-i="1" aria-pressed="false">المقاس</button>
+     <button data-i="2" aria-pressed="false">٢٧ سنة</button>
+    </div>
+    <figure style="margin:18px 0 0">
+     <img class="photo" style="aspect-ratio:4/3;object-fit:cover" src="br/tanta.jpg" alt="من جوّه فرع طنطا">
+     <figcaption class="hint" style="margin-top:7px">من جوّه فرع طنطا. [كادر الواجهة لسه ناقص]</figcaption>
+    </figure>
+    <button class="cta" data-go="branches">الفروع العشرة
+     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button>
+   </section>
+   <ul class="nums">
+    <li><div class="n">١٩٩٩</div><div class="t">الفاترينة الأولى</div></li>
+    <li><div class="n">١٠</div><div class="t">فروع شغّالة</div></li>
+    <li><div class="n">٦</div><div class="t">محافظات</div></li>
+    <li><div class="n">٣</div><div class="t">أقسام من الشهر ده</div></li>
+   </ul>
+
+   <section>
+    <div class="entry" data-go="shop">
+     <img class="im" src="br/nasr.jpg" alt="">
+     <div class="bd">
+      <h2>المقاس اللي مش عندنا،<br>بنقولك موجود فين.</h2>
+      <p>عشر فروع بيشوفوا رصيد بعض. اكتب مقاسك مرة واحدة، وكل اللي هتشوفه بعدها متاح بمقاسك — وبيقولك في أنهي فرع.</p>
+      <span class="go">ادخل على التشكيلة
+       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></span>
+     </div>
+    </div>
+   </section>
+   <section>
+    <div class="secttl"><h2>الحكاية</h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">تلات محطات. مفيش فيهم حاجة متزوّقة.</p>
+    <ul class="stations">
+     <li><div class="yr">١٩٩٩</div><h3>أربعة أصحاب ومحل واحد</h3>
+      <p>محمد سمير، ودكتور أحمد، ومصطفى كامل، ومحمود موسى. أصحاب قبل ما يكونوا شركا — فتحوا محل أحذية إيطالية في وقت كان اللي عايز شوز كويس لازم يسافر عشانها.</p></li>
+     <li><div class="yr">بعدها بسنين</div><h3>من طنطا للدلتا، وبعدين للقاهرة</h3>
+      <p>المحلة، والمنصورة، والزقازيق، ودمنهور — المدن اللي أهلها كانوا بييجوا طنطا مخصوص. وبعدين سموحة، ومدينة نصر، والدقي، وأكتوبر، والعاشر.</p></li>
+     <li><div class="yr">٢٠٢٦</div><h3>عشر فروع، ونفس المعيار</h3>
+      <p>السعر واحد في العشرة، والضمان واحد، والمقاس اللي مش عندنا بنقولك موجود فين.</p></li>
+     <li><h3>ليه اسمها «نورماندي»؟</h3><p class="muted">[سطرين من المؤسسين — محدش يعرفها غيرهم، وهي أحلى حتة في الصفحة.]</p></li>
+    </ul>
+   </section>
+   <section>
+    <div class="secttl"><h2>الأربعة اللي بدأوا</h2></div><div class="rule"></div>
+    <ul class="founders">
+     <li><div class="fph">[صورة]</div><div class="fn">محمد سمير<div class="fr">مؤسس · ١٩٩٩ – ٢٠٢٠</div></div></li>
+     <li><div class="fph">[صورة]</div><div class="fn">دكتور أحمد<div class="fr">مؤسس</div></div></li>
+     <li><div class="fph">[صورة]</div><div class="fn">مصطفى كامل<div class="fr">مؤسس</div></div></li>
+     <li><div class="fph">[صورة]</div><div class="fn">محمود موسى<div class="fr">مؤسس</div></div></li>
+    </ul>
+    <div class="memo"><p>الشركة مكمّلة. وعلى ذكرى صحبته مكمّلين.</p>
+     <p>محمد سمير مشي في سنين كورونا، والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه.</p></div>
+   </section>
+   <section id="branches">
+    <div class="secttl"><h2>عشر فروع</h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">كل فرع ليه صفحته: صورته، وتليفونه، وتقييمه على جوجل، والمتاح فيه دلوقتي.</p>
+    <ul class="brlist" id="brlist"></ul>
+    <p class="hint">الصفحة بتعرض الفروع الشغّالة بس. أي فرع بيقفل بيخرج في نفس اليوم.</p>
+   </section>
+   <section>
+    <div class="newbox">
+     <span class="kick">جديد — الشهر ده</span>
+     <h2>٢٧ سنة وإحنا بنبيع للراجل. دلوقتي بنبيع لبيته كمان.</h2>
+     <p class="lead" style="font-size:14.5px">من ١٩٩٩ لحد السنة دي، نورماندي كانت رجالي وبس. من الشهر ده دخلت موديلات حريمي وأطفالي — في فروع محدّدة الأول، مش كلها مرة واحدة.</p>
+     <p class="lead" style="font-size:14.5px">وده مش دخول في سوق جديد. الراجل اللي بيشتري من نورماندي من عشرين سنة بقى له بيت، والبيت ده هو اللي كان بيختار معاه من الأول.</p>
+     <div class="pills"><span class="pill">رجالي — العشرة</span><span class="pill off">حريمي — [الفروع]</span><span class="pill off">أطفالي — [الفروع]</span></div>
+    </div>
+   </section>
+   <section id="memories">
+    <div class="secttl"><h2>الذكريات</h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">أماكن محجوزة لحاجات حقيقية من الأرشيف. فاضية لحد ما تتملا — وما بنحطش فيها حاجة مولّدة.</p>
+    <ul class="mems"><li class="ph">إعلانات الجرنال</li><li class="ph">كارت نورماندي كلوب</li><li class="ph">إعلانات ولافتات قديمة</li><li class="ph">أول فاتورة وكارت ضمان</li></ul>
+    <div class="darkbox"><h2>مفيش صورة للفرع الأول. وإحنا مش هنخترع واحدة.</h2>
+     <p>بدل الصورة، رسمة مكتوب تحتها بالنص إنها رسمة: «رسمناه من وصف أربع ناس اشتغلوا فيه. لو فاكر حاجة غلط، قولنا».</p></div>
+    <div class="ph" style="margin-top:12px;aspect-ratio:4/3">[رسمة الفرع الأول]</div>
+    <div class="newbox" style="margin-top:12px">
+     <h2 style="font-size:19px;margin-top:0">عندك حاجة من نورماندي زمان؟</h2>
+     <p class="lead" style="font-size:14.5px">علبة، كارت كلوب، فاتورة، شنطة، أو الشوز نفسه. صوّرها وابعتها — واسمك هيبقى تحتها.</p>
+     <button class="cta" style="margin-top:14px" onclick="alert('في الديمو ده الزرار مش موصّل بواتساب.')">ابعتها على واتساب</button>
+    </div>
+    <p class="hint">ومن الشهر ده: كل فرع بيصوّر كادر واحد بتاريخه كل شهر. أرشيف ٢٠٣٠ بيتصوّر النهارده.</p>
+   </section>
+   <div id="footer1"></div>
+  </div>
+
+  <!-- ===== الفرع ===== -->
+  <div class="view" id="v-branch">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span class="spacer" style="font-weight:700;font-size:16px">الفروع</span>
+    <img class="logo" src="logo.svg" alt="نورماندي">
+   </header>
+   <img id="bPhoto" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--panel)" alt="">
+   <section style="padding-top:20px">
+    <span class="badge" id="bBadge" hidden>
+     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+     الفرع الأول — من ١٩٩٩</span>
+    <h1 class="alx" id="bName" style="font-weight:800;font-size:31px;line-height:1.3;margin-top:12px"></h1>
+    <p class="lead" id="bAddr"></p>
+    <div class="rate"><span class="v">[٠٫٠]</span>
+     <span style="flex:1"><span class="stars">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+     </span><span style="display:block;font-size:13px;color:var(--mut);margin-top:3px">[التقييم وعدد المراجعات بيتقروا من جوجل بلايسس]</span></span>
+    </div>
+    <dl class="info">
+     <div><dt>التليفون</dt><dd class="tel" id="bTel"></dd></div>
+     <div><dt>المواعيد</dt><dd>يومياً ١٢ ظهراً – ١١ مساءً</dd></div>
+     <div><dt>الأقسام</dt><dd style="display:flex;gap:6px;flex-wrap:wrap">
+      <span class="pill">رجالي</span><span class="pill off">حريمي — [قريب]</span><span class="pill off">أطفالي — [قريب]</span></dd></div>
+    </dl>
+    <div class="btns">
+     <a class="p" id="bCall"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.5l1.8 4.2-2.2 1.4a12 12 0 0 0 6.3 6.3l1.4-2.2L20 15.5V19a1.5 1.5 0 0 1-1.7 1.5A16 16 0 0 1 3.5 5.7 1.5 1.5 0 0 1 5 4z"></path></svg>كلّم الفرع</a>
+     <a class="s" id="bMap" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>الاتجاهات</a>
+    </div>
+   </section>
+   <section>
+    <div class="secttl"><h2 id="availTtl"></h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">الرصيد بيتقري من نظام الفروع. اللي خلص مابيظهرش.</p>
+    <div class="finder">
+     <label for="sz">مقاسك كام؟</label>
+     <div class="frow"><input id="sz" type="number" inputmode="numeric" min="28" max="48" placeholder="42">
+      <button id="go">اعرض المتاح</button></div>
+     <p class="hint">ولو مش موجود بمقاسك هنا، بنقولك موجود في أنهي فرع. ومش متأكد من مقاسك؟
+      <a style="color:var(--rust);font-weight:700" data-pol="size">شوف دليل المقاسات</a>.</p>
+    </div>
+    <div id="result"></div>
+    <p class="snap" id="snapNote"></p>
+   </section>
+   <section>
+    <div class="darkbox"><h2>المحل اللي بدأ منه كل حاجة</h2>
+     <p>سنة ١٩٩٩، أربع أصحاب فتحوا في طنطا محل أحذية إيطالية. كل فرع تاني في مصر اتفتح بعد كده، اتفتح من الباب ده.</p>
+     <button data-go="story">الحكاية كاملة
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button></div>
+    <div class="ph" style="margin-top:12px;height:180px">[خريطة الفرع]</div>
+   </section>
+   <section><div class="secttl"><h2>أقرب فروع ليك</h2></div><div class="rule"></div>
+    <ul class="near" id="near"></ul></section>
+   <div id="footer2"></div>
+  </div>
+
+  <!-- ===== كارت الزيارة ===== -->
+  <div class="view" id="v-card">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span class="spacer" style="font-weight:700;font-size:16px">كارت الزيارة</span>
+    <img class="logo" src="logo.svg" alt="نورماندي">
+   </header>
+   <section style="padding-top:20px">
+    <h1 class="alx" style="font-weight:800;font-size:28px">ورّي الكارت ده في الفرع</h1>
+    <p class="lead">اللي اخترته محجوز في عربيتك على الموبايل بس — مش حجز في المخزن. البايع بيفتح الرقم ويجيبهملك جاهزين تقيسهم.</p>
+    <div class="darkbox" style="margin-top:18px;text-align:center">
+     <div style="font-size:13px;color:#c9c1b6">رقم الكارت</div>
+     <div class="code" id="vcCode" style="color:var(--or);margin-top:6px">—</div>
+     <div style="margin-top:14px;font-size:14.5px" id="vcBranch"></div>
+    </div>
+    <div id="vcItems"></div>
+    <p class="hint" id="vcEmpty" hidden>الكارت فاضي. ارجع لأي فرع، اكتب مقاسك، وضيف اللي عجبك.</p>
+    <div class="warn" style="margin-top:16px">الكارت ده مش طلب ولا دفع. هو ورقة بتقول للبايع إنت عايز تشوف إيه — عشان ما تقفش تشرح.</div>
+   </section>
+   <div id="footer3"></div>
+  </div>
+
+  <!-- ===== السياسات ===== -->
+  <div class="view policy" id="v-policy">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span class="spacer" style="font-weight:700;font-size:16px" id="polBar"></span>
+    <img class="logo" src="logo.svg" alt="نورماندي">
+   </header>
+   <section style="padding-top:18px" id="polBody"></section>
+   <div id="footer4"></div>
+  </div>
+
+
+  <!-- ===== الرئيسية (التسوق) ===== -->
+  <div class="view padnav" id="v-main">
+   <header class="bar"><img class="logo" src="logo.svg" alt="نورماندي"><span class="spacer"></span>
+    <button class="iconbtn" data-go="story" aria-label="صفحة البراند">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7v14H4zM13 5h7v14h-7z"></path></svg></button>
+   </header>
+   <section style="padding-top:14px">
+    <label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b645d" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+     <input id="q" placeholder="ابحث بالموديل أو الكود"></label>
+    <p class="hint" style="margin:8px 4px 0">البحث في كل الفروع العشرة مع بعض</p>
+    <div class="sizebar"><div style="display:flex;align-items:center;gap:10px">
+      <span class="sv" id="mSize">—</span>
+      <span style="font-size:14px;line-height:1.4">مقاسك<br><span style="color:#c9c1b6;font-size:12px">كل اللي هتشوفه متاح بمقاسك بس</span></span></div>
+     <button id="setSize">حدّده</button></div>
+    <div class="tabs" role="tablist">
+     <button role="tab" aria-selected="true">رجالي</button>
+     <button role="tab" aria-selected="false" disabled style="opacity:.45">حريمي</button>
+     <button role="tab" aria-selected="false" disabled style="opacity:.45">أطفالي</button></div>
+    <p class="hint">حريمي وأطفالي بيتفتحوا أول ما الرصيد يدخل الفروع.</p>
+    <div class="secttl"><h2>رايح فين؟</h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">قولنا المشوار، ونطلّعلك اللي يليق بيه</p>
+    <div class="occ" id="occ"></div>
+    <div class="giftban" data-go="gift">
+     <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M3 12h18M12 8v13"></path><path d="M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8c2 0 5-.5 5-1.5S13.5 5 12 8"></path></svg></span>
+     <span style="flex:1"><b class="alx" style="font-size:17px">هدية لحد بتحبه؟</b>
+      <span style="display:block;font-size:13px;margin-top:2px">مش عارف مقاسه؟ يبدّله في أي فرع خلال ١٤ يوم</span></span>
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></div>
+    <ul class="trust">
+     <li>ضمان ٣ شهور ضد عيوب الصناعة</li>
+     <li>استبدال خلال ١٤ يوم</li>
+     <li>سعر واحد في العشرة</li>
+     <li>١٠ فروع في ٦ محافظات</li></ul>
+    <p class="hint" style="text-align:center">
+     <a data-pol="warranty" style="color:var(--rust);font-weight:700">تفاصيل الضمان</a> ·
+     <a data-pol="exchange" style="color:var(--rust);font-weight:700">الاستبدال</a> ·
+     <a data-pol="size" style="color:var(--rust);font-weight:700">دليل المقاسات</a></p>
+   </section>
+   <div id="footer5"></div>
+  </div>
+
+  <!-- ===== نتايج ===== -->
+  <div class="view padnav" id="v-finder">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span style="flex:1"><b class="alx" id="fTtl" style="font-size:19px"></b>
+     <span style="display:block;font-size:13px;color:var(--mut)" id="fSub"></span></span>
+   </header>
+   <section style="padding-top:12px">
+    <div class="chips" id="fSizes"></div>
+    <div style="margin-top:14px;padding:12px;background:#fff;border:1px solid var(--bd);border-radius:14px">
+     <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="font-weight:700;font-size:14px">متاح فين؟</span>
+      <span style="font-size:12px;color:var(--mut)" id="fBrNote"></span></div>
+     <div class="chips" id="fBranches"></div></div>
+    <ul class="pgrid" id="fGrid"></ul>
+    <p class="hint" id="fEmpty" hidden>مفيش موديل مطابق. غيّر المقاس أو الفرع.</p>
+   </section>
+   <div id="footer6"></div>
+  </div>
+
+  <!-- ===== المنتج ===== -->
+  <div class="view" id="v-product">
+   <div style="position:relative;background:#fff">
+    <img class="hero-img" id="pImg" alt="">
+    <button class="iconbtn" data-back="1" aria-label="رجوع" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,.92)">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+   </div>
+   <section style="padding-top:18px">
+    <div style="font-size:13px;color:var(--mut)" id="pMeta"></div>
+    <h1 class="alx" id="pName" style="font-weight:700;font-size:22px;line-height:1.35;margin-top:4px"></h1>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:8px">
+     <span class="alx" id="pPrice" style="font-weight:800;font-size:26px"></span><span style="font-size:15px">جنيه</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+     <span style="font-weight:700;font-size:15px">المقاس</span>
+     <a data-pol="size" style="font-size:13px;color:var(--chipink);text-decoration:underline">مش متأكد؟ قيس رجلك</a></div>
+    <div class="szgrid" id="pSizes"></div>
+    <div class="avlist"><div class="hd" id="pAvTtl"></div><div id="pAv"></div></div>
+    <ul class="trust" style="grid-template-columns:1fr 1fr">
+     <li>ضمان ٣ شهور</li><li>استبدال ١٤ يوم</li></ul>
+    <p class="hint" style="text-align:center">
+     <a data-pol="warranty" style="color:var(--rust);font-weight:700">الضمان بيغطي إيه بالظبط</a></p>
+   </section>
+   <div class="sticky2">
+    <button class="d" id="pAdd">ضيفه لكارت الزيارة<small>تشوفه وتقيسه في الفرع</small></button>
+    <button class="o" data-go="checkout">اطلبه لحد البيت<small>[لسه مش مفعّل]</small></button>
+   </div>
+   <div id="footer7"></div>
+  </div>
+
+  <!-- ===== الهدية ===== -->
+  <div class="view padnav" id="v-gift">
+   <div style="background:var(--ink);color:var(--cream);padding:14px 16px 22px">
+    <button class="iconbtn" data-back="1" aria-label="رجوع" style="background:transparent;border-color:#5a534d">
+     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <h1 class="alx" style="margin-top:14px;font-weight:800;font-size:26px;line-height:1.3;color:var(--cream)">هدية <span style="color:var(--or)">من أول خطوة</span></h1>
+    <p style="margin:6px 0 0;font-size:14px;color:#d9d2c7;line-height:1.6">تلات أسئلة، ونختار معاك. ولو المقاس طلع مش مظبوط، يبدّله في أي فرع خلال ١٤ يوم.</p>
+   </div>
+   <section style="padding-top:18px">
+    <h2 style="font-size:15px;font-weight:700">الهدية لمين؟</h2>
+    <div class="qa" id="gWho"></div>
+    <h2 style="font-size:15px;font-weight:700;margin-top:18px">المناسبة؟</h2>
+    <div class="qa" id="gOcc"></div>
+    <h2 style="font-size:15px;font-weight:700;margin-top:18px">مقاسه؟</h2>
+    <div class="qa" id="gSize"></div>
+    <div class="secttl"><h2>ترشيحاتنا</h2></div><div class="rule"></div>
+    <ul class="pgrid" id="gGrid"></ul>
+    <div class="warn" style="margin-top:14px">تغليف الهدية وإخفاء السعر في الفاتورة بيتظبطوا في الفرع.</div>
+   </section>
+   <div id="footer8"></div>
+  </div>
+
+  <!-- ===== الضمان ===== -->
+  <div class="view padnav" id="v-warr">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span class="spacer" style="font-weight:700;font-size:16px">ضماناتي</span><img class="logo" src="logo.svg" alt=""></header>
+   <section style="padding-top:16px">
+    <p class="lead">كل فاتورة من نورماندي عليها ضمان ٣ شهور ضد عيوب الصناعة.</p>
+    <div class="darkbox" style="margin-top:14px">
+     <div style="font-size:13px;font-weight:700;color:#9fd8a9">الضمان شغال</div>
+     <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+      <div style="width:60px;height:60px;border-radius:12px;background:#4a4541"></div>
+      <div style="flex:1"><div style="font-weight:700;font-size:15px">[الموديل]</div>
+       <div style="font-size:13px;color:#c9c1b6">[فاتورة الفرع] · [المقاس]</div></div></div>
+     <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px">
+      <span>فاضل <b class="alx" style="font-size:18px;color:var(--or)">[٠٠]</b> يوم</span><span style="color:#c9c1b6">[التاريخ]</span></div>
+     <div style="height:6px;border-radius:3px;background:#4a4541;margin-top:8px"><div style="width:55%;height:100%;background:var(--or);border-radius:3px"></div></div>
+    </div>
+    <div class="box" style="background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px;margin-top:14px">
+     <h2 style="font-size:18px;font-weight:700">فيه مشكلة في الشوز؟</h2>
+     <p class="hint">صوّرها وابعتها — الفرع يشوفها قبل ما تروح، ويقولك هتتصلّح ولا لأ.</p>
+     <div class="qa" id="wPart"></div>
+     <label style="display:block;font-size:13px;font-weight:600;margin-top:14px">اوصفها في سطر</label>
+     <input placeholder="النعل بدأ ينفصل من قدام" style="width:100%;height:48px;margin-top:6px;padding:0 12px;border-radius:12px;border:1px solid #d8d0c3;font:inherit;font-size:16px;background:#faf8f4">
+     <label style="display:block;font-size:13px;font-weight:600;margin-top:12px">هتروح أنهي فرع؟</label>
+     <select id="wBr" style="width:100%;height:48px;margin-top:6px;padding:0 10px;border-radius:12px;border:1px solid #d8d0c3;font:inherit;font-size:16px;background:#faf8f4;color:var(--ink)"></select>
+     <button class="cta" style="width:100%;justify-content:center;margin-top:16px" onclick="alert('في الديمو ده البلاغ مش بيتبعت فعلاً.')">ابعت للفرع</button>
+    </div>
+    <div class="warn">الضمان بيغطي النعل والجلد. <a data-pol="warranty" style="font-weight:700;text-decoration:underline">اقرا النص الرسمي</a>.</div>
+   </section>
+   <div id="footer9"></div>
+  </div>
+
+  <!-- ===== حسابي ===== -->
+  <div class="view padnav" id="v-signin">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span class="spacer" style="font-weight:700;font-size:16px">حسابي</span><img class="logo" src="logo.svg" alt=""></header>
+   <section style="padding-top:18px">
+    <h1 class="alx" style="font-weight:800;font-size:24px">عشان نحفظلك مقاسك وكارتك</h1>
+    <p class="lead">من غير باسورد. كود في ثانية، ومرة واحدة بس — بعدها الموقع فاكرك.</p>
+    <label style="display:block;margin-top:16px;font-size:13px;font-weight:600">رقم موبايلك أو إيميلك</label>
+    <input dir="ltr" placeholder="01xxxxxxxxx" style="width:100%;height:52px;margin-top:6px;padding:0 14px;border-radius:14px;border:1.5px solid var(--ink);font:inherit;font-size:17px;text-align:right;background:#fff">
+    <div style="font-size:13px;font-weight:600;margin-top:16px">ابعتلي الكود على</div>
+    <div class="qa" id="sVia"></div>
+    <button class="cta" style="width:100%;justify-content:center;margin-top:18px" onclick="alert('في الديمو ده مفيش تسجيل فعلي.')">ابعت الكود</button>
+    <p class="hint" style="text-align:center">بتسجيلك بتوافق على <a data-pol="privacy" style="color:var(--rust);font-weight:700">سياسة الخصوصية</a>. مش هنبعتلك إعلانات من غير إذنك.</p>
+   </section>
+   <div id="footer10"></div>
+  </div>
+
+  <!-- ===== الطلب للبيت ===== -->
+  <div class="view padnav" id="v-checkout">
+   <header class="bar">
+    <button class="iconbtn" data-back="1" aria-label="رجوع"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+    <span class="spacer" style="font-weight:700;font-size:16px">اطلبه لحد البيت</span><img class="logo" src="logo.svg" alt=""></header>
+   <section style="padding-top:18px">
+    <div class="box" style="background:#fff;border:1px solid var(--bd);border-radius:18px;padding:20px">
+     <h2 class="alx" style="font-size:22px;font-weight:800">[لسه مش مفعّل]</h2>
+     <p class="lead" style="font-size:14.5px">الطلب والشحن أونلاين لسه ما اشتغلوش. البيع دلوقتي في الفروع العشرة.</p>
+    </div>
+    <p class="lead">لحد ما يشتغل، الصفحة بتعمل حاجة واحدة بس: تقولك المقاس اللي انت عايزه موجود في أنهي فرع، وتجهّزلك كارت زيارة تاخده معاك.</p>
+    <button class="cta" data-go="card">افتح كارت الزيارة
+     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button>
+    <div class="warn" style="margin-top:16px">أي كلام عن «شحن مجاني» أو «جرّب قبل ما تدفع» مش معتمد ومش هينزل قبل ما النظام يشتغل.
+     <a data-pol="shipping" style="font-weight:700;text-decoration:underline">تفاصيل</a></div>
+   </section>
+   <div id="footer11"></div>
+  </div>
+  </div>
+
+  <nav id="nav"></nav>
+  <div id="vcbar"><span class="cnt" id="vcCnt">0</span>
+   <span style="flex:1;font-weight:700;font-size:15px">كارت الزيارة</span>
+   <span style="font-size:13px;color:#c9c1b6">افتحه ›</span></div>
+ </div>
+
+ <aside class="note">
+  <h3>ديمو تفاعلي — موبايل</h3>
+  <p>افتحه من تليفونك ياخد الشاشة كلها.</p>
+  <ul>
+   <li><b>اضغط أي فرع</b> تفتح صفحته.</li>
+   <li><b>اكتب مقاسك</b> — الرصيد حقيقي، نسخة من نظام الفروع.</li>
+   <li><b>ضيف اللي عجبك لكارت الزيارة</b> — ده الباب اللي بيدخل الزاير على باقي التصميم.</li>
+   <li>الفوتر تحت فيه <b>السياسات كلها</b>، مكتوبة من النص الرسمي مش من كلام الشوبيفاي.</li>
+   <li>اللي بين <b>[قوسين]</b> لسه ناقص بيانات.</li>
+  </ul>
+ </aside>
+</div>
+
+<script>
+const BR=[
+ {k:'tanta',n:'طنطا',ad:'33 شارع النحاس',tel:'0403419346',img:'br/tanta.jpg',first:true,q:'Normandy+Shoes+Tanta'},
+ {k:'mahalla',n:'المحلة الكبرى',ad:'آخر شارع الجيش — أمام مسجد قادوس',tel:'0402236669',img:'br/mahalla.jpg',q:'Normandy+Shoes+Mahalla'},
+ {k:'mansoura',n:'المنصورة',ad:'أول المشاية السفلية — أمام القاعة الزرقاء',tel:'0502373307',img:'br/mansoura.jpg',q:'Normandy+Shoes+Mansoura'},
+ {k:'zagazig',n:'الزقازيق',ad:'تقاطع شارع سوريا مع طلبة عويضة، بجوار بكري أمام فرع ديزل',tel:'0552377088',img:'br/zagazig.jpg',q:'Normandy+Shoes+Zagazig'},
+ {k:'damanhour',n:'دمنهور',ad:'شارع عبد السلام الشاذلي، بجوار بنك CIB',tel:'0453350337',img:'br/damanhour.jpg',q:'Normandy+Shoes+Damanhour'},
+ {k:'smouha',n:'سموحة',ad:'١٥ شارع فيكتور عمانويل، أمام بوابة نادي سموحة بجوار تاون تيم',tel:'034280574',img:'br/smouha.jpg',q:'Normandy+Shoes+Smouha'},
+ {k:'nasrcity',n:'مدينة نصر',ad:'آخر محمد حسين هيكل، خلف مطعم جاد — عباس العقاد',tel:'0222737961',img:'br/nasr.jpg',q:'Normandy+Shoes+Nasr+City'},
+ {k:'dokki',n:'الدقي',ad:'تقاطع محيي الدين أبو العز مع شارع عمان، أمام العربي',tel:'0233377545',img:'br/dokki.jpg',q:'Normandy+Shoes+Dokki'},
+ {k:'october',n:'أكتوبر',ad:'القطعة 18 — الصناعية الأولى — مول أوت ليت',tel:'01018590793',img:'br/october.jpg',q:'Normandy+Shoes+6+October'},
+ {k:'tenth',n:'العاشر من رمضان',ad:'الصناعية الثانية — أوت ليت مول بجوار بم بم',tel:'01033087353',img:'br/ramadan.jpg',q:'Normandy+Shoes+10th+of+Ramadan'},
+];
+const BRN=Object.fromEntries(BR.map(b=>[b.k,b.n]));
+const VP=[
+ ['السعر واحد، والضمان واحد، في العشر فروع.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.'],
+ ['المقاس اللي مش عندنا، بنقولك موجود فين.','عشر فروع بيشوفوا رصيد بعض. مش هتلف على فاضي.'],
+ ['٢٧ سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.'],
+];
+const OCC=[
+ {id:'work', t:'شغل ومكتب', d:'من أول اجتماع لآخر اليوم', tags:['شغل','مكتب','شغل كاجوال']},
+ {id:'event',t:'فرح ومناسبة', d:'عشان تدخل واثق',        tags:['مناسبات','فرح','خطوبة','سهرة','بدلة','خطوبة وفرح','مناسبات خفيفة']},
+ {id:'daily',t:'يومي وكاجوال', d:'شيك من غير مبالغة',     tags:['كاجوال','يومي','خروجات','كاجوال شيك','سمارت كاجوال','ستريت وير']},
+ {id:'walk', t:'سفر ومشي كتير',d:'خفيف ونعله مريح',       tags:['مشي','رياضة','جيم']},
+];
+const SIZES=[[28,'18.5 – 19','أطفالي'],[29,'19 – 19.5','أطفالي'],[30,'19.5 – 20','أطفالي'],[31,'20 – 20.5','أطفالي'],
+[32,'20.5 – 21','أطفالي'],[33,'21 – 21.5','أطفالي'],[34,'21.5 – 22','أطفالي'],[35,'22 – 22.5','أطفالي'],
+[36,'22.5 – 23','أطفالي · حريمي'],[37,'23 – 23.5','أطفالي · حريمي'],[38,'23.5 – 24','أطفالي · حريمي'],
+[39,'24 – 24.5','أطفالي · حريمي'],[40,'24.5 – 25','حريمي · رجالي'],[41,'25 – 25.5','حريمي · رجالي'],
+[42,'25.5 – 26','رجالي'],[43,'26 – 26.5','رجالي'],[44,'26.5 – 27','رجالي'],[45,'27 – 27.5','رجالي'],
+[46,'27.5 – 28','رجالي'],[47,'28 – 28.5','رجالي'],[48,'28.5 – 29','رجالي']];
+const POL={
+ warranty:{t:'الضمان',h:`<h2>الضمان</h2><div class="rule"></div>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:16px">ضمان 3 شهور ضد عيوب الصناعة فقط — ولا يعني استبدال الحذاء.</p>
+  <p>لو ثبت وجود عيب صناعة بعد عرض المنتج على إدارة الشركة، الشركة تتولى صيانة الحذاء. ولازم الاحتفاظ بورقة الضمان وتقديمها مع الحذاء في أي فرع.</p></div>
+  <h3>الضمان بيغطي</h3><ul><li>النعل</li><li>الجلد</li></ul>
+  <h3>الضمان مابيغطيش</h3><ul><li>عناية غير سليمة</li><li>خدش أو قطع من الاحتكاك</li><li>الاستهلاك الطبيعي</li>
+  <li>تلوّن الجوارب من الجلد الطبيعي المصبوغ نباتياً</li><li>اختيار المقاس مسؤولية العميل</li></ul>
+  <div class="warn">النص ده منقول حرف بحرف من ورقة الضمان الرسمية. أي وعد أكبر من كده مش معتمد.</div>`},
+ exchange:{t:'الاستبدال',h:`<h2>الاستبدال</h2><div class="rule"></div>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:16px">الاستبدال متاح 14 يوم من الشراء.</p>
+  <p>الشروط: الفاتورة معاك، والمنتج بحالته، وعلبته معاه.</p></div>
+  <h3>هدية ومش عارف المقاس؟</h3><p>اسأل على مقاس شوز بيلبسه، أو اختار قالب واسع، وخد الفاتورة معاك.</p>
+  <div class="warn">الاستبدال حاجة والضمان حاجة تانية. الضمان ضد عيوب الصناعة وبيتصلّح، والاستبدال بيبدّل المقاس في أول ١٤ يوم.</div>`},
+ size:{t:'دليل المقاسات',h:`<h2>دليل المقاسات</h2><div class="rule"></div>
+  <p>قيس من الكعب لأطول صباع وانت واقف. قيس الرجلين الاتنين وخد الأطول.</p><div id="sztable"></div>
+  <h3>قواعد</h3><ul><li>الرقم الأعلى في كل مدى داخل فيه: 26.5 سم = مقاس 43، و26.6 = مقاس 44.</li>
+  <li>رقمك بين مقاسين؟ خد الأكبر.</li><li>الجدول المعتمد مفيهوش عرض قدم.</li></ul>
+  <div class="warn">الأقسام: رجالي وحريمي وأطفالي. مفيش قسم اسمه «أولادي».</div>`},
+ privacy:{t:'الخصوصية',h:`<h2>سياسة الخصوصية</h2><div class="rule"></div>
+  <p>الصفحة دي بتشرح البيانات اللي بنجمعها وليه.</p>
+  <h3>اللي بنجمعه</h3><ul><li>اللي بتكتبه بنفسك: مقاسك واللي بتضيفه لكارت الزيارة.</li>
+  <li>بيانات تواصل لو بعتّلنا على واتساب أو كلّمت فرع.</li></ul>
+  <h3>اللي مابنعملوش</h3><ul><li>مابنبيعش بياناتك لأي جهة.</li><li>مافيش دفع في الصفحة دي.</li></ul>
+  <h3>كارت الزيارة</h3><p>اللي بتضيفه بيتحفظ على موبايلك بس في الديمو ده، ومابيتبعتش لحد.</p>
+  <div class="warn">[النسخة القانونية الكاملة محتاجة مراجعة من الإدارة قبل النشر.]</div>`},
+ shipping:{t:'الشحن',h:`<h2>الشحن والطلب أونلاين</h2><div class="rule"></div>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:16px">[لسه مش مفعّل.]</p>
+  <p>الطلب والشحن أونلاين لسه ما اشتغلوش. البيع دلوقتي في الفروع العشرة.</p></div>
+  <p>لحد ما يشتغل، الصفحة بتعمل حاجة واحدة: تقولك المقاس اللي انت عايزه موجود في أنهي فرع، وتجهّزلك كارت زيارة تاخده معاك.</p>
+  <div class="warn">أي كلام عن «شحن مجاني» أو «جرّب قبل ما تدفع» مش معتمد ومش هينزل قبل ما النظام يشتغل فعلاً.</div>`},
+};
+const AR=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let STOCK=null,cur=BR[0],hist=[],VC=[],vcBranch=null,SIZE=null,FB='all',curOcc=OCC[0],curProd=null;
+const SHOPV=['v-main','v-finder','v-product','v-gift','v-card','v-warr','v-signin','v-checkout'];
+
+/* ===== فوتر: بيعرض جزء من الداخلي ===== */
+function footerHTML(){return `<footer>
+ <img class="logo" src="logo.svg" alt="نورماندي">
+ <img src="slogan.svg" alt="من أول خطوة" style="height:30px;margin-top:12px;filter:invert(1) brightness(1.7)">
+ <p style="margin:14px 0 0;font-size:14px;color:#c9c1b6">من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.</p>
+ <div class="fcols">
+  <div><h4>تسوّق</h4>
+   <a data-go="shop">التشكيلة</a>${OCC.map(o=>`<a data-occ="${o.id}">${o.t}</a>`).join('')}
+   <a data-go="gift">هدية</a></div>
+  <div><h4>حسابك</h4>
+   <a data-go="card">كارت الزيارة</a><a data-go="warr">ضماناتي</a>
+   <a data-go="signin">حسابي</a><a data-go="checkout">الطلب للبيت</a></div>
+  <div><h4>السياسات</h4>
+   <a data-pol="warranty">الضمان</a><a data-pol="exchange">الاستبدال</a>
+   <a data-pol="size">دليل المقاسات</a><a data-pol="shipping">الشحن والطلب</a><a data-pol="privacy">الخصوصية</a></div>
+  <div><h4>نورماندي</h4>
+   <a data-go="story">الحكاية</a><a data-go="branches">الفروع</a>
+   <span style="color:#9b9388">المواعيد: يومياً ١٢ ظ – ١١ م</span></div>
+ </div>
+ <h4 style="margin-top:22px">الفروع</h4>
+ <div class="fbranches">${BR.map((b,i)=>`<button data-br="${i}">${b.n}</button>`).join('')}</div>
+ <div class="fbot">نورماندي شوز — ١٩٩٩ · ٢٠٢٦ · كل الحقوق محفوظة<br>
+  <span style="color:#6f685e">ديمو تفاعلي للمراجعة الداخلية.</span></div></footer>`;}
+for(let i=1;i<=11;i++){const el=document.getElementById('footer'+i); if(el) el.innerHTML=footerHTML();}
+
+/* ===== النافيجيشن ===== */
+const NAVI=[
+ {g:'shop',   t:'الرئيسية', v:'v-main',  p:'M4 11 12 4l8 7v9h-5v-6H9v6H4z'},
+ {g:'finder', t:'تسوّق',    v:'v-finder',p:'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-3.5-3.5'},
+ {g:'card',   t:'كارت الزيارة', v:'v-card', mid:1},
+ {g:'checkout',t:'الشنطة',  v:'v-checkout',p:'M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0'},
+ {g:'signin', t:'حسابي',    v:'v-signin',p:'M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 21c1.5-4 4.5-6 8-6s6.5 2 8 6'},
+];
+function renderNav(active){
+ document.getElementById('nav').innerHTML=NAVI.map(n=>n.mid
+  ? `<a data-go="card" class="mid"><span class="fab"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.5a2.5 2.5 0 0 0 0 5V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.5a2.5 2.5 0 0 0 0-5z"></path><path d="M9 5v14" stroke-dasharray="2 2.2"></path><path d="M13 10h4M13 14h3"></path></svg>${VC.length?`<b>${AR(VC.length)}</b>`:''}</span>كارت الزيارة</a>`
+  : `<a data-go="${n.g}" class="${active===n.v?'sel':''}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${n.p}"></path></svg>${n.t}</a>`).join('');
+}
+
+/* ===== راوتر ===== */
+function show(id,push){
+ if(push!==false){const c=[...$$('.view')].find(v=>v.classList.contains('on')); if(c&&c.id!==id)hist.push(c.id);}
+ $$('.view').forEach(v=>v.classList.toggle('on',v.id===id));
+ const shop=SHOPV.includes(id);
+ document.getElementById('nav').classList.toggle('on',shop);
+ document.getElementById('vcbar').classList.toggle('on', !shop && VC.length>0);
+ if(shop) renderNav(id);
+ document.getElementById('scroll').scrollTop=0;
+}
+
+/* ===== بيانات ===== */
+fetch('stock.json').then(r=>r.json()).then(d=>{STOCK=d;
+ const sn=document.getElementById('snapNote');
+ if(sn) sn.textContent='نسخة الرصيد متاخدة من نظام الفروع يوم '+AR(d.at)+' · '+AR(d.items.length)+' موديل';
+ buildOcc(); });
+
+/* الكلام كله عربي: الهب بيسجّل النوع واللون إنجليزي */
+const USE={Classic:'كلاسيك',Casual:'كاجوال',Sport:'رياضي',Sports:'رياضي',Smart:'سمارت',
+ Slipper:'شبشب',Sandal:'صندل',Men:'رجالي',Hav:'كلاسيك'};
+const COL={Black:'أسود',Havan:'هافان',Brown:'بني',White:'أبيض'};
+const ar=(t,m)=>{ if(!t) return ''; let x=String(t);
+ for(const k in m) x=x.replace(new RegExp(k,'gi'), m[k]);
+ return x.replace(/[A-Za-z]+/g,'').replace(/\s+/g,' ').trim(); };
+const useAr=u=>ar(u,USE), colAr=c=>ar(c,COL);
+const title=it=>[useAr(it.use), it.m, '—', (it.n||it.c), colAr(it.col)].filter(Boolean).join(' ');
+const img1=it=>(it.u&&it.u[0])||'';
+const inBranch=(it,k)=>k==='all'? Object.keys(it.s).length>0 : (it.s[k]||[]).length>0;
+const hasSize=(it,v,k)=>!v? true : (k&&k!=='all'? (it.s[k]||[]).includes(v) : Object.values(it.s).some(a=>a.includes(v)));
+function matchOcc(it,o){ return it.t && it.t.some(t=>o.tags.includes(t)); }
+function pool(o,v,k){ return STOCK.items.filter(it=>matchOcc(it,o)&&hasSize(it,v,k)&&inBranch(it,k)); }
+function brCount(it,v){ return Object.keys(it.s).filter(k=>!v||it.s[k].includes(v)).length; }
+
+function buildOcc(){
+ document.getElementById('occ').innerHTML=OCC.map(o=>{
+  const p=pool(o,SIZE,'all'); const im=p.length?img1(p[0]):'';
+  return `<a data-occ="${o.id}">${im?`<img src="${im}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:'<div style="height:118px;background:var(--panel)"></div>'}
+   <div class="t">${o.t}<div class="d">${o.d}${SIZE?` · ${AR(p.length)} بمقاسك`:''}</div></div></a>`;}).join('');
+}
+function card(it){
+ const n=brCount(it,SIZE); const ok=n>0;
+ return `<li data-p="${it.c}">${img1(it)?`<img src="${img1(it)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:'<div style="height:150px;background:var(--panel)"></div>'}
+  <div class="b"><div class="nm">${title(it)}</div>
+  <div class="pr">${it.p} ج</div>
+  <div class="av" style="color:${ok?'#2f6b3a':'#8a4a0e'}"><span class="dot" style="background:${ok?'#2f8a45':'#d18430'}"></span>${ok?(n===1?'فرع واحد':AR(n)+' فروع'):'مش متاح'}</div></div></li>`;
+}
+function openFinder(oid){
+ curOcc=OCC.find(o=>o.id===oid)||OCC[0];
+ document.getElementById('fTtl').textContent=curOcc.t;
+ const szs=[40,41,42,43,44,45,46,47,48];
+ document.getElementById('fSizes').innerHTML=`<button data-fs="0" aria-pressed="${!SIZE}">كل المقاسات</button>`+
+  szs.map(v=>`<button data-fs="${v}" aria-pressed="${SIZE===v}">${v}</button>`).join('');
+ document.getElementById('fBranches').innerHTML=`<button data-fb="all" aria-pressed="${FB==='all'}">كل مكان</button>`+
+  BR.map(b=>`<button data-fb="${b.k}" aria-pressed="${FB===b.k}">${b.n}</button>`).join('');
+ drawFinder(); show('v-finder');
+}
+function drawFinder(){
+ const p=pool(curOcc,SIZE,FB);
+ document.getElementById('fSub').textContent=`رجالي${SIZE?' · مقاس '+SIZE:''} · ${AR(p.length)} موديل متاح`;
+ document.getElementById('fBrNote').textContent=FB==='all'?'العشر فروع':BRN[FB];
+ document.getElementById('fGrid').innerHTML=p.slice(0,40).map(card).join('');
+ document.getElementById('fEmpty').hidden=p.length>0;
+}
+function openProduct(code){
+ const it=STOCK.items.find(x=>x.c===code); if(!it)return; curProd=it;
+ document.getElementById('pImg').src=img1(it);
+ document.getElementById('pMeta').textContent=[useAr(it.use),it.m,'كود '+(it.n||it.c)].filter(Boolean).join(' · ');
+ document.getElementById('pName').textContent=title(it);
+ document.getElementById('pPrice').textContent=it.p;
+ const all=[...new Set([].concat(...Object.values(it.s)))].sort((a,b)=>a-b);
+ const range=it.z&&it.z.length?it.z:all;
+ document.getElementById('pSizes').innerHTML=range.map(v=>
+  `<button data-ps="${v}" ${all.includes(v)?'':'disabled'} aria-pressed="${SIZE===v}">${v}</button>`).join('');
+ drawAvail();
+ show('v-product');
+}
+function drawAvail(){
+ const it=curProd; const v=SIZE;
+ document.getElementById('pAvTtl').textContent=v?`مقاس ${v} متاح فين؟`:'متاح فين؟';
+ const rows=BR.filter(b=>(it.s[b.k]||[]).length && (!v||it.s[b.k].includes(v)));
+ document.getElementById('pAv').innerHTML = rows.length? rows.map(b=>`
+  <div class="rw"><span class="dot" style="background:#2f8a45"></span>
+   <div style="flex:1"><div style="font-weight:600;font-size:14px">${b.n}</div>
+    <div style="font-size:12px;color:var(--mut)">${b.ad}</div></div>
+   <span style="font-size:12px;font-weight:700;color:#2f6b3a">موجود</span></div>`).join('')
+  : `<div class="rw"><span class="dot" style="background:#d18430"></span>
+     <div style="flex:1;font-size:14px">${v?`مقاس ${v} مش متاح في أي فرع دلوقتي.`:'مش متاح دلوقتي.'}</div></div>`;
+}
+/* الهدية */
+const GW=['بابا','جوزي','أخويا','صاحبي','ابني'], GO=['عيد ميلاد','شغل جديد','تخرّج','عيد','من غير مناسبة'];
+let gw=1,go=0,gs=1;
+function drawGift(){
+ document.getElementById('gWho').innerHTML=GW.map((x,i)=>`<button data-gw="${i}" aria-pressed="${gw===i}">${x}</button>`).join('');
+ document.getElementById('gOcc').innerHTML=GO.map((x,i)=>`<button data-go2="${i}" aria-pressed="${go===i}">${x}</button>`).join('');
+ document.getElementById('gSize').innerHTML=`<button data-gs="0" aria-pressed="${gs===0}">عارف مقاسه</button><button data-gs="1" aria-pressed="${gs===1}">مش عارف — يبدّله في أي فرع</button>`;
+ const o=OCC.find(x=>x.id=== (go===0||go===3?'event':'daily'))||OCC[2];
+ const p=pool(o, gs===0?SIZE:null, 'all').slice(0,6);
+ document.getElementById('gGrid').innerHTML=p.map(card).join('');
+}
+/* الضمان وحسابي */
+let wp=0,sv=0;
+function drawWarr(){
+ const parts=['النعل','الجلد','حاجة تانية'];
+ document.getElementById('wPart').innerHTML=parts.map((x,i)=>`<button data-wp="${i}" aria-pressed="${wp===i}">${x}</button>`).join('');
+ document.getElementById('wBr').innerHTML=BR.map(b=>`<option>${b.n}</option>`).join('');
+}
+function drawSignin(){
+ const v=['واتساب','رسالة SMS','إيميل'];
+ document.getElementById('sVia').innerHTML=v.map((x,i)=>`<button data-sv="${i}" aria-pressed="${sv===i}">${x}</button>`).join('');
+}
+/* صفحة البراند */
+document.getElementById('brlist').innerHTML=BR.map((b,i)=>`<li data-br="${i}">
+ <img class="im" src="${b.img}" alt="${b.n}" loading="lazy">
+ <div class="bd"><span style="flex:1"><span class="nm">${b.n}</span>${b.first?'<span class="badge">الفرع الأول</span>':''}
+ <span class="ad">${b.ad}</span></span>
+ <span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></span></div></li>`).join('');
+function openBranch(i){ cur=BR[i];
+ document.getElementById('bPhoto').src=cur.img;
+ document.getElementById('bName').textContent='نورماندي '+cur.n;
+ document.getElementById('bAddr').textContent=cur.ad;
+ document.getElementById('bTel').textContent=cur.tel;
+ document.getElementById('bCall').href='tel:'+cur.tel;
+ document.getElementById('bMap').href='https://www.google.com/maps/search/?api=1&query='+cur.q;
+ document.getElementById('bBadge').hidden=!cur.first;
+ document.getElementById('availTtl').textContent='المتاح في '+cur.n+' دلوقتي';
+ document.getElementById('result').innerHTML=''; document.getElementById('sz').value=SIZE||'';
+ document.getElementById('near').innerHTML=BR.filter(b=>b.k!==cur.k).slice(0,3).map(b=>`<li data-br="${BR.indexOf(b)}">
+  <span><b class="alx" style="font-size:17px">${b.n}</b><span style="display:block;font-size:13px;color:var(--mut)">${b.ad}</span></span>
+  <span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></span></li>`).join('');
+ show('v-branch'); }
+function openPolicy(k){const p=POL[k]; if(!p)return;
+ document.getElementById('polBar').textContent=p.t; document.getElementById('polBody').innerHTML=p.h;
+ if(k==='size') document.getElementById('sztable').innerHTML='<table><tr><th>المقاس</th><th>طول القدم (سم)</th><th>القسم</th></tr>'+
+  SIZES.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')+'</table>';
+ show('v-policy');}
+function openCard(){
+ document.getElementById('vcCode').textContent=VC.length?'NRM-'+String(1000+VC.length*7+(vcBranch?vcBranch.length:3)):'—';
+ document.getElementById('vcBranch').textContent=vcBranch?'تاخده لفرع '+vcBranch:'';
+ document.getElementById('vcEmpty').hidden=VC.length>0;
+ document.getElementById('vcItems').innerHTML=VC.map((it,i)=>`<div class="vcitem">
+  ${it.u?`<img src="${it.u}" alt="" onerror="this.style.visibility='hidden'">`:'<img alt="">'}
+  <div style="flex:1"><div style="font-weight:700">${it.n||it.c}</div>
+   <div style="font-size:13px;color:var(--mut)">كود ${it.n||it.c} — ${it.p} ج · مقاس ${it.sz}</div></div>
+  <button class="rm" data-rm="${i}">×</button></div>`).join('');
+ show('v-card');}
+function syncBar(){document.getElementById('vcCnt').textContent=AR(VC.length);
+ const shop=SHOPV.includes([...$$('.view')].find(v=>v.classList.contains('on'))?.id);
+ document.getElementById('vcbar').classList.toggle('on',!shop&&VC.length>0);
+ if(shop) renderNav([...$$('.view')].find(v=>v.classList.contains('on')).id);}
+function askSize(){
+ const v=prompt('مقاسك كام؟ (من 40 لـ 48)', SIZE||'42');
+ const n=parseInt(v,10); if(!n) return;
+ SIZE=n; document.getElementById('mSize').textContent=n; buildOcc();
+}
+/* ===== الأحداث ===== */
+document.addEventListener('click',e=>{
+ const t=e.target;
+ const pol=t.closest('[data-pol]'); if(pol){openPolicy(pol.dataset.pol);return;}
+ const occ=t.closest('[data-occ]'); if(occ){openFinder(occ.dataset.occ);return;}
+ const pr=t.closest('[data-p]'); if(pr){openProduct(pr.dataset.p);return;}
+ const br=t.closest('[data-br]'); if(br){openBranch(+br.dataset.br);return;}
+ const go=t.closest('[data-go]'); if(go){const g=go.dataset.go;
+  if(g==='card'){openCard();}
+  else if(g==='shop'){document.getElementById('mSize').textContent=SIZE||'—'; buildOcc(); show('v-main');}
+  else if(g==='finder'){openFinder(curOcc.id);}
+  else if(g==='gift'){drawGift(); show('v-gift');}
+  else if(g==='warr'){drawWarr(); show('v-warr');}
+  else if(g==='signin'){drawSignin(); show('v-signin');}
+  else if(g==='checkout'){show('v-checkout');}
+  else {show('v-story'); if(g==='branches') setTimeout(()=>document.getElementById('branches').scrollIntoView({behavior:'smooth'}),40);} return;}
+ const bk=t.closest('[data-back]'); if(bk){const p=hist.pop(); show(p||'v-story',false); return;}
+ const rm=t.closest('[data-rm]'); if(rm){VC.splice(+rm.dataset.rm,1); syncBar(); hist.pop(); openCard(); return;}
+ const fs=t.closest('[data-fs]'); if(fs){const v=+fs.dataset.fs; SIZE=v||null;
+  document.getElementById('mSize').textContent=SIZE||'—';
+  $$('#fSizes button').forEach(b=>b.setAttribute('aria-pressed', (+b.dataset.fs||0)===(SIZE||0)));
+  drawFinder(); buildOcc(); return;}
+ const fb=t.closest('[data-fb]'); if(fb){FB=fb.dataset.fb;
+  $$('#fBranches button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.fb===FB)); drawFinder(); return;}
+ const ps=t.closest('[data-ps]'); if(ps&&!ps.disabled){SIZE=+ps.dataset.ps;
+  $$('#pSizes button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ps===SIZE));
+  document.getElementById('mSize').textContent=SIZE; drawAvail(); return;}
+ if(t.closest('#pAdd')){const it=curProd; if(!it)return;
+  if(!SIZE){alert('اختار المقاس الأول.');return;}
+  const brs=BR.filter(b=>(it.s[b.k]||[]).includes(SIZE));
+  if(!brs.length){alert('المقاس ده مش متاح في أي فرع.');return;}
+  VC.push({c:it.c,n:it.n,p:it.p,u:img1(it),sz:SIZE}); vcBranch=brs[0].n; syncBar();
+  document.getElementById('pAdd').innerHTML='في الكارت ✓<small>'+brs[0].n+'</small>'; return;}
+ if(t.closest('#setSize')){askSize();return;}
+ const gw2=t.closest('[data-gw]'); if(gw2){gw=+gw2.dataset.gw; drawGift(); return;}
+ const go2=t.closest('[data-go2]'); if(go2){go=+go2.dataset.go2; drawGift(); return;}
+ const gs2=t.closest('[data-gs]'); if(gs2){gs=+gs2.dataset.gs; drawGift(); return;}
+ const wp2=t.closest('[data-wp]'); if(wp2){wp=+wp2.dataset.wp; drawWarr(); return;}
+ const sv2=t.closest('[data-sv]'); if(sv2){sv=+sv2.dataset.sv; drawSignin(); return;}
+ if(t.closest('#vcbar')){openCard();}
+});
+document.getElementById('vpsw').addEventListener('click',e=>{const b=e.target.closest('button[data-i]'); if(!b)return;
+ const i=+b.dataset.i; document.getElementById('vpsw').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+ document.getElementById('vp').textContent=VP[i][0]; document.getElementById('vpsub').textContent=VP[i][1];});
+/* بحث المقاس في صفحة الفرع */
+function find(){const v=parseInt(document.getElementById('sz').value,10), out=document.getElementById('result');
+ if(!STOCK){out.innerHTML='<p class="hint">الرصيد لسه بيحمّل…</p>';return;}
+ if(!v){out.innerHTML='<p class="hint">اكتب مقاسك الأول.</p>';return;}
+ SIZE=v; document.getElementById('mSize').textContent=v;
+ const here=STOCK.items.filter(it=>(it.s[cur.k]||[]).includes(v));
+ let h='';
+ if(here.length){
+  h+=`<p class="hint" style="margin:14px 0 0">${AR(here.length)} موديل بمقاس ${v} في ${cur.n}</p><ul class="pgrid">`;
+  h+=here.slice(0,8).map(card).join('')+'</ul>';
+  h+=`<button class="cta" style="width:100%;justify-content:center" data-occ="${OCC[0].id}">شوف كل اللي بمقاسك
+   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button>`;
+ } else {
+  const other={}; STOCK.items.forEach(it=>{for(const k in it.s){if(it.s[k].includes(v))other[k]=(other[k]||0)+1;}});
+  const list=BR.filter(b=>b.k!==cur.k&&other[b.k]).sort((a,b)=>other[b.k]-other[a.k]).slice(0,3);
+  h+=`<div class="elsewhere"><b>مقاس ${v} مش متاح في ${cur.n} دلوقتي.</b>`+
+     (list.length?'<br>موجود في: '+list.map(b=>`${b.n} (${AR(other[b.k])} موديل)`).join(' · '):'')+'</div>';
+ }
+ out.innerHTML=h;}
+document.getElementById('go').onclick=find;
+document.getElementById('sz').addEventListener('keydown',e=>{if(e.key==='Enter')find();});
+syncBar();
+</script>
+</body></html>
