@@ -156,6 +156,11 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
 .occ img{width:100%;height:118px;object-fit:cover;display:block;background:var(--panel)}
 .occ .t{padding:10px 12px 12px;font-weight:700;font-size:15px}
 .occ .d{font-size:12px;color:var(--mut);margin-top:2px;font-weight:400}
+.pro{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.pro a{display:block;background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer}
+.pro img{width:100%;height:92px;object-fit:cover;display:block;background:var(--panel)}
+.pro .t{padding:8px 8px 10px;font-weight:700;font-size:12.5px;line-height:1.35}
+.pro .d{font-size:11px;color:var(--mut);margin-top:2px;font-weight:400;line-height:1.4}
 .giftban{display:flex;align-items:center;gap:14px;margin-top:18px;padding:16px;border-radius:16px;background:var(--or);color:var(--ink);cursor:pointer}
 .giftban .ic{width:52px;height:52px;flex:none;border-radius:14px;background:var(--ink);color:var(--or);display:flex;align-items:center;justify-content:center}
 .trust{list-style:none;margin:22px 0 0;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--panel);border-radius:16px;font-size:13px;font-weight:600}
@@ -436,6 +441,11 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <div class="secttl"><h2>رايح فين؟</h2></div><div class="rule"></div>
     <p class="lead muted" style="font-size:14.5px">قولنا المشوار، ونطلّعلك اللي يليق بيه</p>
     <div class="occ" id="occ"></div>
+    <div class="secttl"><h2>مين فيهم إنت؟</h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">كل واحد ليه يومه وليه شوزه — اختار اللي شبهك</p>
+    <div class="pro" id="pro"></div>
+    <div class="secttl"><h2>رجلك محتاجة إيه؟</h2></div><div class="rule"></div>
+    <div id="comfort" style="margin-top:12px"></div>
     <div class="giftban" data-go="gift">
      <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M3 12h18M12 8v13"></path><path d="M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8c2 0 5-.5 5-1.5S13.5 5 12 8"></path></svg></span>
      <span style="flex:1"><b class="alx" style="font-size:17px">هدية لحد بتحبه؟</b>
@@ -639,6 +649,19 @@ const OCC=[
  {id:'daily',t:'يومي وكاجوال', d:'شيك من غير مبالغة',     tags:['كاجوال','يومي','خروجات','كاجوال شيك','سمارت كاجوال','ستريت وير']},
  {id:'walk', t:'سفر ومشي كتير',d:'خفيف ونعله مريح',       tags:['مشي','رياضة','جيم']},
 ];
+
+/* التسوّق بالمهنة — تالت ركن في تجربة نورماندي */
+const PRO=[
+ {id:'emp',  n:'أحمد · الموظف',   d:'مكتب واجتماعات',    tags:['شغل','مكتب','شغل كاجوال']},
+ {id:'law',  n:'أ. حازم · المحامي',d:'هيبة من أول خطوة',  tags:['كلاسيك','بدلة','شغل'], col:'Black'},
+ {id:'groom',n:'عمر · العريس',    d:'ليلة العمر',        tags:['فرح','خطوبة','سهرة','خطوبة وفرح','بدلة']},
+ {id:'dad',  n:'كريم · الأب',     d:'خروجة العيلة',      tags:['خروجات','كاجوال شيك','سمارت كاجوال']},
+ {id:'stu',  n:'يوسف · الطالب',   d:'الجامعة والخروج',   tags:['كاجوال','يومي','ستريت وير']},
+ {id:'hag',  n:'الحاج سمير',      d:'راحة ووقار',        tags:['مشي','كلاسيك','يومي']},
+ {id:'sea',  n:'زياد · المصيّف',  d:'الساحل والإجازة',   tags:['صيفي','خروجات','كاجوال']},
+ {id:'doc',  n:'د. مروان',        d:'واقف طول اليوم',    tags:['مشي','رياضة','جيم']},
+ {id:'eng',  n:'م. طارق',         d:'موقع ومشاوير',      tags:['رياضة','مشي','يومي']},
+];
 const SIZES=[[28,'18.5 – 19','أطفالي'],[29,'19 – 19.5','أطفالي'],[30,'19.5 – 20','أطفالي'],[31,'20 – 20.5','أطفالي'],
 [32,'20.5 – 21','أطفالي'],[33,'21 – 21.5','أطفالي'],[34,'21.5 – 22','أطفالي'],[35,'22 – 22.5','أطفالي'],
 [36,'22.5 – 23','أطفالي · حريمي'],[37,'23 – 23.5','أطفالي · حريمي'],[38,'23.5 – 24','أطفالي · حريمي'],
@@ -690,6 +713,7 @@ function footerHTML(){return `<footer>
   <div><h4>تسوّق</h4>
    <a data-go="shop">التشكيلة</a>${OCC.map(o=>`<a data-occ="${o.id}">${o.t}</a>`).join('')}
    <a data-go="gift">هدية</a></div>
+  <div><h4>بالمهنة</h4>${PRO.slice(0,6).map(p=>`<a data-pro="${p.id}">${p.n}</a>`).join('')}</div>
   <div><h4>حسابك</h4>
    <a data-go="card">كارت الزيارة</a><a data-go="warr">ضماناتي</a>
    <a data-go="signin">حسابي</a><a data-go="checkout">الطلب للبيت</a></div>
@@ -735,7 +759,7 @@ function show(id,push){
 fetch('stock.json').then(r=>r.json()).then(d=>{STOCK=d;
  const sn=document.getElementById('snapNote');
  if(sn) sn.textContent='نسخة الرصيد متاخدة من نظام الفروع يوم '+AR(d.at)+' · '+AR(d.items.length)+' موديل';
- buildOcc(); });
+ buildOcc(); buildPro(); });
 
 /* الكلام كله عربي: الهب بيسجّل النوع واللون إنجليزي */
 const USE={Classic:'كلاسيك',Casual:'كاجوال',Sport:'رياضي',Sports:'رياضي',Smart:'سمارت',
@@ -750,7 +774,7 @@ const img1=it=>(it.u&&it.u[0])||'';
 const inBranch=(it,k)=>k==='all'? Object.keys(it.s).length>0 : (it.s[k]||[]).length>0;
 const hasSize=(it,v,k)=>!v? true : (k&&k!=='all'? (it.s[k]||[]).includes(v) : Object.values(it.s).some(a=>a.includes(v)));
 function matchOcc(it,o){ return it.t && it.t.some(t=>o.tags.includes(t)); }
-function pool(o,v,k){ return STOCK.items.filter(it=>matchOcc(it,o)&&hasSize(it,v,k)&&inBranch(it,k)); }
+function pool(o,v,k){ return STOCK.items.filter(it=>matchTags(it,o.tags,o.col)&&hasSize(it,v,k)&&inBranch(it,k)); }
 function brCount(it,v){ return Object.keys(it.s).filter(k=>!v||it.s[k].includes(v)).length; }
 
 function buildOcc(){
@@ -759,6 +783,30 @@ function buildOcc(){
   return `<a data-occ="${o.id}">${im?`<img src="${im}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:'<div style="height:118px;background:var(--panel)"></div>'}
    <div class="t">${o.t}<div class="d">${o.d}${SIZE?` · ${AR(p.length)} بمقاسك`:''}</div></div></a>`;}).join('');
 }
+
+function matchTags(it,tags,col){
+ if(col && (it.col||'').toLowerCase().indexOf(col.toLowerCase())<0) return false;
+ return it.t && it.t.some(t=>tags.includes(t));
+}
+function poolT(tags,col,v,k){ return STOCK.items.filter(it=>matchTags(it,tags,col)&&hasSize(it,v,k)&&inBranch(it,k)); }
+function buildPro(){
+ const el=document.getElementById('pro'); if(!el)return;
+ const used=new Set();
+ el.innerHTML=PRO.map(p=>{
+  const r=poolT(p.tags,p.col,SIZE,'all');
+  // كل مهنة بصورة مختلفة، عشان الشبكة ما تبقاش مكررة
+  const pick=r.find(x=>img1(x)&&!used.has(img1(x)))||r[0];
+  const im=pick?img1(pick):''; if(im) used.add(im);
+  return `<a data-pro="${p.id}">${im?`<img src="${im}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:'<div style="height:92px;background:var(--panel)"></div>'}
+   <div class="t">${p.n}<div class="d">${p.d}${SIZE?` · ${AR(r.length)}`:''}</div></div></a>`;}).join('');
+ const c=document.getElementById('comfort');
+ if(c){ const r=poolT(['مشي','رياضة','جيم'],null,SIZE,'all');
+  c.innerHTML = r.length? `<a data-pro="doc" style="display:flex;align-items:center;background:#fff;border:1px solid var(--bd);border-radius:16px;overflow:hidden;cursor:pointer">
+   <span style="flex:1;padding:16px"><span class="pill">كومفورت</span>
+    <span class="alx" style="display:block;font-weight:700;font-size:18px;margin-top:8px">نعل مريح وخفيف</span>
+    <span style="display:block;font-size:13px;color:var(--mut);margin-top:4px">للي ماشي كتير أو رجله بتتعب آخر اليوم · ${AR(r.length)} موديل</span></span>
+   <img src="${img1(r[0])}" alt="" style="width:140px;height:140px;object-fit:cover;display:block" onerror="this.style.visibility='hidden'"></a>`:'';}
+}
 function card(it){
  const n=brCount(it,SIZE); const ok=n>0;
  return `<li data-p="${it.c}">${img1(it)?`<img src="${img1(it)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:'<div style="height:150px;background:var(--panel)"></div>'}
@@ -766,8 +814,10 @@ function card(it){
   <div class="pr">${it.p} ج</div>
   <div class="av" style="color:${ok?'#2f6b3a':'#8a4a0e'}"><span class="dot" style="background:${ok?'#2f8a45':'#d18430'}"></span>${ok?(n===1?'فرع واحد':AR(n)+' فروع'):'مش متاح'}</div></div></li>`;
 }
-function openFinder(oid){
- curOcc=OCC.find(o=>o.id===oid)||OCC[0];
+function openFinder(oid,kind){
+ if(kind==='pro'){ const p=PRO.find(x=>x.id===oid)||PRO[0];
+  curOcc={id:p.id,t:p.n,d:p.d,tags:p.tags,col:p.col,pro:1}; }
+ else curOcc=OCC.find(o=>o.id===oid)||OCC[0];
  document.getElementById('fTtl').textContent=curOcc.t;
  const szs=[40,41,42,43,44,45,46,47,48];
  document.getElementById('fSizes').innerHTML=`<button data-fs="0" aria-pressed="${!SIZE}">كل المقاسات</button>`+
@@ -778,7 +828,7 @@ function openFinder(oid){
 }
 function drawFinder(){
  const p=pool(curOcc,SIZE,FB);
- document.getElementById('fSub').textContent=`رجالي${SIZE?' · مقاس '+SIZE:''} · ${AR(p.length)} موديل متاح`;
+ document.getElementById('fSub').textContent=`${curOcc.pro?curOcc.d:'رجالي'}${SIZE?' · مقاس '+SIZE:''} · ${AR(p.length)} موديل متاح`;
  document.getElementById('fBrNote').textContent=FB==='all'?'العشر فروع':BRN[FB];
  document.getElementById('fGrid').innerHTML=p.slice(0,40).map(card).join('');
  document.getElementById('fEmpty').hidden=p.length>0;
@@ -872,18 +922,19 @@ function syncBar(){document.getElementById('vcCnt').textContent=AR(VC.length);
 function askSize(){
  const v=prompt('مقاسك كام؟ (من 40 لـ 48)', SIZE||'42');
  const n=parseInt(v,10); if(!n) return;
- SIZE=n; document.getElementById('mSize').textContent=n; buildOcc();
+ SIZE=n; document.getElementById('mSize').textContent=n; buildOcc(); buildPro();
 }
 /* ===== الأحداث ===== */
 document.addEventListener('click',e=>{
  const t=e.target;
  const pol=t.closest('[data-pol]'); if(pol){openPolicy(pol.dataset.pol);return;}
  const occ=t.closest('[data-occ]'); if(occ){openFinder(occ.dataset.occ);return;}
+ const prx=t.closest('[data-pro]'); if(prx){openFinder(prx.dataset.pro,'pro');return;}
  const pr=t.closest('[data-p]'); if(pr){openProduct(pr.dataset.p);return;}
  const br=t.closest('[data-br]'); if(br){openBranch(+br.dataset.br);return;}
  const go=t.closest('[data-go]'); if(go){const g=go.dataset.go;
   if(g==='card'){openCard();}
-  else if(g==='shop'){document.getElementById('mSize').textContent=SIZE||'—'; buildOcc(); show('v-main');}
+  else if(g==='shop'){document.getElementById('mSize').textContent=SIZE||'—'; buildOcc(); buildPro(); show('v-main');}
   else if(g==='finder'){openFinder(curOcc.id);}
   else if(g==='gift'){drawGift(); show('v-gift');}
   else if(g==='warr'){drawWarr(); show('v-warr');}
@@ -895,7 +946,7 @@ document.addEventListener('click',e=>{
  const fs=t.closest('[data-fs]'); if(fs){const v=+fs.dataset.fs; SIZE=v||null;
   document.getElementById('mSize').textContent=SIZE||'—';
   $$('#fSizes button').forEach(b=>b.setAttribute('aria-pressed', (+b.dataset.fs||0)===(SIZE||0)));
-  drawFinder(); buildOcc(); return;}
+  drawFinder(); buildOcc(); buildPro(); return;}
  const fb=t.closest('[data-fb]'); if(fb){FB=fb.dataset.fb;
   $$('#fBranches button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.fb===FB)); drawFinder(); return;}
  const ps=t.closest('[data-ps]'); if(ps&&!ps.disabled){SIZE=+ps.dataset.ps;
