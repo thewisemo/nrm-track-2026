@@ -44,7 +44,16 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
  color:#8d8578;text-align:center;padding:20px;border-radius:18px;font-family:Alexandria,sans-serif;font-size:14px;border:1px dashed #cfc7b8}
 .photo{width:100%;display:block;border-radius:18px;background:var(--panel)}
 .hero{padding-top:26px} .hero h1{font-weight:800;font-size:31px;line-height:1.34;margin-top:14px}
-.vpswitch{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap}
+.vpwrap{position:relative;margin-top:18px;border-radius:20px;overflow:hidden;background:var(--panel)}
+.vpwrap img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;position:absolute;inset:0;
+ opacity:0;transition:opacity .9s ease}
+.vpwrap img.on{opacity:1;position:relative}
+.vpcap{position:absolute;left:0;right:0;bottom:0;padding:38px 16px 12px;font-size:12.5px;color:#fff;
+ background:linear-gradient(0deg,rgba(25,22,18,.78),rgba(25,22,18,0))}
+.vpdots{display:flex;gap:7px;justify-content:center;margin-top:14px}
+.vpdots button{width:34px;height:5px;border-radius:3px;border:0;background:#d6cfc2;padding:0;cursor:pointer;transition:background .4s}
+.vpdots button[aria-pressed="true"]{background:var(--or)}
+.vpswitch{display:none}
 .vpswitch button{border:1px solid var(--bd);background:#fff;border-radius:99px;height:34px;padding:0 13px;
  font-size:12.5px;font-weight:700;cursor:pointer;color:var(--mut)}
 .vpswitch button[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
@@ -58,9 +67,12 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .stations li{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px}
 .stations .yr{font-family:Alexandria,sans-serif;font-weight:700;font-size:13px;color:var(--rust)}
 .stations h3{font-size:18px;font-weight:700;margin:6px 0} .stations p{margin:0;font-size:14.5px;color:#4a4541}
-.founders{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.founders{list-style:none;margin:16px -16px 0;padding:0 16px;display:flex;gap:12px;overflow-x:auto;
+ scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.founders::-webkit-scrollbar{display:none}
+.founders li{flex:0 0 146px;scroll-snap-align:start}
 .founders li{background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden}
-.founders .fph{aspect-ratio:1/1;background:var(--panel);display:flex;align-items:center;justify-content:center;color:#8d8578;font-size:12px}
+.founders .fph{aspect-ratio:1/1;width:100%;background:var(--panel);display:flex;align-items:center;justify-content:center;color:#8d8578;font-size:12px}
 .founders .fn{padding:12px;font-weight:700;font-size:15px}
 .founders .fr{font-size:12.5px;color:var(--mut);margin-top:2px;font-weight:400}
 .memo{margin-top:12px;background:var(--ink);color:var(--cream);border-radius:20px;padding:22px}
@@ -237,15 +249,17 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <span class="kick">من ١٩٩٩</span>
     <h1 id="vp">السعر واحد، والضمان واحد، في العشر فروع.</h1>
     <p class="lead" id="vpsub">من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.</p>
-    <div class="vpswitch" id="vpsw" role="group" aria-label="جرّب سطور افتتاحية">
-     <button data-i="0" aria-pressed="true">السعر والضمان</button>
-     <button data-i="1" aria-pressed="false">المقاس</button>
-     <button data-i="2" aria-pressed="false">٢٧ سنة</button>
+    <div class="vpwrap" id="vpwrap">
+     <img src="br/nasr.jpg" class="on" alt="">
+     <img src="br/october.jpg" alt="">
+     <img src="br/mahalla.jpg" alt="">
+     <div class="vpcap" id="vpcap">فرع مدينة نصر</div>
     </div>
-    <figure style="margin:18px 0 0">
-     <img class="photo" style="aspect-ratio:4/3;object-fit:cover" src="br/tanta.jpg" alt="من جوّه فرع طنطا">
-     <figcaption class="hint" style="margin-top:7px">من جوّه فرع طنطا. [كادر الواجهة لسه ناقص]</figcaption>
-    </figure>
+    <div class="vpdots" id="vpdots" role="group" aria-label="سطور الافتتاحية">
+     <button data-i="0" aria-pressed="true" aria-label="١"></button>
+     <button data-i="1" aria-pressed="false" aria-label="٢"></button>
+     <button data-i="2" aria-pressed="false" aria-label="٣"></button>
+    </div>
     <button class="cta" data-go="branches">الفروع العشرة
      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button>
    </section>
@@ -271,8 +285,8 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <div class="secttl"><h2>الحكاية</h2></div><div class="rule"></div>
     <p class="lead muted" style="font-size:14.5px">تلات محطات. مفيش فيهم حاجة متزوّقة.</p>
     <ul class="stations">
-     <li><div class="yr">١٩٩٩</div><h3>أربعة أصحاب ومحل واحد</h3>
-      <p>محمد سمير، ودكتور أحمد، ومصطفى كامل، ومحمود موسى. أصحاب قبل ما يكونوا شركا — فتحوا محل أحذية إيطالية في وقت كان اللي عايز شوز كويس لازم يسافر عشانها.</p></li>
+     <li><div class="yr">١٩٩٩</div><h3>خمسة أصحاب ومحل واحد</h3>
+      <p>دكتور أحمد فؤاد، وأحمد سرحان، ومحمد سمير، ومصطفى كامل، ومحمود موسى. أصحاب قبل ما يكونوا شركا — فتحوا محل أحذية إيطالية في وقت كان اللي عايز شوز كويس لازم يسافر عشانها.</p></li>
      <li><div class="yr">بعدها بسنين</div><h3>من طنطا للدلتا، وبعدين للقاهرة</h3>
       <p>المحلة، والمنصورة، والزقازيق، ودمنهور — المدن اللي أهلها كانوا بييجوا طنطا مخصوص. وبعدين سموحة، ومدينة نصر، والدقي، وأكتوبر، والعاشر.</p></li>
      <li><div class="yr">٢٠٢٦</div><h3>عشر فروع، ونفس المعيار</h3>
@@ -281,15 +295,17 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     </ul>
    </section>
    <section>
-    <div class="secttl"><h2>الأربعة اللي بدأوا</h2></div><div class="rule"></div>
+    <div class="secttl"><h2>الخمسة اللي بدأوا</h2></div><div class="rule"></div>
+    <p class="lead muted" style="font-size:14.5px">محل في طنطا اسمه على خمس أصحاب.</p>
     <ul class="founders">
+     <li><div class="fph">[صورة]</div><div class="fn">دكتور أحمد فؤاد<div class="fr">مؤسس</div></div></li>
+     <li><div class="fph">[صورة]</div><div class="fn">أحمد سرحان<div class="fr">مؤسس</div></div></li>
      <li><div class="fph">[صورة]</div><div class="fn">محمد سمير<div class="fr">مؤسس · ١٩٩٩ – ٢٠٢٠</div></div></li>
-     <li><div class="fph">[صورة]</div><div class="fn">دكتور أحمد<div class="fr">مؤسس</div></div></li>
      <li><div class="fph">[صورة]</div><div class="fn">مصطفى كامل<div class="fr">مؤسس</div></div></li>
      <li><div class="fph">[صورة]</div><div class="fn">محمود موسى<div class="fr">مؤسس</div></div></li>
     </ul>
     <div class="memo"><p>الشركة مكمّلة. وعلى ذكرى صحبته مكمّلين.</p>
-     <p>محمد سمير مشي في سنين كورونا، والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه.</p></div>
+     <p>محمد سمير مشي سنة ٢٠٢٠، والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه.</p></div>
    </section>
    <section id="branches">
     <div class="secttl"><h2>عشر فروع</h2></div><div class="rule"></div>
@@ -373,7 +389,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    </section>
    <section>
     <div class="darkbox"><h2>المحل اللي بدأ منه كل حاجة</h2>
-     <p>سنة ١٩٩٩، أربع أصحاب فتحوا في طنطا محل أحذية إيطالية. كل فرع تاني في مصر اتفتح بعد كده، اتفتح من الباب ده.</p>
+     <p>سنة ١٩٩٩، خمس أصحاب فتحوا في طنطا محل أحذية إيطالية. كل فرع تاني في مصر اتفتح بعد كده، اتفتح من الباب ده.</p>
      <button data-go="story">الحكاية كاملة
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button></div>
     <div class="ph" style="margin-top:12px;height:180px">[خريطة الفرع]</div>
@@ -639,9 +655,9 @@ const BR=[
 ];
 const BRN=Object.fromEntries(BR.map(b=>[b.k,b.n]));
 const VP=[
- ['السعر واحد، والضمان واحد، في العشر فروع.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.'],
- ['المقاس اللي مش عندنا، بنقولك موجود فين.','عشر فروع بيشوفوا رصيد بعض. مش هتلف على فاضي.'],
- ['٢٧ سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.'],
+ ['السعر واحد، والضمان واحد، في العشر فروع.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.','فرع مدينة نصر'],
+ ['المقاس اللي مش عندنا، بنقولك موجود فين.','عشر فروع بيشوفوا رصيد بعض. مش هتلف على فاضي.','من جوّه فرع أكتوبر'],
+ ['٢٧ سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.','فرع المحلة الكبرى'],
 ];
 const OCC=[
  {id:'work', t:'شغل ومكتب', d:'من أول اجتماع لآخر اليوم', tags:['شغل','مكتب','شغل كاجوال']},
@@ -966,9 +982,21 @@ document.addEventListener('click',e=>{
  const sv2=t.closest('[data-sv]'); if(sv2){sv=+sv2.dataset.sv; drawSignin(); return;}
  if(t.closest('#vcbar')){openCard();}
 });
-document.getElementById('vpsw').addEventListener('click',e=>{const b=e.target.closest('button[data-i]'); if(!b)return;
- const i=+b.dataset.i; document.getElementById('vpsw').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
- document.getElementById('vp').textContent=VP[i][0]; document.getElementById('vpsub').textContent=VP[i][1];});
+/* الافتتاحية بتلف لوحدها كل شوية — مش زرار المستخدم لازم يكتشفه */
+let vpi=0, vpTimer=null;
+const vpImgs=()=>document.querySelectorAll('#vpwrap img');
+function vpGo(i){
+ vpi=(i+VP.length)%VP.length;
+ document.getElementById('vp').textContent=VP[vpi][0];
+ document.getElementById('vpsub').textContent=VP[vpi][1];
+ document.getElementById('vpcap').textContent=VP[vpi][2];
+ vpImgs().forEach((im,n)=>im.classList.toggle('on',n===vpi));
+ document.querySelectorAll('#vpdots button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===vpi));
+}
+function vpStart(){ clearInterval(vpTimer); vpTimer=setInterval(()=>vpGo(vpi+1),5200); }
+document.getElementById('vpdots').addEventListener('click',e=>{
+ const b=e.target.closest('button[data-i]'); if(!b)return; vpGo(+b.dataset.i); vpStart();});
+vpGo(0); vpStart();
 /* بحث المقاس في صفحة الفرع */
 function find(){const v=parseInt(document.getElementById('sz').value,10), out=document.getElementById('result');
  if(!STOCK){out.innerHTML='<p class="hint">الرصيد لسه بيحمّل…</p>';return;}
