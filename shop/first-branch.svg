@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img"
+     aria-label="رسمة للفرع الأول لنورماندي في طنطا سنة ١٩٩٩">
+  <defs>
+    <style>
+      .ink{fill:none;stroke:#3a3632;stroke-linecap:round;stroke-linejoin:round}
+      .t1{stroke-width:5}.t2{stroke-width:3}.t3{stroke-width:2}.t4{stroke-width:1.5;opacity:.42}
+      .wh{fill:#fdfbf6}
+    </style>
+    <filter id="hand" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="3" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="hand3" filterUnits="userSpaceOnUse" x="440" y="280" width="320" height="70">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="#f0ece2"/>
+
+  <!-- الجيران: باهتين، الفرع كان في شارع جانبي -->
+  <g class="ink t4" filter="url(#hand)">
+    <path d="M58 806V236h196v570M58 322h196M58 408h196M58 494h196M58 580h196M58 666h196"/>
+    <path d="M94 272h54v34H94zM172 278h54v34h-54zM94 358h54v34H94zM172 364h54v34h-54z"/>
+    <path d="M94 446h54v34H94zM172 450h54v34h-54zM96 532h54v34H96zM174 536h54v34h-54z"/>
+    <path d="M100 620h50v30h-50zM176 622h50v30h-50z"/>
+    <path d="M948 806V318h194v488M948 400h194M948 486h194M948 572h194M948 658h194"/>
+    <path d="M984 350h56v32h-56zM1070 354h56v32h-56zM984 436h56v32h-56zM1070 440h56v32h-56z"/>
+    <path d="M984 522h56v32h-56zM1070 526h56v32h-56z"/>
+    <path d="M1000 690h40v116h-40"/>
+  </g>
+
+  <g filter="url(#hand)">
+    <!-- صندوق الشيش المعدني فوق اللافتة -->
+    <path class="ink t2" d="M286 170h628v42H286z"/>
+    <path class="ink t4" d="M300 180h600M300 192h600M300 202h600"/>
+
+    <!-- جسم المحل -->
+    <path class="ink t1" d="M300 812V212h600v600"/>
+
+    <!-- اللافتة -->
+    <path d="M300 212h600v116H300z" fill="#3a3632"/>
+    <path class="ink t2" d="M300 328h600"/>
+
+    <!-- الفاترينة -->
+    <path class="wh" d="M332 362h322v326H332z"/>
+    <path class="ink t2" d="M332 362h322v326H332z"/>
+    <path class="ink t3" d="M332 458h322M332 554h322M332 650h322"/>
+    <g class="ink t3">
+      <path transform="translate(352,456) scale(1.3,1.3)" d="M0 26 L58 26 Q63 25 62 20 Q58 15 44 13 Q33 12 27 10 Q22 3 15 3 Q5 3 2 8 Q0 12 0 18 Z M1 21 L59 21"/>
+      <path transform="translate(445.6,456) scale(1.3,1.3)" d="M0 0 v-26 h58 v26 Z M0 -26 l9-9 h58 l-9 9 M58 0 l9-9 v-26 l-9 9 M15 -13 h28"/>
+      <path transform="translate(545.7,456) scale(1.3,1.3)" d="M0 30 L52 30 Q57 29 56 24 Q52 19 41 17 Q32 16 28 12 Q25 4 25 -20 Q25 -29 15 -29 Q6 -29 6 -20 Q6 2 3 9 Q0 15 0 24 Z M1 25 L53 25"/>
+      <path transform="translate(352,552) scale(1.3,1.3)" d="M0 0 v-26 h58 v26 Z M0 -26 l9-9 h58 l-9 9 M58 0 l9-9 v-26 l-9 9 M15 -13 h28"/>
+      <path transform="translate(452.1,552) scale(1.3,1.3)" d="M0 26 L58 26 Q63 25 62 20 Q58 15 44 13 Q33 12 27 10 Q22 3 15 3 Q5 3 2 8 Q0 12 0 18 Z M1 21 L59 21"/>
+      <path transform="translate(545.7,552) scale(1.3,1.3)" d="M0 26 L58 26 Q63 25 62 20 Q58 15 44 13 Q33 12 27 10 Q22 3 15 3 Q5 3 2 8 Q0 12 0 18 Z M1 21 L59 21"/>
+      <path transform="translate(432.6,648) scale(-1.3,1.3)" d="M0 26 L58 26 Q63 25 62 20 Q58 15 44 13 Q33 12 27 10 Q22 3 15 3 Q5 3 2 8 Q0 12 0 18 Z M1 21 L59 21"/>
+      <path transform="translate(518.4,648) scale(-1.3,1.3)" d="M0 30 L52 30 Q57 29 56 24 Q52 19 41 17 Q32 16 28 12 Q25 4 25 -20 Q25 -29 15 -29 Q6 -29 6 -20 Q6 2 3 9 Q0 15 0 24 Z M1 25 L53 25"/>
+      <path transform="translate(531.4,648) scale(1.3,1.3)" d="M0 0 v-26 h58 v26 Z M0 -26 l9-9 h58 l-9 9 M58 0 l9-9 v-26 l-9 9 M15 -13 h28"/>
+    </g>
+    <g class="ink t4"><path d="M360 676 548 376M416 686 606 380"/></g>
+
+    <!-- الباب الزجاج -->
+    <path class="wh" d="M700 404h168v408H700z"/>
+    <path class="ink t2" d="M700 404h168v408H700z"/>
+    <path class="ink t3" d="M700 478h168M700 760h168"/>
+    <path class="ink t3" d="M722 596v46"/>
+    <g class="ink t3">
+      <path transform="translate(742,590) scale(1.3,1.3)" d="M0 26 L58 26 Q63 25 62 20 Q58 15 44 13 Q33 12 27 10 Q22 3 15 3 Q5 3 2 8 Q0 12 0 18 Z M1 21 L59 21"/>
+      <path transform="translate(820.8,724) scale(-1.3,1.3)" d="M0 30 L52 30 Q57 29 56 24 Q52 19 41 17 Q32 16 28 12 Q25 4 25 -20 Q25 -29 15 -29 Q6 -29 6 -20 Q6 2 3 9 Q0 15 0 24 Z M1 25 L53 25"/>
+    </g>
+    <!-- ورقة صغيرة ملزوقة على الباب -->
+    <path class="ink t3" d="M746 430h72v34h-72z"/>
+    <path class="ink t4" d="M756 442h52M756 452h34"/>
+
+    <!-- السلمة والرصيف -->
+    <path class="ink t2" d="M268 812h664M292 846h616"/>
+    <path class="ink t3" d="M300 812v34M432 812v34M568 812v34M700 812v34M836 812v34M900 812v34"/>
+    <path class="ink t4" d="M110 848h990"/>
+
+    <!-- كرسي بلاستيك على الرصيف -->
+    <path class="ink t3" d="M962 770h56v6h-56M968 776v34M1012 776v34M962 770v-36h9v36"/>
+  </g>
+
+  <!-- الكتابة: من غير اهتزاز عشان تفضل مقروءة -->
+  <text x="600" y="294" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="68" letter-spacing="9" fill="#fdfbf6">NORMANDY</text>
+  <g filter="url(#hand3)"><rect x="486" y="306" width="228" height="7" rx="3.5" fill="#ee9637"/></g>
+  <text x="600" y="878" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="25" letter-spacing="8" fill="#3a3632" opacity=".5">TANTA 1999</text>
+</svg>
