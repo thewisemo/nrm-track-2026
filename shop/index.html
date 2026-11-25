@@ -5,17 +5,24 @@
 <title>نورماندي شوز</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="ديمو تفاعلي لصفحة نورماندي شوز — موبايل">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* خطوط نورماندي المعتمدة. فودافون بيرسم كل الأرقام واللاتيني، وجي اس اس تو بيرسم العربي.
+   التقسيم ده بالذات هو اللي بيمنع الأرقام الهندية، لأن جي اس اس تو بيرسم 1999 على شكل 1999. */
+@font-face{font-family:NRM;src:url(f/nrm-num.woff2) format('woff2');font-weight:400 900;
+ font-display:swap;unicode-range:U+0020-007E}
+@font-face{font-family:NRM;src:url(f/nrm-med.woff2) format('woff2');font-weight:400 600;
+ font-display:swap;unicode-range:U+00A0-10FFFF}
+@font-face{font-family:NRM;src:url(f/nrm-bold.woff2) format('woff2');font-weight:700 900;
+ font-display:swap;unicode-range:U+00A0-10FFFF}
+</style>
 <style>
 :root{--cream:#f6f3ec;--ink:#2d2a28;--or:#ee9637;--bd:#e3ddd2;--mut:#6b645d;
  --panel:#ebe6dc;--rust:#a85a12;--chip:#fbeedd;--chipink:#8a4a0e;--shell:#15130f}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
-body{background:var(--shell);font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--ink);line-height:1.6}
+body{background:var(--shell);font-family:NRM,sans-serif;color:var(--ink);line-height:1.6}
 a{color:inherit;text-decoration:none} button{font:inherit;color:inherit}
-.alx{font-family:Alexandria,sans-serif}
+.alx{font-family:NRM,sans-serif}
 #stage{min-height:100dvh;display:flex;align-items:center;justify-content:center;gap:28px}
 #phone{width:100%;max-width:100%;background:var(--cream);position:relative;overflow:hidden}
 #scroll{height:100dvh;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
@@ -26,7 +33,7 @@ a{color:inherit;text-decoration:none} button{font:inherit;color:inherit}
   box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px #3a352e;flex:none}
  #scroll{height:822px;border-radius:33px}
  .note{display:block;max-width:300px;color:#b8b0a4;font-size:14px;line-height:1.85}
- .note h3{font-family:Alexandria,sans-serif;color:#f1ece2;font-size:19px;margin:0 0 12px}
+ .note h3{font-family:NRM,sans-serif;color:#f1ece2;font-size:19px;margin:0 0 12px}
  .note b{color:var(--or)} .note ul{margin:14px 0 0;padding:0 18px 0 0} .note li{margin-bottom:9px}
 }
 header.bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:12px 16px;
@@ -36,25 +43,25 @@ header.bar img.logo{height:26px;width:auto;display:block}
  display:flex;align-items:center;justify-content:center;cursor:pointer}
 .spacer{flex:1}
 section{padding:0 16px}
-h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
+h1,h2,h3{font-family:NRM,sans-serif;margin:0}
 .kick{display:inline-block;font-size:12px;font-weight:700;color:var(--rust);background:var(--chip);padding:5px 12px;border-radius:99px}
 .lead{font-size:16px;color:#4a4541;margin:10px 0 0}
 .muted{color:var(--mut)} .hint{font-size:13px;color:var(--mut);margin:10px 0 0}
 .ph{background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
- color:#8d8578;text-align:center;padding:20px;border-radius:18px;font-family:Alexandria,sans-serif;font-size:14px;border:1px dashed #cfc7b8}
+ color:#8d8578;text-align:center;padding:20px;border-radius:18px;font-family:NRM,sans-serif;font-size:14px;border:1px dashed #cfc7b8}
 .empt{margin-top:14px;background:#fff;border:1px solid var(--bd);border-radius:18px;padding:20px;text-align:center}
-.empt b{font-family:Alexandria,sans-serif;font-weight:800;font-size:18px;display:block;line-height:1.4}
+.empt b{font-family:NRM,sans-serif;font-weight:800;font-size:18px;display:block;line-height:1.4}
 .empt span{display:block;font-size:14px;color:var(--mut);margin-top:8px;line-height:1.6}
 .exlbl{position:absolute;top:12px;inset-inline-end:14px;font-size:11px;font-weight:700;
  color:#1f1d1b;background:var(--or);border-radius:99px;padding:3px 10px}
 .mems li.ph{padding:16px 13px;gap:6px;justify-content:flex-end}
 .mems li b{font-weight:700;font-size:14px;color:#5f5750;line-height:1.35}
-.mems li span{font-size:11.5px;line-height:1.45;color:#938b7d;font-family:'IBM Plex Sans Arabic',sans-serif}
+.mems li span{font-size:11.5px;line-height:1.45;color:#938b7d;font-family:NRM,sans-serif}
 .mems li.ph::before{content:'مطلوب';font-size:10.5px;font-weight:700;color:var(--chipink);background:var(--chip);
  padding:3px 9px;border-radius:99px;margin-bottom:auto}
 .mapbox{margin-top:12px;background:var(--panel);border:1px solid var(--bd);border-radius:18px;padding:16px;
  display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.mapbox b{font-family:Alexandria,sans-serif;font-size:15.5px;display:block}
+.mapbox b{font-family:NRM,sans-serif;font-size:15.5px;display:block}
 .mapbox span{font-size:13px;color:var(--mut);display:block;margin-top:3px}
 .mapgo{margin-inline-start:auto;display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 16px;
  border-radius:22px;background:var(--ink);color:var(--cream);font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap}
@@ -77,11 +84,11 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
  background:var(--or);color:var(--ink);font-weight:700;font-size:15px;margin-top:18px;border:0;cursor:pointer}
 .nums{list-style:none;margin:26px 0 0;padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .nums li{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:16px}
-.nums .n{font-family:Alexandria,sans-serif;font-weight:800;font-size:28px;line-height:1}
+.nums .n{font-family:NRM,sans-serif;font-weight:800;font-size:28px;line-height:1}
 .nums .t{font-size:13px;color:var(--mut);margin-top:5px}
 .stations{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
 .stations li{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px}
-.stations .yr{font-family:Alexandria,sans-serif;font-weight:700;font-size:13px;color:var(--rust)}
+.stations .yr{font-family:NRM,sans-serif;font-weight:700;font-size:13px;color:var(--rust)}
 .stations h3{font-size:18px;font-weight:700;margin:6px 0} .stations p{margin:0;font-size:14.5px;color:#4a4541}
 .founders{list-style:none;margin:16px -16px 0;padding:0;display:flex;gap:12px;overflow-x:auto;
  scroll-snap-type:x mandatory;scroll-padding-inline-start:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -90,18 +97,18 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .founders li{flex:0 0 146px;scroll-snap-align:start}
 .founders li{background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden}
 .founders .fph{aspect-ratio:1/1;width:100%;background:var(--panel);display:flex;align-items:center;justify-content:center;position:relative}
-.founders .fph span{font-family:Alexandria,sans-serif;font-weight:800;font-size:46px;color:#cfc5b4;line-height:1}
+.founders .fph span{font-family:NRM,sans-serif;font-weight:800;font-size:46px;color:#cfc5b4;line-height:1}
 .founders .fph::after{content:'';position:absolute;inset:10px;border:1px dashed #d6ccba;border-radius:12px}
 .founders .fn{padding:12px;font-weight:700;font-size:15px}
 .founders .fr{font-size:12.5px;color:var(--mut);margin-top:2px;font-weight:400}
 .memo{margin-top:12px;background:var(--ink);color:var(--cream);border-radius:20px;padding:22px}
-.memo p:first-child{font-family:Alexandria,sans-serif;font-weight:700;font-size:18px;margin:0}
+.memo p:first-child{font-family:NRM,sans-serif;font-weight:700;font-size:18px;margin:0}
 .memo p:last-child{margin:10px 0 0;font-size:14.5px;color:#c9c1b6}
 .brlist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
 .brlist li{background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden;cursor:pointer}
 .brlist .im{aspect-ratio:16/10;width:100%;object-fit:cover;display:block;background:var(--panel)}
 .brlist .bd{padding:14px 16px;display:flex;align-items:center;gap:12px}
-.brlist .nm{font-family:Alexandria,sans-serif;font-weight:700;font-size:18px}
+.brlist .nm{font-family:NRM,sans-serif;font-weight:700;font-size:18px}
 .brlist .ad{font-size:13px;color:var(--mut);margin-top:2px;display:block}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;background:var(--ink);
  color:var(--or);font-size:11px;font-weight:700;margin-right:8px;vertical-align:middle}
@@ -115,14 +122,14 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .mems li{aspect-ratio:1/1}
 .view{display:none} .view.on{display:block}
 .rate{margin-top:16px;display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid var(--bd);border-radius:16px;text-decoration:none;color:inherit}
-.rate b{font-family:Alexandria,sans-serif;font-weight:700;font-size:15.5px}
+.rate b{font-family:NRM,sans-serif;font-weight:700;font-size:15.5px}
 .rate .stars{color:var(--or);display:flex}
-.rate .v{font-family:Alexandria,sans-serif;font-weight:800;font-size:26px;line-height:1}
+.rate .v{font-family:NRM,sans-serif;font-weight:800;font-size:26px;line-height:1}
 .stars{display:flex;gap:2px;color:var(--or)}
 dl.info{margin:12px 0 0;display:grid;gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:16px;overflow:hidden;font-size:15px}
 dl.info>div{display:grid;grid-template-columns:86px minmax(0,1fr);background:#fff;padding:13px 16px;gap:10px}
 dl.info dt{color:var(--mut)} dl.info dd{margin:0}
-.tel{font-weight:700;font-family:Alexandria,sans-serif;direction:ltr;text-align:right;unicode-bidi:isolate}
+.tel{font-weight:700;font-family:NRM,sans-serif;direction:ltr;text-align:right;unicode-bidi:isolate}
 .btns{display:flex;gap:10px;margin-top:12px}
 .btns a{flex:1;height:52px;border-radius:26px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700}
 .btns .p{background:var(--or);color:var(--ink)} .btns .s{background:#fff;border:1px solid #d6cfc2}
@@ -154,7 +161,7 @@ dl.info dt{color:var(--mut)} dl.info dd{margin:0}
 /* فوتر */
 footer{margin-top:34px;background:var(--ink);color:#d9d2c8;padding:28px 16px calc(120px + env(safe-area-inset-bottom))}
 footer img.logo{height:26px;display:block}
-footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0 10px;font-weight:700}
+footer h4{font-family:NRM,sans-serif;font-size:14px;color:#fff;margin:0 0 10px;font-weight:700}
 .fcols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
 .fcols a,.fcols span{display:block;font-size:14px;padding:5px 0;color:#c9c1b6;cursor:pointer}
 .fcols a:hover{color:#fff}
@@ -179,7 +186,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
 .search input{flex:1;border:0;outline:0;font:inherit;font-size:16px;background:transparent;color:var(--ink)}
 .sizebar{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:12px 14px;
  background:var(--ink);color:var(--cream);border-radius:14px}
-.sizebar .sv{font-family:Alexandria,sans-serif;font-weight:800;font-size:26px;color:var(--or);line-height:1}
+.sizebar .sv{font-family:NRM,sans-serif;font-weight:800;font-size:26px;color:var(--or);line-height:1}
 .sizebar button{height:44px;padding:0 14px;border-radius:22px;border:1px solid #5a534d;background:transparent;color:var(--cream);font-size:14px;cursor:pointer}
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:18px;padding:5px;background:var(--panel);border-radius:14px}
 .tabs button{height:44px;border:0;border-radius:10px;background:transparent;font-size:15px;color:#4a4541;cursor:pointer}
@@ -195,11 +202,11 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
 .pro .t{padding:8px 8px 10px;font-weight:700;font-size:12.5px;line-height:1.35}
 .pro .d{font-size:11px;color:var(--mut);margin-top:2px;font-weight:400;line-height:1.4}
 .io{background:#fff;border:1px solid var(--bd);border-radius:20px;padding:20px 18px;margin-top:12px;position:relative}
-.io .ion{position:absolute;top:19px;left:18px;font-family:Alexandria,sans-serif;font-weight:800;
+.io .ion{position:absolute;top:19px;left:18px;font-family:NRM,sans-serif;font-weight:800;
  font-size:15px;color:#d8cebb;letter-spacing:1px}
-.io h3{font-family:Alexandria,sans-serif;font-weight:800;font-size:20px;line-height:1.4;margin:0;padding-left:46px}
+.io h3{font-family:NRM,sans-serif;font-weight:800;font-size:20px;line-height:1.4;margin:0;padding-left:46px}
 .io p{font-size:14.5px;color:#4a4541;margin:10px 0 0;line-height:1.75}
-.io p.big{font-family:Alexandria,sans-serif;font-weight:800;font-size:19px;color:var(--ink);line-height:1.5;
+.io p.big{font-family:NRM,sans-serif;font-weight:800;font-size:19px;color:var(--ink);line-height:1.5;
  margin-top:14px;padding-inline-start:0;border-inline-start:0}
 .io p.sm{font-size:13px;color:var(--mut);margin-top:10px}
 .io blockquote{margin:12px 0 0;padding:14px 16px;background:var(--panel);border-radius:14px;
@@ -209,7 +216,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
  border-radius:14px;color:var(--chipink);font-weight:700;font-size:14.5px;text-decoration:none}
 .insl svg{margin-inline-start:auto}
 .whybox{background:var(--chip);border-radius:14px;padding:13px 15px;margin-top:4px}
-.whybox b{display:block;font-family:Alexandria,sans-serif;font-size:13.5px;color:var(--chipink)}
+.whybox b{display:block;font-family:NRM,sans-serif;font-size:13.5px;color:var(--chipink)}
 .whybox span{display:block;font-size:13.5px;color:#6a4418;margin-top:5px;line-height:1.65}
 .erow{display:flex;gap:9px;margin-top:14px}
 .erow .cta{flex:1;justify-content:center;font-size:14px}
@@ -226,7 +233,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
 .pgrid img{width:100%;height:150px;object-fit:cover;display:block;background:var(--panel)}
 .pgrid .b{padding:10px 12px 12px}
 .pgrid .nm{font-size:13px;font-weight:600;line-height:1.45}
-.pgrid .pr{font-family:Alexandria,sans-serif;font-weight:700;font-size:16px;margin-top:6px}
+.pgrid .pr{font-family:NRM,sans-serif;font-weight:700;font-size:16px;margin-top:6px}
 .pgrid .av{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:600}
 .dot{width:8px;height:8px;border-radius:4px;display:inline-block}
 .hero-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#fff}
@@ -258,11 +265,11 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
  padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--ink);color:var(--cream);cursor:pointer}
 #vcbar.on{display:flex}
 #vcbar .cnt{width:34px;height:34px;border-radius:17px;background:var(--or);color:var(--ink);
- display:flex;align-items:center;justify-content:center;font-weight:800;font-family:Alexandria,sans-serif}
+ display:flex;align-items:center;justify-content:center;font-weight:800;font-family:NRM,sans-serif}
 .vcitem{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--bd);border-radius:16px;padding:12px;margin-top:10px}
 .vcitem img{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--panel);flex:none}
 .vcitem .rm{flex:none;width:36px;height:36px;border-radius:18px;border:1px solid var(--bd);background:#fff;cursor:pointer}
-.code{font-family:Alexandria,sans-serif;font-weight:800;font-size:30px;letter-spacing:.06em;direction:ltr}
+.code{font-family:NRM,sans-serif;font-weight:800;font-size:30px;letter-spacing:.06em;direction:ltr}
 .policy h2{font-size:24px;font-weight:800;margin-top:6px}
 .policy h3{font-size:17px;font-weight:700;margin:22px 0 8px}
 .policy p{font-size:15px;color:#4a4541;margin:0 0 10px}
@@ -287,9 +294,9 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     </button>
    </header>
    <section class="hero">
-    <span class="kick">من ١٩٩٩</span>
+    <span class="kick">من 1999</span>
     <h1 id="vp">السعر واحد، والضمان واحد، في العشر فروع.</h1>
-    <p class="lead" id="vpsub">من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.</p>
+    <p class="lead" id="vpsub">من 1999 في طنطا. عشر فروع في ست محافظات.</p>
     <div class="vpwrap" id="vpwrap">
      <img src="br/nasr.jpg" class="on" alt="">
      <img src="br/october.jpg" alt="">
@@ -297,18 +304,18 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
      <div class="vpcap" id="vpcap">فرع مدينة نصر</div>
     </div>
     <div class="vpdots" id="vpdots" role="group" aria-label="سطور الافتتاحية">
-     <button data-i="0" aria-pressed="true" aria-label="١"></button>
-     <button data-i="1" aria-pressed="false" aria-label="٢"></button>
-     <button data-i="2" aria-pressed="false" aria-label="٣"></button>
+     <button data-i="0" aria-pressed="true" aria-label="1"></button>
+     <button data-i="1" aria-pressed="false" aria-label="2"></button>
+     <button data-i="2" aria-pressed="false" aria-label="3"></button>
     </div>
     <button class="cta" data-go="branches">الفروع العشرة
      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button>
    </section>
    <ul class="nums">
-    <li><div class="n">١٩٩٩</div><div class="t">الفاترينة الأولى</div></li>
-    <li><div class="n">١٠</div><div class="t">فروع شغّالة</div></li>
-    <li><div class="n">٦</div><div class="t">محافظات</div></li>
-    <li><div class="n">٣</div><div class="t">أقسام من الشهر ده</div></li>
+    <li><div class="n">1999</div><div class="t">الفاترينة الأولى</div></li>
+    <li><div class="n">10</div><div class="t">فروع شغّالة</div></li>
+    <li><div class="n">6</div><div class="t">محافظات</div></li>
+    <li><div class="n">3</div><div class="t">أقسام من الشهر ده</div></li>
    </ul>
    <p class="hint" style="padding:0 16px;text-align:center">أربع أرقام بس. مفيش فيهم رقم محدش يقدر يعدّه.</p>
 
@@ -327,28 +334,28 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <div class="secttl"><h2>الحكاية</h2></div><div class="rule"></div>
     <p class="lead muted" style="font-size:14.5px">تلات محطات، وكلها تقدر تتأكد منها بنفسك.</p>
     <ul class="stations">
-     <li><div class="yr">١٩٩٩</div><h3>خمسة أصحاب ومحل واحد</h3>
+     <li><div class="yr">1999</div><h3>خمسة أصحاب ومحل واحد</h3>
       <p>دكتور أحمد فؤاد، وأحمد سرحان، ومحمد سمير، ومصطفى كامل، ومحمود موسى. أصحاب قبل ما يكونوا شركا.<br>فتحوا محل أحذية إيطالية في وقت كان اللي عايز جزمة محترمة لازم يسافر عشانها — أو يستنى حد مسافر.</p></li>
      <li><div class="yr">بعدها بسنين</div><h3>من طنطا للدلتا، وبعدين للقاهرة</h3>
       <p>المحلة، والمنصورة، والزقازيق، ودمنهور — المدن اللي أهلها كانوا بييجوا طنطا مخصوص. فرحنا لهم.<br>وبعدين سموحة، ومدينة نصر، والدقي، وأكتوبر، والعاشر. كل فرع فتح، فتح على نفس الاتفاق اللي اتعمل في طنطا.</p></li>
-     <li><div class="yr">٢٠٢٦</div><h3>عشر فروع، ونفس المعيار</h3>
+     <li><div class="yr">2026</div><h3>عشر فروع، ونفس المعيار</h3>
       <p>السعر واحد في العشرة. الضمان واحد. والمقاس اللي مش عندنا، بنقولك موجود فين.<br>ده مش كلام إعلان — ده اللي بيحصل لما تدخل أي فرع فيهم.</p></li>
-     <li><div class="yr">السؤال اللي بيتسأل كل يوم</div><h3>وليه اسمها «نورماندي»؟</h3><p>دي الحتة الوحيدة في الصفحة اللي مش هنكتبها إحنا.<br>الاسم اتقال في محل في طنطا سنة ١٩٩٩، ومحدش يعرف الحكاية غير الخمسة اللي كانوا واقفين ساعتها. سايبينها لهم يحكوها بكلامهم — ولما يحكوها هتلاقيها هنا بالحرف.</p></li>
+     <li><div class="yr">السؤال اللي بيتسأل كل يوم</div><h3>وليه اسمها «نورماندي»؟</h3><p>دي الحتة الوحيدة في الصفحة اللي مش هنكتبها إحنا.<br>الاسم اتقال في محل في طنطا سنة 1999‏، ومحدش يعرف الحكاية غير الخمسة اللي كانوا واقفين ساعتها. سايبينها لهم يحكوها بكلامهم — ولما يحكوها هتلاقيها هنا بالحرف.</p></li>
     </ul>
    </section>
    <section>
     <div class="secttl"><h2>الخمسة اللي بدأوا</h2></div><div class="rule"></div>
     <p class="lead muted" style="font-size:14.5px">محل في طنطا اسمه على خمس أصحاب. والشركة لسه ماشية على نفس الاتفاق.</p>
     <ul class="founders">
-     <li><div class="fph"><span>أ</span></div><div class="fn">دكتور أحمد فؤاد<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
-     <li><div class="fph"><span>س</span></div><div class="fn">أحمد سرحان<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
-     <li><div class="fph"><span>م</span></div><div class="fn">محمد سمير<div class="fr">مؤسس · ١٩٩٩ – ٢٠٢٠</div></div></li>
-     <li><div class="fph"><span>ك</span></div><div class="fn">مصطفى كامل<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
-     <li><div class="fph"><span>و</span></div><div class="fn">محمود موسى<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
+     <li><div class="fph"><span>أ</span></div><div class="fn">دكتور أحمد فؤاد<div class="fr">مؤسس · من 1999</div></div></li>
+     <li><div class="fph"><span>س</span></div><div class="fn">أحمد سرحان<div class="fr">مؤسس · من 1999</div></div></li>
+     <li><div class="fph"><span>م</span></div><div class="fn">محمد سمير<div class="fr">مؤسس · 1999 – 2020</div></div></li>
+     <li><div class="fph"><span>ك</span></div><div class="fn">مصطفى كامل<div class="fr">مؤسس · من 1999</div></div></li>
+     <li><div class="fph"><span>و</span></div><div class="fn">محمود موسى<div class="fr">مؤسس · من 1999</div></div></li>
     </ul>
     <p class="hint">صور الخمسة بتتجمّع دلوقتي من أرشيف الشركة ومن بيوتهم.</p>
     <div class="memo"><p>الشركة مكمّلة. وعلى ذكرى صحبته مكمّلين.</p>
-     <p>محمد سمير مشي سنة ٢٠٢٠. والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه — وكل فرع بيفتح، بيفتح على نفس الاتفاق اللي اتعمل في طنطا.</p></div>
+     <p>محمد سمير مشي سنة 2020‏. والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه — وكل فرع بيفتح، بيفتح على نفس الاتفاق اللي اتعمل في طنطا.</p></div>
    </section>
    <section id="branches">
     <div class="secttl"><h2>عشر فروع</h2></div><div class="rule"></div>
@@ -363,12 +370,12 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <div class="io">
      <span class="ion" dir="ltr">01</span>
      <h3>الفرع مرتّب بالمقاس. مش بالموديل.</h3>
-     <p>في أي محل جزم، إنت بتختار موديل عاجبك، وبعدين تسأل السؤال اللي بيوجع: «عندكم ٤٣؟». ونص المرات الرد «خلص».</p>
+     <p>في أي محل جزم، إنت بتختار موديل عاجبك، وبعدين تسأل السؤال اللي بيوجع: «عندكم 43؟». ونص المرات الرد «خلص».</p>
      <p>في نورماندي الرف مرتّب بالمقاس — من الأصغر للأكبر، كل مقاس له حتته. إنت بتروح على رفّك على طول، وكل اللي قدامك بيجيلك.</p>
      <p class="big">إنت مش بتدوّر على مقاسك. إنت بتقف فيه.</p>
-     <p class="sm">وده مش ترتيب اتعمل السنة دي. ده اللي المحل اشتغل بيه من ١٩٩٩.</p>
+     <p class="sm">وده مش ترتيب اتعمل السنة دي. ده اللي المحل اشتغل بيه من 1999‏.</p>
      <figure style="margin:14px 0 0">
-      <img class="photo" style="aspect-ratio:4/3;object-fit:cover" src="br/october.jpg" alt="رف مكتوب عليه مقاس ٤٢ في فرع أكتوبر" loading="lazy">
+      <img class="photo" style="aspect-ratio:4/3;object-fit:cover" src="br/october.jpg" alt="رف مكتوب عليه مقاس 42 في فرع أكتوبر" loading="lazy">
       <figcaption class="hint" style="margin-top:7px">فرع أكتوبر. الرقم المكتوب على الحيطة هو المقاس، مش ديكور.</figcaption>
      </figure>
     </div>
@@ -401,15 +408,15 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    <section>
     <div class="newbox">
      <span class="kick">جديد — الشهر ده</span>
-     <h2>٢٧ سنة وإحنا بنبيع للراجل. دلوقتي بنبيع لبيته كمان.</h2>
-     <p class="lead" style="font-size:14.5px">من ١٩٩٩ لحد السنة دي، نورماندي كانت رجالي وبس. من الشهر ده دخلت موديلات حريمي وأطفالي — في فروع محدّدة الأول، مش كلها مرة واحدة.</p>
+     <h2>27 سنة وإحنا بنبيع للراجل. دلوقتي بنبيع لبيته كمان.</h2>
+     <p class="lead" style="font-size:14.5px">من 1999 لحد السنة دي، نورماندي كانت رجالي وبس. من الشهر ده دخلت موديلات حريمي وأطفالي — في فروع محدّدة الأول، مش كلها مرة واحدة.</p>
      <p class="lead" style="font-size:14.5px">وده مش دخول في سوق جديد. الراجل اللي بيشتري من نورماندي من عشرين سنة بقى له بيت، والبيت ده هو اللي كان بيختار معاه من الأول.</p>
      <div class="pills"><span class="pill">رجالي — العشرة</span><span class="pill off">حريمي — في فروع محدّدة</span><span class="pill off">أطفالي — في فروع محدّدة</span></div>
     </div>
    </section>
    <section id="memories">
     <div class="secttl"><h2>الذكريات</h2></div><div class="rule"></div>
-    <p class="lead muted" style="font-size:14.5px">نورماندي عندها ٢٧ سنة، وأرشيفها لسه متفرّق على ناس وبيوت ودواليب. دي الأربع حاجات اللي بندوّر عليها.</p>
+    <p class="lead muted" style="font-size:14.5px">نورماندي عندها 27 سنة، وأرشيفها لسه متفرّق على ناس وبيوت ودواليب. دي الأربع حاجات اللي بندوّر عليها.</p>
     <ul class="mems"><li class="ph"><b>إعلانات الجرنال</b><span>أول إعلان اتنشر، وأي إعلان بعده</span></li><li class="ph"><b>كارت نورماندي كلوب</b><span>اللي كان بيتحط في المحفظة ومابيتزقّش</span></li><li class="ph"><b>لافتات قديمة</b><span>من واجهات اتغيّرت ولافتات اتشالت</span></li><li class="ph"><b>أول فاتورة وكارت ضمان</b><span>الورقتين اللي بدأ بيهم كل حاجة</span></li></ul>
     <div class="darkbox"><h2>مفيش صورة للفرع الأول. وإحنا مش هنخترع واحدة.</h2>
      <p>الفرع الأول فتح قبل ما الموبايلات تبقى في إيد كل حد، فمحدش صوّره. وإحنا مش هنحط صورة لمحل تاني ونقول إنه هو.<br>بدل الصورة، رسمة. مرسومة من وصف ناس اشتغلت فيه، ومكتوب تحتها بالنص إنها رسمة.</p></div>
@@ -419,7 +426,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
      <p class="lead" style="font-size:14.5px">علبة، ولا كارت كلوب، ولا فاتورة، ولا شنطة، ولا الجزمة نفسها وهي لسه ماشية.<br>صوّرها بموبايلك وابعتها — واسمك هيبقى تحتها في الصفحة دي.</p>
      <button class="cta" style="margin-top:14px" onclick="alert('في الديمو ده الزرار مش موصّل بواتساب.')">ابعتها على واتساب</button>
     </div>
-    <p class="hint" style="font-size:14px;text-align:center">ومن الشهر ده: كل فرع بيصوّر كادر واحد بتاريخه كل شهر.<br><b style="color:var(--rust)">أرشيف ٢٠٣٠ بيتصوّر النهارده.</b></p>
+    <p class="hint" style="font-size:14px;text-align:center">ومن الشهر ده: كل فرع بيصوّر كادر واحد بتاريخه كل شهر.<br><b style="color:var(--rust)">أرشيف 2030 بيتصوّر النهارده.</b></p>
    </section>
    <div id="footer1"></div>
   </div>
@@ -436,7 +443,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    <section style="padding-top:20px">
     <span class="badge" id="bBadge" hidden>
      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
-     الفرع الأول — من ١٩٩٩</span>
+     الفرع الأول — من 1999</span>
     <h1 class="alx" id="bName" style="font-weight:800;font-size:31px;line-height:1.3;margin-top:12px"></h1>
     <p class="lead" id="bAddr"></p>
     <a class="rate" id="bRev" target="_blank" rel="noopener">
@@ -449,7 +456,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     </a>
     <dl class="info">
      <div><dt>التليفون</dt><dd class="tel" id="bTel"></dd></div>
-     <div><dt>المواعيد</dt><dd>يومياً ١٢ ظهراً – ١١ مساءً</dd></div>
+     <div><dt>المواعيد</dt><dd>يومياً 12 ظهراً – 11 مساءً</dd></div>
      <div><dt>الأقسام</dt><dd style="display:flex;gap:6px;flex-wrap:wrap">
       <span class="pill">رجالي</span><span class="pill off">حريمي — بيوصل قريب</span><span class="pill off">أطفالي — بيوصل قريب</span></dd></div>
      <div><dt>الترتيب</dt><dd>الرف مرتّب بالمقاس، من الأصغر للأكبر. روح على رفّك على طول.</dd></div>
@@ -477,7 +484,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    </section>
    <section>
     <div class="darkbox"><h2>المحل اللي بدأ منه كل حاجة</h2>
-     <p>سنة ١٩٩٩، خمس أصحاب فتحوا في طنطا محل أحذية إيطالية. كل فرع تاني في مصر اتفتح بعد كده، اتفتح من الباب ده.</p>
+     <p>سنة 1999‏، خمس أصحاب فتحوا في طنطا محل أحذية إيطالية. كل فرع تاني في مصر اتفتح بعد كده، اتفتح من الباب ده.</p>
      <button data-go="story">الحكاية كاملة
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button></div>
     <div class="mapbox">
@@ -557,13 +564,13 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <div class="giftban" data-go="gift">
      <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"></rect><path d="M3 12h18M12 8v13"></path><path d="M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8c2 0 5-.5 5-1.5S13.5 5 12 8"></path></svg></span>
      <span style="flex:1"><b class="alx" style="font-size:17px">هدية لحد بتحبه؟</b>
-      <span style="display:block;font-size:13px;margin-top:2px">مش عارف مقاسه؟ يبدّله في أي فرع خلال ١٤ يوم</span></span>
+      <span style="display:block;font-size:13px;margin-top:2px">مش عارف مقاسه؟ يبدّله في أي فرع خلال 14 يوم</span></span>
      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></div>
     <ul class="trust">
-     <li>ضمان ٣ شهور ضد عيوب الصناعة</li>
-     <li>استبدال خلال ١٤ يوم</li>
+     <li>ضمان 3 شهور ضد عيوب الصناعة</li>
+     <li>استبدال خلال 14 يوم</li>
      <li>سعر واحد في العشرة</li>
-     <li>١٠ فروع في ٦ محافظات</li></ul>
+     <li>10 فروع في 6 محافظات</li></ul>
     <p class="hint" style="text-align:center">
      <a data-pol="warranty" style="color:var(--rust);font-weight:700">تفاصيل الضمان</a> ·
      <a data-pol="exchange" style="color:var(--rust);font-weight:700">الاستبدال</a> ·
@@ -618,7 +625,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <div class="szgrid" id="pSizes"></div>
     <div class="avlist"><div class="hd" id="pAvTtl"></div><div id="pAv"></div></div>
     <ul class="trust" style="grid-template-columns:1fr 1fr">
-     <li>ضمان ٣ شهور</li><li>استبدال ١٤ يوم</li></ul>
+     <li>ضمان 3 شهور</li><li>استبدال 14 يوم</li></ul>
     <p class="hint" style="text-align:center">
      <a data-pol="warranty" style="color:var(--rust);font-weight:700">الضمان بيغطي إيه بالظبط</a></p>
    </section>
@@ -635,7 +642,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <button class="iconbtn" data-back="1" aria-label="رجوع" style="background:transparent;border-color:#5a534d">
      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
     <h1 class="alx" style="margin-top:14px;font-weight:800;font-size:26px;line-height:1.3;color:var(--cream)">هدية <span style="color:var(--or)">من أول خطوة</span></h1>
-    <p style="margin:6px 0 0;font-size:14px;color:#d9d2c7;line-height:1.6">تلات أسئلة، ونختار معاك. ولو المقاس طلع مش مظبوط، يبدّله في أي فرع خلال ١٤ يوم.</p>
+    <p style="margin:6px 0 0;font-size:14px;color:#d9d2c7;line-height:1.6">تلات أسئلة، ونختار معاك. ولو المقاس طلع مش مظبوط، يبدّله في أي فرع خلال 14 يوم.</p>
    </div>
    <section style="padding-top:18px">
     <h2 style="font-size:15px;font-weight:700">الهدية لمين؟</h2>
@@ -657,7 +664,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <button class="iconbtn" data-back="1" aria-label="رجوع"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
     <span class="spacer" style="font-weight:700;font-size:16px">ضماناتي</span><img class="logo" src="logo.svg" alt=""></header>
    <section style="padding-top:16px">
-    <p class="lead">كل فاتورة من نورماندي عليها ضمان ٣ شهور ضد عيوب الصناعة.</p>
+    <p class="lead">كل فاتورة من نورماندي عليها ضمان 3 شهور ضد عيوب الصناعة.</p>
     <div class="empt">
      <b>لسه مافيش ضمان مسجّل على حسابك</b>
      <span>أول ما تشتري من أي فرع، الفاتورة بتتربط برقمك، والضمان بيظهر هنا لوحده — وبيفضّلك عدّاد بالأيام اللي فاضلة.</span>
@@ -673,7 +680,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
       <div style="flex:1"><div style="font-weight:700;font-size:15px">[الموديل]</div>
        <div style="font-size:13px;color:#c9c1b6">[فاتورة الفرع] · [المقاس]</div></div></div>
      <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px">
-      <span>فاضل <b class="alx" style="font-size:18px;color:var(--or)">[٠٠]</b> يوم</span><span style="color:#c9c1b6">[التاريخ]</span></div>
+      <span>فاضل <b class="alx" style="font-size:18px;color:var(--or)">[00]</b> يوم</span><span style="color:#c9c1b6">[التاريخ]</span></div>
      <div style="height:6px;border-radius:3px;background:#4a4541;margin-top:8px"><div style="width:55%;height:100%;background:var(--or);border-radius:3px"></div></div>
     </div>
     <div class="box" style="background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px;margin-top:14px">
@@ -755,7 +762,7 @@ const BR=[
  {k:'mansoura',n:'المنصورة',ad:'أول المشاية السفلية — أمام القاعة الزرقاء',tel:'0502373307',img:'br/mansoura.jpg',q:'Normandy+Shoes+Mansoura'},
  {k:'zagazig',n:'الزقازيق',ad:'تقاطع شارع سوريا مع طلبة عويضة، بجوار بكري أمام فرع ديزل',tel:'0552377088',img:'br/zagazig.jpg',q:'Normandy+Shoes+Zagazig'},
  {k:'damanhour',n:'دمنهور',ad:'شارع عبد السلام الشاذلي، بجوار بنك CIB',tel:'0453350337',img:'br/damanhour.jpg',q:'Normandy+Shoes+Damanhour'},
- {k:'smouha',n:'سموحة',ad:'١٥ شارع فيكتور عمانويل، أمام بوابة نادي سموحة بجوار تاون تيم',tel:'034280574',img:'br/smouha.jpg',q:'Normandy+Shoes+Smouha'},
+ {k:'smouha',n:'سموحة',ad:'15 شارع فيكتور عمانويل، أمام بوابة نادي سموحة بجوار تاون تيم',tel:'034280574',img:'br/smouha.jpg',q:'Normandy+Shoes+Smouha'},
  {k:'nasrcity',n:'مدينة نصر',ad:'آخر محمد حسين هيكل، خلف مطعم جاد — عباس العقاد',tel:'0222737961',img:'br/nasr.jpg',q:'Normandy+Shoes+Nasr+City'},
  {k:'dokki',n:'الدقي',ad:'تقاطع محيي الدين أبو العز مع شارع عمان، أمام العربي',tel:'0233377545',img:'br/dokki.jpg',q:'Normandy+Shoes+Dokki'},
  {k:'october',n:'أكتوبر',ad:'القطعة 18 — الصناعية الأولى — مول أوت ليت',tel:'01018590793',img:'br/october.jpg',q:'Normandy+Shoes+6+October'},
@@ -763,9 +770,9 @@ const BR=[
 ];
 const BRN=Object.fromEntries(BR.map(b=>[b.k,b.n]));
 const VP=[
- ['السعر واحد، والضمان واحد، في العشر فروع.','مش سعر الفرع الكبير غير سعر الفرع الصغير. من ١٩٩٩.','فرع مدينة نصر'],
+ ['السعر واحد، والضمان واحد، في العشر فروع.','مش سعر الفرع الكبير غير سعر الفرع الصغير. من 1999.','فرع مدينة نصر'],
  ['المقاس اللي مش عندنا، بنقولك موجود فين.','العشرة بيشوفوا رصيد بعض — عشان متلفش على فاضي.','من جوّه فرع أكتوبر'],
- ['٢٧ سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','بنشوف ميّة موديل، ومابندخّلش غير اللي يستاهل.','فرع المحلة الكبرى'],
+ ['27 سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','بنشوف ميّة موديل، ومابندخّلش غير اللي يستاهل.','فرع المحلة الكبرى'],
 ];
 const OCC=[
  {id:'work', t:'شغل ومكتب', d:'من أول اجتماع لآخر اليوم', ph:'ph/work.jpg',
@@ -823,7 +830,7 @@ const POL={
   <h2>الضمان</h2><div class="rule"></div>
   <p class="lead">ضماننا مكتوب في سطر واحد، عشان محدش يتفاجئ وهو واقف في الفرع.</p>
   <div class="box"><p style="font-weight:700;color:var(--ink);font-size:17px;line-height:1.5">
-   ضمان ٣ شهور ضد عيوب الصناعة فقط — ولا يعني استبدال الحذاء.</p>
+   ضمان 3 شهور ضد عيوب الصناعة فقط — ولا يعني استبدال الحذاء.</p>
    <p>لو ثبت وجود عيب صناعة بعد عرض المنتج على إدارة الشركة، الشركة تتولى صيانة الحذاء.
    ولازم الاحتفاظ بورقة الضمان وتقديمها مع الحذاء.</p>
    <p class="hint" style="margin-top:10px">ده نص ورقة الضمان الرسمية حرف بحرف. اللي تحته شرح ليه بالعامية، مش بدل منه.</p></div>
@@ -843,12 +850,12 @@ const POL={
   <div class="warn">واللي مش مكتوب هنا، مش بنوعد بيه. لو حد قالك غير كده، ده كلامه هو مش كلامنا.</div>`},
  exchange:{t:'الاستبدال',h:`
   <h2>الاستبدال</h2><div class="rule"></div>
-  <p class="lead">١٤ يوم. ومش محتاج تشرح السبب.</p>
-  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:17px">الاستبدال متاح ١٤ يوم من تاريخ الشراء.</p>
+  <p class="lead">14 يوم. ومش محتاج تشرح السبب.</p>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:17px">الاستبدال متاح 14 يوم من تاريخ الشراء.</p>
    <p>تلات شروط بس: الفاتورة معاك، والجزمة بحالتها، والعلبة معاها.</p></div>
   <h3>الاستبدال غير الضمان</h3>
   <p>الاستبدال بيبدّل المقاس أو الموديل في أول أسبوعين. الضمان حاجة تانية خالص —
-   ده ضد عيوب الصناعة وبيشتغل بالصيانة لمدة ٣ شهور.
+   ده ضد عيوب الصناعة وبيشتغل بالصيانة لمدة 3 شهور.
    <a data-pol="warranty" style="color:var(--rust);font-weight:700">اقرا الضمان</a>.</p>
   <h3>هتجيب هدية ومش عارف المقاس؟</h3>
   <ul><li>اسأل على مقاس جزمة هو بيلبسها دلوقتي.</li>
@@ -865,7 +872,7 @@ const POL={
   <p class="hint">قيس بالليل. الرجل بتكبر شوية على آخر اليوم، والمقاس اللي يريّحك ساعتها هو الصح.</p>
   <div id="sztable"></div>
   <h3>تلات قواعد</h3>
-  <ul><li>الرقم الأعلى في كل مدى داخل فيه: ٢٦٫٥ سم = مقاس ٤٣، و٢٦٫٦ = مقاس ٤٤.</li>
+  <ul><li>الرقم الأعلى في كل مدى داخل فيه: 26.5 سم = مقاس 43، و26.6 = مقاس 44.</li>
       <li>رقمك بين مقاسين؟ خد الأكبر. الجزمة الضيّقة مابتتوسّعش، بتوجع.</li>
       <li>الجدول ده مفيهوش عرض قدم. لو رجلك عريضة، قول للبايع وهو يرشّحلك قالب أوسع.</li></ul>
   <div class="warn">الأقسام عندنا: رجالي، وحريمي، وأطفالي. مفيش قسم اسمه «أولادي».</div>`},
@@ -893,9 +900,9 @@ const POL={
    وبتجهّزلك كارت زيارة تاخده معاك عشان متقفش تشرح.</p>
   <div class="warn">أي كلام عن «شحن مجاني» أو «جرّب قبل ما تدفع» مش معتمد من نورماندي، ومش هيتكتب هنا قبل ما يبقى حقيقي.</div>`},
 };
-const AR=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const AR=n=>String(n);   // الأرقام عربية (0-9) في كل الصفحة — مفيش أرقام هندية
 const MO=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const arDate=t=>{const[y,m,d]=String(t).split('-');return AR(+d)+' '+MO[+m-1]+' '+AR(y);};
+const arDate=t=>{const[y,m,d]=String(t).split('-');return (+d)+' '+MO[+m-1]+' '+y;};
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 let STOCK=null,cur=BR[0],hist=[],VC=[],vcBranch=null,SIZE=null,FB='all',curOcc=OCC[0],curProd=null;
 const SHOPV=['v-main','v-finder','v-product','v-gift','v-card','v-warr','v-signin','v-checkout'];
@@ -904,7 +911,7 @@ const SHOPV=['v-main','v-finder','v-product','v-gift','v-card','v-warr','v-signi
 function footerHTML(){return `<footer>
  <img class="logo" src="logo.svg" alt="نورماندي">
  <img src="slogan.svg" alt="من أول خطوة" style="height:30px;margin-top:12px;filter:invert(1) brightness(1.7)">
- <p style="margin:14px 0 0;font-size:14px;color:#c9c1b6">من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.</p>
+ <p style="margin:14px 0 0;font-size:14px;color:#c9c1b6">من 1999 في طنطا. عشر فروع في ست محافظات.</p>
  <div class="fcols">
   <div><h4>تسوّق</h4>
    <a data-go="shop">التشكيلة</a>${OCC.map(o=>`<a data-occ="${o.id}">${o.t}</a>`).join('')}
@@ -918,11 +925,11 @@ function footerHTML(){return `<footer>
    <a data-pol="size">دليل المقاسات</a><a data-pol="shipping">الشحن والطلب</a><a data-pol="privacy">الخصوصية</a></div>
   <div><h4>نورماندي</h4>
    <a data-go="story">الحكاية</a><a data-go="branches">الفروع</a>
-   <span style="color:#9b9388">المواعيد: يومياً ١٢ ظ – ١١ م</span></div>
+   <span style="color:#9b9388">المواعيد: يومياً 12 ظ – 11 م</span></div>
  </div>
  <h4 style="margin-top:22px">الفروع</h4>
  <div class="fbranches">${BR.map((b,i)=>`<button data-br="${i}">${b.n}</button>`).join('')}</div>
- <div class="fbot">نورماندي شوز — ١٩٩٩ · ٢٠٢٦ · كل الحقوق محفوظة<br>
+ <div class="fbot">نورماندي شوز — 1999 · 2026 · كل الحقوق محفوظة<br>
   <span style="color:#6f685e">ديمو تفاعلي للمراجعة الداخلية.</span></div></footer>`;}
 for(let i=1;i<=11;i++){const el=document.getElementById('footer'+i); if(el) el.innerHTML=footerHTML();}
 
