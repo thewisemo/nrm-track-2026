@@ -42,6 +42,11 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .muted{color:var(--mut)} .hint{font-size:13px;color:var(--mut);margin:10px 0 0}
 .ph{background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
  color:#8d8578;text-align:center;padding:20px;border-radius:18px;font-family:Alexandria,sans-serif;font-size:14px;border:1px dashed #cfc7b8}
+.mems li.ph{padding:16px 13px;gap:6px;justify-content:flex-end}
+.mems li b{font-weight:700;font-size:14px;color:#5f5750;line-height:1.35}
+.mems li span{font-size:11.5px;line-height:1.45;color:#938b7d;font-family:'IBM Plex Sans Arabic',sans-serif}
+.mems li.ph::before{content:'مطلوب';font-size:10.5px;font-weight:700;color:var(--chipink);background:var(--chip);
+ padding:3px 9px;border-radius:99px;margin-bottom:auto}
 .photo{width:100%;display:block;border-radius:18px;background:var(--panel)}
 .hero{padding-top:26px} .hero h1{font-weight:800;font-size:31px;line-height:1.34;margin-top:14px}
 .vpwrap{position:relative;margin-top:18px;border-radius:20px;overflow:hidden;background:var(--panel)}
@@ -67,12 +72,15 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .stations li{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:18px}
 .stations .yr{font-family:Alexandria,sans-serif;font-weight:700;font-size:13px;color:var(--rust)}
 .stations h3{font-size:18px;font-weight:700;margin:6px 0} .stations p{margin:0;font-size:14.5px;color:#4a4541}
-.founders{list-style:none;margin:16px -16px 0;padding:0 16px;display:flex;gap:12px;overflow-x:auto;
- scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.founders{list-style:none;margin:16px -16px 0;padding:0;display:flex;gap:12px;overflow-x:auto;
+ scroll-snap-type:x mandatory;scroll-padding-inline-start:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.founders::before,.founders::after{content:'';flex:0 0 16px}
 .founders::-webkit-scrollbar{display:none}
 .founders li{flex:0 0 146px;scroll-snap-align:start}
 .founders li{background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden}
-.founders .fph{aspect-ratio:1/1;width:100%;background:var(--panel);display:flex;align-items:center;justify-content:center;color:#8d8578;font-size:12px}
+.founders .fph{aspect-ratio:1/1;width:100%;background:var(--panel);display:flex;align-items:center;justify-content:center;position:relative}
+.founders .fph span{font-family:Alexandria,sans-serif;font-weight:800;font-size:46px;color:#cfc5b4;line-height:1}
+.founders .fph::after{content:'';position:absolute;inset:10px;border:1px dashed #d6ccba;border-radius:12px}
 .founders .fn{padding:12px;font-weight:700;font-size:15px}
 .founders .fr{font-size:12.5px;color:var(--mut);margin-top:2px;font-weight:400}
 .memo{margin-top:12px;background:var(--ink);color:var(--cream);border-radius:20px;padding:22px}
@@ -269,13 +277,14 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <li><div class="n">٦</div><div class="t">محافظات</div></li>
     <li><div class="n">٣</div><div class="t">أقسام من الشهر ده</div></li>
    </ul>
+   <p class="hint" style="padding:0 16px;text-align:center">أربع أرقام بس. مفيش فيهم رقم محدش يقدر يعدّه.</p>
 
    <section>
     <div class="entry" data-go="shop">
      <img class="im" src="br/nasr.jpg" alt="">
      <div class="bd">
       <h2>المقاس اللي مش عندنا،<br>بنقولك موجود فين.</h2>
-      <p>عشر فروع بيشوفوا رصيد بعض. اكتب مقاسك مرة واحدة، وكل اللي هتشوفه بعدها متاح بمقاسك — وبيقولك في أنهي فرع.</p>
+      <p>اكتب مقاسك مرة واحدة. كل اللي هتشوفه بعدها موجود بمقاسك فعلاً، ومكتوب تحته في أنهي فرع.<br>مفيش «اتصل للاستعلام»، ومفيش تروح وترجع.</p>
       <span class="go">ادخل على التشكيلة
        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></span>
      </div>
@@ -283,35 +292,36 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    </section>
    <section>
     <div class="secttl"><h2>الحكاية</h2></div><div class="rule"></div>
-    <p class="lead muted" style="font-size:14.5px">تلات محطات. مفيش فيهم حاجة متزوّقة.</p>
+    <p class="lead muted" style="font-size:14.5px">تلات محطات، وكلها تقدر تتأكد منها بنفسك.</p>
     <ul class="stations">
      <li><div class="yr">١٩٩٩</div><h3>خمسة أصحاب ومحل واحد</h3>
-      <p>دكتور أحمد فؤاد، وأحمد سرحان، ومحمد سمير، ومصطفى كامل، ومحمود موسى. أصحاب قبل ما يكونوا شركا — فتحوا محل أحذية إيطالية في وقت كان اللي عايز شوز كويس لازم يسافر عشانها.</p></li>
+      <p>دكتور أحمد فؤاد، وأحمد سرحان، ومحمد سمير، ومصطفى كامل، ومحمود موسى. أصحاب قبل ما يكونوا شركا.<br>فتحوا محل أحذية إيطالية في وقت كان اللي عايز جزمة محترمة لازم يسافر عشانها — أو يستنى حد مسافر.</p></li>
      <li><div class="yr">بعدها بسنين</div><h3>من طنطا للدلتا، وبعدين للقاهرة</h3>
-      <p>المحلة، والمنصورة، والزقازيق، ودمنهور — المدن اللي أهلها كانوا بييجوا طنطا مخصوص. وبعدين سموحة، ومدينة نصر، والدقي، وأكتوبر، والعاشر.</p></li>
+      <p>المحلة، والمنصورة، والزقازيق، ودمنهور — المدن اللي أهلها كانوا بييجوا طنطا مخصوص. فرحنا لهم.<br>وبعدين سموحة، ومدينة نصر، والدقي، وأكتوبر، والعاشر. كل فرع فتح، فتح على نفس الاتفاق اللي اتعمل في طنطا.</p></li>
      <li><div class="yr">٢٠٢٦</div><h3>عشر فروع، ونفس المعيار</h3>
-      <p>السعر واحد في العشرة، والضمان واحد، والمقاس اللي مش عندنا بنقولك موجود فين.</p></li>
-     <li><h3>ليه اسمها «نورماندي»؟</h3><p class="muted">[سطرين من المؤسسين — محدش يعرفها غيرهم، وهي أحلى حتة في الصفحة.]</p></li>
+      <p>السعر واحد في العشرة. الضمان واحد. والمقاس اللي مش عندنا، بنقولك موجود فين.<br>ده مش كلام إعلان — ده اللي بيحصل لما تدخل أي فرع فيهم.</p></li>
+     <li><div class="yr">السؤال اللي بيتسأل كل يوم</div><h3>وليه اسمها «نورماندي»؟</h3><p>دي الحتة الوحيدة في الصفحة اللي مش هنكتبها إحنا.<br>الاسم اتقال في محل في طنطا سنة ١٩٩٩، ومحدش يعرف الحكاية غير الخمسة اللي كانوا واقفين ساعتها. سايبينها لهم يحكوها بكلامهم — ولما يحكوها هتلاقيها هنا بالحرف.</p></li>
     </ul>
    </section>
    <section>
     <div class="secttl"><h2>الخمسة اللي بدأوا</h2></div><div class="rule"></div>
-    <p class="lead muted" style="font-size:14.5px">محل في طنطا اسمه على خمس أصحاب.</p>
+    <p class="lead muted" style="font-size:14.5px">محل في طنطا اسمه على خمس أصحاب. والشركة لسه ماشية على نفس الاتفاق.</p>
     <ul class="founders">
-     <li><div class="fph">[صورة]</div><div class="fn">دكتور أحمد فؤاد<div class="fr">مؤسس</div></div></li>
-     <li><div class="fph">[صورة]</div><div class="fn">أحمد سرحان<div class="fr">مؤسس</div></div></li>
-     <li><div class="fph">[صورة]</div><div class="fn">محمد سمير<div class="fr">مؤسس · ١٩٩٩ – ٢٠٢٠</div></div></li>
-     <li><div class="fph">[صورة]</div><div class="fn">مصطفى كامل<div class="fr">مؤسس</div></div></li>
-     <li><div class="fph">[صورة]</div><div class="fn">محمود موسى<div class="fr">مؤسس</div></div></li>
+     <li><div class="fph"><span>أ</span></div><div class="fn">دكتور أحمد فؤاد<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
+     <li><div class="fph"><span>س</span></div><div class="fn">أحمد سرحان<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
+     <li><div class="fph"><span>م</span></div><div class="fn">محمد سمير<div class="fr">مؤسس · ١٩٩٩ – ٢٠٢٠</div></div></li>
+     <li><div class="fph"><span>ك</span></div><div class="fn">مصطفى كامل<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
+     <li><div class="fph"><span>و</span></div><div class="fn">محمود موسى<div class="fr">مؤسس · من ١٩٩٩</div></div></li>
     </ul>
+    <p class="hint">صور الخمسة بتتجمّع دلوقتي من أرشيف الشركة ومن بيوتهم.</p>
     <div class="memo"><p>الشركة مكمّلة. وعلى ذكرى صحبته مكمّلين.</p>
-     <p>محمد سمير مشي سنة ٢٠٢٠، والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه.</p></div>
+     <p>محمد سمير مشي سنة ٢٠٢٠. والصحبة اللي بدأت المحل فضلت هي اللي ماشية بيه — وكل فرع بيفتح، بيفتح على نفس الاتفاق اللي اتعمل في طنطا.</p></div>
    </section>
    <section id="branches">
     <div class="secttl"><h2>عشر فروع</h2></div><div class="rule"></div>
-    <p class="lead muted" style="font-size:14.5px">كل فرع ليه صفحته: صورته، وتليفونه، وتقييمه على جوجل، والمتاح فيه دلوقتي.</p>
+    <p class="lead muted" style="font-size:14.5px">كل فرع ليه صفحته: صورته، وتليفونه، والمتاح فيه <b>دلوقتي</b> — مش اللي كان متاح الشهر اللي فات.</p>
     <ul class="brlist" id="brlist"></ul>
-    <p class="hint">الصفحة بتعرض الفروع الشغّالة بس. أي فرع بيقفل بيخرج في نفس اليوم.</p>
+    <p class="hint">الصفحة بتعرض الفروع الشغّالة بس. أي فرع بيقفل بيخرج من هنا في نفس اليوم، عشان محدش يروح على محل مابقاش موجود.</p>
    </section>
    <section>
     <div class="newbox">
@@ -324,17 +334,17 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    </section>
    <section id="memories">
     <div class="secttl"><h2>الذكريات</h2></div><div class="rule"></div>
-    <p class="lead muted" style="font-size:14.5px">أماكن محجوزة لحاجات حقيقية من الأرشيف. فاضية لحد ما تتملا — وما بنحطش فيها حاجة مولّدة.</p>
-    <ul class="mems"><li class="ph">إعلانات الجرنال</li><li class="ph">كارت نورماندي كلوب</li><li class="ph">إعلانات ولافتات قديمة</li><li class="ph">أول فاتورة وكارت ضمان</li></ul>
+    <p class="lead muted" style="font-size:14.5px">نورماندي عندها ٢٧ سنة، وأرشيفها لسه متفرّق على ناس وبيوت ودواليب. دي الأربع حاجات اللي بندوّر عليها.</p>
+    <ul class="mems"><li class="ph"><b>إعلانات الجرنال</b><span>أول إعلان اتنشر، وأي إعلان بعده</span></li><li class="ph"><b>كارت نورماندي كلوب</b><span>اللي كان بيتحط في المحفظة ومابيتزقّش</span></li><li class="ph"><b>لافتات قديمة</b><span>من واجهات اتغيّرت ولافتات اتشالت</span></li><li class="ph"><b>أول فاتورة وكارت ضمان</b><span>الورقتين اللي بدأ بيهم كل حاجة</span></li></ul>
     <div class="darkbox"><h2>مفيش صورة للفرع الأول. وإحنا مش هنخترع واحدة.</h2>
-     <p>بدل الصورة، رسمة مكتوب تحتها بالنص إنها رسمة: «رسمناه من وصف أربع ناس اشتغلوا فيه. لو فاكر حاجة غلط، قولنا».</p></div>
-    <div class="ph" style="margin-top:12px;aspect-ratio:4/3">[رسمة الفرع الأول]</div>
+     <p>الفرع الأول فتح قبل ما الموبايلات تبقى في إيد كل حد، فمحدش صوّره. وإحنا مش هنحط صورة لمحل تاني ونقول إنه هو.<br>بدل الصورة، رسمة. مرسومة من وصف ناس اشتغلت فيه، ومكتوب تحتها بالنص إنها رسمة.</p></div>
+    <figure style="margin:12px 0 0"><img class="photo" style="aspect-ratio:4/3;object-fit:cover" src="first-branch.svg" alt="رسمة للفرع الأول في طنطا"><figcaption class="hint" style="margin-top:7px">رسمة — مش صورة. اترسمت من وصف ناس اشتغلت في المحل. لو فاكر حاجة غلط فيها، قولنا ونعدّلها.</figcaption></figure>
     <div class="newbox" style="margin-top:12px">
      <h2 style="font-size:19px;margin-top:0">عندك حاجة من نورماندي زمان؟</h2>
-     <p class="lead" style="font-size:14.5px">علبة، كارت كلوب، فاتورة، شنطة، أو الشوز نفسه. صوّرها وابعتها — واسمك هيبقى تحتها.</p>
+     <p class="lead" style="font-size:14.5px">علبة، ولا كارت كلوب، ولا فاتورة، ولا شنطة، ولا الجزمة نفسها وهي لسه ماشية.<br>صوّرها بموبايلك وابعتها — واسمك هيبقى تحتها في الصفحة دي.</p>
      <button class="cta" style="margin-top:14px" onclick="alert('في الديمو ده الزرار مش موصّل بواتساب.')">ابعتها على واتساب</button>
     </div>
-    <p class="hint">ومن الشهر ده: كل فرع بيصوّر كادر واحد بتاريخه كل شهر. أرشيف ٢٠٣٠ بيتصوّر النهارده.</p>
+    <p class="hint" style="font-size:14px;text-align:center">ومن الشهر ده: كل فرع بيصوّر كادر واحد بتاريخه كل شهر.<br><b style="color:var(--rust)">أرشيف ٢٠٣٠ بيتصوّر النهارده.</b></p>
    </section>
    <div id="footer1"></div>
   </div>
@@ -655,9 +665,9 @@ const BR=[
 ];
 const BRN=Object.fromEntries(BR.map(b=>[b.k,b.n]));
 const VP=[
- ['السعر واحد، والضمان واحد، في العشر فروع.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.','فرع مدينة نصر'],
- ['المقاس اللي مش عندنا، بنقولك موجود فين.','عشر فروع بيشوفوا رصيد بعض. مش هتلف على فاضي.','من جوّه فرع أكتوبر'],
- ['٢٧ سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','من ١٩٩٩ في طنطا. عشر فروع في ست محافظات.','فرع المحلة الكبرى'],
+ ['السعر واحد، والضمان واحد، في العشر فروع.','مش سعر الفرع الكبير غير سعر الفرع الصغير. من ١٩٩٩.','فرع مدينة نصر'],
+ ['المقاس اللي مش عندنا، بنقولك موجود فين.','العشرة بيشوفوا رصيد بعض — عشان متلفش على فاضي.','من جوّه فرع أكتوبر'],
+ ['٢٧ سنة بنختار الجزمة، عشان انت تختار مرة واحدة.','بنشوف ميّة موديل، ومابندخّلش غير اللي يستاهل.','فرع المحلة الكبرى'],
 ];
 const OCC=[
  {id:'work', t:'شغل ومكتب', d:'من أول اجتماع لآخر اليوم', tags:['شغل','مكتب','شغل كاجوال']},
@@ -685,35 +695,79 @@ const SIZES=[[28,'18.5 – 19','أطفالي'],[29,'19 – 19.5','أطفالي']
 [42,'25.5 – 26','رجالي'],[43,'26 – 26.5','رجالي'],[44,'26.5 – 27','رجالي'],[45,'27 – 27.5','رجالي'],
 [46,'27.5 – 28','رجالي'],[47,'28 – 28.5','رجالي'],[48,'28.5 – 29','رجالي']];
 const POL={
- warranty:{t:'الضمان',h:`<h2>الضمان</h2><div class="rule"></div>
-  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:16px">ضمان 3 شهور ضد عيوب الصناعة فقط — ولا يعني استبدال الحذاء.</p>
-  <p>لو ثبت وجود عيب صناعة بعد عرض المنتج على إدارة الشركة، الشركة تتولى صيانة الحذاء. ولازم الاحتفاظ بورقة الضمان وتقديمها مع الحذاء في أي فرع.</p></div>
-  <h3>الضمان بيغطي</h3><ul><li>النعل</li><li>الجلد</li></ul>
-  <h3>الضمان مابيغطيش</h3><ul><li>عناية غير سليمة</li><li>خدش أو قطع من الاحتكاك</li><li>الاستهلاك الطبيعي</li>
-  <li>تلوّن الجوارب من الجلد الطبيعي المصبوغ نباتياً</li><li>اختيار المقاس مسؤولية العميل</li></ul>
-  <div class="warn">النص ده منقول حرف بحرف من ورقة الضمان الرسمية. أي وعد أكبر من كده مش معتمد.</div>`},
- exchange:{t:'الاستبدال',h:`<h2>الاستبدال</h2><div class="rule"></div>
-  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:16px">الاستبدال متاح 14 يوم من الشراء.</p>
-  <p>الشروط: الفاتورة معاك، والمنتج بحالته، وعلبته معاه.</p></div>
-  <h3>هدية ومش عارف المقاس؟</h3><p>اسأل على مقاس شوز بيلبسه، أو اختار قالب واسع، وخد الفاتورة معاك.</p>
-  <div class="warn">الاستبدال حاجة والضمان حاجة تانية. الضمان ضد عيوب الصناعة وبيتصلّح، والاستبدال بيبدّل المقاس في أول ١٤ يوم.</div>`},
- size:{t:'دليل المقاسات',h:`<h2>دليل المقاسات</h2><div class="rule"></div>
-  <p>قيس من الكعب لأطول صباع وانت واقف. قيس الرجلين الاتنين وخد الأطول.</p><div id="sztable"></div>
-  <h3>قواعد</h3><ul><li>الرقم الأعلى في كل مدى داخل فيه: 26.5 سم = مقاس 43، و26.6 = مقاس 44.</li>
-  <li>رقمك بين مقاسين؟ خد الأكبر.</li><li>الجدول المعتمد مفيهوش عرض قدم.</li></ul>
-  <div class="warn">الأقسام: رجالي وحريمي وأطفالي. مفيش قسم اسمه «أولادي».</div>`},
- privacy:{t:'الخصوصية',h:`<h2>سياسة الخصوصية</h2><div class="rule"></div>
-  <p>الصفحة دي بتشرح البيانات اللي بنجمعها وليه.</p>
-  <h3>اللي بنجمعه</h3><ul><li>اللي بتكتبه بنفسك: مقاسك واللي بتضيفه لكارت الزيارة.</li>
-  <li>بيانات تواصل لو بعتّلنا على واتساب أو كلّمت فرع.</li></ul>
-  <h3>اللي مابنعملوش</h3><ul><li>مابنبيعش بياناتك لأي جهة.</li><li>مافيش دفع في الصفحة دي.</li></ul>
-  <h3>كارت الزيارة</h3><p>اللي بتضيفه بيتحفظ على موبايلك بس في الديمو ده، ومابيتبعتش لحد.</p>
-  <div class="warn">[النسخة القانونية الكاملة محتاجة مراجعة من الإدارة قبل النشر.]</div>`},
- shipping:{t:'الشحن',h:`<h2>الشحن والطلب أونلاين</h2><div class="rule"></div>
-  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:16px">[لسه مش مفعّل.]</p>
-  <p>الطلب والشحن أونلاين لسه ما اشتغلوش. البيع دلوقتي في الفروع العشرة.</p></div>
-  <p>لحد ما يشتغل، الصفحة بتعمل حاجة واحدة: تقولك المقاس اللي انت عايزه موجود في أنهي فرع، وتجهّزلك كارت زيارة تاخده معاك.</p>
-  <div class="warn">أي كلام عن «شحن مجاني» أو «جرّب قبل ما تدفع» مش معتمد ومش هينزل قبل ما النظام يشتغل فعلاً.</div>`},
+ warranty:{t:'الضمان',h:`
+  <h2>الضمان</h2><div class="rule"></div>
+  <p class="lead">ضماننا مكتوب في سطر واحد، عشان محدش يتفاجئ وهو واقف في الفرع.</p>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:17px;line-height:1.5">
+   ضمان ٣ شهور ضد عيوب الصناعة فقط — ولا يعني استبدال الحذاء.</p>
+   <p>لو ثبت وجود عيب صناعة بعد عرض المنتج على إدارة الشركة، الشركة تتولى صيانة الحذاء.
+   ولازم الاحتفاظ بورقة الضمان وتقديمها مع الحذاء.</p>
+   <p class="hint" style="margin-top:10px">ده نص ورقة الضمان الرسمية حرف بحرف. اللي تحته شرح ليه بالعامية، مش بدل منه.</p></div>
+  <h3>يعني إيه بالبلدي</h3>
+  <p>لو طلع في الجزمة عيب صناعة، إحنا بنصلّحه. مش بنبدّلها بجزمة جديدة، ومش بنرجّع فلوس — بنصلّح العيب ونرجّعهالك.</p>
+  <h3>بيغطي إيه</h3>
+  <ul><li><b>النعل</b> — لو انفصل أو اتفكّ من غير سبب من برّه.</li>
+      <li><b>الجلد</b> — لو فيه عيب في الخامة نفسها.</li></ul>
+  <h3>مابيغطيش إيه</h3>
+  <ul><li>عناية غير سليمة</li><li>خدش أو قطع من الاحتكاك</li><li>الاستهلاك الطبيعي</li>
+      <li>تلوّن الجوارب من الجلد الطبيعي المصبوغ نباتياً</li>
+      <li>اختيار المقاس — ده مسؤولية العميل</li></ul>
+  <h3>تستخدمه إزاي</h3>
+  <ul><li>خد الجزمة وورقة الضمان معاك لأي فرع من العشرة.</li>
+      <li>الفرع بيعرض المنتج على الإدارة.</li>
+      <li>لو العيب ثبت، الصيانة علينا.</li></ul>
+  <div class="warn">واللي مش مكتوب هنا، مش بنوعد بيه. لو حد قالك غير كده، ده كلامه هو مش كلامنا.</div>`},
+ exchange:{t:'الاستبدال',h:`
+  <h2>الاستبدال</h2><div class="rule"></div>
+  <p class="lead">١٤ يوم. ومش محتاج تشرح السبب.</p>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:17px">الاستبدال متاح ١٤ يوم من تاريخ الشراء.</p>
+   <p>تلات شروط بس: الفاتورة معاك، والجزمة بحالتها، والعلبة معاها.</p></div>
+  <h3>الاستبدال غير الضمان</h3>
+  <p>الاستبدال بيبدّل المقاس أو الموديل في أول أسبوعين. الضمان حاجة تانية خالص —
+   ده ضد عيوب الصناعة وبيشتغل بالصيانة لمدة ٣ شهور.
+   <a data-pol="warranty" style="color:var(--rust);font-weight:700">اقرا الضمان</a>.</p>
+  <h3>هتجيب هدية ومش عارف المقاس؟</h3>
+  <ul><li>اسأل على مقاس جزمة هو بيلبسها دلوقتي.</li>
+      <li>أو اختار قالب واسع شوية — أسهل في الاستبدال.</li>
+      <li>وخد الفاتورة معاك، وسيبها معاه. ده اللي بيخليه يبدّل من غير حرج.</li></ul>
+  <div class="warn">الاستبدال بيتم في أي فرع من العشرة، مش لازم نفس الفرع اللي اشتريت منه.</div>`},
+ size:{t:'دليل المقاسات',h:`
+  <h2>دليل المقاسات</h2><div class="rule"></div>
+  <p class="lead">مقاسك رقم واحد. وعندنا مابيتغيّرش من موديل لموديل.</p>
+  <h3>قيس رجلك في دقيقة</h3>
+  <ul><li>قف على ورقة بيضا بكل وزنك.</li>
+      <li>خلّي حد يرسم حوالين رجلك والقلم لازق فيها.</li>
+      <li>قيس من الكعب لأطول صباع. اعمل كده للرجلين، وخد الرقم الأكبر.</li></ul>
+  <p class="hint">قيس بالليل. الرجل بتكبر شوية على آخر اليوم، والمقاس اللي يريّحك ساعتها هو الصح.</p>
+  <div id="sztable"></div>
+  <h3>تلات قواعد</h3>
+  <ul><li>الرقم الأعلى في كل مدى داخل فيه: ٢٦٫٥ سم = مقاس ٤٣، و٢٦٫٦ = مقاس ٤٤.</li>
+      <li>رقمك بين مقاسين؟ خد الأكبر. الجزمة الضيّقة مابتتوسّعش، بتوجع.</li>
+      <li>الجدول ده مفيهوش عرض قدم. لو رجلك عريضة، قول للبايع وهو يرشّحلك قالب أوسع.</li></ul>
+  <div class="warn">الأقسام عندنا: رجالي، وحريمي، وأطفالي. مفيش قسم اسمه «أولادي».</div>`},
+ privacy:{t:'الخصوصية',h:`
+  <h2>الخصوصية</h2><div class="rule"></div>
+  <p class="lead">إحنا متجر جزم. مش محتاجين نعرف عنك غير حاجة واحدة: مقاسك.</p>
+  <h3>اللي بنعرفه</h3>
+  <ul><li>المقاس اللي بتكتبه، واللي بتضيفه في كارت الزيارة.</li>
+      <li>رقمك لو إنت اللي بعتّه لنا على واتساب أو كلّمت فرع.</li></ul>
+  <h3>اللي مابنعملوش</h3>
+  <ul><li>مابنبيعش بياناتك لحد. ولا بنأجّرها. ولا بنبدّلها.</li>
+      <li>مابنبعتش إعلانات لحد ما يقول إنه عايزها.</li>
+      <li>مفيش دفع ولا بيانات كارت في الصفحة دي أصلاً.</li></ul>
+  <h3>كارت الزيارة</h3>
+  <p>اللي بتحطه في الكارت بيفضل على موبايلك إنت. مابيوصلش لينا، ومابيتبعتش لحد.
+   هو ورقة بتوريها للبايع، مش حساب عندنا.</p>
+  <div class="warn">النسخة القانونية الكاملة بتتراجع دلوقتي مع الإدارة، وهتتحط هنا مكان الكلام ده من غير ما يتغيّر معناه.</div>`},
+ shipping:{t:'الشحن والطلب',h:`
+  <h2>الشحن والطلب</h2><div class="rule"></div>
+  <p class="lead">لسه مش شغال. ولما يشتغل هتعرف من هنا الأول.</p>
+  <div class="box"><p style="font-weight:700;color:var(--ink);font-size:17px">البيع دلوقتي في الفروع العشرة بس.</p>
+   <p>مفيش طلب أونلاين، ومفيش شحن، ومفيش دفع على الصفحة دي.</p></div>
+  <h3>طب الصفحة دي بتعمل إيه؟</h3>
+  <p>حاجة واحدة: بتقولك المقاس اللي انت عايزه موجود في أنهي فرع دلوقتي،
+   وبتجهّزلك كارت زيارة تاخده معاك عشان متقفش تشرح.</p>
+  <div class="warn">أي كلام عن «شحن مجاني» أو «جرّب قبل ما تدفع» مش معتمد من نورماندي، ومش هيتكتب هنا قبل ما يبقى حقيقي.</div>`},
 };
 const AR=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
