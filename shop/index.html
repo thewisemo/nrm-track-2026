@@ -42,11 +42,22 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .muted{color:var(--mut)} .hint{font-size:13px;color:var(--mut);margin:10px 0 0}
 .ph{background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
  color:#8d8578;text-align:center;padding:20px;border-radius:18px;font-family:Alexandria,sans-serif;font-size:14px;border:1px dashed #cfc7b8}
+.empt{margin-top:14px;background:#fff;border:1px solid var(--bd);border-radius:18px;padding:20px;text-align:center}
+.empt b{font-family:Alexandria,sans-serif;font-weight:800;font-size:18px;display:block;line-height:1.4}
+.empt span{display:block;font-size:14px;color:var(--mut);margin-top:8px;line-height:1.6}
+.exlbl{position:absolute;top:12px;inset-inline-end:14px;font-size:11px;font-weight:700;
+ color:#1f1d1b;background:var(--or);border-radius:99px;padding:3px 10px}
 .mems li.ph{padding:16px 13px;gap:6px;justify-content:flex-end}
 .mems li b{font-weight:700;font-size:14px;color:#5f5750;line-height:1.35}
 .mems li span{font-size:11.5px;line-height:1.45;color:#938b7d;font-family:'IBM Plex Sans Arabic',sans-serif}
 .mems li.ph::before{content:'مطلوب';font-size:10.5px;font-weight:700;color:var(--chipink);background:var(--chip);
  padding:3px 9px;border-radius:99px;margin-bottom:auto}
+.mapbox{margin-top:12px;background:var(--panel);border:1px solid var(--bd);border-radius:18px;padding:16px;
+ display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mapbox b{font-family:Alexandria,sans-serif;font-size:15.5px;display:block}
+.mapbox span{font-size:13px;color:var(--mut);display:block;margin-top:3px}
+.mapgo{margin-inline-start:auto;display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 16px;
+ border-radius:22px;background:var(--ink);color:var(--cream);font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap}
 .photo{width:100%;display:block;border-radius:18px;background:var(--panel)}
 .hero{padding-top:26px} .hero h1{font-weight:800;font-size:31px;line-height:1.34;margin-top:14px}
 .vpwrap{position:relative;margin-top:18px;border-radius:20px;overflow:hidden;background:var(--panel)}
@@ -103,7 +114,9 @@ h1,h2,h3{font-family:Alexandria,sans-serif;margin:0}
 .mems{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .mems li{aspect-ratio:1/1}
 .view{display:none} .view.on{display:block}
-.rate{margin-top:16px;display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid var(--bd);border-radius:16px}
+.rate{margin-top:16px;display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid var(--bd);border-radius:16px;text-decoration:none;color:inherit}
+.rate b{font-family:Alexandria,sans-serif;font-weight:700;font-size:15.5px}
+.rate .stars{color:var(--or);display:flex}
 .rate .v{font-family:Alexandria,sans-serif;font-weight:800;font-size:26px;line-height:1}
 .stars{display:flex;gap:2px;color:var(--or)}
 dl.info{margin:12px 0 0;display:grid;gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:16px;overflow:hidden;font-size:15px}
@@ -329,7 +342,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
      <h2>٢٧ سنة وإحنا بنبيع للراجل. دلوقتي بنبيع لبيته كمان.</h2>
      <p class="lead" style="font-size:14.5px">من ١٩٩٩ لحد السنة دي، نورماندي كانت رجالي وبس. من الشهر ده دخلت موديلات حريمي وأطفالي — في فروع محدّدة الأول، مش كلها مرة واحدة.</p>
      <p class="lead" style="font-size:14.5px">وده مش دخول في سوق جديد. الراجل اللي بيشتري من نورماندي من عشرين سنة بقى له بيت، والبيت ده هو اللي كان بيختار معاه من الأول.</p>
-     <div class="pills"><span class="pill">رجالي — العشرة</span><span class="pill off">حريمي — [الفروع]</span><span class="pill off">أطفالي — [الفروع]</span></div>
+     <div class="pills"><span class="pill">رجالي — العشرة</span><span class="pill off">حريمي — في فروع محدّدة</span><span class="pill off">أطفالي — في فروع محدّدة</span></div>
     </div>
    </section>
    <section id="memories">
@@ -364,20 +377,19 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
      الفرع الأول — من ١٩٩٩</span>
     <h1 class="alx" id="bName" style="font-weight:800;font-size:31px;line-height:1.3;margin-top:12px"></h1>
     <p class="lead" id="bAddr"></p>
-    <div class="rate"><span class="v">[٠٫٠]</span>
-     <span style="flex:1"><span class="stars">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
-     </span><span style="display:block;font-size:13px;color:var(--mut);margin-top:3px">[التقييم وعدد المراجعات بيتقروا من جوجل بلايسس]</span></span>
-    </div>
+    <a class="rate" id="bRev" target="_blank" rel="noopener">
+     <span class="stars">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"></path></svg>
+     </span>
+     <span style="flex:1"><b>الناس بتقول إيه على الفرع ده</b>
+      <span style="display:block;font-size:13px;color:var(--mut);margin-top:3px">تقييمات جوجل الحقيقية — من غير ما نختار إحنا اللي يتعرض منها.</span></span>
+     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d2a28" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg>
+    </a>
     <dl class="info">
      <div><dt>التليفون</dt><dd class="tel" id="bTel"></dd></div>
      <div><dt>المواعيد</dt><dd>يومياً ١٢ ظهراً – ١١ مساءً</dd></div>
      <div><dt>الأقسام</dt><dd style="display:flex;gap:6px;flex-wrap:wrap">
-      <span class="pill">رجالي</span><span class="pill off">حريمي — [قريب]</span><span class="pill off">أطفالي — [قريب]</span></dd></div>
+      <span class="pill">رجالي</span><span class="pill off">حريمي — بيوصل قريب</span><span class="pill off">أطفالي — بيوصل قريب</span></dd></div>
     </dl>
     <div class="btns">
      <a class="p" id="bCall"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.5l1.8 4.2-2.2 1.4a12 12 0 0 0 6.3 6.3l1.4-2.2L20 15.5V19a1.5 1.5 0 0 1-1.7 1.5A16 16 0 0 1 3.5 5.7 1.5 1.5 0 0 1 5 4z"></path></svg>كلّم الفرع</a>
@@ -402,7 +414,11 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
      <p>سنة ١٩٩٩، خمس أصحاب فتحوا في طنطا محل أحذية إيطالية. كل فرع تاني في مصر اتفتح بعد كده، اتفتح من الباب ده.</p>
      <button data-go="story">الحكاية كاملة
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button></div>
-    <div class="ph" style="margin-top:12px;height:180px">[خريطة الفرع]</div>
+    <div class="mapbox">
+     <div><b>تعرف توصل؟</b><span>العنوان فوق بالظبط. ولو تهت، كلّم الفرع — بيردّوا.</span></div>
+     <a class="mapgo" id="bMap2" target="_blank" rel="noopener">افتحه على الخريطة
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></a>
+    </div>
    </section>
    <section><div class="secttl"><h2>أقرب فروع ليك</h2></div><div class="rule"></div>
     <ul class="near" id="near"></ul></section>
@@ -534,7 +550,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    </section>
    <div class="sticky2">
     <button class="d" id="pAdd">ضيفه لكارت الزيارة<small>تشوفه وتقيسه في الفرع</small></button>
-    <button class="o" data-go="checkout">اطلبه لحد البيت<small>[لسه مش مفعّل]</small></button>
+    <button class="o" data-go="checkout">اطلبه لحد البيت<small>الشحن لسه مابدأش</small></button>
    </div>
    <div id="footer7"></div>
   </div>
@@ -568,7 +584,15 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <span class="spacer" style="font-weight:700;font-size:16px">ضماناتي</span><img class="logo" src="logo.svg" alt=""></header>
    <section style="padding-top:16px">
     <p class="lead">كل فاتورة من نورماندي عليها ضمان ٣ شهور ضد عيوب الصناعة.</p>
-    <div class="darkbox" style="margin-top:14px">
+    <div class="empt">
+     <b>لسه مافيش ضمان مسجّل على حسابك</b>
+     <span>أول ما تشتري من أي فرع، الفاتورة بتتربط برقمك، والضمان بيظهر هنا لوحده — وبيفضّلك عدّاد بالأيام اللي فاضلة.</span>
+     <button class="cta" style="margin-top:14px" data-go="signin">اربط رقمك بالفواتير
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 6-6 6 6 6"></path></svg></button>
+    </div>
+    <p class="hint" style="margin-bottom:0">شكله هيبقى كده:</p>
+    <div class="darkbox" style="margin-top:8px;position:relative">
+     <span class="exlbl">مثال</span>
      <div style="font-size:13px;font-weight:700;color:#9fd8a9">الضمان شغال</div>
      <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
       <div style="width:60px;height:60px;border-radius:12px;background:#4a4541"></div>
@@ -618,7 +642,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
     <span class="spacer" style="font-weight:700;font-size:16px">اطلبه لحد البيت</span><img class="logo" src="logo.svg" alt=""></header>
    <section style="padding-top:18px">
     <div class="box" style="background:#fff;border:1px solid var(--bd);border-radius:18px;padding:20px">
-     <h2 class="alx" style="font-size:22px;font-weight:800">[لسه مش مفعّل]</h2>
+     <h2 class="alx" style="font-size:22px;font-weight:800">الشحن لسه مابدأش. ومش هنقولك غير كده.</h2>
      <p class="lead" style="font-size:14.5px">الطلب والشحن أونلاين لسه ما اشتغلوش. البيع دلوقتي في الفروع العشرة.</p>
     </div>
     <p class="lead">لحد ما يشتغل، الصفحة بتعمل حاجة واحدة بس: تقولك المقاس اللي انت عايزه موجود في أنهي فرع، وتجهّزلك كارت زيارة تاخده معاك.</p>
@@ -645,7 +669,7 @@ footer h4{font-family:Alexandria,sans-serif;font-size:14px;color:#fff;margin:0 0
    <li><b>اكتب مقاسك</b> — الرصيد حقيقي، نسخة من نظام الفروع.</li>
    <li><b>ضيف اللي عجبك لكارت الزيارة</b> — ده الباب اللي بيدخل الزاير على باقي التصميم.</li>
    <li>الفوتر تحت فيه <b>السياسات كلها</b>، مكتوبة من النص الرسمي مش من كلام الشوبيفاي.</li>
-   <li>اللي بين <b>[قوسين]</b> لسه ناقص بيانات.</li>
+   <li>الكارت المكتوب عليه <b>مثال</b> في صفحة الضمان بياناته بتتملي من فاتورة حقيقية — مش هنملاها من دماغنا.</li>
   </ul>
  </aside>
 </div>
@@ -770,6 +794,8 @@ const POL={
   <div class="warn">أي كلام عن «شحن مجاني» أو «جرّب قبل ما تدفع» مش معتمد من نورماندي، ومش هيتكتب هنا قبل ما يبقى حقيقي.</div>`},
 };
 const AR=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const MO=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const arDate=t=>{const[y,m,d]=String(t).split('-');return AR(+d)+' '+MO[+m-1]+' '+AR(y);};
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 let STOCK=null,cur=BR[0],hist=[],VC=[],vcBranch=null,SIZE=null,FB='all',curOcc=OCC[0],curProd=null;
 const SHOPV=['v-main','v-finder','v-product','v-gift','v-card','v-warr','v-signin','v-checkout'];
@@ -828,7 +854,7 @@ function show(id,push){
 /* ===== بيانات ===== */
 fetch('stock.json').then(r=>r.json()).then(d=>{STOCK=d;
  const sn=document.getElementById('snapNote');
- if(sn) sn.textContent='نسخة الرصيد متاخدة من نظام الفروع يوم '+AR(d.at)+' · '+AR(d.items.length)+' موديل';
+ if(sn) sn.textContent='الرصيد ده نسخة من نظام الفروع، اتاخدت يوم '+arDate(d.at)+' · '+AR(d.items.length)+' موديل';
  buildOcc(); buildPro(); });
 
 /* الكلام كله عربي: الهب بيسجّل النوع واللون إنجليزي */
@@ -962,7 +988,8 @@ function openBranch(i){ cur=BR[i];
  document.getElementById('bAddr').textContent=cur.ad;
  document.getElementById('bTel').textContent=cur.tel;
  document.getElementById('bCall').href='tel:'+cur.tel;
- document.getElementById('bMap').href='https://www.google.com/maps/search/?api=1&query='+cur.q;
+ document.getElementById('bRev').href='https://www.google.com/maps/search/?api=1&query='+cur.q;
+ document.getElementById('bMap').href=document.getElementById('bMap2').href='https://www.google.com/maps/search/?api=1&query='+cur.q;
  document.getElementById('bBadge').hidden=!cur.first;
  document.getElementById('availTtl').textContent='المتاح في '+cur.n+' دلوقتي';
  document.getElementById('result').innerHTML=''; document.getElementById('sz').value=SIZE||'';
