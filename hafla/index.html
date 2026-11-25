@@ -41,6 +41,9 @@ p{margin:14px 0 0}
 .cpbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;margin-top:10px;
  border:0;border-radius:24px;background:var(--ink);color:var(--cream);font:inherit;font-weight:700;font-size:14.5px;cursor:pointer}
 .cpbtn.ok{background:#2f6b3a}
+.lcp{border:0;background:var(--cream);color:var(--ink);font:inherit;font-size:12.5px;font-weight:700;
+ padding:7px 13px;border-radius:99px;cursor:pointer;white-space:nowrap}
+.lcp.ok{background:#2f6b3a;color:#fff}
 .lnk{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:56px;margin-top:18px;
  border-radius:28px;background:var(--red);color:#fff;font-weight:800;font-size:16px;text-decoration:none}
 .dl{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--bd);border-radius:16px;
@@ -73,13 +76,17 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <div class="wrap">
 
 <p class="lead">الورقة دي مش اقتراح. دي اللي هننفّذه. كل رقم فيها متاخد من نظام الفروع، مش تقدير، ولو رقم اتغيّر الصفحة دي بتتحدّث.</p>
+<div class="big" style="margin-top:20px">
+ <b>الحفلة صفحة دائمة. اللي بيخلص هو العرض، مش الصفحة.</b>
+ <p>صفحة الحفلة مفتوحة طول السنة، وبتشتغل أول ما يبقى فيه عرض على أي موديلات. فلما نقول «آخر يوم» إحنا بنتكلم عن <b>عروض نوفمبر</b> — الصفحة نفسها فاضلة مكانها، والناس تتعوّد ترجعلها.</p>
+</div>
 <div class="note"><b>الأرقام دي للكتالوج كله — مش لفرع ولا مقاس.</b> العدّادات اللي على صفحة الحفلة نفسها بتتغيّر مع الفلتر: لو اخترت فرع ومقاس، بتوريك المتاح <b>ليك إنت</b> وبس. أرقام الورقة دي متاخدة من نظام الفروع من غير أي فلتر، يوم 25 نوفمبر.</div>
 
 <h2>الوضع بالأرقام</h2><div class="rule"></div>
 <div class="nums">
  <div><b>28</b><span>موديل عليه خصم مباشر</span></div>
  <div><b>551</b><span>مقاس متاح دلوقتي</span></div>
- <div><b>27–47%</b><span>مدى الخصم</span></div>
+ <div><b>338</b><span>موديل في الكتالوج كله داخل الحفلة</span></div>
  <div><b>310</b><span>موديل على عرض القطعة التانية والتالتة</span></div>
 </div>
 
@@ -143,6 +150,18 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <tr><td>سموحة</td><td class="p">25</td></tr>
 </table>
 
+<h2>لينك كل موديل — وده أهم تغيير</h2><div class="rule"></div>
+<p class="lead">كل موديل في الحفلة ليه لينك بيفتح عليه هو شخصياً، مش على الصفحة كلها. يعني اللي بيدوس من البوست بيلاقي نفسه قدام الجزمة اللي شافها بالظبط — من غير ما يدوّر فيها وسط 338 موديل.</p>
+<div class="note"><b>الشكل:</b> <span dir="ltr" style="font-family:NRM">normandyshoes.com/pages/elhafla?m=الكود</span><br>
+واللينكات جاهزة في الجدول تحت — دوسة واحدة تنسخ لينك أي موديل.</div>
+<p><b>وفي كل بوست بيبقى فيه لينكين بترتيب:</b></p>
+<table>
+ <tr><th>اللينك</th><th>بيعمل إيه</th></tr>
+ <tr><td><b>لينك الموديل</b> — الأول</td><td>ده اللي بيشتري. بيفتح على الجزمة نفسها على طول</td></tr>
+ <tr><td><b>لينك الحفلة</b> — التاني</td><td>ده للي الموديل ده مش نوعه أو مش مقاسه — يشوف الباقي</td></tr>
+</table>
+<div class="note">وصفحة الموديل نفسها فيها زرار <b>«← رجوع للعروض»</b> فوق، فحد مش هيعلق في صفحة واحدة.</div>
+
 <h2>اللي بينزل كل يوم — بالظبط</h2><div class="rule"></div>
 <table>
  <tr><th>الملف</th><th>بينزل فين</th></tr>
@@ -189,7 +208,7 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 
 <h2>كل موديلات الحفلة — بالرصيد الحالي</h2><div class="rule"></div>
 <p class="lead">ده الجدول اللي طنطاوي بيكتب منه الكابشن. أسماء الفروع مكتوبة جاهزة للنسخ.</p>
-<table id="tbl"><tr><th>الموديل</th><th>السعر</th><th>متاح في</th></tr></table>
+<table id="tbl"><tr><th>الموديل</th><th>السعر</th><th>اللينك</th><th>متاح في</th></tr></table>
 
 <footer>نورماندي شوز — من أول خطوة · الصفحة دي للفريق، مش للنشر.</footer>
 </div>
@@ -197,23 +216,23 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <script>
 const LINK='https://normandyshoes.com/pages/elhafla';
 const DAYS=[
- {d:'الخميس 26 نوفمبر',t:'الافتتاح',code:'702 هافان',
+ {d:'الخميس 26 نوفمبر',t:'الافتتاح',code:'702 هافان',m:'702-Havan',
   why:'هو <b>الموديل الوحيد المتاح في العشر فروع</b>، وفيه 30 مقاس. يعني مستحيل حد يقول «مش موجود في فرعي» في أول يوم. أول انطباع ما ينفعش يبقى خيبة.',
   extra:'معاه: الفيديو الرأسي + كاروسيل الإعلان',
-  cap:'الحفلة بدأت. و28 موديل سعرهم نزل على طول — الخصم من 27% لـ 47%، والسعر الجديد مكتوب على كل موديل.\nوباقي الكتالوج كله داخل عرض القطعة التانية 25% والتالتة 50%.\nوعشان ما تقفش قدام الرف تدوّر — افتح اللينك، قول فرعك ومقاسك، والصفحة تفرزلك اللي متاح ليك إنت.'},
- {d:'الجمعة 27 نوفمبر',t:'3187 جراي',code:'كان 3650 · بقى 2250',
+  cap:'الحفلة فتحت.\n28 موديل نزل سعرهم، وباقي الكتالوج كله داخل عرض القطعة التانية والتالتة.\nوعشان ما تقفش قدام الرف تدوّر — افتح اللينك، قول فرعك ومقاسك، والصفحة تفرزلك اللي متاح ليك إنت.'},
+ {d:'الجمعة 27 نوفمبر',t:'3187 جراي',code:'كان 3650 · بقى 2250',m:'3187-جراي',
   why:'الجمعة يوم خروجة، و3187 كاجوال جلد في 9 فروع بـ38 مقاس — تاني أعلى رصيد في الحفلة. ومقاساته من 40 لـ 45، يعني بيغطي أغلب الناس.',
   cap:'3187 جراي — كان 3650، بقى 2250.\nكاجوال جلد، في 9 فروع، ومقاساته من 40 لـ 45.\nالجمعة خروجة، ودي بتمشي مع الجينز ومع البنطلون القماش.'},
- {d:'السبت 28 نوفمبر',t:'426006 أسود',code:'كان 2350 · بقى 1645',
+ {d:'السبت 28 نوفمبر',t:'426006 أسود',code:'كان 2350 · بقى 1645',m:'426006-Black',
   why:'أكبر رصيد في الحفلة كلها — <b>54 مقاس</b> في 8 فروع. وأهم من كده: مقاساته بتوصل <b>47</b>، وده واحد من القليلين اللي بيوصلوا للمقاس ده. البوست ده بيكلّم شريحة بتتجاهل عادةً.',
   cap:'426006 أسود — كان 2350، بقى 1645.\nرياضي، وده أكتر موديل عندنا منه رصيد في الحفلة: 54 مقاس في 8 فروع.\nولو مقاسك 46 أو 47 — ده واحد من القليلين اللي بيوصلوا لحد هناك.'},
- {d:'الحد 29 نوفمبر',t:'2025 أسود',code:'كان 3850 · بقى 2300',
+ {d:'الحد 29 نوفمبر',t:'2025 أسود',code:'كان 3850 · بقى 2300',m:'2025-Black',
   why:'أعلى فرق جنيه في الحفلة — <b>1550 جنيه</b>. وبوت جلد نوبك والجو بيبرد، فالتوقيت في صالحه. وموجود في 9 فروع.',
   cap:'2025 أسود — كان 3850، بقى 2300. يعني وفّرت 1550.\nبوت جلد نوبك، في 9 فروع.\nالجو بيبرد، والبوت ده اللي بيستحمل.'},
- {d:'الاتنين 30 نوفمبر — آخر يوم',t:'S102 بني جلد',code:'كان 3800 · بقى 2000',
-  why:'<b>أكبر خصم في الحفلة كلها — 47%.</b> وفاضل منه 5 مقاسات بس في 5 فروع. دي مش ندرة مصنوعة، ده الرقم الحقيقي. وآخر يوم لازم يبقى فيه سبب حقيقي للاستعجال، مش عدّاد متخيّل.',
-  extra:'وفي آخر اليوم: ستوري واحدة بتقول الحفلة خلصت، والعروض اللي فضلت لسه شغّالة',
-  cap:'آخر يوم في الحفلة.\nS102 بني جلد — كان 3800، بقى 2000. ده أكبر خصم في الحفلة كلها: 47%.\nوفاضل منه 5 مقاسات بس في 5 فروع. مش هنقولك «اتعجّل» — هنقولك الرقم وإنت تحكم.'}];
+ {d:'الاتنين 30 نوفمبر — آخر يوم في عروض نوفمبر',t:'S102 بني جلد',code:'كان 3800 · بقى 2000',m:'S102-Brown-جلد',
+  why:'<b>أكبر فرق سعر في الحفلة كلها.</b> وفاضل منه 5 مقاسات بس في 5 فروع. دي مش ندرة مصنوعة، ده الرقم الحقيقي. وآخر يوم لازم يبقى فيه سبب حقيقي للاستعجال، مش عدّاد متخيّل.',
+  extra:'وفي آخر اليوم: ستوري بتقول إن عروض نوفمبر خلصت — والحفلة فاضلة مفتوحة لأول عرض جديد',
+  cap:'آخر يوم في عروض نوفمبر.\nS102 بني جلد — كان 3800، بقى 2000.\nوفاضل منه 5 مقاسات بس في 5 فروع. مش هنقولك «اتعجّل» — هنقولك الرقم وإنت تحكم.'}];
 
 document.getElementById('days').innerHTML=DAYS.map((x,i)=>`
 <div class="day">
@@ -221,11 +240,17 @@ document.getElementById('days').innerHTML=DAYS.map((x,i)=>`
  <div class="b">
   <p class="why">${x.why}</p>
   ${x.extra?`<p class="why" style="margin-top:10px;color:var(--red);font-weight:700">${x.extra}</p>`:''}
-  <div class="cap" id="cap${i}">${x.cap}\n\n${LINK}</div>
+  <div class="cap" id="cap${i}">${x.cap}\n\nالموديل ده: ${LINK}?m=${encodeURIComponent(x.m)}\nوباقي موديلات الحفلة: ${LINK}</div>
   <button class="cpbtn" data-c="${i}">انسخ الكابشن والرابط</button>
  </div></div>`).join('');
 
+async function cp(t){ try{await navigator.clipboard.writeText(t);}
+ catch(_){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);
+ ta.select();document.execCommand('copy');ta.remove();} }
 document.addEventListener('click',async e=>{
+ const L=e.target.closest('[data-l]');
+ if(L){ await cp(L.dataset.l); const o=L.textContent; L.textContent='اتنسخ ✓'; L.classList.add('ok');
+   setTimeout(()=>{L.textContent=o;L.classList.remove('ok');},1500); return; }
  const b=e.target.closest('[data-c]'); if(!b)return;
  const t=document.getElementById('cap'+b.dataset.c).innerText;
  try{ await navigator.clipboard.writeText(t); }
@@ -239,7 +264,8 @@ fetch('models.json').then(r=>r.json()).then(rows=>{
  const t=document.getElementById('tbl');
  t.innerHTML+=rows.map(m=>`<tr>
   <td><b>${m.n} ${m.col}</b><span style="display:block;color:var(--mut);font-size:12px">${m.use} · مقاسات ${m.sz[0]}–${m.sz[1]}</span></td>
-  <td class="p">${m.now}<s>${m.was}</s></td>
+  <td class="p">${m.now}&nbsp; <s>${m.was}</s></td>
+  <td><button class="lcp" data-l="${LINK}?m=${encodeURIComponent(m.code)}">انسخ</button></td>
   <td style="font-size:12.5px;color:#4a4541">${m.br.join('، ')}</td></tr>`).join('');
 });
 </script>
