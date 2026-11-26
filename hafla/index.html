@@ -64,6 +64,31 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 .sticky{position:sticky;bottom:0;background:linear-gradient(to top,#fff 60%,rgba(255,255,255,0));
  padding:12px 0 14px;margin-top:0}
 @media(min-width:620px){.nums{grid-template-columns:repeat(4,1fr)}}
+
+.who{margin:26px 0 8px;background:#fff;border:1px solid #e7e1d4;border-radius:20px;padding:18px 16px}
+.who>p{margin:0 0 12px;font-weight:700;color:var(--mut);font-size:14.5px}
+.whob{display:flex;flex-direction:column;gap:9px}
+.whob button{font:inherit;font-weight:700;font-size:15px;text-align:right;cursor:pointer;
+ border:1.5px solid #e7e1d4;background:#faf8f3;color:var(--ink);border-radius:14px;padding:14px 16px}
+.whob button.on{background:var(--red);border-color:var(--red);color:#fff}
+.alltog{font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;background:none;border:none;
+ color:var(--mut);text-decoration:underline;padding:12px 2px 2px}
+.alltog.on{color:var(--red)}
+.idx{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;padding-top:14px;border-top:1px solid #efe9dc}
+.idx a{font-size:12.5px;font-weight:700;text-decoration:none;color:#5c544e;background:#f4f0e7;
+ border-radius:999px;padding:7px 12px}
+#today{margin-top:24px}
+.tcard{background:var(--red);color:#fff;border-radius:22px;padding:20px 18px}
+.tcard .tl{font-size:13px;opacity:.85;font-weight:700;letter-spacing:.3px}
+.tcard .tm{font-size:27px;font-weight:800;margin:6px 0 2px;line-height:1.25}
+.tcard .tp{font-size:16px;font-weight:700;opacity:.95}
+.tcard .tp s{opacity:.6;font-weight:400}
+.tcard .tb{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.tcard .tb button,.tcard .tb a{font:inherit;font-weight:700;font-size:14.5px;cursor:pointer;
+ border:none;border-radius:999px;padding:12px 18px;text-decoration:none;background:#fff;color:var(--red)}
+.tcard .tb a.gh{background:rgba(255,255,255,.18);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
+.tcard .ta{margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.3);font-size:14px;line-height:1.75}
+.tcard .ta a{color:#fff;font-weight:800}
 </style></head>
 <body>
 
@@ -75,6 +100,20 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 
 <div class="wrap">
 
+<div id="today"></div>
+
+<div class="who">
+ <p>إنت مين؟ دوس عشان تشوف بتاعك بس:</p>
+ <div class="whob">
+  <button data-role="m" class="on">أستاذ محمود — النشر</button>
+  <button data-role="b">أستاذ أحمد وأستاذ مصطفى — الفروع</button>
+  <button data-role="a">الإدارة — الصورة الكبيرة</button>
+ </div>
+ <button id="allbtn" class="alltog">أو اعرض كل الأقسام</button>
+ <div id="idx" class="idx"></div>
+</div>
+
+<section data-r="a">
 <p class="lead">الورقة دي مش اقتراح. دي اللي هننفّذه. كل رقم فيها متاخد من نظام الفروع، مش تقدير، ولو رقم اتغيّر الصفحة دي بتتحدّث.</p>
 <div class="big" style="margin-top:20px">
  <b>الحفلة صفحة دائمة. اللي بيخلص هو العرض، مش الصفحة.</b>
@@ -82,6 +121,9 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 </div>
 <div class="note"><b>الأرقام دي للكتالوج كله — مش لفرع ولا مقاس.</b> العدّادات اللي على صفحة الحفلة نفسها بتتغيّر مع الفلتر: لو اخترت فرع ومقاس، بتوريك المتاح <b>ليك إنت</b> وبس. أرقام الورقة دي متاخدة من نظام الفروع من غير أي فلتر، يوم 25 نوفمبر.</div>
 
+
+</section>
+<section data-r="a">
 <h2>الوضع بالأرقام</h2><div class="rule"></div>
 <div class="nums">
  <div><b>28</b><span>موديل عليه خصم مباشر</span></div>
@@ -96,6 +138,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <p>المشكلة مش إن العروض قليلة. المشكلة إن محدش فتح عليها الضوء. الخطة دي بتحل ده.</p>
 </div>
 
+</section>
+<section data-r="a">
 <h2>القاعدة</h2><div class="rule"></div>
 <h3>موديل واحد في اليوم، ومعاه رابطه. مفيش ألبوم.</h3>
 <p><b>والعدد ثابت</b> — سواء الحفلة وقفت آخر نوفمبر أو اتمدّت. اللي بيتغيّر هو <b>أنهي موديل</b> و<b>الزاوية</b>، مش العدد. وده مقصود: الفريق بيعرف شغله من غير نقاش كل يوم، والناس بتتعوّد على الإيقاع.</p>
@@ -107,10 +151,14 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
 </a>
 
+</section>
+<section data-r="m a">
 <h2>سيناريو أ — الحفلة تقف 30 نوفمبر</h2><div class="rule"></div>
 <p class="lead">فاضل خمس أيام. مفيش وقت تسخين — كل يوم لازم يشتغل لوحده. اضغط «انسخ الكابشن» وهو بينسخ النص والرابط مع بعض، جاهز تلزقه.</p>
 <div id="days"></div>
 
+</section>
+<section data-r="a">
 <h2>سيناريو ب — الحفلة اتمدّت</h2><div class="rule"></div>
 <p>نفس القاعدة: <b>موديل واحد في اليوم</b>. اللي بيتغيّر إننا بنبطّل نتكلم بإلحاح ونمشي بإيقاع أسبوعي ثابت:</p>
 <table>
@@ -124,6 +172,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 </table>
 <p><b>قاعدة التدوير:</b> مينفعش ينزل نوعين متشابهين ورا بعض. الترتيب: كلاسيك ← رياضي ← كاجوال ← بوت/هافان ← ويعيد. كده الفيد بيبان مختلف من غير ما نغيّر التصميم.</p>
 
+</section>
+<section data-r="m">
 <h2>حارس الرصيد</h2><div class="rule"></div>
 <p class="lead">دي أهم قاعدة في الورقة كلها. قبل أي بوست بيوم، الرصيد يتراجع من <a href="https://normandyshoes.com/pages/elhafla" target="_blank" style="color:var(--red);font-weight:700">صفحة الحفلة</a> نفسها:</p>
 <table>
@@ -134,6 +184,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 </table>
 <div class="note"><b>ليه الصرامة دي؟</b> أسوأ حاجة ممكن تحصل للحفلة إن حد يشوف بوست، يسيب شغله، يروح الفرع، ويلاقي الموديل خلص. دي بتحرق الثقة في كل بوست بعدها، ومش هنكسبها تاني بسهولة.</div>
 
+</section>
+<section data-r="b a">
 <h2>الخصم المباشر موزّع إزاي على الفروع</h2><div class="rule"></div>
 <p class="lead">عدد المقاسات المتاحة من الـ28 موديل في كل فرع — ده اللي بيحكم أنهي فرع نقدر نضغط عليه أكتر.</p>
 <table>
@@ -150,6 +202,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <tr><td>سموحة</td><td class="p">25</td></tr>
 </table>
 
+</section>
+<section data-r="m">
 <h2>لينك كل موديل — وده أهم تغيير</h2><div class="rule"></div>
 <p class="lead">كل موديل في الحفلة ليه لينك بيفتح عليه هو شخصياً، مش على الصفحة كلها. يعني اللي بيدوس من البوست بيلاقي نفسه قدام الجزمة اللي شافها بالظبط — من غير ما يدوّر فيها وسط 338 موديل.</p>
 <div class="note"><b>الشكل:</b> <span dir="ltr" style="font-family:NRM">normandyshoes.com/pages/elhafla?m=الكود</span><br>
@@ -162,6 +216,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 </table>
 <div class="note">وصفحة الموديل نفسها فيها زرار <b>«← رجوع للعروض»</b> فوق، فحد مش هيعلق في صفحة واحدة.</div>
 
+</section>
+<section data-r="m">
 <h2>اللي بينزل كل يوم — بالظبط</h2><div class="rule"></div>
 <table>
  <tr><th>الملف</th><th>بينزل فين</th></tr>
@@ -171,6 +227,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <tr><td><b>الرابط</b></td><td>أول كومنت على فيسبوك · ستيكر اللينك على الستوري · البايو على انستجرام</td></tr>
 </table>
 
+</section>
+<section data-r="b m">
 <h2>قبل أي بوست — الفروع تفهم الأول</h2><div class="rule"></div>
 <div class="big">
  <b>مفيش بوست ينزل قبل ما العشر فروع تكون فاهمة.</b>
@@ -210,6 +268,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <br><br><b>ده الرابط اللي أستاذ أحمد سعيد وأستاذ مصطفى يبعتوه للفروع</b> عشان كل بايع يشوفه بنفسه قبل ما يبدأ يومه — الدخول على الشاشة، العميل اللي جاي بكارت الحفلة، موديلات الخصم المباشر، وحساب عرض القطعة التانية والتالتة خطوة بخطوة.
 </div>
 
+</section>
+<section data-r="m">
 <h2>إزاي بينزل — خطوة بخطوة</h2><div class="rule"></div>
 <p class="lead">ده روتين اليوم الواحد. نفسه كل يوم، ومش محتاج قرار.</p>
 <table>
@@ -227,6 +287,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <br><br>والمقاسين الاتنين جاهزين: <b>الرأسي</b> لتيك توك والريلز والستوري، و<b>الشبه مربع</b> لبوست فيسبوك وانستجرام.</div>
 <div class="note"><b>ميعاد النشر:</b> اختار ميعاد واحد وثبّت عليه الخمس أيام. <b>الثبات أهم من الميعاد نفسه</b> — الناس بتتعوّد، والأرقام بتبقى قابلة للمقارنة. وبعد أسبوع لو جرّبنا ميعاد تاني نعرف فرّق ولا لأ.</div>
 
+</section>
+<section data-r="m a">
 <h2>الحفلة والخطة العادية — إيه اللي بيحصل للاتنين</h2><div class="rule"></div>
 <div class="big">
  <b>الخطة العادية ما بتقفش.</b>
@@ -242,6 +304,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <div class="note"><b>ليه مش نوقّف كل حاجة ونركّز على الحفلة؟</b> لأن اللي بيحصل ساعتها إن الصفحة تتحوّل لخمس أيام خصومات ورا بعض ومفيش غيرهم — والناس بتبدأ تشوفنا «محل بيخفّض» بس. بوست الخدمة وبوست الحكاية هما اللي بيفكّروهم إننا براند له حكاية، وبيخلّوا الخصم يبان كحدث مش كحالة دايمة. والاتنين مش بيزاحموا الموديل لأنهم مش بيبيعوا موديل.</div>
 <div class="note"><b>وليه مش بوستين في اليوم؟</b> على انستجرام وفيسبوك، تاني بوست في نفس اليوم بياخد من وصول الأول — المنصة مابتوزّعش الاتنين بالتساوي. فبدل ما يبقى عندنا بوستين نُص وصول، بوست واحد بوصول كامل.</div>
 
+</section>
+<section data-r="m a">
 <h2>الإعلان المدفوع</h2><div class="rule"></div>
 <h3>إيه اللي هيتعمل بيه الإعلان؟</h3>
 <table>
@@ -266,6 +330,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <div class="note"><b>والنسب دي مش مقدّسة.</b> بعد يومين هتبان الحقيقة بنفسها: الموديل اللي إعلانه جايب أسئلة في الكومنتات وبيع في الفرع ياخد أكتر، واللي ساكت يتقفل. <b>ما تستنّاش آخر الحملة عشان تعدّل</b> — خمس أيام مابيستحملوش انتظار.</div>
 <div class="note">إحنا <b>مش متجر أونلاين</b>. البيع في عشر فروع. فالاستهداف الصح مش «مصر كلها» — ده <b>دايرة حوالين كل فرع</b>. اعمل مجموعة إعلانية لكل فرع باستهداف جغرافي حوالين عنوانه، وحطّ في الإعلان اسم الفرع. كده الإعلان اللي بيشوفه اللي في طنطا بيقوله «موجود في طنطا».</div>
 
+</section>
+<section data-r="m">
 <h2>الزرار — لأستاذ محمود</h2><div class="rule"></div>
 <p class="lead">دي أهم حتة عملية في الورقة. الزرار مش موجود في كل حتة، وده الوضع الحقيقي:</p>
 <h3>ميتا — فيسبوك وانستجرام</h3>
@@ -288,6 +354,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <p><b>اللي نختاره:</b> <span dir="ltr">Shop Now</span> على كروت الموديلات، و<span dir="ltr">Learn More</span> على الفيديو.</p>
 <div class="note"><b>ملحوظة أمانة:</b> أسماء الزراير المتاحة بتختلف حسب هدف الحملة والدولة ونوع الوجهة. الأسماء اللي فوق هي اللي بتظهر في أغلب الحالات — <b>بس اللي يحكم هو القايمة اللي بتظهر قدام أستاذ محمود في اللحظة دي</b>. لو مالقاش اسم منهم، أقرب بديل في نفس المعنى يمشي.</div>
 
+</section>
+<section data-r="m b">
 <h2>الممنوعات</h2><div class="rule"></div>
 <div class="no"><ul>
  <li><b>ألبوم.</b> لأي سبب. لو حد طلب ألبوم، الرد إن الـ28 موديل كلهم على الصفحة أصلاً — والصفحة بتفرز بالمقاس والفرع، وده اللي الألبوم مش بيعمله.</li>
@@ -297,6 +365,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
  <li><b>على كروت عرض «قطعة والتانية والتالتة»</b> لازم يتكتب <b>«الخصم بيتحسب في الفرع على الكاشير»</b>. من غير السطر ده، العميل هيروح الفرع متوقّع السعر على التيكيت، والبايع هو اللي هيتحمّل.</li>
 </ul></div>
 
+</section>
+<section data-r="m">
 <h2>الفيديو التعليمي — بمقاسين</h2><div class="rule"></div>
 <p class="lead">ده الفيديو اللي بيشرح صفحة الحفلة بالتعليق الصوتي — العميل يشوفه مرة واحدة ويبقى عارف يستخدم الصفحة لوحده. نفس الفيديو اتعمل بمقاسين، كل واحد متظبّط لشاشة مختلفة.</p>
 <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:18px">
@@ -318,6 +388,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <div class="note"><b>وياريت محدش يعكسهم.</b> الفيد بيتفرّج عليه الناس وهي بتنزل بإيدها، فالمقاس الشبه مربع بياخد مساحة أكبر في الشاشة وبيوقّفهم. أما تيك توك والريلز والستوري فالشاشة فيهم كلها فيديو واحد — وأي مقاس أقصر من الشاشة بيسيب شرايط سودا من فوق ومن تحت، والمنصة بتقرا ده إن الفيديو مش متعمّل علشانها فبتقلّل انتشاره بنفسها. <b>الشرايط السودا دي هي الفرق بين فيديو بيتفرّجوا عليه لآخره وفيديو بيعدّوه في ثانية.</b></div>
 <div class="note"><b>ينزل إمتى؟</b> <b>يوم الافتتاح، وقبل كارت أول موديل بساعتين على الأقل.</b> الترتيب ده مش عشوائي: الفيديو بيعلّم الناس يستخدموا الصفحة، فلما كارت الموديل ينزل بعده يبقوا عارفين يعملوا إيه باللينك. ولو نزل بعد الكروت، الناس تكون دخلت الصفحة وهي مش فاهمة وخرجت. والفيديو <b>يتثبّت (pin) فوق البروفايل</b> طول مدة الحفلة، عشان أي حد جديد يلاقيه أول حاجة.</div>
 
+</section>
+<section data-r="m">
 <h2>فيديو الشرح القصير والكاروسيل</h2><div class="rule"></div>
 <p class="lead">الفيديو ده تسجيل حقيقي للصفحة وهي بتتستخدم — مش موشن جرافيك. 22 ثانية، وبيعلّم حاجة واحدة بس: قول فرعك ومقاسك.</p>
 <video src="video.mp4" controls playsinline preload="metadata"
@@ -330,6 +402,8 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 </table>
 <div class="note"><b>ليه كاروسيل مع إن فيه فيديو؟</b> على فيسبوك وانستجرام الفيد، الفيديو التعليمي بياخد تلات ثواني والناس تعدّي. الكاروسيل بيتقرا على مهل، وبيشتغل من غير صوت، <b>وبيفضل على البروفايل كمرجع</b> — الفيديو بيندفن تحت أول بوست بعديه.</div>
 
+</section>
+<section data-r="m b">
 <h2>التحميلات</h2><div class="rule"></div>
 <a class="dl" href="tut-9x16.mp4" download><span style="font-size:26px">🎥</span>
  <span><b>الفيديو التعليمي — 9:16</b><span>تيك توك وريلز وستوري · 75 ثانية</span></span><i>حمّل</i></a>
@@ -348,10 +422,13 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 <div class="note"><b>لأستاذ أحمد:</b> الملف مفتوح بـ12 طبقة مسمّاة بالعربي — الخلفية، صورة المنتج، كعب التذكرة، تذكرة الحفلة، اسم الموديل، الكود والألوان، السعر الجديد، السعر القديم، شعار نورماندي، والسطر تحت. غيّر طبقة «صورة المنتج» وبدّل الأرقام وخلاص.
 <br><br><b>ملاحظة واحدة مهمة:</b> الكتابة في الملف <b>مرسومة مش حيّة</b>، لأن الملف اتعمل بره الفوتوشوب. أول مرة تفتحه، اكتب النصوص الأربعة من جديد بخطوط البراند (جي اس اس تو للعربي، فودافون للأرقام) واحفظه كقالب — شغل عشر دقايق مرة واحدة، وبعدها كل موديل بيتعمل في دقيقة.</div>
 
+</section>
+<section data-r="m b a">
 <h2>كل موديلات الحفلة — بالرصيد الحالي</h2><div class="rule"></div>
 <p class="lead">ده الجدول اللي أستاذ محمود بيكتب منه الكابشن. أسماء الفروع مكتوبة جاهزة للنسخ.</p>
 <table id="tbl"><tr><th>الموديل</th><th>السعر</th><th>اللينك</th><th>متاح في</th></tr></table>
 
+</section>
 <footer>نورماندي شوز — من أول خطوة · الصفحة دي للفريق، مش للنشر.</footer>
 </div>
 
@@ -409,6 +486,65 @@ document.addEventListener('click',async e=>{
  const old=b.textContent; b.textContent='اتنسخ ✓'; b.classList.add('ok');
  setTimeout(()=>{b.textContent=old;b.classList.remove('ok');},1600);
 });
+
+/* ===== كارت النهارده + تقسيم بالشخص ===== */
+(function(){
+ const T=document.getElementById('today');
+ const now=new Date();
+ const idx=(function(){
+   if(now.getFullYear()!==2026||now.getMonth()!==10) return now<new Date(2026,10,26)?0:-1;
+   const d=now.getDate();
+   if(d<26) return 0; if(d>30) return -1; return d-26;
+ })();
+ if(idx<0||!DAYS[idx]){
+  T.innerHTML='<div class="tcard"><div class="tl">عروض نوفمبر</div>'+
+   '<div class="tm">خلصت</div><p class="tp" style="margin-top:8px">والحفلة فاضلة مفتوحة لأول عرض جديد.</p>'+
+   '<div class="tb"><a href="'+LINK+'" target="_blank" rel="noopener">افتح صفحة الحفلة</a></div></div>';
+ } else {
+  const x=DAYS[idx];
+  const cap=x.cap+'\n\nالموديل ده: '+LINK+'?m='+encodeURIComponent(x.m)+
+            '\nوباقي موديلات الحفلة: '+LINK;
+  T.innerHTML='<div class="tcard"><div class="tl">النهارده · '+x.d+'</div>'+
+   '<div class="tm">'+(x.t==='الافتتاح'?x.code+' — الافتتاح':x.t)+'</div>'+
+   '<p class="tp">'+(x.t==='الافتتاح'?'متاح في العشر فروع':x.code)+'</p>'+
+   '<div class="tb"><button id="tcp">انسخ الكابشن والرابط</button>'+
+   '<a class="gh" href="'+LINK+'?m='+encodeURIComponent(x.m)+'" target="_blank" rel="noopener">افتح الموديل</a></div>'+
+   '<div class="ta"><b>لو رصيده وقع الصبح:</b> انزل بـ'+x.alt+' — '+
+   '<a href="'+LINK+'?m='+encodeURIComponent(x.altm)+'" target="_blank" rel="noopener">لينكه</a></div></div>';
+  document.getElementById('tcp').addEventListener('click',async function(){
+   await cp(cap); const o=this.textContent; this.textContent='اتنسخ ✓';
+   setTimeout(()=>{this.textContent=o;},1600);
+  });
+ }
+
+ const secs=[...document.querySelectorAll('section[data-r]')];
+ const btns=[...document.querySelectorAll('.whob button')];
+ const all=document.getElementById('allbtn');
+ function show(role){
+  if(role==='all'){ secs.forEach(s=>s.style.display=''); btns.forEach(b=>b.classList.remove('on'));
+   all.classList.add('on'); all.textContent='✓ كل الأقسام ظاهرة'; }
+  else { secs.forEach(s=>s.style.display=s.dataset.r.split(' ').includes(role)?'':'none');
+   btns.forEach(b=>b.classList.toggle('on',b.dataset.role===role));
+   all.classList.remove('on'); all.textContent='أو اعرض كل الأقسام'; }
+  buildIdx();
+  try{localStorage.setItem('nrmRole',role);}catch(e){}
+  window.scrollTo({top:0,behavior:'smooth'});
+ }
+ function buildIdx(){
+  const I=document.getElementById('idx');
+  I.innerHTML=secs.filter(s=>s.style.display!=='none').map((s,i)=>{
+   const h=s.querySelector('h2'); if(!h.id) h.id='s'+i;
+   const t=h.textContent.split('—')[0].trim();
+   return '<a href="#'+h.id+'">'+t+'</a>';}).join('');
+ }
+ btns.forEach(b=>b.addEventListener('click',()=>show(b.dataset.role)));
+ all.addEventListener('click',()=>show(all.classList.contains('on')?'m':'all'));
+ let r='m'; try{r=localStorage.getItem('nrmRole')||'m';}catch(e){}
+ secs.forEach(s=>{ if(r!=='all') s.style.display=s.dataset.r.split(' ').includes(r)?'':'none'; });
+ btns.forEach(b=>b.classList.toggle('on',b.dataset.role===r));
+ if(r==='all'){ all.classList.add('on'); all.textContent='✓ كل الأقسام ظاهرة'; }
+ buildIdx();
+})();
 
 fetch('models.json').then(r=>r.json()).then(rows=>{
  const t=document.getElementById('tbl');
