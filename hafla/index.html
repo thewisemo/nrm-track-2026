@@ -507,6 +507,7 @@ document.getElementById('days').innerHTML=DAYS.map((x,i)=>`
   <p class="why" style="margin-top:10px;background:#faf6f5;border-radius:12px;padding:10px 12px">
    <b>لو رصيده وقع الصبح، البديل:</b> ${x.alt} — ${x.altwhy}.
    <a href="${LINK}?m=${encodeURIComponent(x.altm)}" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">لينك البديل ←</a></p>
+  <p class="why" data-stk="${x.m}" style="margin-top:10px;font-size:13.5px;color:#4a4541"></p>
   <div class="cap" id="cap${i}">${x.cap}</div>
   ${cpset(i)}
  </div></div>`).join('');
@@ -531,35 +532,44 @@ document.addEventListener('click',async e=>{
  setTimeout(()=>{b.textContent=old;b.classList.remove('ok');},1600);
 });
 
-/* ===== كارت النهارده + تقسيم بالشخص ===== */
-(function(){
- const T=document.getElementById('today');
- const now=new Date();
- const idx=(function(){
-   if(now.getFullYear()!==2026||now.getMonth()!==10) return now<new Date(2026,10,26)?0:-1;
-   const d=now.getDate();
-   if(d<26) return 0; if(d>30) return -1; return d-26;
- })();
- if(idx<0||!DAYS[idx]){
-  T.innerHTML='<div class="tcard"><div class="tl">عروض نوفمبر</div>'+
-   '<div class="tm">خلصت</div><p class="tp" style="margin-top:8px">والحفلة فاضلة مفتوحة لأول عرض جديد.</p>'+
+/* ===== كارت النهارده — بيتبني من الرصيد الحي ===== */
+const T=document.getElementById('today');
+const plan={}; DAYS.forEach(x=>plan[x.m]=x);
+const nb=k=>k===1?'في فرع واحد':k===2?'في فرعين':k===10?'في العشر فروع':
+          (k>=3&&k<=9)?('في '+k+' فروع'):('في '+k+' فرع');
+const nsz=k=>k===1?'مقاس واحد':k===2?'مقاسين':(k>=3&&k<=10)?(k+' مقاسات'):(k+' مقاس');
+
+function card(ST){
+ if(!ST||!ST.pick||!ST.models[ST.pick]){
+  T.innerHTML='<div class="tcard"><div class="tl">عروض نوفمبر</div><div class="tm">خلصت</div>'+
+   '<p class="tp" style="margin-top:8px">والحفلة فاضلة مفتوحة لأول عرض جديد.</p>'+
    '<div class="tb"><a href="'+LINK+'" target="_blank" rel="noopener">افتح صفحة الحفلة</a></div></div>';
- } else {
-  const x=DAYS[idx];
-  T.innerHTML='<div class="tcard"><div class="tl">النهارده · '+x.d+'</div>'+
-   '<div class="tm">'+(x.t==='الافتتاح'?x.code+' — الافتتاح':x.t)+'</div>'+
-   '<p class="tp">'+(x.t==='الافتتاح'?'متاح في العشر فروع':x.code)+'</p>'+
-   '<div class="tb">'+
-   '<button data-p="'+idx+':fbcap">كابشن فيسبوك</button>'+
-   '<button data-p="'+idx+':fbcom">كومنت فيسبوك</button>'+
-   '<button data-p="'+idx+':igcap">كابشن انستجرام وتيك توك</button>'+
-   '<button data-p="'+idx+':bio">لينك البايو</button>'+
-   '<a class="gh" href="'+LINK+'?m='+encodeURIComponent(x.m)+'" target="_blank" rel="noopener">افتح الموديل</a></div>'+
-   '<div class="ta"><b>لو رصيده وقع الصبح:</b> انزل بـ'+x.alt+' — '+
-   '<a href="'+LINK+'?m='+encodeURIComponent(x.altm)+'" target="_blank" rel="noopener">لينكه</a></div></div>';
+  return; }
+ const m=ST.models[ST.pick], d=plan[ST.pick];
+ const cap=(d&&d.cap)||m.cap;
+ const ml=LINK+'?m='+encodeURIComponent(m.code);
+ PAY.today={ fbcap:cap+'\n\nاللينك في أول كومنت 👇',
+   fbcom:'الموديل ده: '+ml+'\nوباقي موديلات الحفلة: '+LINK,
+   igcap:cap+'\n\nالرابط في البايو 👆', bio:ml };
+ const sb=ST.sub&&ST.models[ST.sub];
+ T.innerHTML='<div class="tcard">'+
+  '<div class="tl">النهارده · يوم '+ST.day+' في الحفلة</div>'+
+  '<div class="tm">'+m.n+' '+m.colar+'</div>'+
+  '<p class="tp">كان <s>'+m.was+'</s> · بقى '+m.now+' — '+nb(m.br.length)+'</p>'+
+  (ST.swapped?'<p class="tp" style="margin-top:8px;background:rgba(255,255,255,.2);border-radius:10px;padding:8px 11px;font-size:13.5px">⚠️ الموديل اللي كان مخطّط النهارده رصيده وقع، وده بديله أوتوماتيك.</p>':'')+
+  '<div class="tb">'+
+  '<button data-p="today:fbcap">كابشن فيسبوك</button>'+
+  '<button data-p="today:fbcom">كومنت فيسبوك</button>'+
+  '<button data-p="today:igcap">كابشن انستجرام وتيك توك</button>'+
+  '<button data-p="today:bio">لينك البايو</button>'+
+  '<a class="gh" href="'+ml+'" target="_blank" rel="noopener">افتح الموديل</a></div>'+
+  (sb?'<div class="ta"><b>لو رصيده وقع قبل ما تنزل:</b> انزل بـ'+sb.n+' '+sb.colar+
+      ' — <a href="'+LINK+'?m='+encodeURIComponent(sb.code)+'" target="_blank" rel="noopener">لينكه</a></div>':'')+
+  '<div class="ta" style="font-size:12.5px;opacity:.85">الرصيد ده محدّث '+ST.at+
+  ' — '+ST.n_offers+' موديل · '+ST.n_sizes+' مقاس متاح</div></div>';
+}
 
- }
-
+(function(){
  const secs=[...document.querySelectorAll('section[data-r]')];
  const btns=[...document.querySelectorAll('.whob button')];
  const all=document.getElementById('allbtn');
@@ -589,13 +599,22 @@ document.addEventListener('click',async e=>{
  buildIdx();
 })();
 
-fetch('models.json').then(r=>r.json()).then(rows=>{
+fetch('stock.json?v='+Date.now()).then(r=>r.json()).then(ST=>{
+ card(ST);
  const t=document.getElementById('tbl');
- t.innerHTML+=rows.map(m=>`<tr>
-  <td><b>${m.n} ${m.col}</b><span style="display:block;color:var(--mut);font-size:12px">${m.use} · مقاسات ${m.sz[0]}–${m.sz[1]}</span></td>
+ t.innerHTML+=ST.order.map(c=>ST.models[c]).filter(Boolean).map(m=>`<tr>
+  <td><b>${m.n} ${m.colar}</b><span style="display:block;color:var(--mut);font-size:12px">${m.use} · مقاسات ${m.sz[0]}–${m.sz[1]} · ${m.br.length} فرع</span></td>
   <td class="p">${m.now}&nbsp; <s>${m.was}</s></td>
   <td><button class="lcp" data-l="${LINK}?m=${encodeURIComponent(m.code)}">انسخ</button></td>
   <td style="font-size:12.5px;color:#4a4541">${m.br.join('، ')}</td></tr>`).join('');
-});
+ document.querySelectorAll('[data-stk]').forEach(el=>{
+  const m=ST.models[el.dataset.stk];
+  el.innerHTML = m
+   ? (m.br.length<3
+      ? '<b style="color:var(--red)">⚠️ رصيده وقع — '+nsz(m.qty)+' '+nb(m.br.length)+' بس. منزلش، خد البديل.</b>'
+      : '<b>الرصيد دلوقتي:</b> '+nsz(m.qty)+' '+nb(m.br.length)+'.')
+   : '<b style="color:var(--red)">⚠️ الموديل ده خلص من الحفلة. خد البديل.</b>';
+ });
+}).catch(()=>{ card(null); });
 </script>
 </body></html>
