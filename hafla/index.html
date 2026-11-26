@@ -77,6 +77,11 @@ footer{border-top:1px solid var(--bd);margin-top:54px;padding-top:20px;font-size
 .idx{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;padding-top:14px;border-top:1px solid #efe9dc}
 .idx a{font-size:12.5px;font-weight:700;text-decoration:none;color:#5c544e;background:#f4f0e7;
  border-radius:999px;padding:7px 12px}
+.cpset{margin-top:12px}
+.cph{margin:0 0 10px;font-size:13px;line-height:1.7;color:var(--mut)}
+.cpset .cpbtn{display:block;width:100%;margin:0 0 8px;text-align:right}
+.cpset .cpbtn.alt{background:#f4f0e7;color:#5c544e;box-shadow:inset 0 0 0 1.5px #e3dcca}
+.tcard .tb button.ok,.cpset .cpbtn.ok{background:#2e7d32;color:#fff;box-shadow:none}
 #today{margin-top:24px}
 .tcard{background:var(--red);color:#fff;border-radius:22px;padding:20px 18px}
 .tcard .tl{font-size:13px;opacity:.85;font-weight:700;letter-spacing:.3px}
@@ -458,6 +463,22 @@ const DAYS=[
   extra:'وفي آخر اليوم: ستوري بتقول إن عروض نوفمبر خلصت — والحفلة فاضلة مفتوحة لأول عرض جديد',
   cap:'آخر يوم في عروض نوفمبر.\nS102 بني جلد — كان 3800، بقى 2000.\nوفاضل منه 5 مقاسات بس في 5 فروع. مش هنقولك «اتعجّل» — هنقولك الرقم وإنت تحكم.'}];
 
+const PAY=DAYS.map(x=>({
+ fbcap: x.cap+'\n\nاللينك في أول كومنت 👇',
+ fbcom: 'الموديل ده: '+LINK+'?m='+encodeURIComponent(x.m)+
+        '\nوباقي موديلات الحفلة: '+LINK,
+ igcap: x.cap+'\n\nالرابط في البايو 👆',
+ bio:   LINK+'?m='+encodeURIComponent(x.m)
+}));
+function cpset(i){ return `
+ <div class="cpset">
+  <p class="cph"><b>الكابشن مفيهوش لينك بقصد</b> — فيسبوك بيحوّل اللينك لكارت معاينة ياخد مكان الصورة، وانستجرام وتيك توك اللينك في الكابشن مابيشتغلش أصلاً. فكل زرار بينسخ حاجة واحدة لمكانها:</p>
+  <button class="cpbtn" data-p="${i}:fbcap">1 · كابشن فيسبوك</button>
+  <button class="cpbtn" data-p="${i}:fbcom">2 · كومنت فيسبوك — اللينكين</button>
+  <button class="cpbtn" data-p="${i}:igcap">3 · كابشن انستجرام وتيك توك</button>
+  <button class="cpbtn alt" data-p="${i}:bio">4 · لينك الموديل — للبايو وستيكر الستوري</button>
+ </div>`; }
+
 document.getElementById('days').innerHTML=DAYS.map((x,i)=>`
 <div class="day">
  <div class="h"><b>${x.d}</b><span>${x.t} · ${x.code}</span></div>
@@ -467,8 +488,8 @@ document.getElementById('days').innerHTML=DAYS.map((x,i)=>`
   <p class="why" style="margin-top:10px;background:#faf6f5;border-radius:12px;padding:10px 12px">
    <b>لو رصيده وقع الصبح، البديل:</b> ${x.alt} — ${x.altwhy}.
    <a href="${LINK}?m=${encodeURIComponent(x.altm)}" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">لينك البديل ←</a></p>
-  <div class="cap" id="cap${i}">${x.cap}\n\nالموديل ده: ${LINK}?m=${encodeURIComponent(x.m)}\nوباقي موديلات الحفلة: ${LINK}</div>
-  <button class="cpbtn" data-c="${i}">انسخ الكابشن والرابط</button>
+  <div class="cap" id="cap${i}">${x.cap}</div>
+  ${cpset(i)}
  </div></div>`).join('');
 
 async function cp(t){ try{await navigator.clipboard.writeText(t);}
@@ -478,6 +499,10 @@ document.addEventListener('click',async e=>{
  const L=e.target.closest('[data-l]');
  if(L){ await cp(L.dataset.l); const o=L.textContent; L.textContent='اتنسخ ✓'; L.classList.add('ok');
    setTimeout(()=>{L.textContent=o;L.classList.remove('ok');},1500); return; }
+ const P=e.target.closest('[data-p]');
+ if(P){ const [i,k]=P.dataset.p.split(':'); await cp(PAY[i][k]);
+   const o=P.textContent; P.textContent='اتنسخ ✓'; P.classList.add('ok');
+   setTimeout(()=>{P.textContent=o;P.classList.remove('ok');},1500); return; }
  const b=e.target.closest('[data-c]'); if(!b)return;
  const t=document.getElementById('cap'+b.dataset.c).innerText;
  try{ await navigator.clipboard.writeText(t); }
@@ -502,19 +527,18 @@ document.addEventListener('click',async e=>{
    '<div class="tb"><a href="'+LINK+'" target="_blank" rel="noopener">افتح صفحة الحفلة</a></div></div>';
  } else {
   const x=DAYS[idx];
-  const cap=x.cap+'\n\nالموديل ده: '+LINK+'?m='+encodeURIComponent(x.m)+
-            '\nوباقي موديلات الحفلة: '+LINK;
   T.innerHTML='<div class="tcard"><div class="tl">النهارده · '+x.d+'</div>'+
    '<div class="tm">'+(x.t==='الافتتاح'?x.code+' — الافتتاح':x.t)+'</div>'+
    '<p class="tp">'+(x.t==='الافتتاح'?'متاح في العشر فروع':x.code)+'</p>'+
-   '<div class="tb"><button id="tcp">انسخ الكابشن والرابط</button>'+
+   '<div class="tb">'+
+   '<button data-p="'+idx+':fbcap">كابشن فيسبوك</button>'+
+   '<button data-p="'+idx+':fbcom">كومنت فيسبوك</button>'+
+   '<button data-p="'+idx+':igcap">كابشن انستجرام وتيك توك</button>'+
+   '<button data-p="'+idx+':bio">لينك البايو</button>'+
    '<a class="gh" href="'+LINK+'?m='+encodeURIComponent(x.m)+'" target="_blank" rel="noopener">افتح الموديل</a></div>'+
    '<div class="ta"><b>لو رصيده وقع الصبح:</b> انزل بـ'+x.alt+' — '+
    '<a href="'+LINK+'?m='+encodeURIComponent(x.altm)+'" target="_blank" rel="noopener">لينكه</a></div></div>';
-  document.getElementById('tcp').addEventListener('click',async function(){
-   await cp(cap); const o=this.textContent; this.textContent='اتنسخ ✓';
-   setTimeout(()=>{this.textContent=o;},1600);
-  });
+
  }
 
  const secs=[...document.querySelectorAll('section[data-r]')];
